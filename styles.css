@@ -1,0 +1,63 @@
+.navbar-nav .nav-item {
+	padding: 0 15px;
+	transition: transform 0.3s;
+	position: relative;
+}
+
+.navbar-nav .nav-item::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background-color: #007bff;
+	transition: width 0.3s;
+	transform: translateX(-50%);
+}
+
+.navbar-nav .nav-item:hover::after {
+	width: 100%;
+}
+
+.navbar-nav .nav-item:hover {
+	transform: scale(1.2);
+	color: #007bff !important;
+}
+
+.main-height {
+	height: 83.75vh;
+}
+
+.barre-size {
+	height: 7.5vh;
+}
+
+.mid-height {
+	height: 41.875vh;
+}
+
+.image-container {
+	position: relative; /* Définit le conteneur des images comme relatif */
+	width: 175px; /* Ajuster la largeur selon la taille des images */
+	height: 190px; /* Ajuster la hauteur selon la taille des images */
+	margin: 0 auto; /* Centre le conteneur d'images horizontalement */
+}
+
+.top-image {
+	position: absolute; /* Position absolue par rapport au conteneur parent */
+	top: 75px;; /* Aligner l'image supérieure en haut */
+	left: 0; /* Aligner l'image supérieure à gauche */
+	width: 175px; /* Prend la largeur totale du conteneur */
+	height: 100px; /* Prend la hauteur totale du conteneur */
+}
+
+.bottom-image {
+	position:absolute;
+	top: 0;
+	left: 25px;
+	width: 125px; /* Prend la largeur totale du conteneur */
+	height: 125px; /* Prend la hauteur totale du conteneur */
+	object-fit: cover;
+	border-radius: 50%;
+}
