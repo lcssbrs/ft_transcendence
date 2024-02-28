@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y netcat
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
-RUN pip install pip install social-auth-app-django
+RUN pip install django-rest-framework-social-oauth2
 RUN pip install requests
 
 # copy entrypoint.sh
