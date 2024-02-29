@@ -197,10 +197,10 @@
 		</div>
 
 		<!-- NOT CONNECTED -->
-		<div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
+		<!-- <div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
 			<img src="imgs/not connected.svg" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
 			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
-		</div>
+		</div> -->
 
 		<!-- PROFILE PAGE -->
 		<div id="profile" class="d-none flex justify-content-center mx-auto">
@@ -288,12 +288,19 @@
 			</div>
 		</div>
 	</div>
-
-		<h2 class="text-white text-center mx-auto d-none" id="solo">SOLO</h2>
-		<h2 class="text-white text-center mx-auto d-none" id="local" >LOCAL</h2>
-		<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
-		<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
-		<h2 class="text-white text-center mx-auto d-none" id="classement" >CLASSEMENT</h2>
+	</div>
+		<div id="local" class="d-none flex flex-column justify-content-center" style="width: 80%;">
+			<div class="d-flex justify-content-center">
+				<canvas id="canvas" class="pong-size d-flex"></canvas>
+			</div>
+			<div class="d-flex justify-content-center mt-5">
+				<button id="start-game" class="btn btn-primary">Start</button>
+			</div>
+		</div>
+			<h2 class="text-white text-center mx-auto d-none" id="solo">SOLO</h2>
+			<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
+			<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
+			<h2 class="text-white text-center mx-auto d-none" id="classement" >CLASSEMENT</h2>
 	</main>
 
 	<!-- BOTTOM BAR -->
@@ -311,4 +318,8 @@
 	</div>
 </body>
 <script src="organisation.js"></script>
+<script src="local.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

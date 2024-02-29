@@ -3,7 +3,7 @@
 var canvas;
 var game;
 var gameStarted = false;
-const PLAYER_HEIGHT = 100;
+const PLAYER_HEIGHT = 30;
 const PLAYER_WIDTH = 5;
 const PLAYER_SPEED = 10;
 const BALL_SPEED = 1.2;
@@ -48,9 +48,11 @@ function startGameWithCountdown() {
 		var context = canvas.getContext('2d');
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		draw();
-		context.fillStyle = 'orange';
-		context.font = 'bold 300px Arial';
-		context.fillText(countdown, canvas.width / 2 - 80, canvas.height / 2 + 105);
+		context.fillStyle = '#F4ACBC';
+		context.font = canvas.width / 2 + 'px Anta';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
+		context.fillText(countdown, canvas.width / 2, canvas.height / 2);
 		countdown--;
 		if (countdown < 0) {
 			clearInterval(countdownInterval);
@@ -62,15 +64,17 @@ function startGameWithCountdown() {
 function drawScore() {
 	var context = canvas.getContext('2d');
 	context.fillStyle = 'white';
-	context.font = 'bold 20px Arial';
-	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Joueur 2: ' + game.challenger.score, canvas.width - 150, 40);
+	context.font = canvas.width / 20 + 'px Anta';
+	context.textAlign = 'center';
+	context.textBaseline = 'middle';
+	context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+	context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
 }
 
 //Mise en place du terrain :
 function draw() {
 	var context = canvas.getContext('2d');
-	context.fillStyle = 'blue';
+	context.fillStyle = '#0D6EFD';
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	context.strokeStyle = 'white';
 	context.beginPath();
@@ -80,20 +84,22 @@ function draw() {
 	context.strokeStyle = 'white';
 	context.lineWidth = 2;
 	context.strokeRect(0, 0, canvas.width, canvas.height);
-	context.fillStyle = 'red';
+	context.fillStyle = '#F4ACBC';
 	context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.beginPath();
 	context.fillStyle = 'white';
-	context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
+	context.arc(game.ball.x, game.ball.y, 3, 0, Math.PI * 2, false);
 	context.fill();
 	drawScore();
 
 	if (displayWinner) {
-		context.fillStyle = 'red';
-		context.font = 'bold 40px Arial';
+		context.fillStyle = '#F4ACBC';
+		context.font = canvas.width / 15 + 'px Anta';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
 		var winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-		context.fillText('Le gagnant est ' + winner + '!', canvas.width / 2 - 250, canvas.height / 2 + 10);
+		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 	}
 }
 
@@ -120,7 +126,7 @@ function ballMove() {
 
 // deplacement joueur 1 (W et S)
 function playerMove(event) {
-	if (event.key === 'w' || event.key === 'W') {
+	if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
 		game.player.y -= PLAYER_SPEED;
 	} else if (event.key === 's' || event.key === 'S') {
 		game.player.y += PLAYER_SPEED;
@@ -176,11 +182,12 @@ function collide(player) {
 // scorboard update
 function updateScoreDisplay() {
 	var context = canvas.getContext('2d');
-	context.clearRect(0, 0, canvas.width, 50);
 	context.fillStyle = 'white';
-	context.font = 'bold 20px Arial';
-	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Joueur 2: ' + game.challenger.score, canvas.width - 150, 40);
+	context.font = canvas.width / 20 + 'px Anta';
+	context.textAlign = 'center';
+	context.textBaseline = 'middle';
+	context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+	context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
 }
 
 // lancer une game

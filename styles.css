@@ -105,3 +105,8 @@
 .input-wrapper input:focus {
 	outline-color: white;
 }
+
+.pong-size {
+	height: 50vh;
+	width: 85vh !important;
+}
