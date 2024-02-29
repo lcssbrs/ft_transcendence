@@ -93,7 +93,7 @@ function draw() {
 		context.fillStyle = 'red';
 		context.font = 'bold 40px Arial';
 		var winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-		context.fillText('Le gagnant est ' + winner + '!', canvas.width / 2 - 250, canvas.height / 2 + 10);
+		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2 - 250, canvas.height / 2 + 10);
 	}
 }
 
