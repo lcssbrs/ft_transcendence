@@ -3,31 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Transcendance</title>
+	<title>Transcendence</title>
 
 	<link rel="stylesheet" href="styles.css">
 
 	<!-- Stylesheets Bootstrap -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 	<!-- JavaScript Bootstrap (nécessite jQuery) -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 	<!-- ICON -->
-	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="icon" href="imgs/icon.ico" type="image/x-icon">
 
 	<!-- POLICE: ANTA -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+
+	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body class="transcendance bg-dark" style="font-family: 'Anta', sans serif;">
+<body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<!-- HEADER -->
 	<header class="barre-size bg-dark text-white row align-items-center justify-content-between mx-2">
 		<!-- TITRE -->
-		<h1 class="col h4 mb-0">🏳️‍⚧️endance</h1>
+		<h1 class="col h4 mb-0">🏳️‍⚧️endence</h1>
 		<!-- BOUTON : SE CONNECTER -->
 		<div class="col-auto" id="logbutton">
 			<button class="btn btn-outline-light px-2 py-1" onclick="log()" href="#">Se connecter</button>
@@ -36,49 +40,272 @@
 		<img src="imgs/luffy.png" id="profilebar" class="img-fluid rounded-circle p-0 d-none" style="width: 35px; height: 35px;">
 	</header>
 
-	<div class="border-top border-5 border-primary mt-0"></div>
+	<div class="border-top border-primary mt-0" style="border-width: 5px !important;"></div>
 
-	<main class="main-height">
-		<div id="logrequire" class="main-height d-flex flex-column align-items-center justify-content-center">
-			<img src="imgs/not connected.svg" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
-			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
-		</div>
+	<main class="main-height d-flex">
 
-		<!-- <div class="main-height text-white text-center d-flex flex-column justify-content-center align-items-center" style="width: 30%;">
-			<div class="image-container">
-				<img src="imgs/luffy.png" class="bottom-image">
-				<img src="imgs/challenger.png" class="top-image">
-			</div>
-			<h3 class="m-0">Hugo Baduel</h3>
-			<h4>hbaduel</h4>
-			<div class="container-fluid d-flex justify-content-center align-items-center">
-				<div class="rounded-3 p-2 mb-2 border border-primary border-3 d-flex mt-1">
-					<div>
-						<p class="mb-1">Classement</p>
-						<p class="small mb-0">#1</p>
+		<div class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
+			<div class="pl-4 pr-2 pt-3">
+				<h4>Amis</h4>
+				<div class="overflow-auto d-flex flex-column mt-2" style="height: 35vh;">
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">lseiberr</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
 					</div>
-					<div class="px-3">
-						<p class="mb-1">Rank</p>
-						<p class="small mb-0">Challenger - 172LP</p>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">tde-los-</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
 					</div>
-					<div>
-						<p class="mb-1">Games jouées</p>
-						<p class="small mb-0">178</p>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">aandrieu</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">loulefdp</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">homerdonut</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">margesexy</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+							</svg>
+						</button>
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-primary rounded-1 mt-1" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+			<div class="pl-4 pr-2 pt-3">
+				<h4>Demandes</h4>
+				<div class="overflow-auto d-flex flex-column mt-2" style="height: 20vh;">
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">coday</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">supernain</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">NulàLol</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+							</svg>
+						</button>
+					</div>
+					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
+						<span class="my-auto mr-auto">LeCapitaine</span>
+						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+							</svg>
+						</button>
+						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="d-flex pl-3 pr-3 pt-4">
+				<div class="form-outline" data-mdb-input-init>
+						<input id="search-focus" type="search" id="form1" class="form-control" />
+						<!-- <label class="form-label" for="form1">Search</label> -->
+				</div>
+				<button type="button" class="btn btn-primary" data-mdb-ripple-init>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+						<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+						<path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+		<!-- NOT CONNECTED -->
+		<!-- <div id="logrequire" class="main-height d-flex flex-column align-items-center justify-content-center mx-auto">
+			<img src="imgs/not connected.svg" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
+			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
 		</div> -->
 
-		<h2 class="text-white text-center d-none" id="solo">SOLO</h2>
-		<h2 class="text-white text-center d-none" id="local" >LOCAL</h2>
-		<h2 class="text-white text-center d-none" id="ranked" >RANKED</h2>
-		<h2 class="text-white text-center d-none" id="tournoi" >TOURNOI</h2>
-		<h2 class="text-white text-center d-none" id="classement" >CLASSEMENT</h2>
+		<!-- PROFILE PAGE -->
+		<!-- <div class="d-flex justify-content-center">
+			<div class="main-height text-white text-center d-flex flex-column justify-content-center align-items-center">
+				<div class="image-container">
+					<img src="imgs/luffy.png" class="bottom-image">
+					<img src="imgs/challenger.png" class="top-image">
+				</div>
+				<h3 class="m-0">Hugo Baduel</h3>
+				<h4>hbaduel</h4>
+				<div class="container-fluid d-flex flex-column border border-primary border rounded-3 mb-2" style="border-width: 4px !important;">
+					<div class="container-fluid d-flex justify-content-center align-items-center">
+						<div class="p-2 d-flex mt-1">
+							<div>
+								<h5 class="mb-1">Games</h5>
+								<p class="mb-0">178</p>
+							</div>
+							<div class="px-3">
+								<h5 class="mb-1">Victoires</h5>
+								<p class="mb-0">144</p>
+							</div>
+							<div>
+								<h5 class="mb-1">Défaites</h5>
+								<p class="mb-0">34</p>
+							</div>
+						</div>
+					</div>
+					<div class="container-fluid d-flex justify-content-center align-items-center">
+						<div class="p-2 mb-2 d-flex mt-1">
+							<div class="mr-3">
+								<h5 class="mb-1">Classement</h5>
+								<p class="mb-0">#1</p>
+							</div>
+							<div>
+								<h5 class="mb-1">Rank</h5>
+								<p class="mb-0">Challenger - 172 LP</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="btn rounded-1 mt-1" type="button" data-toggle="tooltip" data-placement="top" title="Edit" style="color:white; background-color: #F4ACBC;"><i class="fa fa-edit"></i></button>
+			</div>
+		<div class="main-height text-white text-center d-flex flex-column justify-content-center align-items-center ml-5">
+			<div class="container-fluid d-flex justify-content-center align-items-center">
+				<div class="rounded-3 p-2 mb-2 border border-primary d-flex mt-1" style="border-width: 4px !important;">
+					<div>
+						<h3 class="mb-2 text-center">Historique</h3>
+						<div class="container-fluid d-flex flex-column p-0 align-items-center">
+							<div class="container-fluid d-flex justify-content-center align-items-center mx-2 mb-3">
+								<div class="d-flex flex-column justify-content-center align-items-center ml-2">
+									<h5 class="mb-3">Résultat</h5>
+									<span class="mb-2">Victoire</span>
+									<span class="mb-2">Victoire</span>
+									<span class="mb-2">Victoire</span>
+									<span class="mb-2">Victoire</span>
+									<span>Victoire</span>
+								</div>
+								<div class="d-flex flex-column justify-content-center align-items-center mx-5">
+									<h5 class="mb-3">Score</h5>
+									<span class="mb-2">3-1</span>
+									<span class="mb-2">3-2</span>
+									<span class="mb-2">3-0</span>
+									<span class="mb-2">2-3</span>
+									<span>3-1</span>
+								</div>
+								<div class="d-flex flex-column justify-content-center align-items-center mr-5">
+									<h5 class="mb-3">Adversaire</h5>
+									<span class="mb-2">lseiberr</span>
+									<span class="mb-2">aandrieu</span>
+									<span class="mb-2">tde-los-</span>
+									<span class="mb-2">margesexy</span>
+									<span>flashmcqueen</span>
+								</div>
+								<div class="d-flex flex-column justify-content-center align-items-center mr-2">
+									<h5>Gain</h5>
+									<span class="mb-2">+21 LP</span>
+									<span class="mb-2">+18 LP</span>
+									<span class="mb-2">+15 LP</span>
+									<span class="mb-2">-30 LP</span>
+									<span>+26 LP</span>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+		<h2 class="text-white text-center mx-auto d-none" id="solo">SOLO</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="local" >LOCAL</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="classement" >CLASSEMENT</h2>
 	</main>
 
 
-	<div class="border-top border-5 border-primary"></div>
+	<div class="border-top border-primary" style="border-width: 5px !important;"></div>
 
 	<!-- BOTTOM BAR -->
 	<div class="barre-size fixed-bottom">
