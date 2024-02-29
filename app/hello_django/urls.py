@@ -18,9 +18,12 @@ from django.urls import path
 from . import views
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
 
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+    path('django/', lambda request: redirect('http://localhost:8000/admin'), name='django_redirect'),
+    path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
 ]
