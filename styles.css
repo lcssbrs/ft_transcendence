@@ -26,15 +26,19 @@
 }
 
 .main-height {
-	height: 83.75vh;
+	height: 83.5vh;
 }
 
-.barre-size {
+.header-size {
+	height: 9vh;
+}
+
+.bottom-size {
 	height: 7.5vh;
 }
 
 .mid-height {
-	height: 41.875vh;
+	height: 41.75vh;
 }
 
 .image-container {
@@ -59,7 +63,7 @@
 	width: 125px;
 	height: 125px;
 	object-fit: cover;
-	border-radius: 50%;
+	border-radius: 100%;
 }
 
 .overflow-auto::-webkit-scrollbar {
@@ -73,4 +77,31 @@
 
 .overflow-auto::-webkit-scrollbar-track {
 	border-radius: 10px;
+}
+
+.profile-bar {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 100%;
+}
+
+.flex {
+	display: flex;
+}
+
+.input-wrapper input {
+	background-color: white;
+	border: none;
+	padding: 2vh;
+	width: 25vh;
+	height: 5vh;
+	border-radius: 1rem;
+	color: #0D6EFD;
+	box-shadow: 0 0.4rem #F4ACBC;
+	cursor: pointer;
+}
+
+.input-wrapper input:focus {
+	outline-color: white;
 }

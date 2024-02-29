@@ -29,34 +29,34 @@
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<!-- HEADER -->
-	<header class="barre-size bg-dark text-white row align-items-center justify-content-between mx-2">
+	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
 		<!-- TITRE -->
-		<h1 class="col h4 mb-0">🏳️‍⚧️endence</h1>
+		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
 		<!-- BOUTON : SE CONNECTER -->
-		<div class="col-auto" id="logbutton">
+		<div class="my-auto mr-4" id="logbutton">
 			<button class="btn btn-outline-light px-2 py-1" onclick="log()" href="#">Se connecter</button>
 		</div>
 		<!-- BOUTON : PROFIL -->
-		<img src="imgs/luffy.png" id="profilebar" class="img-fluid rounded-circle p-0 d-none" style="width: 35px; height: 35px;">
+		<div id="profilebar" onclick="Profile()" href="#" class="my-auto mr-4 d-none">
+			<img src="imgs/luffy.png" id="profilebar" class="profile-bar border border-primary" style="border-width: 2px !important;">
+		</button>
 	</header>
-
-	<div class="border-top border-primary mt-0" style="border-width: 5px !important;"></div>
 
 	<main class="main-height d-flex">
 
-		<div class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
+		<div id="friend" class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Amis</h4>
 				<div class="overflow-auto d-flex flex-column mt-2" style="height: 35vh;">
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">lseiberr</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 							</svg>
@@ -64,13 +64,13 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">tde-los-</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 							</svg>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">aandrieu</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
@@ -92,13 +92,13 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">loulefdp</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 							</svg>
@@ -106,13 +106,13 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">homerdonut</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 							</svg>
@@ -120,13 +120,13 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">margesexy</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
 								<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
 								<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 							</svg>
@@ -139,12 +139,12 @@
 				<div class="overflow-auto d-flex flex-column mt-2" style="height: 20vh;">
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">coday</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
 								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
 							</svg>
@@ -152,12 +152,12 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">supernain</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
 								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
 							</svg>
@@ -165,12 +165,12 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">NulàLol</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
 								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
 							</svg>
@@ -178,12 +178,12 @@
 					</div>
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">LeCapitaine</span>
-						<button class="btn-sm mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
+						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
 								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
 							</svg>
 						</button>
-						<button class="btn-sm" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
+						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
 								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
 							</svg>
@@ -191,28 +191,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="d-flex pl-3 pr-3 pt-4">
-				<div class="form-outline" data-mdb-input-init>
-						<input id="search-focus" type="search" id="form1" class="form-control" />
-						<!-- <label class="form-label" for="form1">Search</label> -->
-				</div>
-				<button type="button" class="btn btn-primary" data-mdb-ripple-init>
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-						<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-						<path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-					</svg>
-				</button>
+			<div class="input-wrapper pl-3 pr-3 pt-4">
+					<input type="text" placeholder="Ajouter un ami..." name="text" class="input">
 			</div>
 		</div>
+
 		<!-- NOT CONNECTED -->
-		<!-- <div id="logrequire" class="main-height d-flex flex-column align-items-center justify-content-center mx-auto">
+		<div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
 			<img src="imgs/not connected.svg" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
 			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
-		</div> -->
+		</div>
 
 		<!-- PROFILE PAGE -->
-		<!-- <div class="d-flex justify-content-center">
-			<div class="main-height text-white text-center d-flex flex-column justify-content-center align-items-center">
+		<div id="profile" class="d-none flex justify-content-center mx-auto">
+			<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center">
 				<div class="image-container">
 					<img src="imgs/luffy.png" class="bottom-image">
 					<img src="imgs/challenger.png" class="top-image">
@@ -295,7 +287,7 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 		<h2 class="text-white text-center mx-auto d-none" id="solo">SOLO</h2>
 		<h2 class="text-white text-center mx-auto d-none" id="local" >LOCAL</h2>
@@ -304,21 +296,16 @@
 		<h2 class="text-white text-center mx-auto d-none" id="classement" >CLASSEMENT</h2>
 	</main>
 
-
-	<div class="border-top border-primary" style="border-width: 5px !important;"></div>
-
 	<!-- BOTTOM BAR -->
-	<div class="barre-size fixed-bottom">
-			<nav class="navbar navbar-expand bg-dark my-2" >
-				<div class="container-fluid">
-					<div class="navbar-nav d-flex justify-content-between w-100 mx-5">
-						<a class="nav-item nav-link text-white p-0" onclick="Page2()" href="#">🤖Solo</a>
-						<a class="nav-item nav-link text-white p-0" onclick="Page3()" href="#">🕹️Local</a>
-						<a class="nav-item nav-link text-white p-0" onclick="Page4()" href="#">⚔️Ranked</a>
-						<a class="nav-item nav-link text-white p-0" onclick="Page5()" href="#">🏆Tournoi</a>
-						<a class="nav-item nav-link text-white p-0" onclick="Page6()" href="#">👑Classement</a>
+	<div class="bottom-size border-top border-primary" style="border-width: 4px !important;">
+			<nav class="navbar navbar-expand bg-dark py-auto" >
+					<div class="navbar-nav justify-content-between w-100 mx-5">
+						<a class="nav-item nav-link text-white p-0 mt-1" onclick="Page2()" href="#">🤖Solo</a>
+						<a class="nav-item nav-link text-white p-0 mt-1" onclick="Page3()" href="#">🕹️Local</a>
+						<a class="nav-item nav-link text-white p-0 mt-1" onclick="Page4()" href="#">⚔️Ranked</a>
+						<a class="nav-item nav-link text-white p-0 mt-1" onclick="Page5()" href="#">🏆Tournoi</a>
+						<a class="nav-item nav-link text-white p-0 mt-1" onclick="Page6()" href="#">👑Classement</a>
 					</div>
-				</div>
 			</nav>
 		</div>
 	</div>
