@@ -1,9 +1,9 @@
 'use strict';
-
+(function() {
 var canvas;
 var game;
 var gameStarted = false;
-const PLAYER_HEIGHT = 100;
+const PLAYER_HEIGHT = 30;
 const PLAYER_WIDTH = 5;
 const PLAYER_SPEED = 10;
 const BALL_SPEED = 1.2;
@@ -49,9 +49,11 @@ function startGameWithCountdown() {
 		var context = canvas.getContext('2d');
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		draw();
-		context.fillStyle = 'orange';
-		context.font = 'bold 300px Arial';
-		context.fillText(countdown, canvas.width / 2 - 80, canvas.height / 2 + 105);
+		context.fillStyle = '#F4ACBC';
+		context.font = canvas.width / 2 + 'px Anta';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
+		context.fillText(countdown, canvas.width / 2, canvas.height / 2);
 		countdown--;
 		if (countdown < 0) {
 			clearInterval(countdownInterval);
@@ -63,15 +65,17 @@ function startGameWithCountdown() {
 function drawScore() {
 	var context = canvas.getContext('2d');
 	context.fillStyle = 'white';
-	context.font = 'bold 20px Arial';
-	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Computer: ' + game.computer.score, canvas.width - 150, 40);
+	context.font = canvas.width / 20 + 'px Anta';
+	context.textAlign = 'center';
+	context.textBaseline = 'middle';
+	context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+	context.fillText(game.computer.score, canvas.width - canvas.width / 4, canvas.height / 6);
 }
 
 //Mise en place du terrain :
 function draw() {
 	var context = canvas.getContext('2d');
-	context.fillStyle = 'blue';
+	context.fillStyle = '#0D6EFD';
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	context.strokeStyle = 'white';
 	context.beginPath();
@@ -81,20 +85,22 @@ function draw() {
 	context.strokeStyle = 'white';
 	context.lineWidth = 2;
 	context.strokeRect(0, 0, canvas.width, canvas.height);
-	context.fillStyle = 'red';
+	context.fillStyle = '#F4ACBC';
 	context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.fillRect(canvas.width - PLAYER_WIDTH, game.computer.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.beginPath();
 	context.fillStyle = 'white';
-	context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
+	context.arc(game.ball.x, game.ball.y, 3, 0, Math.PI * 2, false);
 	context.fill();
 	drawScore();
 
 	if (displayWinner) {
-		context.fillStyle = 'red';
-		context.font = 'bold 40px Arial';
+		context.fillStyle = '#F4ACBC';
+		context.font = canvas.width / 15 + 'px Anta';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
 		var winner = game.player.score === 3 ? "Joueur 1" : "Computer";
-		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2 - 250, canvas.height / 2 + 10);
+		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 	}
 }
 
@@ -122,7 +128,7 @@ function ballMove() {
 
 // deplacement joueur
 function playerMove(event) {
-	if (event.key === 'w' || event.key === 'W') {
+	if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
 		game.player.y -= PLAYER_SPEED;
 	} else if (event.key === 's' || event.key === 'S') {
 		game.player.y += PLAYER_SPEED;
@@ -141,18 +147,18 @@ function computerMove() {
 
     // Si la balle est au-dessus de la raquette de l'ordinateur, déplacer l'ordinateur vers le bas
     if (difference > 0) {
-        game.computer.y += Math.min(PLAYER_SPEED, difference);
+		game.computer.y += Math.min(PLAYER_SPEED, difference);
     }
     // Si la balle est en dessous de la raquette de l'ordinateur, déplacer l'ordinateur vers le haut
     else if (difference < 0) {
-        game.computer.y -= Math.min(PLAYER_SPEED, Math.abs(difference));
+		game.computer.y -= Math.min(PLAYER_SPEED, Math.abs(difference));
     }
 
     // Limiter la position de l'ordinateur dans le terrain
     if (game.computer.y < 0) {
-        game.computer.y = 0;
+		game.computer.y = 0;
     } else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
-        game.computer.y = canvas.height - PLAYER_HEIGHT;
+		game.computer.y = canvas.height - PLAYER_HEIGHT;
     }
 
     // Simulation de l'ordinateur appuyant sur les touches
@@ -160,9 +166,9 @@ function computerMove() {
     // nous ajustons la position de l'ordinateur selon la position actuelle de la balle
     var ballPosition = game.ball.y - (game.computer.y + PLAYER_HEIGHT / 2);
     if (ballPosition > 0) {
-        game.computer.y += PLAYER_SPEED;
+		game.computer.y += PLAYER_SPEED;
     } else if (ballPosition < 0) {
-        game.computer.y -= PLAYER_SPEED;
+		game.computer.y -= PLAYER_SPEED;
     }
 }
 
@@ -201,11 +207,12 @@ function collide(player) {
 // scorboard update
 function updateScoreDisplay() {
 	var context = canvas.getContext('2d');
-	context.clearRect(0, 0, canvas.width, 50);
 	context.fillStyle = 'white';
-	context.font = 'bold 20px Arial';
-	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Computer: ' + game.computer.score, canvas.width - 150, 40);
+	context.font = canvas.width / 20 + 'px Anta';
+	context.textAlign = 'center';
+	context.textBaseline = 'middle';
+	context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+	context.fillText(game.computer.score, canvas.width - canvas.width / 4, canvas.height / 6);
 }
 
 // lancer une game
@@ -247,7 +254,7 @@ function removeKeyListeners() {
 
 // Dessins et animations
 document.addEventListener('DOMContentLoaded', function () {
-	canvas = document.getElementById('canvas');
+	canvas = document.getElementById('canvas1');
 	game = {
 		player: {
 			y: canvas.height / 2 - PLAYER_HEIGHT / 2,
@@ -275,8 +282,10 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('keydown', playerMove);
 
 // Event sur le bouton de démarrage de la partie
-document.getElementById('start-game').addEventListener('click', function() {
+document.getElementById('start-solo').addEventListener('click', function() {
 	if (!gameStarted) {
 		startGameWithCountdown();
 	}
 });
+
+})();

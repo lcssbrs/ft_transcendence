@@ -17,7 +17,7 @@ function Profile()
 function log()
 {
 	logbutton.classList.add('d-none');
-	logrequire.classList.add('d-none');
+	// logrequire.classList.add('d-none');
 	profilebar.classList.remove('d-none');
 }
 

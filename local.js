@@ -1,5 +1,6 @@
 'use strict';
 
+(function() {
 var canvas;
 var game;
 var gameStarted = false;
@@ -223,7 +224,7 @@ function removeKeyListeners() {
 
 // Dessins et animations
 document.addEventListener('DOMContentLoaded', function () {
-	canvas = document.getElementById('canvas');
+	canvas = document.getElementById('canvas2');
 	game = {
 		player: {
 			y: canvas.height / 2 - PLAYER_HEIGHT / 2,
@@ -252,8 +253,10 @@ document.addEventListener('keydown', playerMove);
 document.addEventListener('keydown', challengerMove);
 
 // Event sur le bouton de démarrage de la partie
-document.getElementById('start-game').addEventListener('click', function() {
+document.getElementById('start-local').addEventListener('click', function() {
 	if (!gameStarted) {
 		startGameWithCountdown();
 	}
 });
+
+})();
