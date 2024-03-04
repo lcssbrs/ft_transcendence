@@ -66,16 +66,16 @@
 	border-radius: 100%;
 }
 
-.overflow-auto::-webkit-scrollbar {
+.friend-scroll::-webkit-scrollbar {
 	width: 5px;
 }
 
-.overflow-auto::-webkit-scrollbar-thumb {
+.friend-scroll::-webkit-scrollbar-thumb {
 	background-color: #F4ACBC;
 	border-radius: 10px;
 }
 
-.overflow-auto::-webkit-scrollbar-track {
+.friend-scroll::-webkit-scrollbar-track {
 	border-radius: 10px;
 }
 
@@ -93,9 +93,9 @@
 .input-wrapper input {
 	background-color: white;
 	border: none;
-	padding: 2vh;
-	width: 25vh;
-	height: 5vh;
+	padding: 5%;
+	width: 100%;
+	height: 40%;
 	border-radius: 1rem;
 	color: #0D6EFD;
 	box-shadow: 0 0.4rem #F4ACBC;
@@ -109,4 +109,17 @@
 .pong-size {
 	height: 50vh;
 	width: 85vh !important;
+}
+
+.classement-scrollbar::-webkit-scrollbar {
+	width: 5px;
+}
+
+.classement-scrollbar::-webkit-scrollbar-thumb {
+	background-color: white;
+	border-radius: 10px;
+}
+
+.classement-scrollbar::-webkit-scrollbar-track {
+	border-radius: 10px;
 }

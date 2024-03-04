@@ -47,7 +47,7 @@
 		<div id="friend" class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Ami(e)s</h4>
-				<div class="overflow-auto d-flex flex-column mt-2" style="height: 35vh;">
+				<div class="overflow-auto friend-scroll d-flex flex-column mt-2" style="height: 35vh;">
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">lseiberr</span>
 						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
@@ -136,7 +136,7 @@
 			</div>
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Demandes</h4>
-				<div class="overflow-auto d-flex flex-column mt-2" style="height: 20vh;">
+				<div class="overflow-auto friend-scroll d-flex flex-column mt-2" style="height: 20vh;">
 					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
 						<span class="my-auto mr-auto">coday</span>
 						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
@@ -211,7 +211,7 @@
 				</div>
 				<h3 class="m-0">Hugo Baduel</h3>
 				<h4>hbaduel</h4>
-				<div class="container-fluid d-flex flex-column border border-primary border rounded-3 mb-2" style="border-width: 4px !important;">
+				<div class="container-fluid d-flex flex-column border border-primary border rounded-3 my-2" style="border-width: 4px !important;">
 					<div class="container-fluid d-flex justify-content-center align-items-center">
 						<div class="p-2 d-flex mt-1">
 							<div>
@@ -241,7 +241,7 @@
 						</div>
 					</div>
 				</div>
-				<button class="btn rounded-1 mt-1" type="button" data-toggle="tooltip" data-placement="top" title="Edit" style="color:white; background-color: #F4ACBC;"><i class="fa fa-edit"></i></button>
+				<button class="btn rounded-1 mt-4 mb-2" type="button" data-toggle="tooltip" data-placement="top" title="Edit" style="color:white; background-color: #F4ACBC;"><i class="fa fa-edit"></i></button>
 			</div>
 			<div class="d-flex flex-column justify-content-center">
 				<div class="main-height text-white text-center d-flex flex-column justify-content-center align-items-center">
@@ -252,7 +252,7 @@
 								<div class="container-fluid d-flex flex-column p-0 align-items-center">
 									<div class="container-fluid d-flex justify-content-center align-items-center mx-2 mb-3">
 										<div class="d-flex flex-column justify-content-center align-items-center ml-2">
-											<h5 class="mb-3">Position</h5>
+											<h5 class="mb-3">Résultat</h5>
 											<span class="mb-2">Victoire</span>
 											<span class="mb-2">Victoire</span>
 											<span class="mb-2">Victoire</span>
@@ -336,7 +336,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="solo" class="d-none flex flex-column justify-content-center" style="width: 80%;">
+		<div id="solo" class="d-none flex flex-column justify-content-center mx-auto">
 			<h2 class="text-white text-center mx-auto my-0 pb-5">SOLO</h2>
 			<div class="d-flex justify-content-center">
 				<canvas id="canvas1" class="pong-size d-flex"></canvas>
@@ -345,7 +345,7 @@
 				<button id="start-solo" class="btn btn-primary">Start</button>
 			</div>
 		</div>
-		<div id="local" class="d-none flex flex-column justify-content-center" style="width: 80%;">
+		<div id="local" class="d-none flex flex-column justify-content-center mx-auto">
 			<h2 class="text-white text-center mx-auto my-0 pb-5">LOCAL</h2>
 			<div class="d-flex justify-content-center">
 				<canvas id="canvas2" class="pong-size d-flex"></canvas>
@@ -354,9 +354,89 @@
 				<button id="start-local" class="btn btn-primary">Start</button>
 			</div>
 		</div>
-			<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
-			<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
-			<h2 class="text-white text-center mx-auto d-none" id="classement" >CLASSEMENT</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
+		<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
+		<div id="classement" class="d-none flex flex-column justify-content-center text-white text-center mx-auto">
+			<h2 class="mx-auto my-0 pb-3">CLASSEMENT</h2>
+			<div class="overflow-auto rouded-3 mb-4 classement-scrollbar" style="max-height: 65vh;">
+				<table class="table table-striped table-dark m-0" style="width: 80vh;">
+					<thead>
+						<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Rang</th>
+						<th scope="col">Victoires</th>
+						<th scope="col">Défaites</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>110</td>
+							<td>70</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</main>
 
 	<!-- BOTTOM BAR -->
