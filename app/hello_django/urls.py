@@ -20,13 +20,16 @@ from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
 from .views import user_list_view
+from .views import add_user_view
 
 
 urlpatterns = [
     path('', views.index, name='index'),
+    # admin
     path('admin/', admin.site.urls),
     path('django/', lambda request: redirect('http://localhost:8000/admin'), name='django_redirect'),
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
-
-    path('utilisateurs/', user_list_view, name='user_list'),
+    # dev
+    path('add_user', add_user_view, name='add_user'),
+    path('users/', user_list_view, name='user_list'),
 ]

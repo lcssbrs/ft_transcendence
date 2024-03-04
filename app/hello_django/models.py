@@ -17,8 +17,8 @@ class user_list(models.Model):
     username = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
     password = models.CharField(max_length=128, validators=[validate_password_length])
     email = models.CharField(max_length=50)
-    profile_picture = models.ImageField(upload_to='photos/', default='default-profile.jpg')
-    status = models.CharField(max_length=20, choices=[('online', 'En ligne'), ('offline', 'Hors ligne'), ('in_game', 'En jeu')])
+    profile_picture = models.ImageField(upload_to='photos/', default='photos/default-profile.jpg')
+    status = models.CharField(max_length=20, default='offline', choices=[('online', 'En ligne'), ('offline', 'Hors ligne'), ('in_game', 'En jeu')])
     last_login = models.DateTimeField(null=True, blank=True)
     # Parties:
     games_played = models.PositiveIntegerField(default=0)
