@@ -1,9 +1,8 @@
-'use strict';
 (function() {
 var canvas;
 var game;
 var gameStarted = false;
-const PLAYER_HEIGHT = 30;
+const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 5;
 const PLAYER_SPEED = 10;
 const BALL_SPEED = 1.2;
@@ -29,8 +28,6 @@ function flashBorder(duration) {
 
 // Fonction pour lancer la partie après un compte à rebours
 function startGameWithCountdown() {
-	gameStarted = true;
-
 	game.player.score = 0;
 	game.computer.score = 0;
 	game.ball.x = canvas.width / 2;
@@ -57,6 +54,7 @@ function startGameWithCountdown() {
 		countdown--;
 		if (countdown < 0) {
 			clearInterval(countdownInterval);
+			gameStarted = true;
 			startGame();
 		}
 	}, 1000);
@@ -90,7 +88,7 @@ function draw() {
 	context.fillRect(canvas.width - PLAYER_WIDTH, game.computer.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.beginPath();
 	context.fillStyle = 'white';
-	context.arc(game.ball.x, game.ball.y, 3, 0, Math.PI * 2, false);
+	context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
 	context.fill();
 	drawScore();
 
@@ -141,40 +139,54 @@ function playerMove(event) {
 }
 
 // IA ordi:
-function computerMove() {
-    // Calcul de la différence entre la position de l'ordinateur et celle de la balle
-    var difference = game.ball.y - (game.computer.y + PLAYER_HEIGHT / 2);
+function computerMove(signal) {
+	let TBS;
+	if (BALL_SPEED <= 5)
+		TBS = 5;
+	else
+	TBS = 6;
+	if (gameStarted == true)
+		{
+			if (signal === 'up')
+			{
+				for (let i = 0; i < TBS; i++) {
+					setTimeout(function() {
+						game.computer.y -= PLAYER_SPEED;
+					}, i * 100); //100 millisecondes
+				}
+			}
+			else if (signal === 'down')
+			{
+				for (let i = 0; i < TBS; i++) {
+					setTimeout(function() {
+						game.computer.y += PLAYER_SPEED;
+					}, i * 100); //100 millisecondes
+				}
+			}
 
-    // Si la balle est au-dessus de la raquette de l'ordinateur, déplacer l'ordinateur vers le bas
-    if (difference > 0) {
-		game.computer.y += Math.min(PLAYER_SPEED, difference);
-    }
-    // Si la balle est en dessous de la raquette de l'ordinateur, déplacer l'ordinateur vers le haut
-    else if (difference < 0) {
-		game.computer.y -= Math.min(PLAYER_SPEED, Math.abs(difference));
-    }
-
-    // Limiter la position de l'ordinateur dans le terrain
-    if (game.computer.y < 0) {
-		game.computer.y = 0;
-    } else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
-		game.computer.y = canvas.height - PLAYER_HEIGHT;
-    }
-
-    // Simulation de l'ordinateur appuyant sur les touches
-    // Pour que la vitesse de déplacement de l'ordinateur soit la même que celle du joueur,
-    // nous ajustons la position de l'ordinateur selon la position actuelle de la balle
-    var ballPosition = game.ball.y - (game.computer.y + PLAYER_HEIGHT / 2);
-    if (ballPosition > 0) {
-		game.computer.y += PLAYER_SPEED;
-    } else if (ballPosition < 0) {
-		game.computer.y -= PLAYER_SPEED;
-    }
+			if (game.computer.y < 0) {
+				game.computer.y = 0;
+			} else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
+				game.computer.y = canvas.height - PLAYER_HEIGHT;
+			}
+	}
 }
 
+// analyse du jeu 1X/sec
+function readGame() {
+	var ballPosition = game.ball.y;
+	var ballDirection = game.ball.speed.y;
+	var signal;
 
-// Appel périodique de computerMove toutes les secondes
-setInterval(computerMove, 1000);
+	if (ballDirection > 0)
+		signal = 'down';
+	else if (ballDirection < 0)
+		signal = 'up';
+
+	computerMove(signal);
+}
+
+setInterval(readGame, 1000);
 
 
 //collisions
@@ -244,7 +256,6 @@ function endGame() {
 
 function removeKeyListeners() {
 	document.removeEventListener('keydown', playerMove);
-	document.removeEventListener('keydown', computerMove);
 }
 
 

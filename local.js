@@ -4,7 +4,7 @@
 var canvas;
 var game;
 var gameStarted = false;
-const PLAYER_HEIGHT = 30;
+const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 5;
 const PLAYER_SPEED = 10;
 const BALL_SPEED = 1.2;
@@ -90,7 +90,7 @@ function draw() {
 	context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.beginPath();
 	context.fillStyle = 'white';
-	context.arc(game.ball.x, game.ball.y, 3, 0, Math.PI * 2, false);
+	context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
 	context.fill();
 	drawScore();
 
