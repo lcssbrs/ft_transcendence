@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # TODO LIST :
     # historique tournoi: position, date, résultat dernier match, adversaire dernier match
@@ -26,13 +29,20 @@ class user_list(models.Model):
     games_loose = models.PositiveIntegerField(default=0)
     games_rank = models.PositiveIntegerField(default=0)
 
-    # hash le mdp
-    def save(self, *args, **kwargs):
-        self.password = make_password(self.password)
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.username
 
     class Meta:
         db_table = 'django_user_list'
+
+@receiver(post_save, sender=user_list)
+def sync_user_to_auth_user(sender, instance, created, **kwargs):
+    if created:
+        User.objects.create_user(
+            username=instance.username,
+            password=instance.password,
+            email=instance.email,
+            first_name=instance.first_name,
+            last_name=instance.last_name
+        )
+
