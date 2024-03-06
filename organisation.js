@@ -8,17 +8,109 @@ const logrequire = document.querySelector('#logrequire');
 const profilebar = document.querySelector('#profilebar');
 const friend = document.querySelector('#friend');
 const profile = document.querySelector('#profile');
+const logscreen = document.querySelector('#loginForm')
+const validlogbutton = document.querySelector('#validlogbutton')
+const registerscreen = document.querySelector('#registerForm')
+
+function validlog()
+{
+	profilebar.classList.remove('d-none');
+	logbutton.classList.add('d-none');
+	logscreen.classList.add('d-none');
+	registerscreen.classList.add('d-none');
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+	var usernameInput = document.getElementById("usernameInput");
+	var usernameError = document.getElementById("usernameMissing");
+
+	var passwordInput = document.getElementById("passwordInput");
+	var passwordError = document.getElementById("passwordMissing");
+	var isValid = true;
+
+	if (usernameInput.value === "") {
+		usernameError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		usernameError.classList.add("d-none");
+	}
+	if (passwordInput.value === "") {
+		passwordError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		passwordError.classList.add("d-none");
+	}
+	if (!isValid) {
+		event.preventDefault();
+	}
+	else {
+		validlog();
+	}
+});
+
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+	var usernameInput = document.getElementById("usernameRegister");
+	var usernameError = document.getElementById("usernameMissingReg");
+
+	var firstInput = document.getElementById("firstRegister");
+	var firstError = document.getElementById("firstMissing");
+
+	var lastInput = document.getElementById("lastRegister");
+	var lastError = document.getElementById("lastMissing");
+
+	var passwordInput = document.getElementById("passwordRegister");
+	var passwordError = document.getElementById("passwordMissingReg");
+	var isValid = true;
+
+	if (usernameInput.value === "") {
+		usernameError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		usernameError.classList.add("d-none");
+	}
+	if (firstInput.value === "") {
+		firstError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		firstError.classList.add("d-none");
+	}
+	if (lastInput.value === "") {
+		lastError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		lastError.classList.add("d-none");
+	}
+	if (passwordInput.value === "") {
+		passwordError.classList.remove("d-none");
+		isValid = false;
+	} else {
+		passwordError.classList.add("d-none");
+	}
+	if (!isValid) {
+		event.preventDefault();
+	}
+	else {
+		validlog();
+	}
+});
 
 function Profile()
 {
 	friend.classList.add('d-none');
 	profile.classList.remove('d-none');
 }
+
 function log()
 {
-	logbutton.classList.add('d-none');
-	// logrequire.classList.add('d-none');
-	profilebar.classList.remove('d-none');
+	logrequire.classList.add('d-none');
+	logscreen.classList.remove('d-none');
+	registerscreen.classList.add('d-none');
+}
+
+function register()
+{
+	logscreen.classList.add('d-none');
+	registerscreen.classList.remove('d-none');
 }
 
 function Page2()
