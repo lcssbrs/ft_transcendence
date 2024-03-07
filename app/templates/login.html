@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Inclure Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Se connecter</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Nom d'utilisateur:</label>
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="id_password">Mot de passe:</label>
+                {{ form.password }}
+                {% for error in form.password.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+            {% if form.errors %}
+                <div class="alert alert-danger mt-2">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+        </form>
+        <p>Vous n'avez pas de compte? <a href="/register/">S'inscrire ici</a></p>
+    </div>
+</body>
+</html>
