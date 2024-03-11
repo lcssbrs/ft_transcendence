@@ -2115,3 +2115,12 @@ Watching for file changes with StatReloader
 "GET /redirection_apres_authentification/?code=81d0e7000f1a824f12082e6b382eac7389655aa0ca16dd38bee52bd735c5fb1e HTTP/1.1" 302 0
 "GET /exchange_code_for_access_token/81d0e7000f1a824f12082e6b382eac7389655aa0ca16dd38bee52bd735c5fb1e/ HTTP/1.1" 302 0
 "GET /home HTTP/1.1" 200 273
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=15e02adb2a46dd8b689172e4a9cbb3daa40b0341b7588f4970c2d34d0bcb2e2d HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=15e02adb2a46dd8b689172e4a9cbb3daa40b0341b7588f4970c2d34d0bcb2e2d HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/15e02adb2a46dd8b689172e4a9cbb3daa40b0341b7588f4970c2d34d0bcb2e2d/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.0" 404 2972
