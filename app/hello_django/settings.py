@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'hello_django',
-	'rest_framework',
-	'django_otp',
+    'rest_framework',
+    'hello_django',
+    'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_email',  # <- if you want email capability.
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
 ]
 
@@ -143,14 +143,23 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_COOKIE_NAME = 'csrftoken'
+
+# API 42
 
 SOCIAL_AUTH_42_KEY = 'u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3'
 SOCIAL_AUTH_42_SECRET = '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'
-LOGIN_REDIRECT_URL = 'http://localhost:8000/'
+LOGIN_REDIRECT_URL = 'http://localhost:80/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),
@@ -174,4 +183,3 @@ LOGGING = {
         },
     },
 }
-

@@ -46,3 +46,4 @@ def sync_user_to_auth_user(sender, instance, created, **kwargs):
             first_name=instance.first_name,
             last_name=instance.last_name
         )
+

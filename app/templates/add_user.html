@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Inscription Utilisateur</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <label for="id_first_name">Prénom:</label><br>
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+            <br><br>
+
+            <label for="id_last_name">Nom de famille:</label><br>
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+            <br><br>
+
+            <label for="id_username">Nom d'utilisateur:</label><br>
+            {{ form.username }}
+            {{ form.username.errors }}
+            <br><br>
+
+            <label for="id_password">Mot de passe:</label><br>
+            {{ form.password }}
+            {{ form.password.errors }}
+            <br><br>
+
+            <label for="id_email">Adresse e-mail:</label><br>
+            {{ form.email }}
+            {{ form.email.errors }}
+            <br><br>
+
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</body>
+</html>

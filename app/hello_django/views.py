@@ -1,16 +1,73 @@
-from django.shortcuts import render
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from django.conf import settings
-import requests
-from django.contrib.auth import get_user_model
-import logging
+from django.shortcuts import render, redirect
+from .forms import add_user_form
 from .models import user_list
-
-logger = logging.getLogger(__name__)
+from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+from django.conf import settings
+from django.http import HttpResponse
+import logging
+import requests
 
 def index(request):
-    return render(request, 'index.html')
+    error_message = None
+    form = None
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                error_message = "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect."
+    else:
+        form = AuthenticationForm()
+
+    add_user_form_instance = add_user_form()
+    if request.method == 'POST':
+        add_user_form_instance = add_user_form(request.POST, request.FILES)
+        if add_user_form_instance.is_valid():
+            email = add_user_form_instance.cleaned_data['email']
+            if user_list.objects.filter(email=email).exists():
+                error_message = "Cet email est déjà utilisé. Veuillez en choisir un autre."
+            else:
+                username = add_user_form_instance.cleaned_data['username']
+                if user_list.objects.filter(username=username).exists():
+                    error_message = "Ce pseudo est déjà utilisé. Veuillez en choisir un autre."
+                else:
+                    add_user_form_instance.save()
+                    return redirect('index')
+
+    return render(request, 'index.html', {'form': form, 'add_user_form': add_user_form_instance, 'error_message': error_message})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                messages.error(request, "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect.")
+                return redirect('login')
+        else:
+            messages.error(request, "Échec de la validation du formulaire.")
+            return redirect('login')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
+
+# API 42
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request, 'home.html')
@@ -33,7 +90,7 @@ def exchange_code_for_access_token(request, code):
         'client_id': settings.SOCIAL_AUTH_42_KEY,
         'client_secret': settings.SOCIAL_AUTH_42_SECRET,
         'code': code,
-        'redirect_uri': 'http://localhost:8000/redirection_apres_authentification',
+        'redirect_uri': 'http://localhost:80/redirection_apres_authentification',
     }
     response = requests.post(token_url, data=data)
 
@@ -70,11 +127,38 @@ def exchange_code_for_access_token(request, code):
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
     return redirect('home')
 
+# DEV
 
-def double_auth(request):
-    if (request == 'POST'):
-        print('on tente')
+def user_list_view(request):
+    users = user_list.objects.all()
+    return render(request, 'user_list.html', {'users': users})
+
+
+"""
+Sauvegarde
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def add_user_view(request):
+    error_message = None
+
+    if request.method == 'POST':
+        form = add_user_form(request.POST, request.FILES)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            if user_list.objects.filter(email=email).exists():
+                error_message = "Cet email est déjà utilisé. Veuillez en choisir un autre."
+            username = form.cleaned_data['username']
+            if user_list.objects.filter(username=username).exists():
+                error_message = "Ce pseudo est déjà utilisé. Veuillez en choisir un autre."
+
+            if not error_message:
+                form.save()
+                return redirect('index')
     else:
-        print ('je pense pas que ca marche')
-    return (redirect('home'))
+        form = add_user_form()
 
+    return render(request, 'add_user.html', {'form': form, 'error_message': error_message})
+"""

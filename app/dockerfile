@@ -21,7 +21,6 @@ RUN python -m pip install Pillow
 RUN pip install django-two-factor-auth
 RUN pip install django-two-factor-auth[phonenumbers]
 
-
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
