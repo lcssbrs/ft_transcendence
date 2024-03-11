@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
 	# api
-    path('home', views.home, name='home'),
+    path('home/', views.home, name='home'),
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
     path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
