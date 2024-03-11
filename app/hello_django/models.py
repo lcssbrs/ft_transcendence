@@ -23,6 +23,7 @@ class user_list(models.Model):
     profile_picture = models.ImageField(upload_to='photos/', default='photos/default-profile.jpg')
     status = models.CharField(max_length=20, default='offline', choices=[('online', 'En ligne'), ('offline', 'Hors ligne'), ('in_game', 'En jeu')])
     last_login = models.DateTimeField(null=True, blank=True)
+    double_auth = models.BooleanField(default=0)
     # Parties:
     games_played = models.PositiveIntegerField(default=0)
     games_win = models.PositiveIntegerField(default=0)
