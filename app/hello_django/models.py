@@ -36,3 +36,13 @@ class user_list(models.Model):
     class Meta:
         db_table = 'django_user_list'
 
+@receiver(post_save, sender=user_list)
+def sync_user_to_auth_user(sender, instance, created, **kwargs):
+    if created:
+        User.objects.create_user(
+            username=instance.username,
+            password=instance.password,
+            email=instance.email,
+            first_name=instance.first_name,
+            last_name=instance.last_name
+        )

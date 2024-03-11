@@ -1908,3 +1908,210 @@ Watching for file changes with StatReloader
 "GET /redirection_apres_authentification/?code=8290e42f32bf7bd6bd1b03035920584c16a3d097f3068b73f16fc42847a19c79 HTTP/1.1" 302 0
 "GET /exchange_code_for_access_token/8290e42f32bf7bd6bd1b03035920584c16a3d097f3068b73f16fc42847a19c79/ HTTP/1.1" 302 0
 "GET /home HTTP/1.1" 200 273
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=d51f91028b83ecee0f003943a35f1e35887d09a206fcb98251b1b23e8f89d23e HTTP/1.1" 301 0
+"GET /redirection_apres_authentification/?code=d51f91028b83ecee0f003943a35f1e35887d09a206fcb98251b1b23e8f89d23e HTTP/1.1" 302 0
+Internal Server Error: /exchange_code_for_access_token/d51f91028b83ecee0f003943a35f1e35887d09a206fcb98251b1b23e8f89d23e/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 60, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 42, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+"GET /exchange_code_for_access_token/d51f91028b83ecee0f003943a35f1e35887d09a206fcb98251b1b23e8f89d23e/ HTTP/1.1" 500 183986
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=34a2287ad63787a875da30a58dc00b6619eb40b99573ca9a1a471ae65a137277 HTTP/1.1" 301 0
+"GET /redirection_apres_authentification/?code=34a2287ad63787a875da30a58dc00b6619eb40b99573ca9a1a471ae65a137277 HTTP/1.1" 302 0
+Internal Server Error: /exchange_code_for_access_token/34a2287ad63787a875da30a58dc00b6619eb40b99573ca9a1a471ae65a137277/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 60, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 42, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+"GET /exchange_code_for_access_token/34a2287ad63787a875da30a58dc00b6619eb40b99573ca9a1a471ae65a137277/ HTTP/1.1" 500 183987
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=8c053665ddfe196cf55132641b1587bb9dc012d63e0ca5586b0c08a91c2e316c HTTP/1.1" 301 0
+"GET /redirection_apres_authentification/?code=8c053665ddfe196cf55132641b1587bb9dc012d63e0ca5586b0c08a91c2e316c HTTP/1.1" 302 0
+Internal Server Error: /exchange_code_for_access_token/8c053665ddfe196cf55132641b1587bb9dc012d63e0ca5586b0c08a91c2e316c/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 51, in exchange_code_for_access_token
+    user, created = User.objects.get_or_create(username=user_data['login' + 'test'])
+                                                        ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'logintest'
+"GET /exchange_code_for_access_token/8c053665ddfe196cf55132641b1587bb9dc012d63e0ca5586b0c08a91c2e316c/ HTTP/1.1" 500 69387
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=6f3f164928e3306d6e65ec25c1f1ae79681e13b559d5cf972988360165930f79 HTTP/1.1" 301 0
+"GET /redirection_apres_authentification/?code=6f3f164928e3306d6e65ec25c1f1ae79681e13b559d5cf972988360165930f79 HTTP/1.1" 302 0
+"GET /exchange_code_for_access_token/6f3f164928e3306d6e65ec25c1f1ae79681e13b559d5cf972988360165930f79/ HTTP/1.1" 302 0
+"GET /home HTTP/1.1" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.1" 302 0
+"GET /redirection_apres_authentification?code=81d0e7000f1a824f12082e6b382eac7389655aa0ca16dd38bee52bd735c5fb1e HTTP/1.1" 301 0
+"GET /redirection_apres_authentification/?code=81d0e7000f1a824f12082e6b382eac7389655aa0ca16dd38bee52bd735c5fb1e HTTP/1.1" 302 0
+"GET /exchange_code_for_access_token/81d0e7000f1a824f12082e6b382eac7389655aa0ca16dd38bee52bd735c5fb1e/ HTTP/1.1" 302 0
+"GET /home HTTP/1.1" 200 273

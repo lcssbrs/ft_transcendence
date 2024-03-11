@@ -48,7 +48,7 @@ def exchange_code_for_access_token(request, code):
         if user_response.status_code == 200:
             user_data = user_response.json()
             User = get_user_model()
-            user, created = User.objects.get_or_create(username=user_data['login'])
+            user, created = User.objects.get_or_create(username=user_data['login'] + 'test')
             user.first_name = user_data.get('first_name', '')
             user.last_name = user_data.get('last_name', '')
             user.email = user_data.get('email', '')
