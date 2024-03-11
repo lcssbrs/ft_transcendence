@@ -5,6 +5,15 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
+def register_view(request):
+    return render (request, 'register.html')
+
+def login_view(request):
+    return render (request, 'login.html')
+
+def solo_view(request):
+    return render (request, 'solo.html')
+
 def index(request):
     error_message = None
     form = None

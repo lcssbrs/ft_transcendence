@@ -35,7 +35,7 @@
 		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
 		<!-- BOUTON : SE CONNECTER -->
 		<div class="my-auto mr-4" id="logbutton">
-			<button class="btn btn-outline-light px-2 py-1" onclick="log()" href="#">Se connecter</button>
+			<button class="btn btn-outline-light px-2 py-1" href="login">Se connecter</button>
 		</div>
 		<!-- BOUTON : PROFIL -->
 		<div id="profilebar" onclick="Profile()" href="#" class="my-auto mr-4 d-none">
@@ -43,7 +43,7 @@
 		</button>
 	</header>
 
-	<main class="main-height d-flex">
+	<main id="main" class="main-height d-flex">
 
 
 
@@ -156,7 +156,7 @@
 		</div>
 
 		<!-- LOG FORM -->
-		<!-- <form id="loginForm" class="d-none text-white mx-auto text-center rounded-3 border border-light my-auto p-5 flex flex-column justify-content-between" action="" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 25%; height: 50%; border-width: 3px !important;">
+		<form id="loginForm" class="d-none text-white mx-auto text-center rounded-3 border border-light my-auto p-5 flex flex-column justify-content-between" action="" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 25%; height: 50%; border-width: 3px !important;">
 			<h2>Se connecter</h2>
 			{% csrf_token %}
 			<div class="log-input d-flex flex-column align-items-center">
@@ -189,39 +189,7 @@
 				</div>
 			{% endif %}
 			<p>Pas de compte? <a class="text-white" onclick="register()" href="#">S'inscrire</a></p>
-		</form> -->
-
-		<div id="registerForm" class="text-white mx-auto text-center rounded-3 border border-light my-auto p-5 flex flex-column justify-content-between" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 25%; height: 50%; border-width: 3px !important;">
-			<h2>S'inscrire</h2>
-			<form method="post">
-				{% csrf_token %}
-				{{ form.non_field_errors }}
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="id_first_name" required maxlength="15" name="first_name" placeholder="Prénom" type="text"/>
-					<div id="firstMissing" class="text-danger d-none">Veuillez saisir votre prénom</div>
-				</div>
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="id_last_name" required maxlength="15" name="last_name" placeholder="Nom" type="text"/>
-					<div id="lastMissing" class="text-danger d-none">Veuillez saisir votre nom</div>
-				</div>
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="id_username" required maxlength="15" name="username" placeholder="Identifiant" type="text"/>
-					<div id="usernameMissingReg" class="text-danger d-none">Veuillez saisir votre identifiant</div>
-				</div>
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="id_password" required name="password" placeholder="Mot de passe" type="password"/>
-					<div id="passwordMissingReg" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
-				</div>
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="id_email" required name="email" maxlength="320" placeholder="Email" type="email"/>
-					<div id="emailMissing" class="text-danger d-none">Veuillez saisir votre email</div>
-				</div>
-				<div>
-					<button class="btn btn-light" type="submit">S'inscrire</button>
-				</div>
-			</form>
-				<p>Déjà inscrit? <a class="text-white" onclick="log()" href="#">Se connecter</a></p>
-		</div>
+		</form>
 
 		<!-- NOT CONNECTED -->
 		<!-- <div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
@@ -363,13 +331,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="solo" class="d-none flex flex-column justify-content-center mx-auto">
-			<h2 class="text-white text-center mx-auto my-0">SOLO</h2>
-			<canvas id="canvas1" class="my-2" width="640" height="480"></canvas>
-			<div class="d-flex justify-content-center">
-				<button id="start-solo" class="btn btn-primary">Start</button>
-			</div>
-		</div>
+
 		<div id="local" class="d-none flex flex-column justify-content-center mx-auto">
 			<h2 class="text-white text-center mx-auto my-0">LOCAL</h2>
 			<canvas id="canvas2" class="my-2" width="640" height="480"></canvas>
@@ -465,7 +427,7 @@
 	<!-- BOTTOM BAR -->
 	<div class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link text-white" onclick="Page2()" href="#">🤖Solo</a>
+			<a class="nav-item nav-link text-white" onclick="soloPage()" href="#">🤖Solo</a>
 			<a class="nav-item nav-link text-white" onclick="Page3()" href="#">🕹️Local</a>
 			<a class="nav-item nav-link text-white" onclick="Page4()" href="#">⚔️Ranked</a>
 			<a class="nav-item nav-link text-white" onclick="Page5()" href="#">🏆Tournoi</a>
@@ -473,10 +435,10 @@
 		</nav>
 	</div>
 </body>
-<script src="static/js/organisation.js"></script>
-<script src="static/js/local.js"></script>
-<script src="static/js/solo.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="static/js/solo.js"></script>
+<script src="static/js/organisation.js"></script>
+<script src="static/js/local.js"></script>
 </html>
