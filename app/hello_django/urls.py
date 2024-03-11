@@ -20,15 +20,20 @@ from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
 from .views import user_list_view, login_view
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', login_view, name='login'),
-    # path('register/', add_user_view, name='register'),
+	# api
+    path('home', views.home, name='home'),
+	path('connexion_42/', views.connexion_42, name='connexion_42'),
+	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
+    path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
     # admin
     path('admin/', admin.site.urls),
     path('django/', lambda request: redirect('http://localhost:8000/admin'), name='django_redirect'),
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
     # dev
+    path('login/', login_view, name='login'),
     path('users/', user_list_view, name='user_list'),
 ]
