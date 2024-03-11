@@ -19,11 +19,14 @@ from . import views
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
-from .views import user_list_view, login_view
+from .views import user_list_view, login_view, solo_view, register_view
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('solo', solo_view, name='solo'),
+    path('login', login_view, name='login'),
+    path('register', register_view, name='register'),
 	# api
     path('home/', views.home, name='home'),
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
