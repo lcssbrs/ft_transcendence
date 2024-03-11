@@ -12,6 +12,24 @@ let displayWinner = false;
 let borderFlashTime = 0;
 let borderFlashInterval = null;
 
+// //websockets
+
+// const socket = new WebSocket('wss://http://localhost:5500/pong.html'); // Remplacez l'URL par l'adresse de votre serveur WebSocket
+
+// // Gérer l'ouverture de la connexion
+// socket.addEventListener('open', function (event) {
+// 	console.log('Connexion établie');
+// });
+
+// // Gérer les messages entrants du serveur
+// socket.addEventListener('message', function (event) {
+// 	console.log('Message du serveur : ', event.data);
+// });
+
+// // Gérer les erreurs de connexion
+// socket.addEventListener('error', function (event) {
+// 	console.error('Erreur de connexion : ', event);
+// });
 
 // clignotement lors d'un but
 function flashBorder(duration) {
@@ -27,10 +45,16 @@ function flashBorder(duration) {
 	}, 50);
 }
 
+socket.send('Position du joueur : (game.player.y)');
+socket.send('Position de la balle : (game.ball.x, game.ball.y)');
+socket.send('Vitesse de la balle : (BALL_SPEED)');
+
 // Fonction pour lancer la partie après un compte à rebours
 function startGameWithCountdown() {
+	gameStarted = true;
+
 	game.player.score = 0;
-	game.computer.score = 0;
+	game.challenger.score = 0;
 	game.ball.x = canvas.width / 2;
 	game.ball.y = canvas.height / 2;
 	game.ball.speed.x = 1;
@@ -40,7 +64,7 @@ function startGameWithCountdown() {
 	displayWinner = false;
 
 	document.addEventListener('keydown', playerMove);
-	document.addEventListener('keydown', computerMove);
+	document.addEventListener('keydown', challengerMove);
 
 	var countdown = 3;
 	var countdownInterval = setInterval(function() {
@@ -53,7 +77,6 @@ function startGameWithCountdown() {
 		countdown--;
 		if (countdown < 0) {
 			clearInterval(countdownInterval);
-			gameStarted = true;
 			startGame();
 		}
 	}, 1000);
@@ -64,7 +87,7 @@ function drawScore() {
 	context.fillStyle = 'white';
 	context.font = 'bold 20px Arial';
 	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Computer: ' + game.computer.score, canvas.width - 150, 40);
+	context.fillText('Joueur 2: ' + game.challenger.score, canvas.width - 150, 40);
 }
 
 //Mise en place du terrain :
@@ -82,7 +105,7 @@ function draw() {
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 	context.fillStyle = 'red';
 	context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
-	context.fillRect(canvas.width - PLAYER_WIDTH, game.computer.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+	context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	context.beginPath();
 	context.fillStyle = 'white';
 	context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
@@ -92,7 +115,7 @@ function draw() {
 	if (displayWinner) {
 		context.fillStyle = 'red';
 		context.font = 'bold 40px Arial';
-		var winner = game.player.score === 3 ? "Joueur 1" : "Computer";
+		var winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
 		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2 - 250, canvas.height / 2 + 10);
 	}
 }
@@ -100,7 +123,6 @@ function draw() {
 //mouvements de la balle :
 function play() {
 	draw();
-	computerMove();
 	ballMove();
 	requestAnimationFrame(play);
 }
@@ -111,7 +133,7 @@ function ballMove() {
 		game.ball.speed.y *= -1;
 	}
 	if (game.ball.x > canvas.width - PLAYER_WIDTH) {
-		collide(game.computer);
+		collide(game.challenger);
 	} else if (game.ball.x < PLAYER_WIDTH) {
 		collide(game.player);
 	}
@@ -119,7 +141,7 @@ function ballMove() {
 	game.ball.y += game.ball.speed.y;
 }
 
-// deplacement joueur
+// deplacement joueur 1 (W et S)
 function playerMove(event) {
 	if (event.key === 'w' || event.key === 'W') {
 		game.player.y -= PLAYER_SPEED;
@@ -133,56 +155,19 @@ function playerMove(event) {
 	}
 }
 
-// IA ordi:
-function computerMove(signal) {
-	let TBS;
-	if (BALL_SPEED <= 5)
-		TBS = 5;
-	else
-	TBS = 7;
-	if (gameStarted == true)
-		{
-			if (signal === 'up')
-			{
-				for (let i = 0; i < TBS; i++) {
-					setTimeout(function() {
-						game.computer.y -= PLAYER_SPEED;
-					}, i * 100); //100 millisecondes
-				}
-			}
-			else if (signal === 'down')
-			{
-				for (let i = 0; i < TBS; i++) {
-					setTimeout(function() {
-						game.computer.y += PLAYER_SPEED;
-					}, i * 100); //100 millisecondes
-				}
-			}
-
-			if (game.computer.y < 0) {
-				game.computer.y = 0;
-			} else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
-				game.computer.y = canvas.height - PLAYER_HEIGHT;
-			}
+// deplacement joueur 2 (Flèches haut et bas)
+function challengerMove(event) {
+	if (event.key === 'ArrowUp') {
+		game.challenger.y -= PLAYER_SPEED;
+	} else if (event.key === 'ArrowDown') {
+		game.challenger.y += PLAYER_SPEED;
+	}
+	if (game.challenger.y < 0) {
+		game.challenger.y = 0;
+	} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
+		game.challenger.y = canvas.height - PLAYER_HEIGHT;
 	}
 }
-
-// analyse du jeu 1X/sec
-function readGame() {
-	var ballPosition = game.ball.y;
-	var ballDirection = game.ball.speed.y;
-	var signal;
-
-	if (ballDirection > 0)
-		signal = 'down';
-	else if (ballDirection < 0)
-		signal = 'up';
-
-	computerMove(signal);
-}
-
-setInterval(readGame, 1000);
-
 
 //collisions
 function collide(player) {
@@ -190,17 +175,17 @@ function collide(player) {
 		game.ball.x = canvas.width / 2;
 		game.ball.y = canvas.height / 2;
 		game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-		game.computer.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+		game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
 		game.ball.speed.x = 2;
 		if (player === game.player) {
-			game.computer.score++;
+			game.challenger.score++;
 			flashBorder(1000);
 		} else {
 			game.player.score++;
 			flashBorder(1000);
 		}
 		updateScoreDisplay();
-		if (game.player.score === 3 || game.computer.score === 3) {
+		if (game.player.score === 3 || game.challenger.score === 3) {
 			endGame();
 		}
 	} else {
@@ -218,24 +203,21 @@ function updateScoreDisplay() {
 	context.fillStyle = 'white';
 	context.font = 'bold 20px Arial';
 	context.fillText('Joueur 1: ' + game.player.score, 20, 40);
-	context.fillText('Computer: ' + game.computer.score, canvas.width - 150, 40);
+	context.fillText('Joueur 2: ' + game.challenger.score, canvas.width - 150, 40);
 }
 
 // lancer une game
 function startGame() {
-	// gameStarted = true;
 	game.player.score = 0;
-	game.computer.score = 0;
+	game.challenger.score = 0;
 	updateScoreDisplay();
 	play();
 }
 
-
-// Fonction pour terminer la partie
 // Fonction pour terminer la partie
 function endGame() {
 	gameStarted = false;
-	var winner = game.player.score === 3 ? "Joueur 1" : "Computer";
+	var winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
 	displayWinner = true;
 	setTimeout(function() {
 		displayWinner = false;
@@ -250,10 +232,8 @@ function endGame() {
 
 function removeKeyListeners() {
 	document.removeEventListener('keydown', playerMove);
+	document.removeEventListener('keydown', challengerMove);
 }
-
-
-
 
 //----------------EVENTS LISTENERS--------
 
@@ -265,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			y: canvas.height / 2 - PLAYER_HEIGHT / 2,
 			score: 0
 		},
-		computer: {
+		challenger: {
 			y: canvas.height / 2 - PLAYER_HEIGHT / 2,
 			score: 0
 		},
@@ -280,11 +260,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 	draw();
-
 });
 
 // Event sur le clavier
 document.addEventListener('keydown', playerMove);
+document.addEventListener('keydown', challengerMove);
 
 // Event sur le bouton de démarrage de la partie
 document.getElementById('start-game').addEventListener('click', function() {
