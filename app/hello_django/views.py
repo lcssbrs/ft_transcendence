@@ -8,6 +8,11 @@ from django.conf import settings
 from django.http import HttpResponse
 import logging
 import requests
+import urllib.request
+from PIL import Image
+from django.core.files import File
+from pathlib import Path
+import os
 
 def index(request):
     error_message = None
@@ -112,8 +117,17 @@ def exchange_code_for_access_token(request, code):
             if created:
                 image = user_data.get('image', '')
                 image = image.get('versions', '')
-                image = image.get('small')
-                usersaved = user_list(user.id ,user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), image)
+                image = image.get('medium')
+                filename, headers = urllib.request.urlretrieve(image)
+                photos_directory = 'media/photos/'
+                if not os.path.exists(photos_directory):
+                    os.makedirs(photos_directory)
+                with open(filename, 'rb') as image_file:
+                    image_data = image_file.read()
+                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                with open(output_filename, 'wb') as output_file:
+                    output_file.write(image_data)
+                usersaved = user_list(user.id ,user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), 'photos/' + user.username.removesuffix('test') + '.png')
                 usersaved.save()
                 user.save()
             else:

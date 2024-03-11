@@ -2124,3 +2124,710 @@ Watching for file changes with StatReloader
 "GET /home HTTP/1.0" 200 273
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.0" 404 2972
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 23927
+"GET /home HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=bb58175e6c2f267f65ed40af26c7e1048d5bd4cf6a76f0f52dcb06ab2f524058 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=bb58175e6c2f267f65ed40af26c7e1048d5bd4cf6a76f0f52dcb06ab2f524058 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/bb58175e6c2f267f65ed40af26c7e1048d5bd4cf6a76f0f52dcb06ab2f524058/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 23927
+"GET /home HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=59b5598991a234ae1ce87788925423e157a40663e379123b418d80a9a917e74e HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=59b5598991a234ae1ce87788925423e157a40663e379123b418d80a9a917e74e HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/59b5598991a234ae1ce87788925423e157a40663e379123b418d80a9a917e74e/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 118, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, "photos/" + user_data.get('username') + '.png')
+                                      ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "NoneType") to str
+"GET /exchange_code_for_access_token/59b5598991a234ae1ce87788925423e157a40663e379123b418d80a9a917e74e/ HTTP/1.0" 500 72306
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=a61425ea5b2b8c6e7bfc7eff3cae2b33ecb932146c64a5a3d36e2725e1960472 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=a61425ea5b2b8c6e7bfc7eff3cae2b33ecb932146c64a5a3d36e2725e1960472 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/a61425ea5b2b8c6e7bfc7eff3cae2b33ecb932146c64a5a3d36e2725e1960472/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 118, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, "photos/" + user_data.get('username') + '.png')
+                                      ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "NoneType") to str
+"GET /exchange_code_for_access_token/a61425ea5b2b8c6e7bfc7eff3cae2b33ecb932146c64a5a3d36e2725e1960472/ HTTP/1.0" 500 72270
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /home HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=9da1245f609fd7fb97f1c8c0f3a35166f648797d3c0229899b689a9eb689a757 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=9da1245f609fd7fb97f1c8c0f3a35166f648797d3c0229899b689a9eb689a757 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/9da1245f609fd7fb97f1c8c0f3a35166f648797d3c0229899b689a9eb689a757/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 118, in exchange_code_for_access_token
+    linkpic = 'photos/' + user_data.get('username') + '.png'
+              ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "NoneType") to str
+"GET /exchange_code_for_access_token/9da1245f609fd7fb97f1c8c0f3a35166f648797d3c0229899b689a9eb689a757/ HTTP/1.0" 500 72150
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=c42d7dba01506320fecebb4bc38bf59ef17df6fbf3a03a9963b953ab037b2ab7 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=c42d7dba01506320fecebb4bc38bf59ef17df6fbf3a03a9963b953ab037b2ab7 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/c42d7dba01506320fecebb4bc38bf59ef17df6fbf3a03a9963b953ab037b2ab7/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    linkpic = 'photos/' + uslogin + '.png'
+              ~~~~~~~~~~^~~~~~~~~
+TypeError: can only concatenate str (not "NoneType") to str
+"GET /exchange_code_for_access_token/c42d7dba01506320fecebb4bc38bf59ef17df6fbf3a03a9963b953ab037b2ab7/ HTTP/1.0" 500 72197
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=baf3bd233bdbc756d16e70f8ba69b96ec8b0eafe11167dff75d0964414b0b70b HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=baf3bd233bdbc756d16e70f8ba69b96ec8b0eafe11167dff75d0964414b0b70b HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/baf3bd233bdbc756d16e70f8ba69b96ec8b0eafe11167dff75d0964414b0b70b/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 120, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, "photos/" + linkpic)
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/photos/.png'
+"GET /exchange_code_for_access_token/baf3bd233bdbc756d16e70f8ba69b96ec8b0eafe11167dff75d0964414b0b70b/ HTTP/1.0" 500 77544
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=8c6f703d13271b3831dcadd9a751fb2d4f18d170b5970f5d99ed61e5a2e149e3 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=8c6f703d13271b3831dcadd9a751fb2d4f18d170b5970f5d99ed61e5a2e149e3 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/8c6f703d13271b3831dcadd9a751fb2d4f18d170b5970f5d99ed61e5a2e149e3/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 120, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, linkpic)
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/.png'
+"GET /exchange_code_for_access_token/8c6f703d13271b3831dcadd9a751fb2d4f18d170b5970f5d99ed61e5a2e149e3/ HTTP/1.0" 500 77448
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=02dd8fa96f5e7c93b3499cbda7e49d0fc158b61f7f5dbd4615e6b364df1521b2 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=02dd8fa96f5e7c93b3499cbda7e49d0fc158b61f7f5dbd4615e6b364df1521b2 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/02dd8fa96f5e7c93b3499cbda7e49d0fc158b61f7f5dbd4615e6b364df1521b2/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=9cdbb3159194c777f5f0ce298579902bd3cca4428b69447172b54e1462c292ae HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=9cdbb3159194c777f5f0ce298579902bd3cca4428b69447172b54e1462c292ae HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/9cdbb3159194c777f5f0ce298579902bd3cca4428b69447172b54e1462c292ae/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 120, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, linkpic)
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/.png'
+"GET /exchange_code_for_access_token/9cdbb3159194c777f5f0ce298579902bd3cca4428b69447172b54e1462c292ae/ HTTP/1.0" 500 77443
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=43b555d431b9a89d3e7526d9462e0bdad8d0170205e632f6dcf3b39f247da41c HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=43b555d431b9a89d3e7526d9462e0bdad8d0170205e632f6dcf3b39f247da41c HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/43b555d431b9a89d3e7526d9462e0bdad8d0170205e632f6dcf3b39f247da41c/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 120, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, linkpic)
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/test.png'
+"GET /exchange_code_for_access_token/43b555d431b9a89d3e7526d9462e0bdad8d0170205e632f6dcf3b39f247da41c/ HTTP/1.0" 500 77434
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=cd84295b9015440010d4bb950514d11c8444040ac7da4dc62565c884e3023d33 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=cd84295b9015440010d4bb950514d11c8444040ac7da4dc62565c884e3023d33 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/cd84295b9015440010d4bb950514d11c8444040ac7da4dc62565c884e3023d33/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos' + user_data.get('username', '') + 'png')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photospng'
+"GET /exchange_code_for_access_token/cd84295b9015440010d4bb950514d11c8444040ac7da4dc62565c884e3023d33/ HTTP/1.0" 500 72182
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=24605d31a298eae00d021040490ea7205257dd6512b5ac66503b0dba1525d13f HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=24605d31a298eae00d021040490ea7205257dd6512b5ac66503b0dba1525d13f HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/24605d31a298eae00d021040490ea7205257dd6512b5ac66503b0dba1525d13f/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=ff6638d0eaf97d6cae24cea167039bf41efde4d00b1b0a01dba990050b9d880a HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=ff6638d0eaf97d6cae24cea167039bf41efde4d00b1b0a01dba990050b9d880a HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/ff6638d0eaf97d6cae24cea167039bf41efde4d00b1b0a01dba990050b9d880a/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos' + user_data.username + '.png')
+                        ^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'username'
+"GET /exchange_code_for_access_token/ff6638d0eaf97d6cae24cea167039bf41efde4d00b1b0a01dba990050b9d880a/ HTTP/1.0" 500 72110
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=d39ac7375e2b6f084919b14411584ff9f7a7709b582992d10fb67db7bb6291ce HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=d39ac7375e2b6f084919b14411584ff9f7a7709b582992d10fb67db7bb6291ce HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/d39ac7375e2b6f084919b14411584ff9f7a7709b582992d10fb67db7bb6291ce/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos' + user.username + '.png')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photoslseiberrtest.png'
+"GET /exchange_code_for_access_token/d39ac7375e2b6f084919b14411584ff9f7a7709b582992d10fb67db7bb6291ce/ HTTP/1.0" 500 72121
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=6551530b8377d786476d1650b7c449464a2ee72e15024eb379215adf4b883467 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=6551530b8377d786476d1650b7c449464a2ee72e15024eb379215adf4b883467 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/6551530b8377d786476d1650b7c449464a2ee72e15024eb379215adf4b883467/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos/' + user.username + '.png')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/lseiberrtest.png'
+"GET /exchange_code_for_access_token/6551530b8377d786476d1650b7c449464a2ee72e15024eb379215adf4b883467/ HTTP/1.0" 500 72128
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=2671774510de134ac69a44550053f9f0b83ddd34d04084b2705b4f43ced3b93c HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=2671774510de134ac69a44550053f9f0b83ddd34d04084b2705b4f43ced3b93c HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/2671774510de134ac69a44550053f9f0b83ddd34d04084b2705b4f43ced3b93c/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos/' + user.username - 'test' + '.png')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+"GET /exchange_code_for_access_token/2671774510de134ac69a44550053f9f0b83ddd34d04084b2705b4f43ced3b93c/ HTTP/1.0" 500 72150
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=5b668bb0142991be5cec670e1e1686e21540ec485259f16085e24ce8841205ce HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=5b668bb0142991be5cec670e1e1686e21540ec485259f16085e24ce8841205ce HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/5b668bb0142991be5cec670e1e1686e21540ec485259f16085e24ce8841205ce/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos/' + user.username.replacesuffix('test') - + '.png')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'replacesuffix'
+"GET /exchange_code_for_access_token/5b668bb0142991be5cec670e1e1686e21540ec485259f16085e24ce8841205ce/ HTTP/1.0" 500 72202
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=392683353d91da7a9e4d17f72f791ce988708473ff6c83b7bd68b6b3cd9eb170 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=392683353d91da7a9e4d17f72f791ce988708473ff6c83b7bd68b6b3cd9eb170 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/392683353d91da7a9e4d17f72f791ce988708473ff6c83b7bd68b6b3cd9eb170/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos/' + user.username.removesuffix('test') - + '.png')
+                                                              ^^^^^^^^
+TypeError: bad operand type for unary +: 'str'
+"GET /exchange_code_for_access_token/392683353d91da7a9e4d17f72f791ce988708473ff6c83b7bd68b6b3cd9eb170/ HTTP/1.0" 500 72126
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=cfc8ae334d216e7f1fa6edbceb4b2d161f5cb2b6bd926fc872d281e87ebf197d HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=cfc8ae334d216e7f1fa6edbceb4b2d161f5cb2b6bd926fc872d281e87ebf197d HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/cfc8ae334d216e7f1fa6edbceb4b2d161f5cb2b6bd926fc872d281e87ebf197d/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 119, in exchange_code_for_access_token
+    f = open('photos/' + user.username.removesuffix('test') + '.png')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/lseiberr.png'
+"GET /exchange_code_for_access_token/cfc8ae334d216e7f1fa6edbceb4b2d161f5cb2b6bd926fc872d281e87ebf197d/ HTTP/1.0" 500 72220
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=27c9f4a567ae0b5a7cfc0888fee529f1a73dcd5c1cdf1dd9136e087fe0c66533 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=27c9f4a567ae0b5a7cfc0888fee529f1a73dcd5c1cdf1dd9136e087fe0c66533 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/27c9f4a567ae0b5a7cfc0888fee529f1a73dcd5c1cdf1dd9136e087fe0c66533/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 122, in exchange_code_for_access_token
+    self.photo.save(
+    ^^^^
+NameError: name 'self' is not defined
+"GET /exchange_code_for_access_token/27c9f4a567ae0b5a7cfc0888fee529f1a73dcd5c1cdf1dd9136e087fe0c66533/ HTTP/1.0" 500 72005
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=75badbe17a08e0b63c0d251b4d5767a6f71117356a0efe10d74d1da50abbbd9c HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=75badbe17a08e0b63c0d251b4d5767a6f71117356a0efe10d74d1da50abbbd9c HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/75badbe17a08e0b63c0d251b4d5767a6f71117356a0efe10d74d1da50abbbd9c/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 128, in exchange_code_for_access_token
+    usersaved = user_list(user.id ,user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), linkpic)
+                                                                                                                                                                ^^^^^^^
+NameError: name 'linkpic' is not defined
+"GET /exchange_code_for_access_token/75badbe17a08e0b63c0d251b4d5767a6f71117356a0efe10d74d1da50abbbd9c/ HTTP/1.0" 500 72506
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=89402c147d6d6e91b74c91da4feefb23f311f7b4584868b4bcea532dd0db65f0 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=89402c147d6d6e91b74c91da4feefb23f311f7b4584868b4bcea532dd0db65f0 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/89402c147d6d6e91b74c91da4feefb23f311f7b4584868b4bcea532dd0db65f0/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 123, in exchange_code_for_access_token
+    self.photo.save(
+    ^^^^
+NameError: name 'self' is not defined
+"GET /exchange_code_for_access_token/89402c147d6d6e91b74c91da4feefb23f311f7b4584868b4bcea532dd0db65f0/ HTTP/1.0" 500 72003
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=768d5533387319ff27a6b52aef2e4da04f1bd93df5c1fa85a25d38e324b6b760 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=768d5533387319ff27a6b52aef2e4da04f1bd93df5c1fa85a25d38e324b6b760 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/768d5533387319ff27a6b52aef2e4da04f1bd93df5c1fa85a25d38e324b6b760/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 123, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 981, in _save_table
+    values = [
+             ^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 985, in <listcomp>
+    (getattr(self, f.attname) if raw else f.pre_save(self, False)),
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/files.py", line 315, in pre_save
+    if file and not file._committed:
+                    ^^^^^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute '_committed'
+"GET /exchange_code_for_access_token/768d5533387319ff27a6b52aef2e4da04f1bd93df5c1fa85a25d38e324b6b760/ HTTP/1.0" 500 97920
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=2168365530f099b2d47056bf9b0c8da0cf98a281e9539b314bce874beda2e6d8 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=2168365530f099b2d47056bf9b0c8da0cf98a281e9539b314bce874beda2e6d8 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/2168365530f099b2d47056bf9b0c8da0cf98a281e9539b314bce874beda2e6d8/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=d47e8c1b85f34c1f32f968ea9758b50c64255325e34b9db095f95c0407ad5962 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=d47e8c1b85f34c1f32f968ea9758b50c64255325e34b9db095f95c0407ad5962 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/d47e8c1b85f34c1f32f968ea9758b50c64255325e34b9db095f95c0407ad5962/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=5a7bd9a483edd66ec85c585ac405fbc935d32918cd4e9912ffe90bc5b323a590 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=5a7bd9a483edd66ec85c585ac405fbc935d32918cd4e9912ffe90bc5b323a590 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/5a7bd9a483edd66ec85c585ac405fbc935d32918cd4e9912ffe90bc5b323a590/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 121, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, 'photos/' + user.username + '.png')
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/lseiberrtest.png'
+"GET /exchange_code_for_access_token/5a7bd9a483edd66ec85c585ac405fbc935d32918cd4e9912ffe90bc5b323a590/ HTTP/1.0" 500 77299
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=2249a3a5c20ed350f29e426e52ac5241ea1f9a75beac65070a6a6bdb9f5897b8 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=2249a3a5c20ed350f29e426e52ac5241ea1f9a75beac65070a6a6bdb9f5897b8 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/2249a3a5c20ed350f29e426e52ac5241ea1f9a75beac65070a6a6bdb9f5897b8/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 121, in exchange_code_for_access_token
+    urllib.request.urlretrieve(image, 'photos/' + user.username.removesuffix('test') + '.png')
+  File "/usr/local/lib/python3.11/urllib/request.py", line 251, in urlretrieve
+    tfp = open(filename, 'wb')
+          ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/lseiberr.png'
+"GET /exchange_code_for_access_token/2249a3a5c20ed350f29e426e52ac5241ea1f9a75beac65070a6a6bdb9f5897b8/ HTTP/1.0" 500 77387
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=c574bcece386a565ec581c02ea8f515aa9b31af051db4d4f7df7f4bebf990c91 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=c574bcece386a565ec581c02ea8f515aa9b31af051db4d4f7df7f4bebf990c91 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/c574bcece386a565ec581c02ea8f515aa9b31af051db4d4f7df7f4bebf990c91/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 122, in exchange_code_for_access_token
+    output = open('photos/' + user.username.removesuffix('test') + '.png')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'photos/lseiberr.png'
+"GET /exchange_code_for_access_token/c574bcece386a565ec581c02ea8f515aa9b31af051db4d4f7df7f4bebf990c91/ HTTP/1.0" 500 72490
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=87ba05611b3dd911071a579d8a30d6f8304152d2de01cc13181584e303108368 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=87ba05611b3dd911071a579d8a30d6f8304152d2de01cc13181584e303108368 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/87ba05611b3dd911071a579d8a30d6f8304152d2de01cc13181584e303108368/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 131, in exchange_code_for_access_token
+    output.write(result.read())
+                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'read'
+"GET /exchange_code_for_access_token/87ba05611b3dd911071a579d8a30d6f8304152d2de01cc13181584e303108368/ HTTP/1.0" 500 72758
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=d3b0767a7120a5cf3b2d34388eaf69fc2dafbb4108c3f236a93ca59e0cf71730 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=d3b0767a7120a5cf3b2d34388eaf69fc2dafbb4108c3f236a93ca59e0cf71730 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/d3b0767a7120a5cf3b2d34388eaf69fc2dafbb4108c3f236a93ca59e0cf71730/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 121, in exchange_code_for_access_token
+    filename, headers = urllib.request.urlretrieve(image)
+                                                   ^^^^^^^
+NameError: name 'image_ur' is not defined
+"GET /exchange_code_for_access_token/d3b0767a7120a5cf3b2d34388eaf69fc2dafbb4108c3f236a93ca59e0cf71730/ HTTP/1.0" 500 71866
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=b5f17cfb01d8d68bfbd23f970d5615947d642cc2438373f813ef1c4a2ce786ea HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=b5f17cfb01d8d68bfbd23f970d5615947d642cc2438373f813ef1c4a2ce786ea HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/b5f17cfb01d8d68bfbd23f970d5615947d642cc2438373f813ef1c4a2ce786ea/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 121, in exchange_code_for_access_token
+    filename, headers = urllib.request.urlretrieve(image)
+                                                   ^^^^^^^
+NameError: name 'image_ur' is not defined
+"GET /exchange_code_for_access_token/b5f17cfb01d8d68bfbd23f970d5615947d642cc2438373f813ef1c4a2ce786ea/ HTTP/1.0" 500 71866
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=94b9213b37ceeb84ddb66dbbd4900c84ea2672c86b4280b2f4f89ec94a93abf3 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=94b9213b37ceeb84ddb66dbbd4900c84ea2672c86b4280b2f4f89ec94a93abf3 HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/94b9213b37ceeb84ddb66dbbd4900c84ea2672c86b4280b2f4f89ec94a93abf3/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 121, in exchange_code_for_access_token
+    filename, headers = urllib.request.urlretrieve(image)
+                                                   ^^^^^^^
+NameError: name 'image_ur' is not defined
+"GET /exchange_code_for_access_token/94b9213b37ceeb84ddb66dbbd4900c84ea2672c86b4280b2f4f89ec94a93abf3/ HTTP/1.0" 500 71866
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=080e0ddc61a4c05a934be0d3d909e006b6e85118de2d3b8053a206fba13432e8 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=080e0ddc61a4c05a934be0d3d909e006b6e85118de2d3b8053a206fba13432e8 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/080e0ddc61a4c05a934be0d3d909e006b6e85118de2d3b8053a206fba13432e8/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=cf1feabb87df012ec1da6df8864ac4efd9a1fa70de35e6df59510cbf037d5b0d HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=cf1feabb87df012ec1da6df8864ac4efd9a1fa70de35e6df59510cbf037d5b0d HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/cf1feabb87df012ec1da6df8864ac4efd9a1fa70de35e6df59510cbf037d5b0d/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=e131bd082d649b4a56d106323e68db096bb1ba327414156f9120810af42d9e96 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=e131bd082d649b4a56d106323e68db096bb1ba327414156f9120810af42d9e96 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/e131bd082d649b4a56d106323e68db096bb1ba327414156f9120810af42d9e96/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+"GET /users HTTP/1.0" 301 0
+"GET /users/ HTTP/1.0" 200 1380
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=a01905d017bacc5a445b11b442bd923f65f1cf3732cda850d3d294160a4db51f HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=a01905d017bacc5a445b11b442bd923f65f1cf3732cda850d3d294160a4db51f HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/a01905d017bacc5a445b11b442bd923f65f1cf3732cda850d3d294160a4db51f/ HTTP/1.0" 302 0
+"GET /home HTTP/1.0" 200 273
+"GET / HTTP/1.0" 200 23927
+"GET /users/ HTTP/1.0" 200 1380
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.

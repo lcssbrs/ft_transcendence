@@ -5,6 +5,11 @@ from django.contrib.auth.hashers import make_password
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from pathlib import Path
+import os
+from django.core.files import File
+import urllib.request
+from PIL import Image
 
 # TODO LIST :
     # historique tournoi: position, date, résultat dernier match, adversaire dernier match
@@ -46,4 +51,3 @@ def sync_user_to_auth_user(sender, instance, created, **kwargs):
             first_name=instance.first_name,
             last_name=instance.last_name
         )
-
