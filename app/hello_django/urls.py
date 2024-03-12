@@ -19,12 +19,13 @@ from . import views
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
-from .views import user_list_view, login_view, solo_view, register_view
+from .views import user_list_view, login_view, solo_view, register_view, ranked_view
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('solo', solo_view, name='solo'),
+    path('ranked', ranked_view, name='ranked'),
     path('login', login_view, name='login'),
     path('register', register_view, name='register'),
 	# api
@@ -39,4 +40,5 @@ urlpatterns = [
     # dev
     path('login/', login_view, name='login'),
     path('users/', user_list_view, name='user_list'),
+	path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]

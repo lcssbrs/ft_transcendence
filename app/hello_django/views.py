@@ -6,6 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.contrib.auth.models import User
 import logging
 import requests
 
@@ -14,6 +16,16 @@ def index(request):
 
 def solo_view(request):
     return render (request, 'solo.html')
+
+def ranked_view(request):
+    return render (request, 'ranked.html')
+
+#check users status for ranked mode
+def get_connected_users(request):
+    connected_users = User.objects.filter(is_active=True)
+    user_names = [user.username for user in connected_users]
+    return JsonResponse({'user_names': user_names})
+
 
 # Login / register
 

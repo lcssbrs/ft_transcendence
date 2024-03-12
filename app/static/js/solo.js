@@ -238,7 +238,6 @@ function startGame() {
 
 
 // Fonction pour terminer la partie
-// Fonction pour terminer la partie
 function endGame() {
 	gameStarted = false;
 	var winner = game.player.score === 3 ? "Joueur 1" : "Computer";
@@ -257,8 +256,6 @@ function endGame() {
 function removeKeyListeners() {
 	document.removeEventListener('keydown', playerMove);
 }
-
-
 
 
 //----------------EVENTS LISTENERS--------
