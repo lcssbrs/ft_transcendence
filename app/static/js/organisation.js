@@ -1,172 +1,107 @@
-const solo = document.querySelector('#solo');
-const local = document.querySelector('#local');
-const ranked = document.querySelector('#ranked');
-const tournoi = document.querySelector('#tournoi');
-const classement = document.querySelector('#classement');
-const logbutton = document.querySelector('#logbutton');
-const logrequire = document.querySelector('#logrequire');
-const profilebar = document.querySelector('#profilebar');
-const friend = document.querySelector('#friend');
-const profile = document.querySelector('#profile');
-const logscreen = document.querySelector('#loginForm')
-const validlogbutton = document.querySelector('#validlogbutton')
-const registerscreen = document.querySelector('#registerForm')
+// document.getElementById("loginForm").addEventListener("submit", function(event) {
+// 	var usernameInput = document.getElementById("usernameInput");
+// 	var usernameError = document.getElementById("usernameMissing");
 
-function validlog()
-{
-	profilebar.classList.remove('d-none');
-	logbutton.classList.add('d-none');
-	logscreen.classList.add('d-none');
-	registerscreen.classList.add('d-none');
-}
+// 	var passwordInput = document.getElementById("passwordInput");
+// 	var passwordError = document.getElementById("passwordMissing");
+// 	var isValid = true;
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-	var usernameInput = document.getElementById("usernameInput");
-	var usernameError = document.getElementById("usernameMissing");
+// 	if (usernameInput.value === "") {
+// 		usernameError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		usernameError.classList.add("d-none");
+// 	}
+// 	if (passwordInput.value === "") {
+// 		passwordError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		passwordError.classList.add("d-none");
+// 	}
+// 	if (!isValid) {
+// 		event.preventDefault();
+// 	}
+// });
 
-	var passwordInput = document.getElementById("passwordInput");
-	var passwordError = document.getElementById("passwordMissing");
-	var isValid = true;
+// document.getElementById("registerForm").addEventListener("submit", function(event) {
+// 	var usernameInput = document.getElementById("usernameRegister");
+// 	var usernameError = document.getElementById("usernameMissingReg");
 
-	if (usernameInput.value === "") {
-		usernameError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		usernameError.classList.add("d-none");
-	}
-	if (passwordInput.value === "") {
-		passwordError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		passwordError.classList.add("d-none");
-	}
-	if (!isValid) {
-		event.preventDefault();
-	}
-});
+// 	var firstInput = document.getElementById("firstRegister");
+// 	var firstError = document.getElementById("firstMissing");
 
-document.getElementById("registerForm").addEventListener("submit", function(event) {
-	var usernameInput = document.getElementById("usernameRegister");
-	var usernameError = document.getElementById("usernameMissingReg");
+// 	var lastInput = document.getElementById("lastRegister");
+// 	var lastError = document.getElementById("lastMissing");
 
-	var firstInput = document.getElementById("firstRegister");
-	var firstError = document.getElementById("firstMissing");
+// 	var passwordInput = document.getElementById("passwordRegister");
+// 	var passwordError = document.getElementById("passwordMissingReg");
 
-	var lastInput = document.getElementById("lastRegister");
-	var lastError = document.getElementById("lastMissing");
+// 	var emailInput = document.getElementById("emailRegister");
+// 	var emailError = document.getElementById("emailError");
+// 	var isValid = true;
 
-	var passwordInput = document.getElementById("passwordRegister");
-	var passwordError = document.getElementById("passwordMissingReg");
+// 	if (usernameInput.value === "") {
+// 		usernameError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		usernameError.classList.add("d-none");
+// 	}
+// 	if (firstInput.value === "") {
+// 		firstError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		firstError.classList.add("d-none");
+// 	}
+// 	if (lastInput.value === "") {
+// 		lastError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		lastError.classList.add("d-none");
+// 	}
+// 	if (passwordInput.value === "") {
+// 		passwordError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		passwordError.classList.add("d-none");
+// 	}
+// 	if (emailInput.value === "") {
+// 		emailError.classList.remove("d-none");
+// 		isValid = false;
+// 	} else {
+// 		emailError.classList.add("d-none");
+// 	}
+// 	if (!isValid) {
+// 		event.preventDefault();
+// 	}
+// });
 
-	var emailInput = document.getElementById("emailRegister");
-	var emailError = document.getElementById("emailError");
-	var isValid = true;
+document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll('.redir');
 
-	if (usernameInput.value === "") {
-		usernameError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		usernameError.classList.add("d-none");
-	}
-	if (firstInput.value === "") {
-		firstError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		firstError.classList.add("d-none");
-	}
-	if (lastInput.value === "") {
-		lastError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		lastError.classList.add("d-none");
-	}
-	if (passwordInput.value === "") {
-		passwordError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		passwordError.classList.add("d-none");
-	}
-	if (emailInput.value === "") {
-		emailError.classList.remove("d-none");
-		isValid = false;
-	} else {
-		emailError.classList.add("d-none");
-	}
-	if (!isValid) {
-		event.preventDefault();
-	}
-});
+    // Ajoutez un gestionnaire d'événement de clic à chaque lien de navigation
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Empêcher le comportement de lien par défaut
 
-function Profile()
-{
-	friend.classList.add('d-none');
-	profile.classList.remove('d-none');
-}
+            // Récupérez l'URL de la vue à charger depuis l'attribut href du lien
+            const url = link.getAttribute('href');
 
-function log()
-{
-	logrequire.classList.add('d-none');
-	logscreen.classList.remove('d-none');
-	registerscreen.classList.add('d-none');
-}
+            // Chargez le contenu de la vue correspondante en appelant la fonction loadView
+            loadView(url);
+        });
+    });
 
-function soloPage()
-{
-	$("#main").load("solo");
-}
-
-function Page3()
-{
-	history.pushState({affichage: 'local'}, null, null);
-	local.classList.remove('d-none');
-	solo.classList.add('d-none');
-	ranked.classList.add('d-none');
-	tournoi.classList.add('d-none');
-	classement.classList.add('d-none');
-}
-
-function Page4()
-{
-	history.pushState({affichage: 'ranked'}, null, null);
-	ranked.classList.remove('d-none');
-	local.classList.add('d-none');
-	solo.classList.add('d-none');
-	tournoi.classList.add('d-none');
-	classement.classList.add('d-none');
-}
-
-function Page5()
-{
-	history.pushState({affichage: 'tournoi'}, null, null);
-	tournoi.classList.remove('d-none');
-	local.classList.add('d-none');
-	ranked.classList.add('d-none');
-	solo.classList.add('d-none');
-	classement.classList.add('d-none');
-}
-
-function Page6()
-{
-	history.pushState({affichage: 'classement'}, null, null);
-	classement.classList.remove('d-none');
-	local.classList.add('d-none');
-	ranked.classList.add('d-none');
-	tournoi.classList.add('d-none');
-	solo.classList.add('d-none');
-}
-
-window.addEventListener('popstate', function(event) {
-	var state = event.state;
-	if (!state)
-		return ;
-	else if (state.affichage == 'solo')
-		Page2();
-	else if (state.affichage == 'local')
-		Page3();
-	else if (state.affichage == 'ranked')
-		Page4();
-	else if (state.affichage == 'tournoi')
-		Page5();
-	else if (state.affichage == 'classement')
-		Page6();
+    // Fonction pour charger la vue correspondante
+    function loadView(url) {
+        // Effectuez une requête AJAX pour récupérer le contenu de la vue depuis le serveur
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                // Mettez à jour le contenu de la page avec le contenu de la vue chargée
+                document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement de la vue:', error);
+            });
+    }
 });

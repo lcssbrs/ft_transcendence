@@ -4,15 +4,45 @@ from .models import user_list
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.http import HttpResponse
+
+def profile_view (request):
+    with open('templates/profile.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
+
+def ranked_view (request):
+    with open('templates/ranked.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
+
+def tournament_view (request):
+    with open('templates/tournament.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
+
+def ranking_view(request):
+    with open('templates/ranking.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
 
 def register_view(request):
-    return render (request, 'register.html')
+    with open('templates/register.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
 
 def login_view(request):
-    return render (request, 'login.html')
+    with open('templates/login.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
 
 def solo_view(request):
-    return render (request, 'solo.html')
+    with open('templates/solo.html', 'r') as file:
+        html_content = file.read()
+    return HttpResponse(html_content, content_type='text/html')
+
+def local_view(request):
+    return render(request, 'local.html')
 
 def index(request):
     error_message = None

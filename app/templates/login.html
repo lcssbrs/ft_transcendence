@@ -1,23 +1,15 @@
-{% extends "head.html" %}
 
-{% block content %}
 <form id="loginForm" class="text-white mx-auto text-center rounded-3 border border-light my-auto p-5 d-flex flex-column justify-content-between" action="" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 25%; height: 50%; border-width: 3px !important;">
 	<h2>Se connecter</h2>
-	{% csrf_token %}
 	<div class="log-input d-flex flex-column align-items-center">
 		<input id="usernameInput" placeholder="Identifiant" type="text"/>
-		{{ form.username }}
-		{% for error in form.username.errors %}
-		    <div id="usernameMissing" class="text-danger d-none">Veuillez saisir votre identifiant</div>
-		{% endfor %}
+		<div id="usernameMissing" class="text-danger d-none">Veuillez saisir votre identifiant</div>
+
 	</div>
 	<div>
 		<div class="log-input d-flex flex-column align-items-center">
 			<input id="passwordInput" placeholder="Mot de passe" type="password"/>
-			{{ form.password }}
-			{% for error in form.password.errors %}
-            <div id="passwordMissing" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
-			{% endfor %}
+			<div id="passwordMissing" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
 			<a class="text-white mt-1" href="#">Mot de passe oublié ?</a>
 		</div>
 	</div>
@@ -28,11 +20,6 @@
 			<span class="ml-1">Intra</span>
 		</button>
 	</div>
-	{% if form.errors %}
-		<div class="alert alert-danger mt-2">
-			{{ form.non_field_errors }}
-		</div>
-	{% endif %}
-	<p>Pas de compte? <a class="text-white" href="register">S'inscrire</a></p>
+	<p>Pas de compte? <a class="text-white redir" href="register">S'inscrire</a></p>
 </form>
-{% endblock %}
+
