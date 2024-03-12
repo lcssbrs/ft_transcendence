@@ -28,18 +28,21 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	<!-- Autres scripts JavaScript communs -->
-	<script src="static/js/organisation.js"></script>
-	<script src="static/js/local.js"></script>
-
+	<!-- HTMX -->
+	<script src="https://unpkg.com/htmx.org@1.2.1"></script>
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
 		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
 		<!-- BOUTON : SE CONNECTER -->
-		<div class="my-auto mr-4" id="logbutton">
-			<button class="btn btn-outline-light redir px-2 py-1" href="login">Se connecter</button>
+		<div class="d-flex my-auto mr-4">
+			<div class="mr-2" id="logbutton">
+				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'login' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">Se connecter</button>
+			</div>
+			<div id="registerbutton">
+				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'register' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">S'inscrire</button>
+			</div>
 		</div>
 		<!-- BOUTON : PROFIL -->
 		<div id="profilebar" onclick="Profile()" href="#" class="my-auto mr-4 d-none">
@@ -47,7 +50,7 @@
 		</button>
 	</header>
 
-	<main id="main-content" class="main-height d-flex">
+	<main id="content" class="main-height d-flex">
 		<!-- FRIEND BAR -->
 		<div id="friend" class="d-none main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
 			<div class="pl-4 pr-2 pt-3">
@@ -161,16 +164,18 @@
 			<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
 			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
 		</div> -->
+		{% block content %}{% endblock %}
 	</main>
 
 	<footer class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link redir text-white" href="solo">🤖Solo</a>
-			<a class="nav-item nav-link redir text-white" href="local">🕹️Local</a>
-			<a class="nav-item nav-link redir text-white" href="ranked">⚔️Ranked</a>
-			<a class="nav-item nav-link redir text-white" href="tournament">🏆Tournoi</a>
-			<a class="nav-item nav-link redir text-white" href="ranking">👑Classement</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'solo' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🤖Solo</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'local' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🕹️Local</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'ranked' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">⚔️Ranked</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'tournament' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🏆Tournoi</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'ranking' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">👑Classement</a>
 		</nav>
 	</footer>
 </body>
 </html>
+

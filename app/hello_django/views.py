@@ -7,41 +7,51 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 def profile_view (request):
-    with open('templates/profile.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/profile.html')
+
+    return render(request, 'profile.html')
 
 def ranked_view (request):
-    with open('templates/ranked.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/ranked.html')
+
+    return render(request, 'ranked.html')
 
 def tournament_view (request):
-    with open('templates/tournament.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/tournament.html')
+
+    return render(request, 'tournament.html')
 
 def ranking_view(request):
-    with open('templates/ranking.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/ranking.html')
+
+    return render(request, 'ranking.html')
 
 def register_view(request):
-    with open('templates/register.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/register.html')
+
+    return render(request, 'register.html')
 
 def login_view(request):
-    with open('templates/login.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/login.html')
+
+    return render(request, 'login.html')
 
 def solo_view(request):
-    with open('templates/solo.html', 'r') as file:
-        html_content = file.read()
-    return HttpResponse(html_content, content_type='text/html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/solo.html')
+
+    return render(request, 'solo.html')
 
 def local_view(request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/local.html')
+
     return render(request, 'local.html')
 
 def index(request):

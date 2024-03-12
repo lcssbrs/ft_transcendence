@@ -23,58 +23,6 @@
 // 	}
 // });
 
-// document.getElementById("registerForm").addEventListener("submit", function(event) {
-// 	var usernameInput = document.getElementById("usernameRegister");
-// 	var usernameError = document.getElementById("usernameMissingReg");
-
-// 	var firstInput = document.getElementById("firstRegister");
-// 	var firstError = document.getElementById("firstMissing");
-
-// 	var lastInput = document.getElementById("lastRegister");
-// 	var lastError = document.getElementById("lastMissing");
-
-// 	var passwordInput = document.getElementById("passwordRegister");
-// 	var passwordError = document.getElementById("passwordMissingReg");
-
-// 	var emailInput = document.getElementById("emailRegister");
-// 	var emailError = document.getElementById("emailError");
-// 	var isValid = true;
-
-// 	if (usernameInput.value === "") {
-// 		usernameError.classList.remove("d-none");
-// 		isValid = false;
-// 	} else {
-// 		usernameError.classList.add("d-none");
-// 	}
-// 	if (firstInput.value === "") {
-// 		firstError.classList.remove("d-none");
-// 		isValid = false;
-// 	} else {
-// 		firstError.classList.add("d-none");
-// 	}
-// 	if (lastInput.value === "") {
-// 		lastError.classList.remove("d-none");
-// 		isValid = false;
-// 	} else {
-// 		lastError.classList.add("d-none");
-// 	}
-// 	if (passwordInput.value === "") {
-// 		passwordError.classList.remove("d-none");
-// 		isValid = false;
-// 	} else {
-// 		passwordError.classList.add("d-none");
-// 	}
-// 	if (emailInput.value === "") {
-// 		emailError.classList.remove("d-none");
-// 		isValid = false;
-// 	} else {
-// 		emailError.classList.add("d-none");
-// 	}
-// 	if (!isValid) {
-// 		event.preventDefault();
-// 	}
-// });
-
 document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.redir');
 
@@ -88,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Chargez le contenu de la vue correspondante en appelant la fonction loadView
             loadView(url);
+
+            // Modification de l'URL sans recharger la page
+            history.pushState(null, null, url);
         });
     });
 
