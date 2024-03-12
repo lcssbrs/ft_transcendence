@@ -2831,3 +2831,662 @@ Watching for file changes with StatReloader
 /usr/src/app/hello_django/views.py changed, reloading.
 Watching for file changes with StatReloader
 /usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /home HTTP/1.0" 301 0
+Internal Server Error: /home/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 72, in home
+    return render(request, 'home.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: home.html
+"GET /home/ HTTP/1.0" 500 77730
+"GET /home/ HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=b7391d2d76892f071ae7af59352b6000e5ac16f944aa28ac114a8afa38e8d56a HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=b7391d2d76892f071ae7af59352b6000e5ac16f944aa28ac114a8afa38e8d56a HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/b7391d2d76892f071ae7af59352b6000e5ac16f944aa28ac114a8afa38e8d56a/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+"GET / HTTP/1.0" 200 21317
+"GET /users/ HTTP/1.0" 200 1380
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=657d2722f6a5d89b992b85d74b0acc71ff90c0f5b9900d464478753ccbb236c3 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=657d2722f6a5d89b992b85d74b0acc71ff90c0f5b9900d464478753ccbb236c3 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/657d2722f6a5d89b992b85d74b0acc71ff90c0f5b9900d464478753ccbb236c3/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+"GET / HTTP/1.0" 200 21317
+"GET /users/ HTTP/1.0" 200 2202
+"GET /users/ HTTP/1.0" 200 2202
+"GET /users/ HTTP/1.0" 200 2202
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=c385900334df3a21b2576978d8b3c62d0749f6184918e344df390b1bdd3ee5f5 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=c385900334df3a21b2576978d8b3c62d0749f6184918e344df390b1bdd3ee5f5 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/c385900334df3a21b2576978d8b3c62d0749f6184918e344df390b1bdd3ee5f5/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+"GET /users/ HTTP/1.0" 200 3021
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 21317
+"GET /users/ HTTP/1.0" 200 559
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /doubleauth/
+"GET /doubleauth/ HTTP/1.0" 404 5471
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /home/ HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=958b45aeedc5997f111f27a5bbb634c678e4820c542a6e4edccbcc224753839f HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=958b45aeedc5997f111f27a5bbb634c678e4820c542a6e4edccbcc224753839f HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/958b45aeedc5997f111f27a5bbb634c678e4820c542a6e4edccbcc224753839f/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 125, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 47, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+"GET /exchange_code_for_access_token/958b45aeedc5997f111f27a5bbb634c678e4820c542a6e4edccbcc224753839f/ HTTP/1.0" 500 194058
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=c512fa7b872c686741e639422ec65cd0728660a0e5edcd0ea866e8bc227139de HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=c512fa7b872c686741e639422ec65cd0728660a0e5edcd0ea866e8bc227139de HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/c512fa7b872c686741e639422ec65cd0728660a0e5edcd0ea866e8bc227139de/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 125, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 47, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+"GET /exchange_code_for_access_token/c512fa7b872c686741e639422ec65cd0728660a0e5edcd0ea866e8bc227139de/ HTTP/1.0" 500 194037
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /doubleauth/
+"GET /doubleauth/ HTTP/1.0" 404 5480
+Not Found: /account/login/
+"GET /account/login/ HTTP/1.0" 404 3831
+Not Found: /doubleauth/
+"GET /doubleauth/ HTTP/1.0" 404 5480
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /doubleauth/
+"GET /doubleauth/ HTTP/1.0" 404 5480
+Not Found: /doubleauth/
+"GET /doubleauth/ HTTP/1.0" 404 5480
+"GET / HTTP/1.0" 200 21317
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 21317
+"GET /home HTTP/1.0" 301 0
+"GET /home/ HTTP/1.0" 200 273
+"GET /users/ HTTP/1.0" 200 1378
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 4553
+"GET /register HTTP/1.0" 200 4883
+"POST /register HTTP/1.0" 200 4883
+"GET /login HTTP/1.0" 200 4553
+"GET /login?csrfmiddlewaretoken=IsZk5VuERuAIByqec0O1fCZRL9Ud4BM1re4tB2JkEC4X503S3kqp5v4NAqaF8fHa&username=seib&password=test HTTP/1.0" 200 4553
+"GET /login?csrfmiddlewaretoken=W1VQUIkVCTeQWlPX2JNZ9LU9xgEUf3gbFN0ZqPzBp1I5qNsBT3pnZEZ5mxUmjHbk&username=test&password=test HTTP/1.0" 200 4553
+"GET /login?csrfmiddlewaretoken=vYESoHoiJHBx5VcsFrT3FAk3m7lyjDXIeKJ1UODYwP5MznP6wLvrvtpZboB0nhSR&username=test&password=test HTTP/1.0" 200 4553
+"GET /register HTTP/1.0" 200 4883
+"POST /register HTTP/1.0" 200 4883
+"GET /login HTTP/1.0" 200 4553
+"GET /login?csrfmiddlewaretoken=uRaddd5K662aG06V9woQpMsBHf6eSSJOdDfmJkkqTewpasJz0Q0efFxxwwmGWwEX&username=test&password=test HTTP/1.0" 200 4553
+"GET /users/ HTTP/1.0" 200 1378
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login?csrfmiddlewaretoken=bzpbz3EouWWXtlHraIXxg7RuwTNEGgrtUluk5aT4h4qcXNk512zV60Wqla36KUmC&username=test&password=test HTTP/1.0" 200 4553
+Not Found: /8080
+"GET /8080 HTTP/1.0" 404 3942
+"GET /register HTTP/1.0" 200 4883
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /register HTTP/1.0" 200 4883
+"POST /register HTTP/1.0" 200 4883
+"GET /users/ HTTP/1.0" 200 1378
+"GET /login HTTP/1.0" 200 4553
+"GET /login?csrfmiddlewaretoken=YkmwF0D1HNU1gp6MaLwk0KhYzZcagNHFH6rFb7SHuVogKRJq158IQDmUogsCkrCO&username=test&password=test HTTP/1.0" 200 4553
+"GET /register HTTP/1.0" 200 4883
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 4553
+"GET /register HTTP/1.0" 200 4883
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 4553
+"GET /home/ HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=a157ad5fd27029ec897c28b7c81e144becc5199513c8131b0d06692624366d2d HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=a157ad5fd27029ec897c28b7c81e144becc5199513c8131b0d06692624366d2d HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/a157ad5fd27029ec897c28b7c81e144becc5199513c8131b0d06692624366d2d/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 141, in exchange_code_for_access_token
+    usersaved.save()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 47, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(aandrieu) already exists.
+
+"GET /exchange_code_for_access_token/a157ad5fd27029ec897c28b7c81e144becc5199513c8131b0d06692624366d2d/ HTTP/1.0" 500 194088
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=4d4c1b8012937c682b7b644bc7d1aa9c000403e17e4cac40d5a395318c212269 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=4d4c1b8012937c682b7b644bc7d1aa9c000403e17e4cac40d5a395318c212269 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/4d4c1b8012937c682b7b644bc7d1aa9c000403e17e4cac40d5a395318c212269/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=ecdbde5822e1e6b51f3cbdb1d0220ebb3ecdca4bb18cb3fe1b08ffe01fe50296 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=ecdbde5822e1e6b51f3cbdb1d0220ebb3ecdca4bb18cb3fe1b08ffe01fe50296 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/ecdbde5822e1e6b51f3cbdb1d0220ebb3ecdca4bb18cb3fe1b08ffe01fe50296/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=79f517deee4d74dd5f20967609fad20deaa9553d8f5ad9f9c3a3872640e81c01 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=79f517deee4d74dd5f20967609fad20deaa9553d8f5ad9f9c3a3872640e81c01 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/79f517deee4d74dd5f20967609fad20deaa9553d8f5ad9f9c3a3872640e81c01/ HTTP/1.0" 302 0
+"GET /home/ HTTP/1.0" 200 273
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 21317
+"GET /register HTTP/1.0" 200 4883
+"POST /register HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 21317
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 4873
+"GET /login HTTP/1.0" 200 4574
+"GET /login HTTP/1.0" 200 4574
+"GET /login HTTP/1.0" 200 4574
+"GET /login HTTP/1.0" 200 4574
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 4574
+"GET /login HTTP/1.0" 200 23918
+"GET /login HTTP/1.0" 200 824
+"POST /login HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 21317
+Forbidden (CSRF token from POST incorrect.): /login
+"POST /login HTTP/1.0" 403 2518
+"GET /login HTTP/1.0" 200 824
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /login HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 21317
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 824
+"POST /login HTTP/1.0" 302 0
+"GET /two_factor_login/ HTTP/1.0" 200 609
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 824
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 60, in login_view
+    return redirect('verify_2fa')
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 48, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'verify_2fa' not found. 'verify_2fa' is not a valid view function or pattern name.
+"POST /login HTTP/1.0" 500 84288
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 824
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 60, in login_view
+    return redirect('verify_2fa')
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 48, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'verify_2fa' not found. 'verify_2fa' is not a valid view function or pattern name.
+"POST /login HTTP/1.0" 500 84156
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST incorrect.): /login
+"POST /login HTTP/1.0" 403 2518
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST incorrect.): /login
+"POST /login HTTP/1.0" 403 2518
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST incorrect.): /login
+"POST /login HTTP/1.0" 403 2518
+"GET /login HTTP/1.0" 200 1077
+"GET /login HTTP/1.0" 200 845
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 60, in login_view
+    return redirect('verify_2fa')
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 48, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'verify_2fa' not found. 'verify_2fa' is not a valid view function or pattern name.
+"POST /login HTTP/1.0" 500 84156
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST incorrect.): /login
+"POST /login HTTP/1.0" 403 2518
+"GET /login HTTP/1.0" 200 845
+"POST /login HTTP/1.0" 302 0
+"GET /login/ HTTP/1.0" 200 845
+"POST /login/ HTTP/1.0" 302 0
+"GET /verify_2fa/ HTTP/1.0" 200 609
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login/ HTTP/1.0" 200 845
+"POST /login/ HTTP/1.0" 302 0
+Internal Server Error: /verify_2fa/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 110, in verify_2fa
+    if not user.has_usable_verified_otp_device():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'has_usable_verified_otp_device'
+"GET /verify_2fa/ HTTP/1.0" 500 72215
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST incorrect.): /login/
+"POST /login/ HTTP/1.0" 403 2518
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 845
+"POST /login HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 21317
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login HTTP/1.0" 200 845
+"GET / HTTP/1.0" 200 21317
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader

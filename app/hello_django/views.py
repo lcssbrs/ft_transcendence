@@ -13,6 +13,12 @@ from PIL import Image
 from django.core.files import File
 from pathlib import Path
 import os
+from django_otp.plugins.otp_email.models import EmailDevice
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework_jwt.settings import api_settings
+import jwt
+from django.core.mail import send_mail
 
 def index(request):
     return render(request, 'index.html')
@@ -63,6 +69,7 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'login.html', {'form': form})
+
 
 # API 42
 

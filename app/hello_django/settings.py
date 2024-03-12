@@ -45,8 +45,13 @@ INSTALLED_APPS = [
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_email',  # <- if you want email capability.
+    'django_otp.plugins.otp_email',
     'two_factor',
+    'two_factor.plugins.phonenumber',
+    'two_factor.plugins.email',
+    'two_factor.plugins.yubikey',
+	'otp_yubikey',
+	'two_factor.plugins.webauthn',
 ]
 
 MIDDLEWARE = [
@@ -183,3 +188,21 @@ LOGGING = {
         },
     },
 }
+
+LOGIN_URL = 'two_factor:login'
+
+# this one is optional
+LOGIN_REDIRECT_URL = 'two_factor:profile'
+
+TWO_FACTOR_WEBAUTHN_RP_NAME = 'hello_django'
+
+OTP_EMAIL_SUBJECT = 'Double authentification django'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'lucas.seiberras@gmail.com'  # Votre adresse email Gmail
+EMAIL_HOST_PASSWORD = 'JoshuaJoshua66180'  # Mot de passe de votre adresse email Gmail
+
+CSRF_COOKIE_NAME = 'csrftoken'
