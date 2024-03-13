@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import user_list
+from .models import models, user_list, Tournament, Match
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer
 import logging
 import requests
 import urllib.request
@@ -20,11 +26,55 @@ from rest_framework_jwt.settings import api_settings
 import jwt
 from django.core.mail import send_mail
 
+
+def exemple_view(request):
+    return render(request, 'exemple.html', {'user': request.user})
+
 def index(request):
-    return render(request, 'index.html')
+    return render (request, 'index.html', {'user': request.user})
+
+def profile_view (request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/profile.html', {'user': request.user})
+
+    return render(request, 'profile.html', {'user': request.user})
+
+def ranked_view (request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/ranked.html', {'user': request.user})
+
+    return render(request, 'ranked.html', {'user': request.user})
+
+def tournament_view (request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/tournament.html', {'user': request.user})
+
+    return render(request, 'tournament.html', {'user': request.user})
+
+def ranking_view(request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/ranking.html', {'user': request.user})
+
+    return render(request, 'ranking.html', {'user': request.user})
 
 def solo_view(request):
-    return render (request, 'solo.html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/solo.html', {'user': request.user})
+
+    return render(request, 'solo.html', {'user': request.user})
+
+def local_view(request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/local.html', {'user': request.user})
+
+    return render(request, 'local.html', {'user': request.user})
+
+#check users status for ranked mode
+def get_connected_users(request):
+    connected_users = User.objects.filter(is_active=True)
+    user_names = [user.username for user in connected_users]
+    return JsonResponse({'user_names': user_names})
+
 
 # Login / register
 
@@ -47,6 +97,9 @@ def register_view(request):
     else:
         form = add_user_form()
 
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/register.html', {'form': form, 'error_message': error_message})
+
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
@@ -68,15 +121,14 @@ def login_view(request):
     else:
         form = AuthenticationForm()
 
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/login.html', {'form': form})
+
     return render(request, 'login.html', {'form': form})
 
-
-# API 42
+# API LOGIN 42
 
 logger = logging.getLogger(__name__)
-
-def home(request):
-    return render(request, 'home.html')
 
 def connexion_42(request):
     return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fredirection_apres_authentification&response_type=code')
@@ -140,7 +192,43 @@ def exchange_code_for_access_token(request, code):
             logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
     else:
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
-    return redirect('home')
+    return redirect('index')
+
+# API
+
+# TODO FAIRE API/ENDPOINTS
+
+class api_user_list(APIView):
+    def get(self, request):
+        users = user_list.objects.all()
+        serializer = UserListSerializer(users, many=True)
+        return Response(serializer.data)
+
+class api_user_details(APIView):
+    def get(self, request, id):
+        try:
+            user = user_list.objects.get(pk=id)
+        except user_list.DoesNotExist:
+            return Response({"message": "L'utilisateur n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserDetailSerializer(user)
+        return Response(serializer.data)
+
+class api_match_list(APIView):
+    def get(self, request):
+        matchs = Match.objects.all()
+        serializer = MatchListSerializer(matchs, many=True)
+        return Response(serializer.data)
+
+class api_match_details(APIView):
+    def get(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match)
+        return Response(serializer.data)
 
 # DEV
 

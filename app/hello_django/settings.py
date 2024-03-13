@@ -52,7 +52,19 @@ INSTALLED_APPS = [
     'two_factor.plugins.yubikey',
 	'otp_yubikey',
 	'two_factor.plugins.webauthn',
+	'channels',
 ]
+
+
+# Définir ASGI_APPLICATION
+ASGI_APPLICATION = 'hello_django.asgi.application'
+
+# Configurer la couche de canaux
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer', # Vous pouvez utiliser d'autres backends selon vos besoins
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

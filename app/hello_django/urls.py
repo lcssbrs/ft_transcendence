@@ -22,30 +22,37 @@ from . import views
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
-from .views import user_list_view, login_view, solo_view, register_view
 from django.conf.urls.static import static
 from two_factor.urls import urlpatterns as tf_urls
 from django.conf.urls import include
 from django_otp.admin import OTPAdminSite
+from .views import user_list_view, index, solo_view, login_view, register_view, local_view, ranking_view, ranked_view, tournament_view, profile_view
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', index, name='index'),
     path('solo', solo_view, name='solo'),
-    path('login', login_view, name='login'),
+    path('login/', login_view, name='login'),
     path('register', register_view, name='register'),
-
-	# api
-    path('home/', views.home, name='home'),
+    path('local/', local_view, name='local'),
+    path('ranking', ranking_view, name='ranking'),
+    path('ranked', ranked_view, name='ranked'),
+    path('tournament', tournament_view, name='tournament'),
+    path('profile', profile_view, name='profile'),
+	# api 42
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
     path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
+	# API
+    path('api/users/', views.api_user_list.as_view(), name='user-list'),
+	path('api/users/<int:id>/', views.api_user_details.as_view(), name='user-details'),
+	path('api/match/', views.api_match_list.as_view(), name='match-list'),
+	path('api/match/<int:id>/', views.api_match_details.as_view(), name='match-details'),
     # admin
-    path('admin/', admin.site.urls),
-    path('django/', lambda request: redirect('http://localhost:8000/admin'), name='django_redirect'),
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
-    # dev
-    path('login/', login_view, name='login'),
+    # devv
     path('users/', user_list_view, name='user_list'),
 
     path('doubleauth', include(tf_urls)),
+	path('exemple', views.exemple_view, name='exemple'),
+	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]

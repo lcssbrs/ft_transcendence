@@ -34,6 +34,9 @@ class user_list(models.Model):
     games_win = models.PositiveIntegerField(default=0)
     games_loose = models.PositiveIntegerField(default=0)
     games_rank = models.PositiveIntegerField(default=0)
+    # Ranked:
+    score = models.PositiveIntegerField(default=0)
+
 
     def __str__(self):
         return self.username
@@ -51,3 +54,45 @@ def sync_user_to_auth_user(sender, instance, created, **kwargs):
             first_name=instance.first_name,
             last_name=instance.last_name
         )
+
+class Match(models.Model):
+    player1 = models.ForeignKey('user_list', related_name='player1_matches', on_delete=models.CASCADE)
+    player2 = models.ForeignKey('user_list', related_name='player2_matches', on_delete=models.CASCADE)
+    score_player1 = models.IntegerField(default=0)
+    score_player2 = models.IntegerField(default=0)
+    player_winner = models.ForeignKey(user_list, related_name='winner_matches', on_delete=models.CASCADE, null=True, blank=True)
+    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu')])
+
+    def update_scores(self):
+        if self.status == 'end_game':
+            self.player1.games_played += 1
+            self.player2.games_played += 1
+            if self.score_player1 > self.score_player2:
+                self.player1.games_win += 1
+                self.player2.games_loose += 1
+            elif self.score_player1 < self.score_player2:
+                self.player2.games_win += 1
+                self.player1.games_loose += 1
+            self.player1.save()
+            self.player2.save()
+
+#   match.update_scores()
+
+class Tournament(models.Model):
+    date_tournament = models.DateTimeField(null=True, blank=True)
+    player01 = models.ForeignKey('user_list', related_name='player01_tournaments', on_delete=models.CASCADE)
+    player02 = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE)
+    player03 = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE)
+    player04 = models.ForeignKey('user_list', related_name='player04_tournaments', on_delete=models.CASCADE)
+
+    def create_matches(self):
+        Match.objects.create(player1=self.player01, player2=self.player02)
+        Match.objects.create(player1=self.player03, player2=self.player04)
+        # TODO les 2 winners doivent s'affronter
+
+    class Meta:
+        db_table = 'django_tournament'
+
+# appelle de méthode :
+#   tournoi = Tournament.objects.get(pk=1)
+#   tournoi.create_matches()
