@@ -14,25 +14,6 @@ def validate_password_length(value):
     if len(value) < 8:
         raise ValidationError("Le mot de passe doit contenir au moins 8 caractères.")
 
-class tournament(models.Model):
-    ID_tournament =  models.PositiveIntegerField(default=0)
-    date_tournament =  models.DateTimeField(null=True, blank=True)
-    player1 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
-    player2 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
-    player3 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
-    player4 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
-    match1 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-    match2 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-    match3 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-    result1 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-    result2 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-    result3 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
-
-    class Meta:
-        db_table = 'django_tournament'
-
-
-
 class user_list(models.Model):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)

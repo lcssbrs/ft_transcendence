@@ -12,8 +12,7 @@ import logging
 import requests
 
 def index(request):
-    return render(request, 'index.html')
-from django.http import HttpResponse
+    return render (request, 'index.html')
 
 def profile_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
@@ -39,17 +38,17 @@ def ranking_view(request):
 
     return render(request, 'ranking.html')
 
-def register_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/register.html')
-
-    return render(request, 'register.html')
-
 def solo_view(request):
-    return render (request, 'solo.html')
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/solo.html')
 
-def ranked_view(request):
-    return render (request, 'ranked.html')
+    return render(request, 'solo.html')
+
+def local_view(request):
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/local.html')
+
+    return render(request, 'local.html')
 
 #check users status for ranked mode
 def get_connected_users(request):
@@ -79,30 +78,12 @@ def register_view(request):
     else:
         form = add_user_form()
 
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/register.html', {'form': form, 'error_message': error_message})
+
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/login.html')
-
-    return render(request, 'login.html')
-
-def solo_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/solo.html')
-
-    return render(request, 'solo.html')
-
-def local_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/local.html')
-
-    return render(request, 'local.html')
-
-def index(request):
-    error_message = None
-    form = None
-
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -113,18 +94,22 @@ def index(request):
                 login(request, user)
                 return redirect('index')
             else:
-                error_message = "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect."
+                messages.error(request, "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect.")
+                return redirect('login')
+        else:
+            messages.error(request, "Échec de la validation du formulaire.")
+            return redirect('login')
     else:
         form = AuthenticationForm()
+
+    if request.META.get("HTTP_HX_REQUEST") != 'true':
+        return render(request, 'full/login.html', {'form': form})
 
     return render(request, 'login.html', {'form': form})
 
 # API LOGIN 42
 
 logger = logging.getLogger(__name__)
-
-def home(request):
-    return render(request, 'home.html')
 
 def connexion_42(request):
     return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fredirection_apres_authentification&response_type=code')
@@ -179,7 +164,7 @@ def exchange_code_for_access_token(request, code):
             logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
     else:
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
-    return redirect('home')
+    return redirect('index')
 
 # API
 

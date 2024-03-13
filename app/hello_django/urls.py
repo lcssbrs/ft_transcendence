@@ -39,7 +39,6 @@ urlpatterns = [
     # admin
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
     # dev
-    path('home/', views.home, name='home'),
     path('users/', user_list_view, name='user_list'),
 	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
