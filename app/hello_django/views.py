@@ -8,47 +8,55 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer
 import logging
 import requests
 
+
+def exemple_view(request):
+    return render(request, 'exemple.html', {'user': request.user})
+
 def index(request):
-    return render (request, 'index.html')
+    return render (request, 'index.html', {'user': request.user})
 
 def profile_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/profile.html')
+        return render(request, 'full/profile.html', {'user': request.user})
 
-    return render(request, 'profile.html')
+    return render(request, 'profile.html', {'user': request.user})
 
 def ranked_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranked.html')
+        return render(request, 'full/ranked.html', {'user': request.user})
 
-    return render(request, 'ranked.html')
+    return render(request, 'ranked.html', {'user': request.user})
 
 def tournament_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/tournament.html')
+        return render(request, 'full/tournament.html', {'user': request.user})
 
-    return render(request, 'tournament.html')
+    return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranking.html')
+        return render(request, 'full/ranking.html', {'user': request.user})
 
-    return render(request, 'ranking.html')
+    return render(request, 'ranking.html', {'user': request.user})
 
 def solo_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/solo.html')
+        return render(request, 'full/solo.html', {'user': request.user})
 
-    return render(request, 'solo.html')
+    return render(request, 'solo.html', {'user': request.user})
 
 def local_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/local.html')
+        return render(request, 'full/local.html', {'user': request.user})
 
-    return render(request, 'local.html')
+    return render(request, 'local.html', {'user': request.user})
 
 #check users status for ranked mode
 def get_connected_users(request):
@@ -169,6 +177,38 @@ def exchange_code_for_access_token(request, code):
 # API
 
 # TODO FAIRE API/ENDPOINTS
+
+class api_user_list(APIView):
+    def get(self, request):
+        users = user_list.objects.all()
+        serializer = UserListSerializer(users, many=True)
+        return Response(serializer.data)
+
+class api_user_details(APIView):
+    def get(self, request, id):
+        try:
+            user = user_list.objects.get(pk=id)
+        except user_list.DoesNotExist:
+            return Response({"message": "L'utilisateur n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserDetailSerializer(user)
+        return Response(serializer.data)
+
+class api_match_list(APIView):
+    def get(self, request):
+        matchs = Match.objects.all()
+        serializer = MatchListSerializer(matchs, many=True)
+        return Response(serializer.data)
+
+class api_match_details(APIView):
+    def get(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match)
+        return Response(serializer.data)
 
 # DEV
 

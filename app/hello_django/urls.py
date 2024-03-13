@@ -32,13 +32,19 @@ urlpatterns = [
     path('ranked', ranked_view, name='ranked'),
     path('tournament', tournament_view, name='tournament'),
     path('profile', profile_view, name='profile'),
-	# api
+	# api 42
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
     path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
+	# API
+    path('api/users/', views.api_user_list.as_view(), name='user-list'),
+	path('api/users/<int:id>/', views.api_user_details.as_view(), name='user-details'),
+	path('api/match/', views.api_match_list.as_view(), name='match-list'),
+	path('api/match/<int:id>/', views.api_match_details.as_view(), name='match-details'),
     # admin
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
-    # dev
+    # devv
     path('users/', user_list_view, name='user_list'),
+	path('exemple', views.exemple_view, name='exemple'),
 	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
