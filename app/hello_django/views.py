@@ -63,9 +63,6 @@ def login_view(request):
 
 logger = logging.getLogger(__name__)
 
-def home(request):
-    return render(request, 'home.html')
-
 def connexion_42(request):
     return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fredirection_apres_authentification&response_type=code')
 
@@ -119,7 +116,7 @@ def exchange_code_for_access_token(request, code):
             logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
     else:
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
-    return redirect('home')
+    return redirect('index')
 
 # API
 
