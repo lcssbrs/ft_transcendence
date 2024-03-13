@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import user_list
+from .models import models, user_list, Tournament, Match
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -59,7 +59,7 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
-# API 42
+# API LOGIN 42
 
 logger = logging.getLogger(__name__)
 
@@ -107,7 +107,7 @@ def exchange_code_for_access_token(request, code):
                 image = user_data.get('image', '')
                 image = image.get('versions', '')
                 image = image.get('small')
-                usersaved = user_list(user.id ,user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), image)
+                usersaved = user_list(user.id, user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), image)
                 usersaved.save()
                 user.save()
             else:
@@ -120,6 +120,10 @@ def exchange_code_for_access_token(request, code):
     else:
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
     return redirect('home')
+
+# API
+
+# TODO FAIRE API/ENDPOINTS
 
 # DEV
 
