@@ -47,7 +47,19 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_email',  # <- if you want email capability.
     'two_factor',
+	'channels',
 ]
+
+
+# Définir ASGI_APPLICATION
+ASGI_APPLICATION = 'hello_django.asgi.application'
+
+# Configurer la couche de canaux
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer', # Vous pouvez utiliser d'autres backends selon vos besoins
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

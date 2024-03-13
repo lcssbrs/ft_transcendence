@@ -1,6 +1,4 @@
-{% extends "head.html" %}
-
-{% block content %}
+{% load static %}
 <div id="solo" class="d-flex flex-column justify-content-center mx-auto">
 	<h2 class="text-white text-center mx-auto my-0">SOLO</h2>
 	<canvas id="canvas1" class="my-2" width="640" height="480"></canvas>
@@ -8,5 +6,4 @@
 		<button id="start-solo" class="btn btn-primary">Start</button>
 	</div>
 </div>
-<script src="static/js/solo.js"></script>
-{% endblock %}
+<script hx-trigger="load" src="{% static 'js/solo.js' %}"></script>

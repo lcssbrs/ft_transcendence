@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +12,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<!-- JavaScript Bootstrap (nécessite jQuery) -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 	<!-- ICON -->
 	<link rel="icon" href="{% static 'images/icon.ico' %}" type="image/x-icon">
 
@@ -25,28 +22,35 @@
 
 	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
 
+	<!-- Scripts JavaScript Bootstrap (nécessite jQuery) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- HTMX -->
+	<script src="https://unpkg.com/htmx.org@1.2.1"></script>
+</head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
-	<!-- HEADER -->
 	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
-		<!-- TITRE -->
 		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
 		<!-- BOUTON : SE CONNECTER -->
-		<div class="my-auto mr-4" id="logbutton">
-			<button class="btn btn-outline-light px-2 py-1" href="login">Se connecter</button>
+		<div class="d-flex my-auto mr-4">
+			<div class="mr-2" id="logbutton">
+				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'login' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">Se connecter</button>
+			</div>
+			<div id="registerbutton">
+				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'register' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">S'inscrire</button>
+			</div>
 		</div>
 		<!-- BOUTON : PROFIL -->
 		<div id="profilebar" onclick="Profile()" href="#" class="my-auto mr-4 d-none">
-			<img src="{% static 'images/luffy.png' %} " id="profilebar" class="profile-bar border border-primary" style="border-width: 2px !important;">
+			<img src="{% static 'images/luffy.png' %}" id="profilebar" class="profile-bar border border-primary" style="border-width: 2px !important;">
 		</button>
 	</header>
 
-	<main id="main" class="main-height d-flex">
-
-
-
+	<main id="content" class="main-height d-flex">
 		<!-- FRIEND BAR -->
 		<div id="friend" class="d-none main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
 			<div class="pl-4 pr-2 pt-3">
@@ -155,290 +159,23 @@
 			</div>
 		</div>
 
-		<!-- LOG FORM -->
-		<form id="loginForm" class="d-none text-white mx-auto text-center rounded-3 border border-light my-auto p-5 flex flex-column justify-content-between" action="" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 25%; height: 50%; border-width: 3px !important;">
-			<h2>Se connecter</h2>
-			{% csrf_token %}
-			<div class="log-input d-flex flex-column align-items-center">
-				<input id="usernameInput" placeholder="Identifiant" type="text"/>
-				{{ form.username }}
-				{% for error in form.username.errors %}
-					<div id="usernameMissing" class="text-danger d-none">Veuillez saisir votre identifiant</div>
-				{% endfor %}
-			</div>
-			<div>
-				<div class="log-input d-flex flex-column align-items-center">
-					<input id="passwordInput" placeholder="Mot de passe" type="password"/>
-					{{ form.password }}
-					{% for error in form.password.errors %}
-						<div id="passwordMissing" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
-					{% endfor %}
-					<a class="text-white mt-1" href="#">Mot de passe oublié ?</a>
-				</div>
-			</div>
-			<div>
-				<button class="btn btn-light" type="submit">Se connecter</button>
-				<button style="color:#ffffff" class="btn btn-dark">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" font-size-adjust="14px"><path d="M24 12.42l-4.428 4.415H24zm-4.428-4.417l-4.414 4.418v4.414h4.414V12.42L24 8.003V3.575h-4.428zm-4.414 0l4.414-4.428h-4.414zM0 15.996h8.842v4.43h4.412V12.42H4.428l8.826-8.846H8.842L0 12.421z"></path></svg>
-					<span class="ml-1">Intra</span>
-				</button>
-			</div>
-			{% if form.errors %}
-				<div class="alert alert-danger mt-2">
-					{{ form.non_field_errors }}
-				</div>
-			{% endif %}
-			<p>Pas de compte? <a class="text-white" onclick="register()" href="#">S'inscrire</a></p>
-		</form>
-
 		<!-- NOT CONNECTED -->
 		<!-- <div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
-			<img src="{% static 'images/not_connected.svg' %} " class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
+			<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
 			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
 		</div> -->
-
-		<!-- PROFILE PAGE -->
-		<div id="profile" class="d-none flex justify-content-center mx-auto">
-			<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center mr-5">
-				<div class="image-container">
-					<img src="{% static 'images/luffy.png' %} " class="bottom-image">
-					<img src="{% static 'images/challenger.png' %}" class="top-image">
-				</div>
-				<h3 class="m-0">Hugo Baduel</h3>
-				<h4>hbaduel</h4>
-				<div class="container-fluid d-flex flex-column border border-primary border rounded-3 my-2" style="border-width: 4px !important;">
-					<div class="container-fluid d-flex justify-content-center align-items-center">
-						<div class="p-2 d-flex mt-1">
-							<div>
-								<h5 class="mb-1">Games</h5>
-								<p class="mb-0">178</p>
-							</div>
-							<div class="px-3">
-								<h5 class="mb-1">Victoires</h5>
-								<p class="mb-0">144</p>
-							</div>
-							<div>
-								<h5 class="mb-1">Défaites</h5>
-								<p class="mb-0">34</p>
-							</div>
-						</div>
-					</div>
-					<div class="container-fluid d-flex justify-content-center align-items-center">
-						<div class="p-2 mb-2 d-flex mt-1">
-							<div class="mr-3">
-								<h5 class="mb-1">Classement</h5>
-								<p class="mb-0">#1</p>
-							</div>
-							<div>
-								<h5 class="mb-1">Rank</h5>
-								<p class="mb-0">Challenger - 172 LP</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<button class="btn rounded-1 mt-4 mb-2" type="button" data-toggle="tooltip" data-placement="top" title="Edit" style="color:white; background-color: #F4ACBC;"><i class="fa fa-edit"></i></button>
-			</div>
-			<div class="d-flex flex-column justify-content-center">
-				<div class="text-white text-center d-flex flex-column mb-3">
-					<div class="container-fluid d-flex justify-content-center align-items-center">
-						<div class="rounded-3 p-2 mb-2 border border-primary d-flex mt-1" style="border-width: 4px !important;">
-							<div>
-								<h3 class="mb-2 text-center">Historique - Ranked</h3>
-								<div class="container-fluid d-flex flex-column p-0 align-items-center">
-									<div class="container-fluid d-flex justify-content-center align-items-center mx-2 mb-3">
-										<div class="d-flex flex-column justify-content-center align-items-center ml-2">
-											<h5 class="mb-3">Résultat</h5>
-											<span class="mb-2">Victoire</span>
-											<span class="mb-2">Victoire</span>
-											<span class="mb-2">Victoire</span>
-											<span class="mb-2">Défaite</span>
-											<span>Victoire</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mx-5">
-											<h5 class="mb-3">Score</h5>
-											<span class="mb-2">3-1</span>
-											<span class="mb-2">3-2</span>
-											<span class="mb-2">3-0</span>
-											<span class="mb-2">2-3</span>
-											<span>3-1</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mr-5">
-											<h5 class="mb-3">Adversaire</h5>
-											<span class="mb-2">lseiberr</span>
-											<span class="mb-2">aandrieu</span>
-											<span class="mb-2">tde-los-</span>
-											<span class="mb-2">margesexy</span>
-											<span>flashmcqueen</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mr-2">
-											<h5>Gain</h5>
-											<span class="mb-2">+21 LP</span>
-											<span class="mb-2">+18 LP</span>
-											<span class="mb-2">+15 LP</span>
-											<span class="mb-2">-30 LP</span>
-											<span>+26 LP</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-white text-center d-flex flex-column mt-3">
-					<div class="container-fluid d-flex justify-content-center align-items-center">
-						<div class="rounded-3 p-2 mb-2 border border-primary d-flex mt-1" style="border-width: 4px !important;">
-							<div>
-								<h3 class="mb-2 text-center">Historique - Tournoi</h3>
-								<div class="container-fluid d-flex flex-column p-0 align-items-center">
-									<div class="container-fluid d-flex justify-content-center align-items-center mx-2 mb-3">
-										<div class="d-flex flex-column justify-content-center align-items-center ml-2">
-											<h5 class="mb-3">Position</h5>
-											<span class="mb-2">#1</span>
-											<span class="mb-2">#2</span>
-											<span class="mb-2">#8</span>
-											<span class="mb-2">#1</span>
-											<span>#3</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mx-5">
-											<h5 class="mb-3">Date</h5>
-											<span class="mb-2">01/03/2024</span>
-											<span class="mb-2">29/02/2024</span>
-											<span class="mb-2">28/02/2024</span>
-											<span class="mb-2">27/02/2024</span>
-											<span>26/02/2024</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mr-5">
-											<h5 class="mb-3">Dernier match</h5>
-											<span class="mb-2">3-1</span>
-											<span class="mb-2">3-2</span>
-											<span class="mb-2">3-0</span>
-											<span class="mb-2">2-3</span>
-											<span>3-1</span>
-										</div>
-										<div class="d-flex flex-column justify-content-center align-items-center mr-2">
-											<h5 class="mb-3">Adversaire</h5>
-											<span class="mb-2">lseiberr</span>
-											<span class="mb-2">aandrieu</span>
-											<span class="mb-2">tde-los-</span>
-											<span class="mb-2">margesexy</span>
-											<span>flashmcqueen</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="local" class="d-none flex flex-column justify-content-center mx-auto">
-			<h2 class="text-white text-center mx-auto my-0">LOCAL</h2>
-			<canvas id="canvas2" class="my-2" width="640" height="480"></canvas>
-			<div class="d-flex justify-content-center">
-				<button id="start-local" class="btn btn-primary">Start</button>
-			</div>
-		</div>
-		<h2 class="text-white text-center mx-auto d-none" id="ranked" >RANKED</h2>
-		<h2 class="text-white text-center mx-auto d-none" id="tournoi" >TOURNOI</h2>
-		<div id="classement" class="d-none flex flex-column justify-content-center text-white text-center mx-auto">
-			<h2 class="mx-auto my-0 pb-3">CLASSEMENT</h2>
-			<div class="overflow-auto rouded-3 mb-4 classement-scrollbar" style="max-height: 65vh;">
-				<table class="table table-striped table-dark m-0" style="width: 80vh;">
-					<thead>
-						<tr>
-						<th scope="col">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Rang</th>
-						<th scope="col">Victoires</th>
-						<th scope="col">Défaites</th>
-					</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>110</td>
-							<td>70</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		{% block content %}{% endblock %}
 	</main>
 
-	<!-- BOTTOM BAR -->
-	<div class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
+	<footer class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link text-white" onclick="soloPage()" href="#">🤖Solo</a>
-			<a class="nav-item nav-link text-white" onclick="Page3()" href="#">🕹️Local</a>
-			<a class="nav-item nav-link text-white" onclick="Page4()" href="#">⚔️Ranked</a>
-			<a class="nav-item nav-link text-white" onclick="Page5()" href="#">🏆Tournoi</a>
-			<a class="nav-item nav-link text-white" onclick="Page6()" href="#">👑Classement</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'solo' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🤖Solo</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'local' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🕹️Local</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'ranked' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">⚔️Ranked</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'tournament' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🏆Tournoi</a>
+			<a class="nav-item nav-link text-white" hx-get="{% url 'ranking' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">👑Classement</a>
 		</nav>
-	</div>
+	</footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="static/js/solo.js"></script>
-<script src="static/js/organisation.js"></script>
-<script src="static/js/local.js"></script>
 </html>
+

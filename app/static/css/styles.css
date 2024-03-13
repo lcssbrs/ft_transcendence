@@ -106,16 +106,16 @@
 	outline-color: white;
 }
 
-.classement-scrollbar::-webkit-scrollbar {
+.ranking-scrollbar::-webkit-scrollbar {
 	width: 5px;
 }
 
-.classement-scrollbar::-webkit-scrollbar-thumb {
+.ranking-scrollbar::-webkit-scrollbar-thumb {
 	background-color: white;
 	border-radius: 10px;
 }
 
-.classement-scrollbar::-webkit-scrollbar-track {
+.ranking-scrollbar::-webkit-scrollbar-track {
 	border-radius: 10px;
 }
 
