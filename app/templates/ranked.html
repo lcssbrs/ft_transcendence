@@ -1,1 +1,12 @@
-<h2 class="text-white text-center mx-auto" id="ranked" >RANKED</h2>
+{% extends "head.html" %}
+
+{% block content %}
+<div id="ranked" class="d-flex flex-column justify-content-center mx-auto">
+	<h2 class="text-white text-center mx-auto my-0">RANKED</h2>
+	<canvas id="canvas1" class="my-2" width="640" height="480"></canvas>
+	<div class="d-flex justify-content-center">
+		<button id="start-ranked" class="btn btn-primary">Start</button>
+	</div>
+</div>
+<script src="static/js/ranked.js"></script>
+{% endblock %}

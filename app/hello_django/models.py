@@ -14,6 +14,25 @@ def validate_password_length(value):
     if len(value) < 8:
         raise ValidationError("Le mot de passe doit contenir au moins 8 caractères.")
 
+class tournament(models.Model):
+    ID_tournament =  models.PositiveIntegerField(default=0)
+    date_tournament =  models.DateTimeField(null=True, blank=True)
+    player1 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
+    player2 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
+    player3 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
+    player4 = models.CharField(max_length=12, validators=[ASCIIUsernameValidator()])
+    match1 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+    match2 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+    match3 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+    result1 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+    result2 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+    result3 = models.CharField(max_length=25, validators=[ASCIIUsernameValidator()])
+
+    class Meta:
+        db_table = 'django_tournament'
+
+
+
 class user_list(models.Model):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
@@ -23,11 +42,16 @@ class user_list(models.Model):
     profile_picture = models.ImageField(upload_to='photos/', default='photos/default-profile.jpg')
     status = models.CharField(max_length=20, default='offline', choices=[('online', 'En ligne'), ('offline', 'Hors ligne'), ('in_game', 'En jeu')])
     last_login = models.DateTimeField(null=True, blank=True)
-    # Parties:
-    games_played = models.PositiveIntegerField(default=0)
-    games_win = models.PositiveIntegerField(default=0)
-    games_loose = models.PositiveIntegerField(default=0)
-    games_rank = models.PositiveIntegerField(default=0)
+    double_auth = models.BooleanField(default=0)
+    # Tournoi:
+    last_tournament_position = models.PositiveIntegerField(default=0)
+    last_tournament_date = models.DateTimeField(null=True, blank=True)
+    last_match_tournament_result = models.CharField(max_length=15)
+    last_match_tournament_opponent = models.CharField(max_length=15)
+    # Ranked:
+    user_score = models.PositiveIntegerField(default=0)
+
+
 
     def __str__(self):
         return self.username

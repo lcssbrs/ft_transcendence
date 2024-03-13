@@ -1,0 +1,191 @@
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 21317
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET / HTTP/1.1" 200 21317
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET / HTTP/1.1" 200 21317
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET / HTTP/1.1" 200 21317
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 21317
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET / HTTP/1.1" 200 21317
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET / HTTP/1.0" 200 21317
+"GET /solo HTTP/1.0" 200 3277
+Watching for file changes with StatReloader
+"GET /solo HTTP/1.0" 200 3277
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+"GET /solo HTTP/1.0" 200 3277
+"GET /solo HTTP/1.0" 200 3277
+"GET /solo HTTP/1.0" 200 3277
+"GET /solo HTTP/1.0" 200 3277
+Watching for file changes with StatReloader
+"GET /solo HTTP/1.0" 200 3277
+"GET / HTTP/1.1" 200 21317
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/css/styles.css HTTP/1.1" 404 1801
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/images/luffy.png HTTP/1.1" 404 1807
+"GET /static/images/challenger.png HTTP/1.1" 404 1822
+"GET /static/js/solo.js HTTP/1.1" 404 1789
+"GET /static/js/organisation.js HTTP/1.1" 404 1813
+"GET /static/js/local.js HTTP/1.1" 404 1792
+"GET /static/images/icon.ico HTTP/1.1" 404 1804
+"GET / HTTP/1.0" 200 21317
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('S¢2Eu\x9bkùdä\x9e\x9eÙ¿ìî\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x8c\x01\x00\x02\x88\x03\x03Fâ;\x9dúßx¾\x7fEoRbªd\x196/|CÒÖ?×wD2c-x\x8bS')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('ªg&\x07º¹ä\x039ÜwÁÇû[\x95WÓÃû#Xºi0ýÉÐé¹é\x9e\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('\x07{d')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('½\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x8c\x01\x00\x02\x88\x03\x03\x13ôò´')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('ÄÍª{¡°ÄG\x00)¼EeDb¼3EÕ\x83\x9a(\x98lzþ$¸]j§;\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('SJKçC>&\x92ì¾ÆU1.Lû')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request syntax ('\x16\x03\x01\x02\x8c\x01\x00\x02\x88\x03\x03ð\x18W¯©ÍÉ±0P@o"PÓPd\x83\x90põ\x00\x93:\x1f')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x8c\x01\x00\x02\x88\x03\x03/Ë5§{ÐcF{Þ\x81\x11\x7fÌ_\x90Qt¥E\x1bS\x8f\x9a\x8b÷[Ìµe«a')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /solo HTTP/1.0" 200 3278
+code 400, message Bad request version ('cç$B\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET / HTTP/1.0" 200 21317
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+"GET /solo HTTP/1.0" 200 3277
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+Not Found: /ranked
+"GET /ranked HTTP/1.0" 404 3696
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /ranked HTTP/1.0" 200 3282
+code 400, message Bad request version ('{êÿ:$Çò\x83\x17\x95µûÐ¶(\x82«lN\x9f\x13×:b\\zlþ¯\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /ranked HTTP/1.0" 200 3284
+code 400, message Bad request syntax ('\x16\x03\x01\x02\x8c\x01\x00\x02\x88\x03\x032ý\x0f¹P;¬Ì¾7\x86d¾µ\x9d\x94')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+Not Found: /8000
+"GET /8000 HTTP/1.0" 404 3811
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+Watching for file changes with StatReloader
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+Watching for file changes with StatReloader
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+"GET /ranked HTTP/1.0" 200 3285
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader

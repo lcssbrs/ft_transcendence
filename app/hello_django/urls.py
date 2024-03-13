@@ -19,6 +19,7 @@ from . import views
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
+from django.conf.urls.static import static
 from .views import user_list_view, index, solo_view, login_view, register_view, local_view, ranking_view, ranked_view, tournament_view, profile_view
 
 urlpatterns = [
@@ -36,5 +37,7 @@ urlpatterns = [
     path('django/', lambda request: redirect('http://localhost:8000/admin'), name='django_redirect'),
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
     # dev
+    path('login/', login_view, name='login'),
     path('users/', user_list_view, name='user_list'),
+	path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
