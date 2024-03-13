@@ -39,5 +39,5 @@ urlpatterns = [
     # dev
     path('login/', login_view, name='login'),
     path('users/', user_list_view, name='user_list'),
-	path('connected-users/', views.get_connected_users, name='get_connected_users'),
+	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
