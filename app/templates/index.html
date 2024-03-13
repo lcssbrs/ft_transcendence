@@ -23,13 +23,11 @@
 	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<!-- Scripts JavaScript Bootstrap (nécessite jQuery) -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<!-- HTMX -->
-	<script src="https://unpkg.com/htmx.org@1.2.1"></script>
+	<script src="static/js/router.js"></script>
+	<script src="static/js/solo.js"></script>
+	<script src="static/js/local.js"></script>
+	<script src="static/js/login.js"></script>
+	<script src="static/js/ranked.js"></script>
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
@@ -38,10 +36,10 @@
 		<!-- BOUTON : SE CONNECTER -->
 		<div class="d-flex my-auto mr-4">
 			<div class="mr-2" id="logbutton">
-				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'login' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">Se connecter</button>
+				<button class="btn btn-outline-light redir px-2 py-1" href="login">Se connecter</button>
 			</div>
 			<div id="registerbutton">
-				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'register' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">S'inscrire</button>
+				<button class="btn btn-outline-light redir px-2 py-1" href="register">S'inscrire</button>
 			</div>
 		</div>
 		<!-- BOUTON : PROFIL -->
@@ -164,16 +162,16 @@
 			<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
 			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
 		</div> -->
-		{% block content %}{% endblock %}
+		</div>
 	</main>
 
 	<footer class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link text-white" hx-get="{% url 'solo' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🤖Solo</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'local' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🕹️Local</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'ranked' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">⚔️Ranked</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'tournament' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🏆Tournoi</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'ranking' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">👑Classement</a>
+			<a class="nav-item nav-link text-white redir" href="solo">🤖Solo</a>
+			<a class="nav-item nav-link text-white redir" href="local">🕹️Local</a>
+			<a class="nav-item nav-link text-white redir" href="ranked">⚔️Ranked</a>
+			<a class="nav-item nav-link text-white redir" href="tournament">🏆Tournoi</a>
+			<a class="nav-item nav-link text-white redir" href="ranking">👑Classement</a>
 		</nav>
 	</footer>
 </body>

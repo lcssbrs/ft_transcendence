@@ -15,40 +15,25 @@ def index(request):
     return render (request, 'index.html')
 
 def profile_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/profile.html')
-
     return render(request, 'profile.html')
 
 def ranked_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranked.html')
-
     return render(request, 'ranked.html')
 
 def tournament_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/tournament.html')
-
     return render(request, 'tournament.html')
 
 def ranking_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranking.html')
-
     return render(request, 'ranking.html')
 
 def solo_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/solo.html')
-
     return render(request, 'solo.html')
 
 def local_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/local.html')
-
     return render(request, 'local.html')
+
+def no_view(request):
+    return render(request, 'nothing.html')
 
 #check users status for ranked mode
 def get_connected_users(request):
@@ -78,9 +63,6 @@ def register_view(request):
     else:
         form = add_user_form()
 
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/register.html', {'form': form, 'error_message': error_message})
-
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
@@ -101,9 +83,6 @@ def login_view(request):
             return redirect('login')
     else:
         form = AuthenticationForm()
-
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/login.html', {'form': form})
 
     return render(request, 'login.html', {'form': form})
 

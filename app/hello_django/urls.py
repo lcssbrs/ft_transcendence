@@ -32,6 +32,7 @@ urlpatterns = [
     path('ranked', ranked_view, name='ranked'),
     path('tournament', tournament_view, name='tournament'),
     path('profile', profile_view, name='profile'),
+    path('nothing', views.no_view, name='nothing'),
 	# api
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
