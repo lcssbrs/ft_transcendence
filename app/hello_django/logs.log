@@ -1,0 +1,134 @@
+Watching for file changes with StatReloader
+"GET /solo HTTP/1.0" 200 12477
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 394
+"GET /solo HTTP/1.0" 200 390
+"GET /ranked HTTP/1.0" 200 378
+"GET /tournament HTTP/1.0" 200 72
+"GET /ranking HTTP/1.0" 200 1676
+"GET /ranked HTTP/1.0" 200 378
+"GET /ranked HTTP/1.0" 200 378
+"GET /ranked HTTP/1.0" 200 12465
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 3868
+"GET /register HTTP/1.0" 200 1900
+Internal Server Error: /register
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: relation "django_user_list" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_user_list" WHERE "django_user_l...
+                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 67, in register_view
+    if form.is_valid():
+       ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/forms/forms.py", line 201, in is_valid
+    return self.is_bound and not self.errors
+                                 ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/forms/forms.py", line 196, in errors
+    self.full_clean()
+  File "/usr/local/lib/python3.11/site-packages/django/forms/forms.py", line 434, in full_clean
+    self._clean_form()
+  File "/usr/local/lib/python3.11/site-packages/django/forms/forms.py", line 455, in _clean_form
+    cleaned_data = self.clean()
+                   ^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/forms.py", line 19, in clean
+    if user_list.objects.filter(username=username).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1241, in exists
+    return self.query.has_results(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 587, in has_results
+    return compiler.has_results()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1530, in has_results
+    return bool(self.execute_sql(SINGLE))
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: relation "django_user_list" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_user_list" WHERE "django_user_l...
+                             ^
+
+"POST /register HTTP/1.0" 500 135227
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"POST /register HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+"GET /login/ HTTP/1.0" 200 1511
+"GET /register HTTP/1.0" 200 1900
+"GET /login/ HTTP/1.0" 200 1511
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=227a9473d64e620117119b515ef524270afada4f5f29b9a2bb60ceb9e3b66554 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=227a9473d64e620117119b515ef524270afada4f5f29b9a2bb60ceb9e3b66554 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/227a9473d64e620117119b515ef524270afada4f5f29b9a2bb60ceb9e3b66554/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+"GET /ranked HTTP/1.0" 200 378
+"GET /ranked HTTP/1.0" 200 12465
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 3868
+"GET /local/ HTTP/1.0" 200 394
+"GET /ranked HTTP/1.0" 200 378
+"GET /ranked HTTP/1.0" 200 12465
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 3868
+"GET /ranked HTTP/1.0" 200 12465
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 3868
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 12084
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 12477
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12481
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 12477
+"GET /ranked HTTP/1.0" 200 378
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 12477
+"GET /solo HTTP/1.0" 200 12477
+"GET /login/ HTTP/1.0" 200 1511
+"GET /register HTTP/1.0" 200 1900
+"GET /login/ HTTP/1.0" 200 1511
+"GET /ranking HTTP/1.0" 200 1676
+"GET /tournament HTTP/1.0" 200 72
+"GET /ranked HTTP/1.0" 200 378
+"GET /local/ HTTP/1.0" 200 394
+"GET /ranked HTTP/1.0" 200 378
+"GET /ranking HTTP/1.0" 200 1676
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12481
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 12477
+"GET /solo HTTP/1.0" 200 390
+"GET /solo HTTP/1.0" 200 12477
+"GET /solo HTTP/1.0" 200 12477
