@@ -12,7 +12,7 @@
 	let borderFlashInterval = null;
 
 	// Établir la connexion WebSocket
-	const websocketURL = 'wss://localhost/ranked/'; // Remplacez YOUR_WEBSOCKET_URL par l'URL de votre serveur WebSocket
+	const websocketURL = 'wss://localhost/ranked/';
 	const websocket = new WebSocket(websocketURL);
 
 	// Gérer les événements WebSocket
@@ -52,9 +52,9 @@
 
 	function getPlayerPalette() {
 		if (playerId === 'left') {
-		  return game.player; // Le premier joueur connecté contrôle la palette de gauche
+		  return game.player;
 		} else {
-		  return game.opponent; // Le deuxième joueur connecté contrôle la palette de droite
+		  return game.opponent;
 		}
 	  }
 

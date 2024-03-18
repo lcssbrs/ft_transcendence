@@ -132,3 +132,159 @@ Watching for file changes with StatReloader
 "GET /solo HTTP/1.0" 200 390
 "GET /solo HTTP/1.0" 200 12477
 "GET /solo HTTP/1.0" 200 12477
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 12089
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=YNVsYXsQjH5KylLbl3jjF4Lxt4BzGxP1C1tgyUZSp2MqwaNFojBqIER1kUGtQfSs HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=0e37208a03782d836f5445e4ce20533de911b46f23c7eae31abcc475bf157be6 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=0e37208a03782d836f5445e4ce20533de911b46f23c7eae31abcc475bf157be6 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/0e37208a03782d836f5445e4ce20533de911b46f23c7eae31abcc475bf157be6/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+"GET /exemple HTTP/1.0" 200 2121
+Not Found: /favicon.ico
+"GET /exemple HTTP/1.0" 200 2056
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.0" 404 5448
+"GET / HTTP/1.0" 200 12089
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=HmXWVTflpZ4khVzluSL2s4HkphdPZqcDAxUApgOnz8wQ54ujyqjqCRvcdi6FHxYo HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=ccde8f206298a276f7414eac43b4720b9ad9557baea25e545ce4718d54fba561 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=ccde8f206298a276f7414eac43b4720b9ad9557baea25e545ce4718d54fba561 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/ccde8f206298a276f7414eac43b4720b9ad9557baea25e545ce4718d54fba561/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 2486
+"POST /add_friend/2/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 3110
+"POST /reject_friend/1/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 2486
+"POST /add_friend/2/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 3110
+"POST /accept_friend/2/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 3239
+"GET /exemple HTTP/1.0" 200 2615
+"POST /remove_friend/2/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 3110
+"POST /add_friend/2/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 2486
+"GET /exemple HTTP/1.0" 200 3796
+"POST /accept_friend/3/ HTTP/1.0" 302 0
+"GET /exemple HTTP/1.0" 200 3925
+"GET /exemple HTTP/1.0" 200 3925
+"GET /exemple HTTP/1.0" 200 2615
+"GET / HTTP/1.0" 200 12089
+"GET /ranking/ HTTP/1.0" 200 1676
+"GET /tournament/ HTTP/1.0" 200 72
+"GET /ranking/ HTTP/1.0" 200 1676
+"GET /ranking/ HTTP/1.0" 200 1676
+"GET /tournament/ HTTP/1.0" 200 72
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12486
+"GET /local/ HTTP/1.0" 200 12486
+"GET /local/ HTTP/1.0" 200 12486
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12486
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET / HTTP/1.0" 200 12089
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=o86vNBMo8Md7vJ7vIzWVL8zU552JjqiZjOeu1m7RGSDZFl56BurDzqin8UXxWDxt HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=763c0ee2655e11f2b0178bbe797cf137ea60251a3cc4cd0ff1dd2188abd8700a HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=763c0ee2655e11f2b0178bbe797cf137ea60251a3cc4cd0ff1dd2188abd8700a HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/763c0ee2655e11f2b0178bbe797cf137ea60251a3cc4cd0ff1dd2188abd8700a/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 378
+Watching for file changes with StatReloader
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=HpyDl3zbxbJ74L4xoeY03z49UjNXtgXmWIZGgE6iDgpxRGtz7igbbPtlcvaI00Ch HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=45f27a2a30f32306456d0339295d1a7dfbfaf9141a5b694c20791d6776ae4bb8 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=45f27a2a30f32306456d0339295d1a7dfbfaf9141a5b694c20791d6776ae4bb8 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/45f27a2a30f32306456d0339295d1a7dfbfaf9141a5b694c20791d6776ae4bb8/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+Not Found: /8080
+"GET /8080 HTTP/1.0" 404 5427
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12486
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /local/ HTTP/1.0" 200 394
+"GET /local/ HTTP/1.0" 200 12486
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=06yZzV7Y9JqRwwha6CvZppPSwsG7m0pEXoe7Cnjn34D8ce4urAwzeNq5DOyt1Ofm HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=d573d836cab462d1a089080d1cd8f8a4cc4cce416a032b0d50e9f80cb11b0f16 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=d573d836cab462d1a089080d1cd8f8a4cc4cce416a032b0d50e9f80cb11b0f16 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/d573d836cab462d1a089080d1cd8f8a4cc4cce416a032b0d50e9f80cb11b0f16/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+"GET / HTTP/1.0" 200 12089
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493

@@ -6,7 +6,7 @@ from hello_django.consumers import PongConsumer
 application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
         URLRouter([
-            path('wss/multi/', PongConsumer.as_asgi()),
+            path('wss/localhost/ranked/', PongConsumer.as_asgi()),
         ])
     ),
 })
