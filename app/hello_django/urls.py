@@ -32,6 +32,11 @@ urlpatterns = [
     path('ranked/', ranked_view, name='ranked'),
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
+	# Friend
+	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
+    path('remove_friend/<int:friend_id>/', views.remove_friend, name='remove_friend'),
+	path('accept_friend/<int:request_id>/', views.accept_friend_request, name='accept_friend'),
+    path('reject_friend/<int:request_id>/', views.reject_friend_request, name='reject_friend'),
 	# API 42
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),

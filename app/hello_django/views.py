@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match
+from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -20,9 +20,6 @@ from .backends import CustomAuthenticationBackend
 
 def index(request):
     return render (request, 'index.html', {'user': request.user})
-
-def exemple_view(request):
-    return render(request, 'exemple.html', {'user': request.user})
 
 def profile_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
@@ -240,7 +237,44 @@ class api_tournois_details(APIView):
         serializer = TournoiListSerializer(tournoi)
         return Response(serializer.data)
 
+# Friend
+
+def add_friend(request, friend_id):
+    if request.method == 'POST':
+        from_user = request.user
+        to_user = user_list.objects.get(pk=friend_id)
+        Friendship.objects.create(from_user=from_user, to_user=to_user)
+        return redirect('exemple')
+
+def remove_friend(request, friend_id):
+    if request.method == 'POST':
+        user = request.user
+        friend = user_list.objects.get(pk=friend_id)
+        user.friends.remove(friend)
+        friend.friends.remove(user)
+        return redirect('exemple')
+
+def accept_friend_request(request, request_id):
+    friend_request = Friendship.objects.get(id=request_id)
+    if not friend_request.accepted:
+        from_user = friend_request.from_user
+        to_user = friend_request.to_user
+        from_user.friends.add(to_user)
+        to_user.friends.add(from_user)
+        friend_request.accepted = True
+        friend_request.save()
+    return redirect('exemple')
+
+def reject_friend_request(request, request_id):
+    friend_request = Friendship.objects.get(id=request_id)
+    friend_request.delete()
+    return redirect('exemple')
+
 # DEV
+
+def exemple_view(request):
+    list = user_list.objects.all()
+    return render(request, 'exemple.html', {'user': request.user, 'list': list})
 
 def user_list_view(request):
     users = user_list.objects.all()

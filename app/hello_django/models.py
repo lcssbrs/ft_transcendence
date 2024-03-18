@@ -31,6 +31,8 @@ class user_list(models.Model):
     games_loose = models.PositiveIntegerField(default=0)
     games_rank = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    # Friend:
+    friends = models.ManyToManyField('self', symmetrical=False, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -45,6 +47,13 @@ class user_list(models.Model):
 
     class Meta:
         db_table = 'django_user_list'
+
+# Friend
+
+class Friendship(models.Model):
+    from_user = models.ForeignKey(user_list, related_name='friend_requests_sent', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(user_list, related_name='friend_requests_received', on_delete=models.CASCADE)
+    accepted = models.BooleanField(default=False)
 
 @receiver(post_save, sender=user_list)
 def sync_user_to_auth_user(sender, instance, created, **kwargs):
