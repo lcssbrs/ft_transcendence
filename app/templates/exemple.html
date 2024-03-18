@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-info img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .profile-info h1 {
+            margin: 0;
+        }
+        .friends-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .friend {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .friend button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-button {
+            background-color: #4caf50;
+            color: white;
+        }
+        .remove-button {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-info">
+            <img src="{{ user.profile_picture.url }}" alt="Photo de profil">
+            <div>
+                <h1>{{ request.user.username }}</h1>
+                <p>{{ request.user.email }}</p>
+            </div>
+        </div>
+        <h2>Liste d'amis</h2>
+        {% if user.friends.all %}
+            <ul class="friends-list">
+                {% for friend in user.friends.all %}
+                <li class="friend">
+                    <span>{{ friend.username }}</span>
+                    <form action="{% url 'remove_friend' friend.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-button">Retirer</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun ami pour le moment.</p>
+        {% endif %}
+        <h2>Demandes d'amis en attente</h2>
+        {% for request in user.friend_requests_received.all %}
+            <div class="friend-request">
+                <span>{{ request.from_user.username }}</span>
+                <form action="{% url 'accept_friend' request.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Accepter</button>
+                </form>
+                <form action="{% url 'reject_friend' request.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Refuser</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>Aucune demande d'amis en attente.</p>
+        {% endfor %}
+        <h2>Utilisateurs disponibles</h2>
+        {% for user_list in list %}
+            {% if user.username != user_list.username and user_list not in user.friends.all %}
+                <form action="{% url 'add_friend' friend_id=user_list.id %}" method="post">
+                    {% csrf_token %}
+                    <span> {{ user_list.username }} </span>
+                    <button type="submit">Ajouter</button>
+                </form>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

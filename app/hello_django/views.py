@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match
+from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -8,47 +8,54 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+import os
+import urllib
 import logging
 import requests
+from .backends import CustomAuthenticationBackend
 
 def index(request):
-    return render (request, 'index.html')
+    return render (request, 'index.html', {'user': request.user})
 
 def profile_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/profile.html')
+        return render(request, 'full/profile.html', {'user': request.user})
 
-    return render(request, 'profile.html')
+    return render(request, 'profile.html', {'user': request.user})
 
 def ranked_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranked.html')
+        return render(request, 'full/ranked.html', {'user': request.user})
 
-    return render(request, 'ranked.html')
+    return render(request, 'ranked.html', {'user': request.user})
 
 def tournament_view (request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/tournament.html')
+        return render(request, 'full/tournament.html', {'user': request.user})
 
-    return render(request, 'tournament.html')
+    return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranking.html')
+        return render(request, 'full/ranking.html', {'user': request.user})
 
-    return render(request, 'ranking.html')
+    return render(request, 'ranking.html', {'user': request.user})
 
 def solo_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/solo.html')
+        return render(request, 'full/solo.html', {'user': request.user})
 
-    return render(request, 'solo.html')
+    return render(request, 'solo.html', {'user': request.user})
 
 def local_view(request):
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/local.html')
+        return render(request, 'full/local.html', {'user': request.user})
 
-    return render(request, 'local.html')
+    return render(request, 'local.html', {'user': request.user})
 
 #check users status for ranked mode
 def get_connected_users(request):
@@ -74,7 +81,7 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                return redirect('index')
+                return redirect('login')
     else:
         form = add_user_form()
 
@@ -84,6 +91,7 @@ def register_view(request):
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
+    error_message = ''
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -94,18 +102,20 @@ def login_view(request):
                 login(request, user)
                 return redirect('index')
             else:
-                messages.error(request, "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect.")
+                error_message = "Nom d'utilisateur ou mot de passe incorrect."
+                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
                 return redirect('login')
         else:
+            error_message = "Échec de la validation du formulaire."
             messages.error(request, "Échec de la validation du formulaire.")
             return redirect('login')
     else:
         form = AuthenticationForm()
 
     if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/login.html', {'form': form})
+        return render(request, 'full/login.html', {'form': form, 'error_message': error_message})
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'error_message': error_message})
 
 # API LOGIN 42
 
@@ -136,41 +146,135 @@ def exchange_code_for_access_token(request, code):
     if response.status_code == 200:
         token_data = response.json()
         token = token_data.get('access_token')
-
         user_info_url = 'https://api.intra.42.fr/v2/me'
         head = {'Authorization': f'Bearer {token}'}
         user_response = requests.get(user_info_url, headers=head)
 
         if user_response.status_code == 200:
-            user_data = user_response.json()
-            User = get_user_model()
-            user, created = User.objects.get_or_create(username=user_data['login'] + 'test')
-            user.first_name = user_data.get('first_name', '')
-            user.last_name = user_data.get('last_name', '')
-            user.email = user_data.get('email', '')
+            user_info = user_response.json()
+            username = user_info.get('login')
+            email = user_info.get('email')
+            first_name = user_info.get('first_name')
+            last_name = user_info.get('last_name')
+
+            user, created = user_list.objects.get_or_create(username=username, email=email)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.password = " "
+            user.intra = True
+
             if created:
-                image = user_data.get('image', '')
+                image = user_info.get('image', '')
                 image = image.get('versions', '')
-                image = image.get('small')
-                usersaved = user_list(user.id, user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), image)
-                usersaved.save()
-                user.save()
+                image = image.get('medium')
+                filename, headers = urllib.request.urlretrieve(image)
+                photos_directory = 'media/photos/'
+                if not os.path.exists(photos_directory):
+                    os.makedirs(photos_directory)
+                with open(filename, 'rb') as image_file:
+                    image_data = image_file.read()
+                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                with open(output_filename, 'wb') as output_file:
+                    output_file.write(image_data)
+                user.profile_picture = 'photos/' + user.username + '.png'
+            user.save()
+            user_login = authenticate(request, username=username, password=" ")
+            if user_login is not None:
+                login(request, user_login)
+                return redirect('index')
             else:
-                image = user_data.get('image', '')
-                image = image.get('versions', '')
-                image = image.get('small')
-                print(user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('email', ''), image)
-        else:
-            logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
-    else:
-        logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
+                return redirect('login')
+            return redirect('index')
     return redirect('index')
 
 # API
 
-# TODO FAIRE API/ENDPOINTS
+class api_user_list(APIView):
+    def get(self, request):
+        users = user_list.objects.all()
+        serializer = UserListSerializer(users, many=True)
+        return Response(serializer.data)
+
+class api_user_details(APIView):
+    def get(self, request, id):
+        try:
+            user = user_list.objects.get(pk=id)
+        except user_list.DoesNotExist:
+            return Response({"message": "L'utilisateur n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserDetailSerializer(user)
+        return Response(serializer.data)
+
+class api_match_list(APIView):
+    def get(self, request):
+        matchs = Match.objects.all()
+        serializer = MatchListSerializer(matchs, many=True)
+        return Response(serializer.data)
+
+class api_match_details(APIView):
+    def get(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match)
+        return Response(serializer.data)
+
+class api_tournois_list(APIView):
+    def get(self, request):
+        tournoi = Tournament.objects.all()
+        serializer = TournoiListSerializer(tournoi, many=True)
+        return Response(serializer.data)
+
+class api_tournois_details(APIView):
+    def get(self, request, id):
+        try:
+            tournoi = Tournament.objects.get(pk=id)
+        except Tournament.DoesNotExist:
+            return Response({"message": "Le tournoi n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TournoiListSerializer(tournoi)
+        return Response(serializer.data)
+
+# Friend
+
+def add_friend(request, friend_id):
+    if request.method == 'POST':
+        from_user = request.user
+        to_user = user_list.objects.get(pk=friend_id)
+        Friendship.objects.create(from_user=from_user, to_user=to_user)
+        return redirect('exemple')
+
+def remove_friend(request, friend_id):
+    if request.method == 'POST':
+        user = request.user
+        friend = user_list.objects.get(pk=friend_id)
+        user.friends.remove(friend)
+        friend.friends.remove(user)
+        return redirect('exemple')
+
+def accept_friend_request(request, request_id):
+    friend_request = Friendship.objects.get(id=request_id)
+    if not friend_request.accepted:
+        from_user = friend_request.from_user
+        to_user = friend_request.to_user
+        from_user.friends.add(to_user)
+        to_user.friends.add(from_user)
+        friend_request.accepted = True
+        friend_request.save()
+    return redirect('exemple')
+
+def reject_friend_request(request, request_id):
+    friend_request = Friendship.objects.get(id=request_id)
+    friend_request.delete()
+    return redirect('exemple')
 
 # DEV
+
+def exemple_view(request):
+    list = user_list.objects.all()
+    return render(request, 'exemple.html', {'user': request.user, 'list': list})
 
 def user_list_view(request):
     users = user_list.objects.all()
