@@ -8,11 +8,21 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+import os
+import urllib
 import logging
 import requests
+from .backends import CustomAuthenticationBackend
 
 def index(request):
-    return render (request, 'index.html')
+    return render (request, 'index.html', {'user': request.user})
+
+def exemple_view(request):
+    return render(request, 'exemple.html', {'user': request.user})
 
 def profile_view (request):
     return render(request, 'profile.html')
@@ -32,15 +42,11 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html')
 
-def no_view(request):
-    return render(request, 'nothing.html')
-
 #check users status for ranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
-
 
 # Login / register
 
@@ -59,13 +65,14 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                return redirect('index')
+                return redirect('login')
     else:
         form = add_user_form()
 
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
+    error_message = ''
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -76,9 +83,11 @@ def login_view(request):
                 login(request, user)
                 return redirect('index')
             else:
-                messages.error(request, "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect.")
+                error_message = "Nom d'utilisateur ou mot de passe incorrect."
+                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
                 return redirect('login')
         else:
+            error_message = "Échec de la validation du formulaire."
             messages.error(request, "Échec de la validation du formulaire.")
             return redirect('login')
     else:
@@ -115,39 +124,96 @@ def exchange_code_for_access_token(request, code):
     if response.status_code == 200:
         token_data = response.json()
         token = token_data.get('access_token')
-
         user_info_url = 'https://api.intra.42.fr/v2/me'
         head = {'Authorization': f'Bearer {token}'}
         user_response = requests.get(user_info_url, headers=head)
 
         if user_response.status_code == 200:
-            user_data = user_response.json()
-            User = get_user_model()
-            user, created = User.objects.get_or_create(username=user_data['login'] + 'test')
-            user.first_name = user_data.get('first_name', '')
-            user.last_name = user_data.get('last_name', '')
-            user.email = user_data.get('email', '')
+            user_info = user_response.json()
+            username = user_info.get('login')
+            email = user_info.get('email')
+            first_name = user_info.get('first_name')
+            last_name = user_info.get('last_name')
+
+            user, created = user_list.objects.get_or_create(username=username, email=email)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.password = " "
+            user.intra = True
+
             if created:
-                image = user_data.get('image', '')
+                image = user_info.get('image', '')
                 image = image.get('versions', '')
-                image = image.get('small')
-                usersaved = user_list(user.id, user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), image)
-                usersaved.save()
-                user.save()
+                image = image.get('medium')
+                filename, headers = urllib.request.urlretrieve(image)
+                photos_directory = 'media/photos/'
+                if not os.path.exists(photos_directory):
+                    os.makedirs(photos_directory)
+                with open(filename, 'rb') as image_file:
+                    image_data = image_file.read()
+                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                with open(output_filename, 'wb') as output_file:
+                    output_file.write(image_data)
+                user.profile_picture = 'photos/' + user.username + '.png'
+            user.save()
+            user_login = authenticate(request, username=username, password=" ")
+            if user_login is not None:
+                login(request, user_login)
+                return redirect('index')
             else:
-                image = user_data.get('image', '')
-                image = image.get('versions', '')
-                image = image.get('small')
-                print(user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('email', ''), image)
-        else:
-            logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
-    else:
-        logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
+                return redirect('login')
+            return redirect('index')
     return redirect('index')
 
 # API
 
-# TODO FAIRE API/ENDPOINTS
+class api_user_list(APIView):
+    def get(self, request):
+        users = user_list.objects.all()
+        serializer = UserListSerializer(users, many=True)
+        return Response(serializer.data)
+
+class api_user_details(APIView):
+    def get(self, request, id):
+        try:
+            user = user_list.objects.get(pk=id)
+        except user_list.DoesNotExist:
+            return Response({"message": "L'utilisateur n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserDetailSerializer(user)
+        return Response(serializer.data)
+
+class api_match_list(APIView):
+    def get(self, request):
+        matchs = Match.objects.all()
+        serializer = MatchListSerializer(matchs, many=True)
+        return Response(serializer.data)
+
+class api_match_details(APIView):
+    def get(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match)
+        return Response(serializer.data)
+
+class api_tournois_list(APIView):
+    def get(self, request):
+        tournoi = Tournament.objects.all()
+        serializer = TournoiListSerializer(tournoi, many=True)
+        return Response(serializer.data)
+
+class api_tournois_details(APIView):
+    def get(self, request, id):
+        try:
+            tournoi = Tournament.objects.get(pk=id)
+        except Tournament.DoesNotExist:
+            return Response({"message": "Le tournoi n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TournoiListSerializer(tournoi)
+        return Response(serializer.data)
 
 # DEV
 
