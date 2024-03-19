@@ -22,37 +22,31 @@
 
 	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- Scripts JavaScript Bootstrap (nécessite jQuery) -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<!-- HTMX -->
-	<script src="https://unpkg.com/htmx.org@1.2.1"></script>
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
 		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
-		<!-- BOUTON : SE CONNECTER -->
-		<div class="d-flex my-auto mr-4">
-			<div class="mr-2" id="logbutton">
-				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'login' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">Se connecter</button>
+		{% if request.user.is_authenticated %}
+			<div id="profilebar" class="my-auto mr-4">
+				<img src="{{ user.profile_picture.url }}" class="profile-bar border border-primary" style="border-width: 2px !important;">
 			</div>
-			<div id="registerbutton">
-				<button class="btn btn-outline-light redir px-2 py-1" hx-get="{% url 'register' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">S'inscrire</button>
+		{% else %}
+			<div id="logbutton" class="d-flex my-auto mr-4">
+				<div class="mr-2">
+					<button class="btn btn-outline-light redir px-2 py-1" href="login">Se connecter</button>
+				</div>
+				<div>
+					<button class="btn btn-outline-light redir px-2 py-1" href="register">S'inscrire</button>
+				</div>
 			</div>
-		</div>
-		<!-- BOUTON : PROFIL -->
-		<div id="profilebar" onclick="Profile()" href="#" class="my-auto mr-4 d-none">
-			<img src="{% static 'images/luffy.png' %}" id="profilebar" class="profile-bar border border-primary" style="border-width: 2px !important;">
-		</button>
+		{% endif %}
 	</header>
 
-	<main id="content" class="main-height d-flex">
+	<main class="main-height d-flex">
 		<!-- FRIEND BAR -->
-		<div id="friend" class="d-none main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
+		<div id="friendbar" class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
+		{% if request.user.is_authenticated %}
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Ami(e)s</h4>
 				<div class="overflow-auto friend-scroll d-flex flex-column mt-2" style="height: 35vh;">
@@ -157,25 +151,31 @@
 			<div class="input-wrapper pl-3 pr-3 pt-4">
 					<input type="text" placeholder="Ajouter iel ami(e)..." name="text" class="input">
 			</div>
+			{% else %}
+				<div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
+					<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
+					<p class="text-center text-white m-0" >Veuillez vous connecter</p>
+				</div>
+			{% endif %}
 		</div>
-
-		<!-- NOT CONNECTED -->
-		<!-- <div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
-			<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
-			<p class="text-center text-white m-0" >Veuillez vous connecter</p>
-		</div> -->
-		{% block content %}{% endblock %}
+		<div id="content" class="d-none flex flex-column justify-content-center mx-auto"></div>
+		<div id="logcontent" class="d-none text-white mx-auto text-center rounded-3 border border-light my-auto p-2 flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 35%; height: 80%; border-width: 3px !important;"></div>
 	</main>
 
 	<footer class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link text-white" hx-get="{% url 'solo' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🤖Solo</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'local' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🕹️Local</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'ranked' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">⚔️Ranked</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'tournament' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">🏆Tournoi</a>
-			<a class="nav-item nav-link text-white" hx-get="{% url 'ranking' %}" hx-push-url="true" hx-target="#content" hx-swap="innerHTML">👑Classement</a>
+			<a class="nav-item nav-link text-white redir" href="solo">🤖Solo</a>
+			<a class="nav-item nav-link text-white redir" href="local">🕹️Local</a>
+			<a class="nav-item nav-link text-white redir" href="ranked">⚔️Ranked</a>
+			<a class="nav-item nav-link text-white redir" href="tournament">🏆Tournoi</a>
+			<a class="nav-item nav-link text-white redir" href="ranking">👑Classement</a>
 		</nav>
 	</footer>
+	<script src="static/js/router.js"></script>
+	<script src="static/js/solo.js"></script>
+	<script src="static/js/local.js"></script>
+	<script src="static/js/login.js"></script>
+	<script src="static/js/ranked.js"></script>
 </body>
 </html>
 

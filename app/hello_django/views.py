@@ -22,47 +22,28 @@ def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/profile.html', {'user': request.user})
-
-    return render(request, 'profile.html', {'user': request.user})
+    return render(request, 'profile.html')
 
 def ranked_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranked.html', {'user': request.user})
-
-    return render(request, 'ranked.html', {'user': request.user})
+    return render(request, 'ranked.html')
 
 def tournament_view (request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/tournament.html', {'user': request.user})
-
-    return render(request, 'tournament.html', {'user': request.user})
+    return render(request, 'tournament.html')
 
 def ranking_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/ranking.html', {'user': request.user})
-
-    return render(request, 'ranking.html', {'user': request.user})
+    return render(request, 'ranking.html')
 
 def solo_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/solo.html', {'user': request.user})
-
-    return render(request, 'solo.html', {'user': request.user})
+    return render(request, 'solo.html')
 
 def local_view(request):
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/local.html', {'user': request.user})
-
-    return render(request, 'local.html', {'user': request.user})
+    return render(request, 'local.html')
 
 #check users status for ranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
-
 
 # Login / register
 
@@ -84,9 +65,6 @@ def register_view(request):
                 return redirect('login')
     else:
         form = add_user_form()
-
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/register.html', {'form': form, 'error_message': error_message})
 
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
@@ -112,10 +90,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
 
-    if request.META.get("HTTP_HX_REQUEST") != 'true':
-        return render(request, 'full/login.html', {'form': form, 'error_message': error_message})
-
-    return render(request, 'login.html', {'form': form, 'error_message': error_message})
+    return render(request, 'login.html', {'form': form})
 
 # API LOGIN 42
 
