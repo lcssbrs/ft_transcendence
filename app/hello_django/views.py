@@ -22,22 +22,22 @@ def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view (request):
-    return render(request, 'profile.html')
+    return render(request, 'profile.html', {'user': request.user})
 
 def ranked_view (request):
-    return render(request, 'ranked.html')
+    return render(request, 'ranked.html', {'user': request.user})
 
 def tournament_view (request):
-    return render(request, 'tournament.html')
+    return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
-    return render(request, 'ranking.html')
+    return render(request, 'ranking.html', {'user': request.user})
 
 def solo_view(request):
-    return render(request, 'solo.html')
+    return render(request, 'solo.html', {'user': request.user})
 
 def local_view(request):
-    return render(request, 'local.html')
+    return render(request, 'local.html', {'user': request.user})
 
 #check users status for ranked mode
 def get_connected_users(request):

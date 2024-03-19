@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Transcendence</title>
 
-	<link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 
 	<!-- Stylesheets Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,10 +34,10 @@
 		{% else %}
 			<div id="logbutton" class="d-flex my-auto mr-4">
 				<div class="mr-2">
-					<button class="btn btn-outline-light redir px-2 py-1" href="login">Se connecter</button>
+					<button class="btn btn-outline-light redir px-2 py-1" href="{% url 'login' %}">Se connecter</button>
 				</div>
 				<div>
-					<button class="btn btn-outline-light redir px-2 py-1" href="register">S'inscrire</button>
+					<button class="btn btn-outline-light redir px-2 py-1" href="{% url 'register' %}">S'inscrire</button>
 				</div>
 			</div>
 		{% endif %}
@@ -164,18 +164,18 @@
 
 	<footer class="bottom-size border-top border-primary my-auto d-flex justify-content-center" style="border-width: 4px !important;">
 		<nav class="navbar navbar-expand navbar-nav justify-content-between mx-5 w-100">
-			<a class="nav-item nav-link text-white redir" href="solo">🤖Solo</a>
-			<a class="nav-item nav-link text-white redir" href="local">🕹️Local</a>
-			<a class="nav-item nav-link text-white redir" href="ranked">⚔️Ranked</a>
-			<a class="nav-item nav-link text-white redir" href="tournament">🏆Tournoi</a>
-			<a class="nav-item nav-link text-white redir" href="ranking">👑Classement</a>
+			<a class="nav-item nav-link text-white redir" href="/solo/">🤖Solo</a>
+			<a class="nav-item nav-link text-white redir" href="/local/">🕹️Local</a>
+			<a class="nav-item nav-link text-white redir" href="/ranked/">⚔️Ranked</a>
+			<a class="nav-item nav-link text-white redir" href="/tournament/">🏆Tournoi</a>
+			<a class="nav-item nav-link text-white redir" href="/ranking/">👑Classement</a>
 		</nav>
 	</footer>
-	<script src="static/js/router.js"></script>
-	<script src="static/js/solo.js"></script>
-	<script src="static/js/local.js"></script>
-	<script src="static/js/login.js"></script>
-	<script src="static/js/ranked.js"></script>
+	<script src="{% static 'js/router.js' %}"></script>
+	<script src="{% static 'js/solo.js' %}"></script>
+	<script src="{% static 'js/local.js' %}"></script>
+	<script src="{% static 'js/login.js' %}"></script>
+	<script src="{% static 'js/ranked.js' %}"></script>
 </body>
 </html>
 
