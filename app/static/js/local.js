@@ -1,6 +1,4 @@
-'use strict';
-
-(function() {
+function setupLocal() {
 var canvas;
 var game;
 var gameStarted = false;
@@ -12,6 +10,8 @@ const MAX_SPEED = 14;
 let displayWinner = false;
 let borderFlashTime = 0;
 let borderFlashInterval = null;
+
+setupStart();
 
 // clignotement lors d'un but
 function flashBorder(duration) {
@@ -223,7 +223,7 @@ function removeKeyListeners() {
 //----------------EVENTS LISTENERS--------
 
 // Dessins et animations
-document.addEventListener('DOMContentLoaded', function () {
+function setupStart() {
 	canvas = document.getElementById('canvas2');
 	game = {
 		player: {
@@ -245,8 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 	draw();
-
-});
+}
 
 // Event sur le clavier
 document.addEventListener('keydown', playerMove);
@@ -258,5 +257,4 @@ document.getElementById('start-local').addEventListener('click', function() {
 		startGameWithCountdown();
 	}
 });
-
-})();
+}
