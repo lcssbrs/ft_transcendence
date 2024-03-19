@@ -24,8 +24,10 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- FRIEND -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="{% static 'js/friend.js' %}"></script>
+	{% if request.user.is_authenticated %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="{% static 'js/friend.js' %}"></script>
+	{% endif %}
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
@@ -62,12 +64,12 @@
 			<div class="input-wrapper pl-3 pr-3 pt-4">
 					<input type="text" placeholder="Ajouter iel ami(e)..." name="text" class="input">
 			</div>
-			{% else %}
-				<div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
-					<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
-					<p class="text-center text-white m-0" >Veuillez vous connecter</p>
-				</div>
-			{% endif %}
+		{% else %}
+			<div id="logrequire" class="main-height flex flex-column align-items-center justify-content-center mx-auto">
+				<img src="{% static 'images/not_connected.svg' %}" class="img-fluid mb-3" style="width: 50vh; height: 15vh;">
+				<p class="text-center text-white m-0" >Veuillez vous connecter</p>
+			</div>
+		{% endif %}
 		</div>
 		<div id="content" class="d-none flex flex-column justify-content-center mx-auto"></div>
 		<div id="logcontent" class="d-none text-white mx-auto text-center rounded-3 border border-light my-auto p-2 flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 35%; height: 80%; border-width: 3px !important;"></div>
