@@ -113,3 +113,19 @@
     </div>
 </body>
 </html>
+
+{% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static '/js/friend.js' %}"></script>
+    <style>
+        /* Ajoutez votre CSS personnalisé ici */
+        .friend {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste d'amis</h1>
+    <div class="friend-user"></div>
+</body>
+</html>

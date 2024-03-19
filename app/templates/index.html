@@ -22,6 +22,10 @@
 
 	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- FRIEND -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="{% static 'js/friend.js' %}"></script>
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
@@ -49,104 +53,11 @@
 		{% if request.user.is_authenticated %}
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Ami(e)s</h4>
-				<div class="overflow-auto friend-scroll d-flex flex-column mt-2" style="height: 35vh;">
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<div class="my-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#28A745" viewBox="0 0 448 512">
-								<path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-							</svg>
-							<span class="ml-2">margesexy</span>
-						</div>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-							</svg>
-						</button>
-					</div>
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<div class="my-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#CCCCCC" viewBox="0 0 448 512">
-								<path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-							</svg>
-							<span class="ml-2">pierre</span>
-						</div>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-							</svg>
-						</button>
-					</div>
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<div class="my-auto">
-							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#0D6EFD" viewBox="0 0 448 512">
-								<path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-							</svg>
-							<span class="ml-2">jacques</span>
-						</div>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-								<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-							</svg>
-						</button>
-					</div>
-				</div>
+				<div id="friends-user" class="friend-user"></div>
 			</div>
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Demandes</h4>
-				<div class="overflow-auto friend-scroll d-flex flex-column mt-2" style="height: 20vh;">
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<span class="my-auto mr-auto">coday</span>
-						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-							</svg>
-						</button>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
-								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
-							</svg>
-						</button>
-					</div>
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<span class="my-auto mr-auto">supernain</span>
-						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-							</svg>
-						</button>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
-								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
-							</svg>
-						</button>
-					</div>
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<span class="my-auto mr-auto">NulàLol</span>
-						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-							</svg>
-						</button>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
-								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
-							</svg>
-						</button>
-					</div>
-					<div class="pt-1 mb-2 d-flex justify-content-between mr-3">
-						<span class="my-auto mr-auto">LeCapitaine</span>
-						<button class="btn-sm rounded-2 mr-2" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-								<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-							</svg>
-						</button>
-						<button class="btn-sm rounded-2" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
-								<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
-							</svg>
-						</button>
-					</div>
-				</div>
+					<div id="friends-scroll" class="friend-scroll"></div>
 			</div>
 			<div class="input-wrapper pl-3 pr-3 pt-4">
 					<input type="text" placeholder="Ajouter iel ami(e)..." name="text" class="input">
@@ -176,6 +87,7 @@
 	<script src="{% static 'js/local.js' %}"></script>
 	<script src="{% static 'js/login.js' %}"></script>
 	<script src="{% static 'js/ranked.js' %}"></script>
+
 </body>
 </html>
 

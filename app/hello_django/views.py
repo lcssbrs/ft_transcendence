@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.http import HttpResponseNotFound
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -219,31 +220,66 @@ def add_friend(request, friend_id):
         from_user = request.user
         to_user = user_list.objects.get(pk=friend_id)
         Friendship.objects.create(from_user=from_user, to_user=to_user)
-        return redirect('exemple')
-
-def remove_friend(request, friend_id):
-    if request.method == 'POST':
-        user = request.user
-        friend = user_list.objects.get(pk=friend_id)
-        user.friends.remove(friend)
-        friend.friends.remove(user)
-        return redirect('exemple')
+        return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
 
 def accept_friend_request(request, request_id):
-    friend_request = Friendship.objects.get(id=request_id)
-    if not friend_request.accepted:
-        from_user = friend_request.from_user
-        to_user = friend_request.to_user
-        from_user.friends.add(to_user)
-        to_user.friends.add(from_user)
-        friend_request.accepted = True
-        friend_request.save()
-    return redirect('exemple')
+    if request.method == 'POST':
+        try:
+            friend_request = Friendship.objects.get(id=request_id)
+            if not friend_request.accepted:
+                from_user = friend_request.from_user
+                to_user = friend_request.to_user
+                from_user.friends.add(to_user)
+                to_user.friends.add(from_user)
+                friend_request.accepted = True
+                friend_request.save()
+                return JsonResponse({'success': 'Demande d\'ami acceptée avec succès.'})
+            else:
+                return JsonResponse({'error': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
+        except Friendship.DoesNotExist:
+            return HttpResponseNotFound("Cette demande d'ami n'existe pas.")
 
 def reject_friend_request(request, request_id):
-    friend_request = Friendship.objects.get(id=request_id)
-    friend_request.delete()
-    return redirect('exemple')
+    if request.method == 'POST':
+        try:
+            friend_request = Friendship.objects.get(id=request_id)
+            friend_request.delete()
+            return JsonResponse({'success': 'Demande d\'ami rejetée avec succès.'})
+        except Friendship.DoesNotExist:
+            return HttpResponseNotFound("Cette demande d'ami n'existe pas.")
+
+
+def get_friends(request):
+    if request.user.is_authenticated:
+        user = request.user
+        friends = user.friends.all()
+        friends_data = [{'id': friend.id, 'username': friend.username, 'status': friend.status} for friend in friends]
+        return JsonResponse({'friends': friends_data})
+    else:
+        return JsonResponse({'message': 'Méthode non autorisée'}, status=405)
+
+def remove_friend(request):
+    if request.method == 'POST':
+        friend_id = request.POST.get('friend_id')
+        user = request.user
+        try:
+            friend = user_list.objects.get(pk=friend_id)
+            user.friends.remove(friend)
+            friend.friends.remove(user)
+            return JsonResponse({'message': 'Ami supprimé avec succès'})
+        except user_list.DoesNotExist:
+            return JsonResponse({'message': 'Ami non trouvé'}, status=404)
+    else:
+        return JsonResponse({'message': 'Méthode non autorisée'}, status=405)
+
+def get_friend_requests(request):
+    if request.method == 'GET':
+        user = request.user
+        friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+        friend_requests_data = [{'id': request.id, 'from_user': request.from_user.username} for request in friend_requests]
+        return JsonResponse({'friend_requests': friend_requests_data})
+    else:
+        return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
 
 # DEV
 
