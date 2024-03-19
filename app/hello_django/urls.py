@@ -53,5 +53,5 @@ urlpatterns = [
     # DEV
     path('users/', user_list_view, name='user_list'),
 	path('exemple', views.exemple_view, name='exemple'),
-	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
+	path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]

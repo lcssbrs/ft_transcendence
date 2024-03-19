@@ -920,3 +920,140 @@ Not Found: /connected-users/
 "GET / HTTP/1.0" 200 11559
 "GET / HTTP/1.0" 200 11559
 "GET / HTTP/1.0" 200 11559
+Watching for file changes with StatReloader
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /local/ HTTP/1.0" 200 244
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /local/ HTTP/1.0" 200 244
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /local/ HTTP/1.0" 200 244
+"GET /local/ HTTP/1.0" 200 244
+"GET /solo/ HTTP/1.0" 200 242
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /solo/ HTTP/1.0" 200 242
+"GET /ranked/ HTTP/1.0" 200 498
+"GET /ranked/ HTTP/1.0" 200 502
+"GET /tournament/ HTTP/1.0" 200 70
+"GET /tournament/ HTTP/1.0" 200 70
+"GET /tournament/ HTTP/1.0" 200 70
+"GET /ranked/ HTTP/1.0" 200 502
+"GET /ranked/ HTTP/1.0" 200 502
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /tournament/ HTTP/1.0" 200 70
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 3434
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /local/ HTTP/1.0" 200 244
+"GET /solo/ HTTP/1.0" 200 242
+"GET /login/ HTTP/1.0" 200 1496
+"GET /connexion_42/?csrfmiddlewaretoken=4JlvnuqGvDIsGXvJ11aXgBwMPX2ItZLY88bes16QxuzTUhJ16K3Otcl8xy5lylAE HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=2bbd43c05d19f90497218473d46bf8529f01715993cb7ea1fce95001815057c6 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=2bbd43c05d19f90497218473d46bf8529f01715993cb7ea1fce95001815057c6 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/2bbd43c05d19f90497218473d46bf8529f01715993cb7ea1fce95001815057c6/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /connected-users/ HTTP/1.0" 404 5463
+/usr/src/app/hello_django/models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 3434
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /connected-users/ HTTP/1.0" 404 5463
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 3434
+"GET /login/ HTTP/1.0" 200 1496
+"GET /connexion_42/?csrfmiddlewaretoken=aQwwTyWxyX54jfP8bg8NsvjCAxgJr5rr4UllYAhAcSR9BDDX1F5TAFErKcfVYuHs HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=53b7e07a794a5529b7f11f449c8037f08899c95da1393ce0f8adc2043bed4e28 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=53b7e07a794a5529b7f11f449c8037f08899c95da1393ce0f8adc2043bed4e28 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/53b7e07a794a5529b7f11f449c8037f08899c95da1393ce0f8adc2043bed4e28/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+Not Found: /connected-users/
+"GET /connected-users/ HTTP/1.0" 404 5463
+/usr/src/app/hello_django/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /connected-users/ HTTP/1.0" 200 37
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /connected-users/ HTTP/1.0" 200 37
+"GET /ranked/ HTTP/1.0" 200 246
+"GET / HTTP/1.0" 200 11107
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /ranked/ HTTP/1.0" 200 246
+"GET /connected-users/ HTTP/1.0" 200 37

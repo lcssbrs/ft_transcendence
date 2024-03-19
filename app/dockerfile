@@ -16,10 +16,9 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install requests
+RUN python -m pip install channels
 RUN pip install djangorestframework
 RUN python -m pip install Pillow
-#  bibliothèque Python 'channels' pour gérer les connexions WebSocket dans Django
-RUN python -m pip install channels
 
 RUN pip install django-two-factor-auth
 RUN pip install django-two-factor-auth[phonenumbers]

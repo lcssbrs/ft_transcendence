@@ -1,5 +1,5 @@
 function setupRanked() {
-	var canvas;
+	var canvas = document.getElementById('canvas1');
 	var game;
 	var gameStarted = false;
 	const PLAYER_HEIGHT = 100;
@@ -14,7 +14,7 @@ function setupRanked() {
 	setupStart();
 
 	// Établir la connexion WebSocket
-	const websocketURL = 'wss://localhost/ranked/';
+	const websocketURL = 'ws://localhost/ranked/';
 	const websocket = new WebSocket(websocketURL);
 
 	// Gérer les événements WebSocket
@@ -28,8 +28,9 @@ function setupRanked() {
 	};
 
 	websocket.onclose = function(event) {
-	  console.log('Connexion WebSocket fermée.');
-	};
+		console.log('Connexion WebSocket fermée :', event.code, event.reason);
+		console.log('Fermeture propre :', event.wasClean);
+	  };
 
 	websocket.onerror = function(error) {
 	  console.error('Erreur WebSocket :', error);
@@ -284,7 +285,6 @@ function setupRanked() {
 
 	// Dessins et animations
 	function setupStart() {
-	  canvas = document.getElementById('canvas1');
 	  game = {
 		player: {
 		  y: canvas.height / 2 - PLAYER_HEIGHT / 2,
