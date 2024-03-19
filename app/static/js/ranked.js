@@ -13,6 +13,66 @@ function setupRanked() {
 
 	setupStart();
 
+	document.getElementById("find-ranked").addEventListener("click", function() {
+		fetch('/api/match/check/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({})
+		})
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			}
+			throw new Error('Network response was not ok.');
+		})
+		.then(data => {
+			if (data.table_exists) {
+				// La table de match existe, rejoindre la partie
+				fetch('/api/match/join/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ player: "player2" })
+				})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok.');
+					}
+					// Rediriger vers la partie
+					startGameWithCountdown();
+				})
+				.catch(error => {
+					console.error('Error joining the game:', error);
+				});
+			} else {
+				// La table de match n'existe pas, créer une nouvelle partie
+				fetch('/api/match/create/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ player: "player1" })
+				})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok.');
+					}
+				})
+				.catch(error => {
+					console.error('Error creating the game:', error);
+				});
+			}
+		})
+		.catch(error => {
+			console.error('Error checking for existing game:', error);
+		});
+	});
+
+
+
 	// Établir la connexion WebSocket
 	const websocketURL = 'ws://localhost/ranked/';
 	const websocket = new WebSocket(websocketURL);

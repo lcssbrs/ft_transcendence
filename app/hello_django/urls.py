@@ -32,6 +32,9 @@ urlpatterns = [
     path('ranked/', ranked_view, name='ranked'),
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
+	path('verification/', VerificationView.as_view(), name='verification'),
+    path('join/', JoinView.as_view(), name='join'),
+    path('create/', CreateView.as_view(), name='create'),
 	# Friend
 	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
     path('remove_friend/<int:friend_id>/', views.remove_friend, name='remove_friend'),

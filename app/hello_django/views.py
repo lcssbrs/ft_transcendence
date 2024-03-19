@@ -40,11 +40,32 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
-#check users status for ranked mode
+#cranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
+
+class MatchAPIView(APIView):
+    def post(self, request):
+        # Récupérer les données de la requête POST
+        user_id = request.data.get('user_id')
+
+        # Vérifier si un match existe déjà
+        existing_match = Match.objects.filter(player2__isnull=True).first()
+
+        if existing_match:
+            # Rejoindre le match existant en tant que player2
+            existing_match.player2 = user_id
+            existing_match.save()
+            serializer = MatchSerializer(existing_match)
+            return Response(serializer.data)
+        else:
+            # Créer un nouveau match avec l'utilisateur comme player1
+            new_match = Match.objects.create(player1=user_id)
+            serializer = MatchSerializer(new_match)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 # Login / register
 
