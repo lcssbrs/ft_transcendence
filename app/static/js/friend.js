@@ -12,7 +12,7 @@ $(document).ready(function() {
                     if (friend.status === 'online') {
                         statusColor = 'green';
                     } else if (friend.status === 'offline') {
-                        statusColor = 'gray';
+                        statusColor = 'pink';
                     } else if (friend.status === 'in_game') {
                         statusColor = 'blue';
                     }
@@ -126,3 +126,32 @@ $(document).ready(function() {
         loadFriendRequests();
     }, 1000);
 });
+
+$(document).ready(function() {
+    $('#add-friend-input').keypress(function(event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            var username = $(this).val().trim();
+            if (username !== '') {
+                addFriend(username);
+                $(this).val('');
+            }
+        }
+    });
+
+    function addFriend(username) {
+        $.ajax({
+            url: '/add_friend_username/' + username + '/',
+            type: 'POST',
+            success: function(response) {
+                console.log('Demande d\'ami envoyée avec succès.');
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur lors de l\'ajout de l\'ami :', error);
+            }
+        });
+    }
+});
+
+
+

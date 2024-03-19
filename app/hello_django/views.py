@@ -219,8 +219,31 @@ def add_friend(request, friend_id):
     if request.method == 'POST':
         from_user = request.user
         to_user = user_list.objects.get(pk=friend_id)
-        Friendship.objects.create(from_user=from_user, to_user=to_user)
-        return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
+        existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
+        if existing_friendship.exists():
+            return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+        else:
+            if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
+                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+            Friendship.objects.create(from_user=from_user, to_user=to_user)
+            return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
+
+def add_friend_username(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        from_user = request.user
+        try:
+            to_user = User.objects.get(username=username)
+            existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
+            if existing_friendship.exists():
+                return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+            if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
+                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+            Friendship.objects.create(from_user=from_user, to_user=to_user)
+            return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'Utilisateur non trouvé.'}, status=404)
+    return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)
 
 def accept_friend_request(request, request_id):
     if request.method == 'POST':
@@ -232,7 +255,7 @@ def accept_friend_request(request, request_id):
                 from_user.friends.add(to_user)
                 to_user.friends.add(from_user)
                 friend_request.accepted = True
-                friend_request.save()
+                friend_request.delete()
                 return JsonResponse({'success': 'Demande d\'ami acceptée avec succès.'})
             else:
                 return JsonResponse({'error': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
