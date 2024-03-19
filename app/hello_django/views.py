@@ -39,15 +39,11 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html')
 
-def no_view(request):
-    return render(request, 'nothing.html')
-
 #check users status for ranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
-
 
 # Login / register
 

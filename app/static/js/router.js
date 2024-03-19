@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	navLinks.forEach(link => {
 		link.addEventListener('click', function(event) {
-			event.preventDefault(); // Empêcher le comportement de lien par défaut
-
-			// Récupérez l'URL de la vue à charger depuis l'attribut href du lien
+			event.preventDefault();
 			const url = link.getAttribute('href');
 			loadView(url);
 			history.pushState(null, null, url);
@@ -18,20 +16,34 @@ document.addEventListener("DOMContentLoaded", function() {
 		if (url === '') {
 			url = 'nothing';
 		}
-		if (event.state === null) {
-			loadView('');
-			loadView(url);
-		}
-		else {
-			loadView(url);
-		}
+		loadView(url);
 	});
 
 	function loadView(url) {
+
 		fetch(url)
 			.then(response => response.text())
 			.then(html => {
-				document.getElementById('content').innerHTML = html;
+				if (url == 'register' || url == 'login') {
+					var content = document.getElementById('logcontent');
+					if (url == 'register') {
+						content.style.width = "35%";
+						content.style.height = "75%";
+					}
+					else {
+						content.style.width = "30%";
+						content.style.height = "60%";
+					}
+					content.classList.remove('d-none');
+					document.getElementById('content').classList.add('d-none');
+					content.innerHTML = html;
+				}
+				else {
+					var content = document.getElementById('content');
+					content.classList.remove('d-none');
+					document.getElementById('logcontent').classList.add('d-none');
+					content.innerHTML = html;
+				}
 				if (url == 'solo')
 					setupSolo();
 				else if (url == 'local')
