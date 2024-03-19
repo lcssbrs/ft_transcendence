@@ -37,6 +37,9 @@ urlpatterns = [
     path('remove_friend/<int:friend_id>/', views.remove_friend, name='remove_friend'),
 	path('accept_friend/<int:request_id>/', views.accept_friend_request, name='accept_friend'),
     path('reject_friend/<int:request_id>/', views.reject_friend_request, name='reject_friend'),
+    path('api/get_friends/', views.get_friends, name='get_friends'),
+	path('api/remove_friend/', views.remove_friend, name='remove_friend'),
+	path('api/get_friend_requests/', views.get_friend_requests, name='get_friend_requests'),
 	# API 42
 	path('connexion_42/', views.connexion_42, name='connexion_42'),
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
