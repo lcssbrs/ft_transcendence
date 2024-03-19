@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		fetch(url)
 			.then(response => response.text())
 			.then(html => {
-				if (url == 'register' || url == 'login') {
+				if (url.endsWith('register/') || url.endsWith('login/')) {
 					var content = document.getElementById('logcontent');
-					if (url == 'register') {
+					if (url.endsWith('register/')) {
 						content.style.width = "35%";
 						content.style.height = "75%";
 					}
@@ -44,13 +44,13 @@ document.addEventListener("DOMContentLoaded", function() {
 					document.getElementById('logcontent').classList.add('d-none');
 					content.innerHTML = html;
 				}
-				if (url == 'solo')
+				if (url.endsWith('solo/'))
 					setupSolo();
-				else if (url == 'local')
+				else if (url.endsWith('local/'))
 					setupLocal();
-				else if (url == 'login')
+				else if (url.endsWith('login/'))
 					setupLogin();
-				else if (url == 'ranked')
+				else if (url.endsWith('ranked/'))
 					setupRanked();
 			})
 			.catch(error => {
