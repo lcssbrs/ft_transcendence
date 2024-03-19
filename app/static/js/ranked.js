@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
 	var canvas;
 	var game;
@@ -10,6 +12,37 @@
 	let displayWinner = false;
 	let borderFlashTime = 0;
 	let borderFlashInterval = null;
+
+
+
+
+	document.addEventListener('DOMContentLoaded', function() {
+		// Charger les stats du joueur depuis la base de données et mettre à jour #player-stats
+		loadPlayerStats();
+
+		// Ajouter un gestionnaire d'événements pour le bouton "Rejoindre une partie classée"
+		document.getElementById('join-ranked').addEventListener('click', function() {
+			joinRankedGame();
+		});
+	});
+
+	function loadPlayerStats() {
+		// Exemple : récupérer les stats du joueur depuis la base de données (utilisez AJAX ou fetch)
+		// et mettez à jour #player-stats avec les données récupérées
+		// par exemple :
+		document.getElementById('player-stats').innerText = "Score: 100, Classement: 1";
+	}
+
+	function joinRankedGame() {
+		// Exemple : Vérifiez si une partie classée est disponible dans la base de données
+		// Si oui, affichez un message approprié
+		// Sinon, créez une nouvelle partie dans la base de données
+		// et affichez un message "En attente d'un adversaire" avec un logo de chargement
+	}
+
+
+
+
 
 	// Établir la connexion WebSocket
 	const websocketURL = 'wss://localhost/ranked/';

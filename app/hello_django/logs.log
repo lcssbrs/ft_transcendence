@@ -288,3 +288,45 @@ Not Found: /ranked/static/js/ranked.js
 "GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
 Not Found: /ranked/static/js/ranked.js
 "GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Watching for file changes with StatReloader
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 12482
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=JqPiCha4FBdoXGPiWsmJEP8TZ7vyAXpcANoUcDgSRJ7dWGvez5wRzSnHd4ZQnfcy HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=3a62d74f791026a6c011119b42fd4db666145eee2b71ec43f8dc2888a1efd44e HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=3a62d74f791026a6c011119b42fd4db666145eee2b71ec43f8dc2888a1efd44e HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/3a62d74f791026a6c011119b42fd4db666145eee2b71ec43f8dc2888a1efd44e/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
+"GET /solo/ HTTP/1.0" 200 390
+"GET /solo/ HTTP/1.0" 200 12482
+"GET /ranked/ HTTP/1.0" 200 378
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12470
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+Not Found: /ranked/static/js/ranked.js
+"GET /ranked/static/js/ranked.js HTTP/1.0" 404 5493
+"GET /ranked/ HTTP/1.0" 200 12671
+"GET /ranked/ HTTP/1.0" 200 12671
+"GET /ranked/ HTTP/1.0" 200 12671
+"GET /ranking/ HTTP/1.0" 200 1676
+"GET /ranking/ HTTP/1.0" 200 1676
+"GET /ranked/ HTTP/1.0" 200 579
+"GET /ranked/ HTTP/1.0" 200 12671
+"GET /ranked/ HTTP/1.0" 200 12671
+Watching for file changes with StatReloader
+"GET /login/ HTTP/1.0" 200 1795
+"GET /connexion_42/?csrfmiddlewaretoken=rrFq4AmlnqxsSbjn7OeJtgnvJXi09zdJ7THlQ5d6ku0tSe0SzOsXHTR09vnRbjS6 HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=bc0be343f5085b54dd610da883a5fc3d74625a38610f5c2d382492092326dac7 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=bc0be343f5085b54dd610da883a5fc3d74625a38610f5c2d382492092326dac7 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/bc0be343f5085b54dd610da883a5fc3d74625a38610f5c2d382492092326dac7/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12089
