@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function loadFriends() {
         $.ajax({
-            url: 'api/get_friends/',
+            url: '/api/get_friends/',
             type: 'GET',
             success: function(response) {
                 var friendsList = response.friends;
@@ -39,15 +39,12 @@ $(document).ready(function() {
                     removeFriend(friendId);
                 });
             },
-            error: function(xhr, status, error) {
-                console.error('Erreur lors du chargement de la liste d\'amis :', error);
-            }
         });
     }
 
     function removeFriend(friendId) {
         $.ajax({
-            url: 'api/remove_friend/',
+            url: '/api/remove_friend/',
             type: 'POST',
             data
 			: {
@@ -96,16 +93,13 @@ $(document).ready(function() {
                     $requestsContainer.append($requestElement);
                 });
             },
-            error: function(xhr, status, error) {
-                console.error('Erreur lors du chargement des demandes d\'amis :', error);
-            }
         });
     }
 
     $(document).on('click', '.accept-button', function() {
         var $requestElement = $(this).closest('.d-flex');
         var requestId = $requestElement.find('.accept-button').data('request-id');
-        $.post('accept_friend/' + requestId + '/', {})
+        $.post('/accept_friend/' + requestId + '/', {})
             .done(function(response) {
                 loadFriendRequests();
             })
@@ -117,7 +111,7 @@ $(document).ready(function() {
     $(document).on('click', '.reject-button', function() {
         var $requestElement = $(this).closest('.d-flex');
         var requestId = $requestElement.find('.reject-button').data('request-id');
-        $.post('reject_friend/' + requestId + '/', {})
+        $.post('/reject_friend/' + requestId + '/', {})
             .done(function(response) {
                 loadFriendRequests();
             })
