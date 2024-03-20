@@ -228,12 +228,11 @@ def add_friend(request, friend_id):
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
 
-def add_friend_username(request):
+def add_friend_username(request, username):
     if request.method == 'POST':
-        username = request.POST.get('username')
         from_user = request.user
         try:
-            to_user = User.objects.get(username=username)
+            to_user = user_list.objects.get(username=username)
             existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
             if existing_friendship.exists():
                 return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
@@ -241,7 +240,7 @@ def add_friend_username(request):
                 return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
-        except User.DoesNotExist:
+        except user_list.DoesNotExist:
             return JsonResponse({'error': 'Utilisateur non trouvé.'}, status=404)
     return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)
 
