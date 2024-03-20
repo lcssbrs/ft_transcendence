@@ -63,7 +63,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 1000);
+    }, 100000);
 });
 
 $(document).ready(function() {
@@ -124,5 +124,5 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 1000);
+    }, 100000);
 });

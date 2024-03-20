@@ -16,7 +16,7 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install requests
-RUN python -m pip install channels
+# RUN python -m pip install channels ---> s'installe finalement via le requirement.txt
 RUN pip install djangorestframework
 RUN python -m pip install Pillow
 

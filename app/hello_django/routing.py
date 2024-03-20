@@ -7,7 +7,6 @@ application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
         URLRouter([
             path('ws/ranked/', PongConsumer.as_asgi()),
-			# Ajoutez d'autres routes WebSocket ici au besoin
         ])
     ),
 })

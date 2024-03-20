@@ -87,11 +87,6 @@ class Match(models.Model):
             self.player1.save()
             self.player2.save()
 
-    def create_match(self, player1_instance, player2_instance):
-        return Match.objects.create(player1=player1_instance, player2=player2_instance, status='waiting')
-
-
-#   match.update_scores()
 
 class Tournament(models.Model):
     date_tournament = models.DateTimeField(null=True, blank=True)

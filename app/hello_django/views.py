@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match, Friendship
+from .models import models, user_list, Tournament, Match, Friendship, Match, user_list
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+from django.views.generic import View
 import os
 import urllib
 import logging
@@ -45,26 +46,6 @@ def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
-
-class MatchAPIView(APIView):
-    def post(self, request):
-        # Récupérer les données de la requête POST
-        user_id = request.data.get('user_id')
-
-        # Vérifier si un match existe déjà
-        existing_match = Match.objects.filter(player2__isnull=True).first()
-
-        if existing_match:
-            # Rejoindre le match existant en tant que player2
-            existing_match.player2 = user_id
-            existing_match.save()
-            serializer = MatchSerializer(existing_match)
-            return Response(serializer.data)
-        else:
-            # Créer un nouveau match avec l'utilisateur comme player1
-            new_match = Match.objects.create(player1=user_id)
-            serializer = MatchSerializer(new_match)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # Login / register
