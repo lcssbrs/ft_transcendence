@@ -54,10 +54,13 @@ INSTALLED_APPS = [
 # Définir ASGI_APPLICATION
 ASGI_APPLICATION = 'hello_django.asgi.application'
 
-# Configurer la couche de canaux
+
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer', # Vous pouvez utiliser d'autres backends selon vos besoins
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
     },
 }
 

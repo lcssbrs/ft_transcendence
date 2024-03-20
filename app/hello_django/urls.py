@@ -17,10 +17,12 @@ Including another URLconf
 from django.urls import path
 from . import views
 from django.contrib import admin
-from django.urls import path
 from django.shortcuts import redirect
 from django.conf.urls.static import static
 from .views import user_list_view, index, solo_view, login_view, register_view, local_view, ranking_view, ranked_view, tournament_view, profile_view
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+
 
 urlpatterns = [
     path('', index, name='index'),

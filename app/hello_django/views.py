@@ -228,7 +228,7 @@ def add_friend(request, friend_id):
         to_user = user_list.objects.get(pk=friend_id)
         existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
         if existing_friendship.exists():
-            return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+            return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
         else:
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
                 return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
@@ -244,7 +244,7 @@ def add_friend_username(request, username):
                 return JsonResponse({'error': 'Vous ne pouvez pas vous ajouter vous-même comme ami'}, status=400)
             existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
             if existing_friendship.exists():
-                return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+                return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
                 return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
