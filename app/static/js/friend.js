@@ -12,7 +12,7 @@ $(document).ready(function() {
                     if (friend.status === 'online') {
                         statusColor = 'green';
                     } else if (friend.status === 'offline') {
-                        statusColor = 'gray';
+                        statusColor = 'pink';
                     } else if (friend.status === 'in_game') {
                         statusColor = 'blue';
                     }
@@ -54,6 +54,7 @@ $(document).ready(function() {
                 loadFriends();
             },
             error: function(xhr, status, error) {
+                showNotification("Erreur lors de la suppression de l\'ami", "error");
                 console.error('Erreur lors de la suppression de l\'ami :', error);
             }
         });
@@ -126,3 +127,60 @@ $(document).ready(function() {
         loadFriendRequests();
     }, 100000);
 });
+
+$(document).ready(function() {
+    $('#add-friend-input').keypress(function(event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            var username = $(this).val().trim();
+            if (username !== '') {
+                addFriend(username);
+                $(this).val('');
+            }
+        }
+    });
+
+    function addFriend(username) {
+        $.ajax({
+            url: '/add_friend_username/' + username + '/',
+            type: 'POST',
+            success: function(response) {
+                var response = { success: true, message: "Demande d'ami envoyée avec succès." };
+                showNotification(response.message, "success");
+            },
+            error: function(xhr, status, error) {
+                var errorMessage;
+                try {
+                    var responseJson = JSON.parse(xhr.responseText);
+                    errorMessage = responseJson.error || error;
+                } catch (e) {
+                    errorMessage = error;
+                }
+                showNotification(errorMessage, "error");
+                console.error('Erreur lors de l\'ajout de l\'ami :', errorMessage);
+            }
+        });
+    }
+});
+
+
+function showNotification(message, type) {
+    var notification = $('#notification');
+    notification.empty().removeClass().addClass('notification').addClass(type);
+    var messageParagraph = $('<p></p>').text(message);
+    var progressSpan = $('<span class="progress"></span>');
+
+    notification.append(messageParagraph);
+    notification.append(progressSpan);
+
+    notification.css({ 'display': 'block' });
+    setTimeout(function() {
+        hideNotification();
+    }, 4000);
+}
+
+function hideNotification() {
+    var notification = $('#notification');
+    notification.css({ 'display': 'none' });
+}
+
