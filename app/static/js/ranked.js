@@ -2,20 +2,26 @@ function setupRanked() {
 
 	document.getElementById("find-ranked").addEventListener("click", function() {
 	    // Établir une connexion WebSocket
-	    var ws = new WebSocket("ws://localhost/ranked/");
+	   // Création de la connexion WebSocket en spécifiant l'URL du serveur WebSocket
 
-	    // Réagir lorsque la connexion est ouverte
-	    ws.onopen = function(event) {
-	        console.log("Connexion WebSocket établie avec succès !");
-	        // Fermer la connexion une fois la vérification effectuée
-	        ws.close();
-	    };
+	   const socket = new WebSocket("ws://localhost:8000/ws/ranked");
 
-	    // Réagir en cas d'erreur de connexion WebSocket
-	    ws.onerror = function(event) {
-	        console.error("Erreur de connexion WebSocket:", event);
-	        // Afficher un message d'erreur à l'utilisateur, etc.
-	    };
+	   socket.onopen = function(event) {
+		   console.log("WebSocket connected");
+		   // Vous pouvez envoyer des données au serveur une fois la connexion établie
+		   socket.send("ping");
+		   console.log("message envoye");
+	   };
+
+	   socket.onmessage = function(event) {
+		   console.log("Received message from server:", event.data);
+		   // Traitez les messages reçus du serveur ici
+	   };
+
+	   socket.onclose = function(event) {
+		   console.log("WebSocket disconnected");
+	   };
+
 	});
 
 }

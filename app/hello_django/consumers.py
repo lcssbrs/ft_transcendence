@@ -3,23 +3,16 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.layers import get_channel_layer
 import json
 
-
 class PongConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # Ajoute le socket à un groupe
-        await self.channel_layer.group_add("ranked", self.channel_name)
         await self.accept()
 
     async def disconnect(self, close_code):
-        # Retire le socket du groupe
-        # await self.channel_layer.group_discard("ranked", self.channel_name)
         pass
 
     async def receive(self, text_data):
-        # Traite les données reçues du client
-        data = json.loads(text_data)
-        # Traite les données ici
-        await self.send(text_data=json.dumps(data))
+        await self.send(text_data=json.dumps({"message": "pong"}))
+
 
 
 
