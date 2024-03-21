@@ -1,25 +1,25 @@
-<div id="profile" class="d-none flex justify-content-center mx-auto">
+<div id="profile" class="d-flex justify-content-center mx-auto">
 	<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center mr-5">
 		<div class="image-container">
-			<img src="{% static 'images/luffy.png' %} " class="bottom-image">
-			<img src="{% static 'images/challenger.png' %}" class="top-image">
+			<img src="{{ user.profile_picture.url }}" class="bottom-image">
+			<img src="" class="top-image">
 		</div>
-		<h3 class="m-0">Hugo Baduel</h3>
-		<h4>hbaduel</h4>
+		<h3 class="m-0">{{ profile_user.first_name }} {{ profile_user.last_name }}</h3>
+		<h4>{{ profile_user.username }}</h4>
 		<div class="container-fluid d-flex flex-column border border-primary border rounded-3 my-2" style="border-width: 4px !important;">
 			<div class="container-fluid d-flex justify-content-center align-items-center">
 				<div class="p-2 d-flex mt-1">
 					<div>
 						<h5 class="mb-1">Games</h5>
-						<p class="mb-0">178</p>
+						<p class="mb-0">{{ profile_user.games_played }}</p>
 					</div>
 					<div class="px-3">
 						<h5 class="mb-1">Victoires</h5>
-						<p class="mb-0">144</p>
+						<p class="mb-0">{{ profile_user.games_win }}</p>
 					</div>
 					<div>
 						<h5 class="mb-1">Défaites</h5>
-						<p class="mb-0">34</p>
+						<p class="mb-0">{{ profile_user.games_loose }}</p>
 					</div>
 				</div>
 			</div>

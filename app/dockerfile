@@ -19,10 +19,14 @@ RUN pip install requests
 RUN pip install djangorestframework
 RUN python -m pip install Pillow
 #  bibliothèque Python 'channels' pour gérer les connexions WebSocket dans Django
-RUN python -m pip install channels
+RUN python -m pip install channels channels_redis daphne
 
 RUN pip install django-two-factor-auth
 RUN pip install django-two-factor-auth[phonenumbers]
+RUN pip install django-otp-yubikey
+RUN pip install django-two-factor-auth[webauthn]
+RUN pip install djangorestframework-jwt
+RUN pip install django-qr-code pillow
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh .

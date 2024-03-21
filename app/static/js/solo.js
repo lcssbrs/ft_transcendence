@@ -1,4 +1,4 @@
-(function() {
+function setupSolo() {
 var canvas;
 var game;
 var gameStarted = false;
@@ -11,6 +11,7 @@ let displayWinner = false;
 let borderFlashTime = 0;
 let borderFlashInterval = null;
 
+setupStart();
 
 // clignotement lors d'un but
 function flashBorder(duration) {
@@ -261,7 +262,7 @@ function removeKeyListeners() {
 //----------------EVENTS LISTENERS--------
 
 // Dessins et animations
-document.addEventListener('DOMContentLoaded', function () {
+function setupStart() {
 	canvas = document.getElementById('canvas1');
 	game = {
 		player: {
@@ -283,8 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 	draw();
-
-});
+}
 
 // Event sur le clavier
 document.addEventListener('keydown', playerMove);
@@ -295,5 +295,4 @@ document.getElementById('start-solo').addEventListener('click', function() {
 		startGameWithCountdown();
 	}
 });
-
-})();
+}
