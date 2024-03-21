@@ -17,7 +17,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install requests
 RUN python -m pip install channels
-RUN pip install daphne
+# RUN pip install daphne
 RUN pip install djangorestframework
 RUN python -m pip install Pillow
 

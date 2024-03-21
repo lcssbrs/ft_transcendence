@@ -57089,3 +57089,18 @@ HTTP GET /api/get_friends/ 200 [0.01, 192.168.32.6:60086]
 HTTP GET /api/get_friend_requests/ 200 [0.01, 192.168.32.6:60096]
 HTTP GET /api/get_friends/ 200 [0.01, 192.168.32.6:44212]
 HTTP GET /api/get_friend_requests/ 200 [0.01, 192.168.32.6:44224]
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 3546
+"GET /login/ HTTP/1.0" 200 1496
+"GET /connexion_42/?csrfmiddlewaretoken=W7XcL66QPrH0YRv1KJ7KUsiIztJ7gbT97GsOPseC5KDyMykSlaGmUXUwnkZjpCwF HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=b5eba99d9758769a1ed5b47a3744f12ef13017d20410d4a869b9e247a9b35903 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=b5eba99d9758769a1ed5b47a3744f12ef13017d20410d4a869b9e247a9b35903 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/b5eba99d9758769a1ed5b47a3744f12ef13017d20410d4a869b9e247a9b35903/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 3643
+"GET /api/get_friends/ HTTP/1.0" 200 15
+"GET /api/get_friend_requests/ HTTP/1.0" 200 23
+"GET /ranked/ HTTP/1.0" 200 256
+Not Found: /ws/ranked
+"GET /ws/ranked HTTP/1.1" 404 6188
