@@ -1,0 +1,27 @@
+<h2>S'inscrire</h2>
+<form method="post" class="mb-1">
+	{% csrf_token %}
+	<div class="log-input d-flex flex-column align-items-center">
+		<input id="id_first_name" required maxlength="15" name="first_name" placeholder="Prénom" type="text"/>
+		<div id="firstMissing" class="text-danger d-none">Veuillez saisir votre prénom</div>
+	</div>
+	<div class="log-input d-flex flex-column align-items-center my-2">
+		<input id="id_last_name" required maxlength="15" name="last_name" placeholder="Nom" type="text"/>
+		<div id="lastMissing" class="text-danger d-none">Veuillez saisir votre nom</div>
+	</div>
+	<div class="log-input d-flex flex-column align-items-center">
+		<input id="id_username" required maxlength="15" name="username" placeholder="Identifiant" type="text"/>
+		<div id="usernameMissingReg" class="text-danger d-none">Veuillez saisir votre identifiant</div>
+	</div>
+	<div class="log-input d-flex flex-column align-items-center my-2">
+		<input id="id_password" required name="password" placeholder="Mot de passe" type="password"/>
+		<div id="passwordMissingReg" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
+	</div>
+	<div class="log-input d-flex flex-column align-items-center">
+		<input id="id_email" required name="email" maxlength="320" placeholder="Email" type="email"/>
+		<div id="emailMissing" class="text-danger d-none">Veuillez saisir votre email</div>
+	</div>
+	<div>
+		<button class="btn btn-light mt-2" type="submit">S'inscrire</button>
+	</div>
+</form>
