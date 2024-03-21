@@ -1,7 +1,6 @@
 <h2>S'inscrire</h2>
 <form method="post" class="mb-1">
 	{% csrf_token %}
-	{{ form.non_field_errors }}
 	<div class="log-input d-flex flex-column align-items-center">
 		<input id="id_first_name" required maxlength="15" name="first_name" placeholder="Prénom" type="text"/>
 		<div id="firstMissing" class="text-danger d-none">Veuillez saisir votre prénom</div>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import add_user_form
 from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
@@ -56,8 +56,10 @@ def two_factor_login(request):
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
-def profile_view (request):
-    return render(request, 'profile.html', {'user': request.user})
+def profile_view(request):
+    username = request.GET.get('username')
+    profile_user = User.objects.get(username=username)
+    return render(request, 'profile.html', {'profile_user': profile_user})
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -114,7 +116,6 @@ def register_view(request):
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
-    error_message = ''
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
