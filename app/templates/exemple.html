@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>WebSocket Example</title>
 </head>
 <body>
-    <h1>Profil de {{ user.username }}</h1>
-    <p>Nom: {{ user.first_name }}</p>
-    <p>Prénom: {{ user.last_name }}</p>
-    <p>E-mail: {{ user.email }}</p>
-    <!-- Autres informations de profil à afficher -->
+    <h1>WebSocket Example</h1>
+    <div id="messages"></div>
+
+    <script>
+        var socket = new WebSocket('ws://localhost:56315/socket');
+
+        socket.onopen = function(event) {
+            console.log('Connexion WebSocket établie');
+        };
+
+        socket.onmessage = function(event) {
+            var messageDiv = document.createElement('div');
+            messageDiv.textContent = 'Message reçu du serveur: ' + event.data;
+            document.getElementById('messages').appendChild(messageDiv);
+        };
+
+        socket.onclose = function(event) {
+            console.log('Connexion WebSocket fermée');
+        };
+
+        socket.onerror = function(error) {
+            console.error('Erreur WebSocket:', error);
+        };
+    </script>
 </body>
 </html>

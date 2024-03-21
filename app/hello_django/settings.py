@@ -59,10 +59,13 @@ INSTALLED_APPS = [
 # Définir ASGI_APPLICATION
 ASGI_APPLICATION = 'hello_django.asgi.application'
 
-# Configurer la couche de canaux
+
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer', # Vous pouvez utiliser d'autres backends selon vos besoins
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
     },
 }
 
@@ -201,20 +204,7 @@ LOGGING = {
     },
 }
 
-LOGIN_URL = 'two_factor:login'
-
-# this one is optional
-LOGIN_REDIRECT_URL = 'two_factor:profile'
-
-TWO_FACTOR_WEBAUTHN_RP_NAME = 'hello_django'
-
-OTP_EMAIL_SUBJECT = 'Double authentification django'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'lucas.seiberras@gmail.com'  # Votre adresse email Gmail
-EMAIL_HOST_PASSWORD = 'JoshuaJoshua66180'  # Mot de passe de votre adresse email Gmail
-
-CSRF_COOKIE_NAME = 'csrftoken'
+AUTHENTICATION_BACKENDS = [
+    'hello_django.backends.CustomAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

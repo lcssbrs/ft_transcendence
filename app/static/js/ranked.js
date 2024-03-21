@@ -1,4 +1,4 @@
-(function() {
+function setupRanked() {
 	var canvas;
 	var game;
 	var gameStarted = false;
@@ -10,6 +10,8 @@
 	let displayWinner = false;
 	let borderFlashTime = 0;
 	let borderFlashInterval = null;
+
+	setupStart();
 
 	// Établir la connexion WebSocket
 	const websocketURL = 'wss://localhost/ranked/'; // Remplacez YOUR_WEBSOCKET_URL par l'URL de votre serveur WebSocket
@@ -281,7 +283,7 @@
 	}
 
 	// Dessins et animations
-	document.addEventListener('DOMContentLoaded', function () {
+	function setupStart() {
 	  canvas = document.getElementById('canvas1');
 	  game = {
 		player: {
@@ -314,8 +316,7 @@
 	  .catch(error => {
 	    console.error('Erreur lors de la récupération des utilisateurs connectés :', error);
 	  });
-
-	});
+	}
 
 	// Écouter les événements sur le bouton de démarrage de la partie
 	document.getElementById('start-ranked').addEventListener('click', function() {
@@ -334,4 +335,4 @@
 		handleOpponentMovement(message.data);
 	  }
 	};
-  })();
+  }

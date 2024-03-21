@@ -19,7 +19,7 @@ RUN pip install requests
 RUN pip install djangorestframework
 RUN python -m pip install Pillow
 #  bibliothèque Python 'channels' pour gérer les connexions WebSocket dans Django
-RUN python -m pip install channels
+RUN python -m pip install channels channels_redis
 
 RUN pip install django-two-factor-auth
 RUN pip install django-two-factor-auth[phonenumbers]
