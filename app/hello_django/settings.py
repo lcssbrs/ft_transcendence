@@ -42,17 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'hello_django',
-    'django_otp',
-    'django_otp.plugins.otp_static',
-    'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_email',
-    'two_factor',
-    'two_factor.plugins.phonenumber',
-    'two_factor.plugins.email',
-    'two_factor.plugins.yubikey',
-	'otp_yubikey',
-	'two_factor.plugins.webauthn',
 	'channels',
+	'qr_code'
 ]
 
 
@@ -78,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'hello_django.urls'

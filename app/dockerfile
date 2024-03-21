@@ -26,6 +26,7 @@ RUN pip install django-two-factor-auth[phonenumbers]
 RUN pip install django-otp-yubikey
 RUN pip install django-two-factor-auth[webauthn]
 RUN pip install djangorestframework-jwt
+RUN pip install django-qr-code pillow
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
