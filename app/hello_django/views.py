@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match, Friendship
+from .models import models, user_list, Tournament, Match, Friendship, Match, user_list
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+from django.views.generic import View
 import os
 import urllib
 import logging
@@ -47,11 +48,12 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
-#check users status for ranked mode
+#cranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
+
 
 # Login / register
 
@@ -156,7 +158,7 @@ def exchange_code_for_access_token(request, code):
                     os.makedirs(photos_directory)
                 with open(filename, 'rb') as image_file:
                     image_data = image_file.read()
-                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                output_filename = os.path.join(photos_directory, user.username + '.png')
                 with open(output_filename, 'wb') as output_file:
                     output_file.write(image_data)
                 user.profile_picture = 'photos/' + user.username + '.png'
