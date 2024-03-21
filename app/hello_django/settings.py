@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_email',  # <- if you want email capability.
     'two_factor',
-	'channels',
 	'qr_code'
 ]
 
