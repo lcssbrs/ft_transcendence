@@ -156,7 +156,7 @@ def exchange_code_for_access_token(request, code):
                     os.makedirs(photos_directory)
                 with open(filename, 'rb') as image_file:
                     image_data = image_file.read()
-                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                output_filename = os.path.join(photos_directory, user.username + '.png')
                 with open(output_filename, 'wb') as output_file:
                     output_file.write(image_data)
                 user.profile_picture = 'photos/' + user.username + '.png'
@@ -167,7 +167,6 @@ def exchange_code_for_access_token(request, code):
                 return redirect('index')
             else:
                 return redirect('login')
-            return redirect('index')
     return redirect('index')
 
 # API
@@ -231,7 +230,7 @@ def add_friend(request, friend_id):
             return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
         else:
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
 
@@ -246,7 +245,7 @@ def add_friend_username(request, username):
             if existing_friendship.exists():
                 return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
         except user_list.DoesNotExist:
