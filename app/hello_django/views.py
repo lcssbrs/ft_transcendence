@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import add_user_form
 from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
@@ -22,8 +22,10 @@ from .backends import CustomAuthenticationBackend
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
-def profile_view (request):
-    return render(request, 'profile.html', {'user': request.user})
+def profile_view(request):
+    username = request.GET.get('username')
+    profile_user = User.objects.get(username=username)
+    return render(request, 'profile.html', {'profile_user': profile_user})
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -77,7 +79,6 @@ def register_view(request):
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
-    error_message = ''
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -86,15 +87,11 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return JsonResponse({'success': True})
             else:
-                error_message = "Nom d'utilisateur ou mot de passe incorrect."
-                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-                return redirect('login')
+                return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect.'})
         else:
-            error_message = "Échec de la validation du formulaire."
-            messages.error(request, "Échec de la validation du formulaire.")
-            return redirect('login')
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
         form = AuthenticationForm()
 
