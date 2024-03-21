@@ -11,11 +11,7 @@ class PongConsumer(AsyncWebsocketConsumer):
         pass
 
     async def receive(self, text_data):
-        await self.send(text_data=json.dumps({"message": "pong"}))
-
-
-
-
+        await self.send(text_data=json.dumps("pong"))
 
 # class PongConsumer(WebsocketConsumer):
 #     def connect(self):

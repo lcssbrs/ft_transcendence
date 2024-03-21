@@ -22,8 +22,6 @@ application = ProtocolTypeRouter({
     "websocket": AuthMiddlewareStack(
         URLRouter([
             path("ws/ranked", consumers.PongConsumer.as_asgi()),
-            # Ajoutez d'autres chemins WebSocket ici si nécessaire
         ])
     ),
 })
-

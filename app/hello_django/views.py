@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match, Friendship, Match, user_list
+from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -13,7 +13,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
-from django.views.generic import View
 import os
 import urllib
 import logging
@@ -48,12 +47,11 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
-#cranked mode
+#check users status for ranked mode
 def get_connected_users(request):
     connected_users = User.objects.filter(is_active=True)
     user_names = [user.username for user in connected_users]
     return JsonResponse({'user_names': user_names})
-
 
 # Login / register
 
@@ -158,7 +156,7 @@ def exchange_code_for_access_token(request, code):
                     os.makedirs(photos_directory)
                 with open(filename, 'rb') as image_file:
                     image_data = image_file.read()
-                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                output_filename = os.path.join(photos_directory, user.username + '.png')
                 with open(output_filename, 'wb') as output_file:
                     output_file.write(image_data)
                 user.profile_picture = 'photos/' + user.username + '.png'
@@ -169,7 +167,6 @@ def exchange_code_for_access_token(request, code):
                 return redirect('index')
             else:
                 return redirect('login')
-            return redirect('index')
     return redirect('index')
 
 # API
@@ -230,10 +227,10 @@ def add_friend(request, friend_id):
         to_user = user_list.objects.get(pk=friend_id)
         existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
         if existing_friendship.exists():
-            return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+            return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
         else:
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
 
@@ -246,9 +243,9 @@ def add_friend_username(request, username):
                 return JsonResponse({'error': 'Vous ne pouvez pas vous ajouter vous-même comme ami'}, status=400)
             existing_friendship = Friendship.objects.filter(from_user=from_user, to_user=to_user)
             if existing_friendship.exists():
-                return JsonResponse({'error': 'Une demande d\'ami existe déjà entre ces utilisateurs.'}, status=400)
+                return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
+                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
         except user_list.DoesNotExist:
