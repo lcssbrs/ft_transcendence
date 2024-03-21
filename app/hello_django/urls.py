@@ -59,5 +59,7 @@ urlpatterns = [
     # DEV
     path('users/', user_list_view, name='user_list'),
 	path('exemple', views.exemple_view, name='exemple'),
-	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
+    path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
+    path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
+	## path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]

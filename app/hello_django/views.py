@@ -311,8 +311,30 @@ def get_friend_requests(request):
     else:
         return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
 
-
 # DEV
+
+class JoinMatch(APIView):
+    def post(self, request):
+        match = Match.objects.filter(status='waiting', player2__isnull=True).exclude(player1=request.user).first()
+
+        if match:
+            match.player2 = request.user
+            match.status = 'in_game'
+            match.save()
+            serializer = MatchListSerializer(match)
+            return Response(serializer.data)
+        else:
+            new_match = Match(player1=request.user)
+            new_match.save()
+            serializer = MatchListSerializer(new_match)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CreateMatch(APIView):
+    def post(self, request):
+        new_match = Match(player1=request.user)
+        new_match.save()
+        serializer = MatchListSerializer(new_match)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 def exemple_view(request):
     list = user_list.objects.all()

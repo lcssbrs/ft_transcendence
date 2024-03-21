@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Example</title>
+    <title>Test Page</title>
 </head>
 <body>
-    <h1>WebSocket Example</h1>
-    <div id="messages"></div>
+    <h1>Test Page</h1>
+
+    <button id="join-match-btn">Rejoindre une partie</button>
+    <button id="create-match-btn">Créer une nouvelle partie</button>
 
     <script>
-        var socket = new WebSocket('ws://localhost:56315/socket');
+        document.getElementById("join-match-btn").addEventListener("click", async () => {
+            try {
+                const response = await fetch("api/join-match/", {
+                    method: "POST",
+                });
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error("Une erreur s'est produite :", error);
+            }
+        });
 
-        socket.onopen = function(event) {
-            console.log('Connexion WebSocket établie');
-        };
-
-        socket.onmessage = function(event) {
-            var messageDiv = document.createElement('div');
-            messageDiv.textContent = 'Message reçu du serveur: ' + event.data;
-            document.getElementById('messages').appendChild(messageDiv);
-        };
-
-        socket.onclose = function(event) {
-            console.log('Connexion WebSocket fermée');
-        };
-
-        socket.onerror = function(error) {
-            console.error('Erreur WebSocket:', error);
-        };
+        document.getElementById("create-match-btn").addEventListener("click", async () => {
+            try {
+                const response = await fetch("api/create-match/", {
+                    method: "POST",
+                });
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error("Une erreur s'est produite :", error);
+            }
+        });
     </script>
 </body>
 </html>
