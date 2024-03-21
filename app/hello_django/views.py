@@ -47,9 +47,7 @@ def two_factor_login(request):
         if 'b\'' + token + '\'' == user.jwt_token:
             return redirect('index')
         else:
-            # Si le token est incorrect, déconnectez l'utilisateur
             logout(request)
-            # Redirigez l'utilisateur vers la page de connexion
             return redirect('login')
     else:
         return render(request, 'two_factor_login.html')
