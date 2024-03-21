@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
+from django.utils.http import urlencode
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -25,6 +26,8 @@ from django.conf import settings
 from rest_framework_jwt.settings import api_settings
 import jwt
 from django.core.mail import send_mail
+#from django_two_factor_auth.utils import get_qrcode_url
+#from django_two_factor_auth.utils import verify_code
 
 
 def exemple_view(request):
@@ -93,6 +96,7 @@ def register_view(request):
 
             if not error_message:
                 form.save()
+                generate_qrcode(user_list.objects.get(id))
                 return redirect('index')
     else:
         form = add_user_form()
@@ -111,6 +115,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                verify_user_code(user.id)
                 return redirect('index')
             else:
                 messages.error(request, "Échec de l'authentification: Nom d'utilisateur ou mot de passe incorrect.")
@@ -162,8 +167,7 @@ def exchange_code_for_access_token(request, code):
 
         if user_response.status_code == 200:
             user_data = user_response.json()
-            User = get_user_model()
-            user, created = User.objects.get_or_create(username=user_data['login'] + 'test')
+            user, created = user_list.objects.get_or_create(username=user_data['login'])
             user.first_name = user_data.get('first_name', '')
             user.last_name = user_data.get('last_name', '')
             user.email = user_data.get('email', '')
@@ -180,15 +184,8 @@ def exchange_code_for_access_token(request, code):
                 output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
                 with open(output_filename, 'wb') as output_file:
                     output_file.write(image_data)
-                usersaved = user_list(user.id ,user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('login', ''), '', user_data.get('email', ''), 'photos/' + user.username.removesuffix('test') + '.png')
-                usersaved.save()
-                user.save()
-            else:
-                image = user_data.get('image', '')
-                image = image.get('versions', '')
-                image = image.get('small')
-                print(user_data.get('first_name', ''), user_data.get('last_name', ''), user_data.get('email', ''), image)
-        else:
+                    user.image = output_filename
+            user.save()
             logger.error("Échec de la récupération des informations utilisateur. Code d'erreur : %d", user_response.status_code)
     else:
         logger.error("Échec de la récupération du jeton d'accès. Code d'erreur : %d", response.status_code)
@@ -235,3 +232,21 @@ class api_match_details(APIView):
 def user_list_view(request):
     users = user_list.objects.all()
     return render(request, 'user_list.html', {'users': users})
+
+
+#2fa google
+
+#def generate_qrcode(request, user_id):
+#    user = user_list.objects.get(pk=user_id)
+#    qrcode_url = get_qrcode_url(user)
+#    qrcode = qrcode.make(qrcode_url)
+#    qrcode.save(user.username + '_qrcode.png')
+#    return render(request, 'register.html', {'qrcode_url': qrcode_url})
+#
+#def verify_user_code(request, user_id):
+#    user = user = user_list.objects.get(pk=user_id)
+#    if verify_code(user, user.id):
+#        return render('profile.html')
+#    else:
+#        return render('login.html')
+#

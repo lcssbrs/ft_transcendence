@@ -3490,3 +3490,256 @@ Watching for file changes with StatReloader
 "GET / HTTP/1.0" 200 21317
 /usr/src/app/hello_django/views.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /api/users HTTP/1.1" 301 0
+"GET /api/users/ HTTP/1.1" 200 5651
+"GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+"GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+"GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+"GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1719
+"GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+"GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+"GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+"GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+"GET /static/rest_framework/js/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+"GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+"GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+"GET /api/users/1 HTTP/1.1" 301 0
+"GET /api/users/1/ HTTP/1.1" 200 5912
+"GET /login HTTP/1.0" 301 0
+"GET /login/ HTTP/1.0" 200 13751
+"POST /login/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+"GET /exemple HTTP/1.0" 200 373
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.0" 200 12084
+"GET /login/ HTTP/1.0" 200 1664
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=28874cfab8d48e933b4729709782841bdd71b1ba16a184209ec1fd8caf56923f HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=28874cfab8d48e933b4729709782841bdd71b1ba16a184209ec1fd8caf56923f HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/28874cfab8d48e933b4729709782841bdd71b1ba16a184209ec1fd8caf56923f/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+"GET /login/ HTTP/1.0" 200 1664
+"GET /register HTTP/1.0" 200 1900
+"GET /login/ HTTP/1.0" 200 1664
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=3e64f2d9c4cf209f31d3b01a980e6c4c980ae353c89024eb92eb44fa94606648 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=3e64f2d9c4cf209f31d3b01a980e6c4c980ae353c89024eb92eb44fa94606648 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/3e64f2d9c4cf209f31d3b01a980e6c4c980ae353c89024eb92eb44fa94606648/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /login/ HTTP/1.0" 200 1664
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=31f3d73e7305e77b2c94161fd04aa7221b0f24016ddaa9b27b234575d1010dea HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=31f3d73e7305e77b2c94161fd04aa7221b0f24016ddaa9b27b234575d1010dea HTTP/1.0" 302 0
+Internal Server Error: /exchange_code_for_access_token/31f3d73e7305e77b2c94161fd04aa7221b0f24016ddaa9b27b234575d1010dea/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+hello_django.models.user_list.DoesNotExist: user_list matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 170, in exchange_code_for_access_token
+    user, created = user_list.objects.get_or_create(username=user_data['login'])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 923, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/models.py", line 50, in sync_user_to_auth_user
+    User.objects.create_user(
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(lseiberr) already exists.
+
+"GET /exchange_code_for_access_token/31f3d73e7305e77b2c94161fd04aa7221b0f24016ddaa9b27b234575d1010dea/ HTTP/1.0" 500 209283
+"GET /login/ HTTP/1.0" 200 13751
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=69552ae45debcecfbc1aa107477fefac1eb85e9faa3f66bcc185ec9361baa5fb HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=69552ae45debcecfbc1aa107477fefac1eb85e9faa3f66bcc185ec9361baa5fb HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/69552ae45debcecfbc1aa107477fefac1eb85e9faa3f66bcc185ec9361baa5fb/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
+"GET /login/ HTTP/1.0" 200 1664
+"GET /connexion_42/? HTTP/1.0" 302 0
+"GET /redirection_apres_authentification?code=cc6888912e9ffa6b241770df0ab25cc9ab55a6696855babfdc8ddd064e1e5cd1 HTTP/1.0" 301 0
+"GET /redirection_apres_authentification/?code=cc6888912e9ffa6b241770df0ab25cc9ab55a6696855babfdc8ddd064e1e5cd1 HTTP/1.0" 302 0
+"GET /exchange_code_for_access_token/cc6888912e9ffa6b241770df0ab25cc9ab55a6696855babfdc8ddd064e1e5cd1/ HTTP/1.0" 302 0
+"GET / HTTP/1.0" 200 12084
