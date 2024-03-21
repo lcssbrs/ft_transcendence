@@ -21,7 +21,9 @@ $(document).ready(function() {
 
                     var $friendElement = $('<div class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
                         '<div class="d-flex align-items-center">' +
+                        '<a href="/profile/?username=' + friend.username + '" class="text-white redir">' +
                         '<span>' + friend.username + '</span>' +
+                        '</a>' +
                         '</div>' +
                         '<button class="btn-sm rounded-2 remove-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC" data-friend-id="' + friend.id + '">' +
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
@@ -30,8 +32,9 @@ $(document).ready(function() {
                         '</button>' +
                         '</div>');
 
-                    $friendElement.find('.d-flex').prepend($statusIcon);
-                    $friendContainer.append($friendElement);
+                        $friendElement.find('.d-flex').prepend($statusIcon);
+                        $friendContainer.append($friendElement);
+                        attachEventListeners();
                 });
 
                 $('.remove-button').on('click', function() {

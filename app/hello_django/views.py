@@ -1,14 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import add_user_form
 from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
+import json
+from django.utils.http import urlencode
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -17,13 +21,45 @@ import os
 import urllib
 import logging
 import requests
+import jwt
+import urllib.request
+from PIL import Image
+from django.core.files import File
+from pathlib import Path
+import os
+from django.conf import settings
+from rest_framework_jwt.settings import api_settings
+import jwt
+from django.core.mail import send_mail
+from io import BytesIO
+from django.http import HttpResponse
+from qrcode import make
+from django.contrib.auth.decorators import login_required
+from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
+from django.contrib.auth import logout
+
+@login_required
+def two_factor_login(request):
+    user = request.user
+    if request.method == 'POST':
+        token = request.POST.get('token')
+        if 'b\'' + token + '\'' == user.jwt_token:
+            return redirect('index')
+        else:
+            logout(request)
+            return redirect('login')
+    else:
+        return render(request, 'two_factor_login.html')
+
 
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
-def profile_view (request):
-    return render(request, 'profile.html', {'user': request.user})
+def profile_view(request):
+    username = request.GET.get('username')
+    profile_user = User.objects.get(username=username)
+    return render(request, 'profile.html', {'profile_user': profile_user})
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -70,14 +106,16 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                return redirect('login')
+                user = user_list.objects.get(username=username)
+                generer_qr_code(user)
+                return afficher_qr_code(request, user)
+                #return redirect('login')
     else:
         form = add_user_form()
 
     return render(request, 'register.html', {'form': form, 'error_message': error_message})
 
 def login_view(request):
-    error_message = ''
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -86,19 +124,22 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                user.is_log = True
+                if user.double_auth:
+                    return redirect('two_factor_login')
                 return redirect('index')
             else:
                 error_message = "Nom d'utilisateur ou mot de passe incorrect."
                 messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-                return redirect('login')
+                return redirect('login')  # Rediriger vers la vue de connexion
         else:
             error_message = "Échec de la validation du formulaire."
             messages.error(request, "Échec de la validation du formulaire.")
-            return redirect('login')
+            return redirect('login')  # Rediriger vers la vue de connexion
     else:
         form = AuthenticationForm()
-
     return render(request, 'login.html', {'form': form})
+
 
 # API LOGIN 42
 
@@ -343,3 +384,41 @@ def exemple_view(request):
 def user_list_view(request):
     users = user_list.objects.all()
     return render(request, 'user_list.html', {'users': users})
+
+
+def generer_qr_code(user):
+    buffer = BytesIO()
+    payload = {
+        'user_id': user.id,
+    }
+    jwt_token = jwt.encode(payload, 'test', algorithm='HS256')
+    user.jwt_token = jwt_token
+    logger.critical(user.jwt_token)
+    user.save()
+    qr_code = make(jwt_token)
+    img = qr_code.convert('RGB')
+    img.save(buffer, format='PNG')
+    image_bytes = buffer.getvalue()
+    user.qr_code.save(f'{user.username}_qr_code.png', ContentFile(image_bytes))
+    return HttpResponse(json.dumps({'jwt_token': jwt_token.decode('utf-8')}), content_type='application/json')
+
+def afficher_qr_code(request, user):
+    return render(request, 'qr_code.html', {'utilisateur': user})
+
+
+def decode_jwt_token(request):
+    # Récupérer le token depuis la requête (par exemple depuis les paramètres GET ou POST)
+    token = request.POST.get('token')
+
+    # Clé secrète utilisée pour signer le token
+    secret_key = 'test'
+
+    try:
+        # Décoder le token en utilisant la clé secrète
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+        # Payload contient les informations décodées du token
+        return JsonResponse({'success': True, 'payload': payload})
+    except jwt.ExpiredSignatureError:
+        return JsonResponse({'success': False, 'error': 'Token expiré'})
+    except jwt.InvalidTokenError:
+        return JsonResponse({'success': False, 'error': 'Token invalide'})

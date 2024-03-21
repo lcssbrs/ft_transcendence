@@ -22,21 +22,17 @@
 
 	<!-- EDIT BUTTON -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- FRIEND -->
-	{% if request.user.is_authenticated %}
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="{% static 'js/friend.js' %}"></script>
-	{% endif %}
 </head>
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
 		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
 		{% if request.user.is_authenticated %}
-			<div id="profilebar" class="my-auto mr-4">
+		<div id="profilebar" class="my-auto mr-4">
+			<a href="{% url 'profile' %}?username={{ user.username }}" class="redir">
 				<img src="{{ user.profile_picture.url }}" class="profile-bar border border-primary" style="border-width: 2px !important;">
-			</div>
+			</a>
+		</div>
 		{% else %}
 			<div id="logbutton" class="d-flex my-auto mr-4">
 				<div class="mr-2">
@@ -54,7 +50,7 @@
 
 	<main class="main-height d-flex">
 		<!-- FRIEND BAR -->
-		<div id="friendbar" class="main-height text-white border-right border-primary rounded-5" style="width: 15%; border-width: 3px !important;">
+		<div id="friendbar" class="main-height text-white border-right border-primary rounded-5 d-flex flex-column justify-content-between" style="width: 15%; border-width: 3px !important;">
 		{% if request.user.is_authenticated %}
 			<div class="pl-4 pr-2 pt-3">
 				<h4>Ami(e)s</h4>
@@ -64,7 +60,7 @@
 				<h4>Demandes</h4>
 					<div id="friends-scroll" class="friend-scroll"></div>
 			</div>
-			<div class="input-wrapper pl-3 pr-3 pt-4">
+			<div class="input-wrapper pl-3 pr-3 mb-3">
 				<input type="text" placeholder="Ajouter un ami..." id="add-friend-input" class="input">
 			</div>
 		{% else %}
@@ -88,11 +84,15 @@
 		</nav>
 	</footer>
 	<script src="{% static 'js/router.js' %}"></script>
+	<script src="{% static 'js/login.js' %}"></script>
 	<script src="{% static 'js/solo.js' %}"></script>
 	<script src="{% static 'js/local.js' %}"></script>
-	<script src="{% static 'js/login.js' %}"></script>
 	<script src="{% static 'js/ranked.js' %}"></script>
-
+	<!-- FRIEND -->
+	{% if request.user.is_authenticated %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="{% static 'js/friend.js' %}"></script>
+	{% endif %}
 </body>
 </html>
 
