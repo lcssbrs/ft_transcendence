@@ -68,7 +68,7 @@ def sync_user_to_auth_user(sender, instance, created, **kwargs):
 
 class Match(models.Model):
     player1 = models.ForeignKey('user_list', related_name='player1_matches', on_delete=models.CASCADE)
-    player2 = models.ForeignKey('user_list', related_name='player2_matches', on_delete=models.CASCADE)
+    player2 = models.ForeignKey('user_list', related_name='player2_matches', on_delete=models.CASCADE, null=True)
     score_player1 = models.IntegerField(default=0)
     score_player2 = models.IntegerField(default=0)
     player_winner = models.ForeignKey(user_list, related_name='winner_matches', on_delete=models.CASCADE, null=True, blank=True)

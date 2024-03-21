@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import add_user_form
-from .models import models, user_list, Tournament, Match, Friendship
+from .models import models, user_list, Tournament, Match, Friendship, Match
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -47,11 +47,41 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
-#check users status for ranked mode
-def get_connected_users(request):
-    connected_users = User.objects.filter(is_active=True)
-    user_names = [user.username for user in connected_users]
-    return JsonResponse({'user_names': user_names})
+#WEBSOCKETS
+
+def check_match(request):
+    try:
+        # Vérifier si un match existe dans la base de données
+        match_exists = Match.objects.exists()
+    except Exception as e:
+        # Gérer les exceptions comme vous le souhaitez
+        return JsonResponse({'error': str(e)}, status=500)
+
+    # Envoyer le résultat au client
+    return JsonResponse({'exists': match_exists})
+
+class JoinMatch(APIView):
+    def post(self, request):
+        match = Match.objects.filter(status='waiting', player2__isnull=True).exclude(player1=request.user).first()
+
+        if match:
+            match.player2 = request.user
+            match.status = 'in_game'
+            match.save()
+            serializer = MatchListSerializer(match)
+            return Response(serializer.data)
+        else:
+            new_match = Match(player1=request.user)
+            new_match.save()
+            serializer = MatchListSerializer(new_match)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CreateMatch(APIView):
+    def post(self, request):
+        new_match = Match(player1=request.user)
+        new_match.save()
+        serializer = MatchListSerializer(new_match)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # Login / register
 
