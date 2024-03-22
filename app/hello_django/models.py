@@ -5,6 +5,11 @@ from django.contrib.auth.hashers import make_password
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from pathlib import Path
+import os
+from django.core.files import File
+import urllib.request
+from PIL import Image
 
 # TODO LIST :
     # historique tournoi: position, date, résultat dernier match, adversaire dernier match
@@ -23,8 +28,11 @@ class user_list(models.Model):
     profile_picture = models.ImageField(upload_to='photos/', default='photos/default-profile.jpg')
     status = models.CharField(max_length=20, default='offline', choices=[('online', 'En ligne'), ('offline', 'Hors ligne'), ('in_game', 'En jeu')])
     last_login = models.DateTimeField(null=True, blank=True)
-    double_auth = models.BooleanField(default=0)
+    double_auth = models.BooleanField(default=1)
+    is_log = models.BooleanField(default=0)
     intra = models.BooleanField(default=False)
+    qr_code = models.ImageField(upload_to='qr_codes/')
+    jwt_token = models.CharField(max_length=500, blank=True, null=True)
     # Parties:
     games_played = models.PositiveIntegerField(default=0)
     games_win = models.PositiveIntegerField(default=0)

@@ -14,11 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.conf.urls.static import static
+from django.conf.urls import include
 from .views import user_list_view, index, solo_view, login_view, register_view, local_view, ranking_view, ranked_view, tournament_view, profile_view
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
@@ -59,6 +63,7 @@ urlpatterns = [
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
     # DEV
     path('users/', user_list_view, name='user_list'),
+    path('two-factor-login/', views.two_factor_login, name='two_factor_login'),
 	path('exemple', views.exemple_view, name='exemple'),
 	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
