@@ -1,40 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <script src="{% static 'js/ranked.js' %}"></script>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
+    <title>Pong Game</title>
+    <style>
+        #player1-pad, #player2-pad {
+            width: 20px;
+            height: 100px;
+            background-color: #000;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #player1-pad {
+            left: 20px; /* Position initiale du pad du joueur 1 */
+        }
+        #player2-pad {
+            right: 20px; /* Position initiale du pad du joueur 2 */
+        }
+    </style>
 </head>
 <body>
-    <h1>Test Page</h1>
-
-    <button id="join-match-btn">Rejoindre une partie</button>
-    <button id="create-match-btn">Créer une nouvelle partie</button>
-
-    <script>
-        document.getElementById("join-match-btn").addEventListener("click", async () => {
-            try {
-                const response = await fetch("api/join-match/", {
-                    method: "POST",
-                });
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                console.error("Une erreur s'est produite :", error);
-            }
-        });
-
-        document.getElementById("create-match-btn").addEventListener("click", async () => {
-            try {
-                const response = await fetch("api/create-match/", {
-                    method: "POST",
-                });
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                console.error("Une erreur s'est produite :", error);
-            }
-        });
-    </script>
+    <div id="player1-pad"></div>
+    <div id="player2-pad"></div>
 </body>
+<div class="d-flex justify-content-center">
+	<button id="start-ranked" class="btn btn-primary">Trouver un adversaire</button>
+	<p id="searching-match" style="display: none; color:white;">Recherche de match en cours...</p>
+</div>
 </html>

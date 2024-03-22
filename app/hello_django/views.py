@@ -16,7 +16,7 @@ from django.core.files.base import ContentFile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer, UserSerializer
 import os
 import urllib
 import logging
@@ -242,6 +242,12 @@ def exchange_code_for_access_token(request, code):
 
 # API
 
+class api_user_view(APIView):
+    def get(self, request):
+        user = user_list.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
 class api_user_list(APIView):
     def get(self, request):
         users = user_list.objects.all()
@@ -393,12 +399,12 @@ class JoinMatch(APIView):
             match.status = 'in_game'
             match.save()
             serializer = MatchListSerializer(match)
-            return Response(serializer.data)
+            return Response({"match_exists": True, "match_data": serializer.data})
         else:
             new_match = Match(player1=request.user)
             new_match.save()
             serializer = MatchListSerializer(new_match)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"match_exists": False, "match_data": serializer.data}, status=status.HTTP_201_CREATED)
 
 class CreateMatch(APIView):
     def post(self, request):
