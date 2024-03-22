@@ -9,7 +9,7 @@ function setupLogin() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
-				loadView('nothing');
+				loadView('/two-factor-login/');
 			}
 			else {
 				loadView('/login/');

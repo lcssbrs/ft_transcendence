@@ -127,15 +127,15 @@ def login_view(request):
                 user.is_log = True
                 if user.double_auth:
                     return redirect('two_factor_login')
-                return redirect('index')
+                return JsonResponse({'success': True})
             else:
                 error_message = "Nom d'utilisateur ou mot de passe incorrect."
                 messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-                return redirect('login')  # Rediriger vers la vue de connexion
+                return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect.'})
         else:
             error_message = "Échec de la validation du formulaire."
             messages.error(request, "Échec de la validation du formulaire.")
-            return redirect('login')  # Rediriger vers la vue de connexion
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
