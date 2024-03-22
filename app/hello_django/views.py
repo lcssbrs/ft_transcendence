@@ -107,7 +107,10 @@ def register_view(request):
                 form.save()
                 response_data['success'] = True
                 response_data['message'] = "Utilisateur enregistré avec succès."
+                user = user_list.objects.get(username=username)
+                generer_qr_code(user)
                 return JsonResponse(response_data)
+                return afficher_qr_code(request, user)
             else:
                 response_data['success'] = False
                 response_data['error_message'] = error_message
@@ -116,10 +119,6 @@ def register_view(request):
             response_data['success'] = False
             response_data['error_message'] = "Données invalides."
             return JsonResponse(response_data, status=400)
-                user = user_list.objects.get(username=username)
-                generer_qr_code(user)
-                return afficher_qr_code(request, user)
-                #return redirect('login')
     else:
         form = add_user_form()
 
@@ -134,21 +133,38 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                user.is_log = True
-                if user.double_auth:
-                    return redirect('two_factor_login')
                 return JsonResponse({'success': True})
             else:
-                error_message = "Nom d'utilisateur ou mot de passe incorrect."
-                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
                 return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect.'})
         else:
-            error_message = "Échec de la validation du formulaire."
-            messages.error(request, "Échec de la validation du formulaire.")
             return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
         form = AuthenticationForm()
+
     return render(request, 'login.html', {'form': form})
+
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 user.is_log = True
+#                 # if user.double_auth:
+#                 #     return redirect('two_factor_login')
+#                 return JsonResponse({'success': True})
+#             else:
+#                 messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
+#                 return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect.'})
+#         else:
+#             messages.error(request, "Échec de la validation du formulaire.")
+#             return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'login.html', {'form': form})
 
 
 # API LOGIN 42
@@ -399,7 +415,6 @@ def generer_qr_code(user):
 
 def afficher_qr_code(request, user):
     return render(request, 'qr_code.html', {'utilisateur': user})
-
 
 def decode_jwt_token(request):
     # Récupérer le token depuis la requête (par exemple depuis les paramètres GET ou POST)
