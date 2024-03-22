@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer, UserSerializer
 import os
 import urllib
 import logging
@@ -23,9 +23,7 @@ def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view(request):
-    username = request.GET.get('username')
-    profile_user = User.objects.get(username=username)
-    return render(request, 'profile.html', {'profile_user': profile_user})
+    return render(request, 'profile.html')
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -34,7 +32,7 @@ def tournament_view (request):
     return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
-    top_players = user_list.objects.order_by('-games_rank')[:10]
+    top_players = user_list.objects.order_by('-games_rank')
 
     context = {
         'top_players': top_players
@@ -59,6 +57,7 @@ def get_connected_users(request):
 
 def register_view(request):
     error_message = None
+    response_data = {}
 
     if request.method == 'POST':
         form = add_user_form(request.POST, request.FILES)
@@ -72,7 +71,17 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                return redirect('login')
+                response_data['success'] = True
+                response_data['message'] = "Utilisateur enregistré avec succès."
+                return JsonResponse(response_data)
+            else:
+                response_data['success'] = False
+                response_data['error_message'] = error_message
+                return JsonResponse(response_data, status=400)
+        else:
+            response_data['success'] = False
+            response_data['error_message'] = "Données invalides."
+            return JsonResponse(response_data, status=400)
     else:
         form = add_user_form()
 
@@ -168,6 +177,12 @@ def exchange_code_for_access_token(request, code):
     return redirect('index')
 
 # API
+
+class api_user_view(APIView):
+    def get(self, request):
+        user = user_list.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 class api_user_list(APIView):
     def get(self, request):

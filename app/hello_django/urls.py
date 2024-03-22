@@ -48,6 +48,7 @@ urlpatterns = [
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
     path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
 	# API
+	path('api/get_user/', views.api_user_view.as_view(), name='get_user'),
     path('api/users/', views.api_user_list.as_view(), name='user-list'),
 	path('api/users/<int:id>/', views.api_user_details.as_view(), name='user-details'),
 	path('api/match/', views.api_match_list.as_view(), name='match-list'),
