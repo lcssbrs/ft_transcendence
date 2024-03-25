@@ -6,6 +6,7 @@ function extractViewContent(html) {
 }
 
 function loadView(url) {
+	console.log(url);
 	fetch(url)
 		.then(response => response.text())
 		.then(html => {

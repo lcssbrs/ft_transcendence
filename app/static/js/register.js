@@ -9,7 +9,17 @@ function setupRegister() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
-				loadView('/login/');
+				document.getElementById('auth-data').setAttribute('data-authenticated', 'True');
+				$.ajax({
+					url: '/api/get_user/',
+					type: 'GET',
+					success: function(response) {
+						document.querySelector('#userAvatar').src = response.profile_picture;
+						document.querySelector('#linkProfile').href = '/profile/?id=' + response.id;
+					}
+				})
+				checkLogged();
+				loadView('/qrcode/');
 			}
 			else {
 				loadView('/register/');

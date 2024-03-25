@@ -6,15 +6,19 @@
 	<form id="loginForm" method="post">
 		{% csrf_token %}
 		<div class="log-input d-flex flex-column align-items-center">
-			<input type="text" id="username" placeholder="Pseudo" name="username" required>
+			{{ form.username }}
 			<div id="usernameMissing" class="text-danger d-none">Veuillez saisir votre identifiant</div>
 		</div>
 		<div>
 			<div class="log-input d-flex flex-column align-items-center my-2">
-				<input type="password" id="password" placeholder="Mot de passe" name="password" required>
+				{{ form.password }}
 				<div id="passwordMissing" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
 				<a class="text-white mt-2" href="#">Mot de passe oublié ?</a>
 			</div>
+		</div>
+		<div class="log-input d-flex flex-column align-items-center my-2">
+			{{ form.token }}
+			<div id="tokenMissing" class="text-danger d-none">Veuillez saisir votre clé d'authentification</div>
 		</div>
 		<div>
 			<button class="btn btn-light" type="submit">Se connecter</button>
