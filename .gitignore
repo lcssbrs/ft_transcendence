@@ -1,2 +1,3 @@
 .env.dev
 app/media/qr_codes/*
+app/hello_django/logs.log

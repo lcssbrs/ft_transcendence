@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import add_user_form
+from .forms import add_user_form, loginForm
 from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
@@ -16,7 +15,7 @@ from django.core.files.base import ContentFile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer
+from .serializers import UserListSerializer, UserDetailSerializer, MatchListSerializer, TournoiListSerializer, UserSerializer
 import os
 import urllib
 import logging
@@ -37,29 +36,17 @@ from qrcode import make
 from django.contrib.auth.decorators import login_required
 from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
-from django.contrib.auth import logout
 
-@login_required
-def two_factor_login(request):
-    user = request.user
-    if request.method == 'POST':
-        token = request.POST.get('token')
-        if 'b\'' + token + '\'' == user.jwt_token:
-            return redirect('index')
-        else:
-            logout(request)
-            return redirect('login')
-    else:
-        return render(request, 'two_factor_login.html')
-
+def afficher_qr_code(request):
+    if (request.user.is_authenticated == False):
+        return redirect ('login')
+    return render(request, 'qr_code.html', {'user': request.user})
 
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view(request):
-    username = request.GET.get('username')
-    profile_user = User.objects.get(username=username)
-    return render(request, 'profile.html', {'profile_user': profile_user})
+    return render(request, 'profile.html')
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -68,14 +55,13 @@ def tournament_view (request):
     return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
-    top_players = user_list.objects.order_by('-games_rank')[:10]
+    top_players = user_list.objects.order_by('-games_rank')
 
     context = {
         'top_players': top_players
     }
 
     return render(request, 'ranking.html', context, {'user': request.user})
-
 
 def solo_view(request):
     return render(request, 'solo.html', {'user': request.user})
@@ -93,6 +79,7 @@ def get_connected_users(request):
 
 def register_view(request):
     error_message = None
+    response_data = {}
 
     if request.method == 'POST':
         form = add_user_form(request.POST, request.FILES)
@@ -106,10 +93,21 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                user = user_list.objects.get(username=username)
+                response_data['success'] = True
+                response_data['message'] = "Utilisateur enregistré avec succès."
+                password = form.cleaned_data.get('password')
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
                 generer_qr_code(user)
-                return afficher_qr_code(request, user)
-                #return redirect('login')
+                return JsonResponse(response_data)
+            else:
+                response_data['success'] = False
+                response_data['error_message'] = error_message
+                return JsonResponse(response_data, status=400)
+        else:
+            response_data['success'] = False
+            response_data['error_message'] = "Données invalides."
+            return JsonResponse(response_data, status=400)
     else:
         form = add_user_form()
 
@@ -117,29 +115,26 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = loginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            token = form.cleaned_data['token']
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                user2 = user_list.objects.get(username=username)
+                if (user2.jwt_token != 'b\'' + token + '\''):
+                    return JsonResponse({'success': False, 'error_message': 'Token de sécurité invalide'})
                 login(request, user)
-                user.is_log = True
-                if user.double_auth:
-                    return redirect('two_factor_login')
                 return JsonResponse({'success': True})
             else:
-                error_message = "Nom d'utilisateur ou mot de passe incorrect."
-                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-                return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect.'})
+                return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect ou clé d\'authentification incorrecte.'})
         else:
-            error_message = "Échec de la validation du formulaire."
-            messages.error(request, "Échec de la validation du formulaire.")
             return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        form = loginForm()
 
+    return render(request, 'login.html', {'form': form})
 
 # API LOGIN 42
 
@@ -212,6 +207,12 @@ def exchange_code_for_access_token(request, code):
     return redirect('index')
 
 # API
+
+class api_user_view(APIView):
+    def get(self, request):
+        user = user_list.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 class api_user_list(APIView):
     def get(self, request):
@@ -364,7 +365,6 @@ def user_list_view(request):
     users = user_list.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
-
 def generer_qr_code(user):
     buffer = BytesIO()
     payload = {
@@ -380,10 +380,6 @@ def generer_qr_code(user):
     image_bytes = buffer.getvalue()
     user.qr_code.save(f'{user.username}_qr_code.png', ContentFile(image_bytes))
     return HttpResponse(json.dumps({'jwt_token': jwt_token.decode('utf-8')}), content_type='application/json')
-
-def afficher_qr_code(request, user):
-    return render(request, 'qr_code.html', {'utilisateur': user})
-
 
 def decode_jwt_token(request):
     # Récupérer le token depuis la requête (par exemple depuis les paramètres GET ou POST)

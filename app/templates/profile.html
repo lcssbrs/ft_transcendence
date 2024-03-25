@@ -1,25 +1,28 @@
+{% extends 'index.html' %}
+
+{% block content %}
 <div id="profile" class="d-flex justify-content-center mx-auto">
 	<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center mr-5">
 		<div class="image-container">
-			<img src="{{ user.profile_picture.url }}" class="bottom-image">
-			<img src="" class="top-image">
+			<img id="user-picture" src class="bottom-image">
+			<img id="rank-picture" src class="top-image">
 		</div>
-		<h3 class="m-0">{{ profile_user.first_name }} {{ profile_user.last_name }}</h3>
-		<h4>{{ profile_user.username }}</h4>
+		<h3 id="name" class="m-0"></h3>
+		<h4 id="username"></h4>
 		<div class="container-fluid d-flex flex-column border border-primary border rounded-3 my-2" style="border-width: 4px !important;">
 			<div class="container-fluid d-flex justify-content-center align-items-center">
 				<div class="p-2 d-flex mt-1">
 					<div>
 						<h5 class="mb-1">Games</h5>
-						<p class="mb-0">{{ profile_user.games_played }}</p>
+						<p id="played" class="mb-0"></p>
 					</div>
 					<div class="px-3">
 						<h5 class="mb-1">Victoires</h5>
-						<p class="mb-0">{{ profile_user.games_win }}</p>
+						<p id="victory" class="mb-0"></p>
 					</div>
 					<div>
 						<h5 class="mb-1">Défaites</h5>
-						<p class="mb-0">{{ profile_user.games_loose }}</p>
+						<p id="defeat" class="mb-0"></p>
 					</div>
 				</div>
 			</div>
@@ -27,11 +30,11 @@
 				<div class="p-2 mb-2 d-flex mt-1">
 					<div class="mr-3">
 						<h5 class="mb-1">Classement</h5>
-						<p class="mb-0">#1</p>
+						<p id="ranking" class="mb-0">#1</p>
 					</div>
 					<div>
 						<h5 class="mb-1">Rank</h5>
-						<p class="mb-0">Challenger - 172 LP</p>
+						<p id="rank" class="mb-0"></p>
 					</div>
 				</div>
 			</div>
@@ -131,3 +134,4 @@
 		</div>
 	</div>
 </div>
+{% endblock %}

@@ -1,5 +1,7 @@
 $(document).ready(function() {
     function loadFriends() {
+        if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+            return ;
         $.ajax({
             url: '/api/get_friends/',
             type: 'GET',
@@ -16,12 +18,11 @@ $(document).ready(function() {
                     } else if (friend.status === 'in_game') {
                         statusColor = 'blue';
                     }
-
                     var $statusIcon = $('<div class="status-icon mr-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ' + statusColor + ';"></div>');
 
                     var $friendElement = $('<div class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
                         '<div class="d-flex align-items-center">' +
-                        '<a href="/profile/?username=' + friend.username + '" class="text-white redir">' +
+                        '<a href="/profile/?id=' + friend.id + '" class="text-white redir">' +
                         '<span>' + friend.username + '</span>' +
                         '</a>' +
                         '</div>' +
@@ -72,6 +73,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     function loadFriendRequests() {
+        if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+            return ;
         $.ajax({
             url: '/api/get_friend_requests/',
             type: 'GET',
