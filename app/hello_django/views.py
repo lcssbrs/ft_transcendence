@@ -202,7 +202,7 @@ def exchange_code_for_access_token(request, code):
                     output_file.write(image_data)
                 user.profile_picture = 'photos/' + user.username + '.png'
             user.save()
-            user_login = authenticate(request, username=username, password=" ")
+            user_login = authenticate(request, username=username, password="")
             if user_login is not None:
                 login(request, user_login)
                 return redirect('index')
