@@ -16126,3 +16126,1706 @@ Forbidden (CSRF token from POST incorrect.): /login/
 HTTP POST /login/ 403 [0.02, 172.21.0.5:40164]
 HTTP POST /login/ 302 [1.24, 172.21.0.5:40148]
 HTTP GET /two-factor-login/ 200 [0.03, 172.21.0.5:40172]
+Watching for file changes with StatReloader
+HTTP GET / 200 [0.15, 172.18.0.5:37432]
+HTTP GET /login/ 200 [0.04, 172.18.0.5:37440]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=slcqLpi0x22TTkbC78Coo1wVbiOqzYoMxNFrD5mEC2uvQ0Kxd4bWzRsFi7Bg5EIs 302 [0.11, 172.18.0.5:37450]
+HTTP GET /redirection_apres_authentification?code=70e60605b24454db7c51092d57bf56a9228d0d7afac521ea65c98bcad1cf1805 301 [0.03, 172.18.0.5:37452]
+HTTP GET /redirection_apres_authentification/?code=70e60605b24454db7c51092d57bf56a9228d0d7afac521ea65c98bcad1cf1805 302 [0.01, 172.18.0.5:37468]
+HTTP GET /exchange_code_for_access_token/70e60605b24454db7c51092d57bf56a9228d0d7afac521ea65c98bcad1cf1805/ 302 [4.52, 172.18.0.5:37474]
+HTTP GET / 200 [0.13, 172.18.0.5:40546]
+HTTP GET /api/get_friends/ 200 [0.22, 172.18.0.5:40556]
+HTTP GET /api/get_friend_requests/ 200 [0.16, 172.18.0.5:40564]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:40570]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:40572]
+HTTP GET /api/get_friends/ 200 [0.16, 172.18.0.5:40580]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:40592]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:40606]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:40610]
+HTTP GET /api/get_friends/ 200 [0.17, 172.18.0.5:40626]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:40628]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:40634]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:40648]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:40654]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:40666]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:40676]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:40690]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:40694]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34636]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34640]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34650]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34662]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:34670]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34674]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34682]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34684]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34688]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34692]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:34706]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34716]
+HTTP GET /api/get_friend_requests/ 200 [0.20, 172.18.0.5:34726]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:34740]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34752]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:34754]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:34766]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34778]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34786]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34796]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:50306]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:50318]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:50328]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50344]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50348]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50364]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50374]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:50384]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:50388]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50400]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:50410]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50420]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50428]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50430]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50434]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50448]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:50452]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50454]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50466]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50482]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46308]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46322]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46334]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46338]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:46346]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46358]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46372]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46376]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:46384]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46396]
+HTTP GET /api/get_friend_requests/ 200 [0.34, 172.18.0.5:46410]
+HTTP GET /api/get_friends/ 200 [0.10, 172.18.0.5:46416]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46418]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:46434]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:46450]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:46462]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46472]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46478]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:46490]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46492]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56758]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:56766]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56782]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56784]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56800]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56808]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56812]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56826]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56828]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56836]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:56846]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56856]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56868]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56872]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56884]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56892]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56906]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56910]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56922]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56930]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52110]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52116]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52130]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52136]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52148]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:52152]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52164]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:52176]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52184]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:52200]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52204]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:52220]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52224]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52230]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52238]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52250]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52256]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52270]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52282]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52284]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55820]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55832]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55840]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:55848]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55864]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55866]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55872]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55888]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55890]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55906]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55916]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55932]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55948]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55950]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55964]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:55968]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:55978]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:55990]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:55992]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:55998]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33476]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:33478]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33482]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:33488]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33504]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:33520]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33522]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:33536]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33540]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:33556]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57084]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:57100]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:57102]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57112]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57120]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57122]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:57132]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57136]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:57138]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57148]
+HTTP GET /api/get_friend_requests/ 200 [0.78, 172.18.0.5:36058]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:36064]
+HTTP GET /api/get_friend_requests/ 200 [0.27, 172.18.0.5:36072]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:36080]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:36082]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:36094]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:36100]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:36102]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:36114]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:36118]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47264]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:47276]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:47288]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47294]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47298]
+HTTP GET /api/get_friends/ 200 [0.12, 172.18.0.5:47302]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47304]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47308]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:47312]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47324]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:42450]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42466]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:42474]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42484]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:42492]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42496]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:42508]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42518]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:42522]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42532]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54046]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54048]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54052]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:54058]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54062]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:54074]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54076]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54090]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54096]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54106]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34894]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34904]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34910]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34914]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34924]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34940]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34954]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34960]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34970]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34972]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38554]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:38562]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38570]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:38576]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38580]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:38590]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:38606]
+HTTP GET /api/get_friends/ 200 [0.10, 172.18.0.5:38612]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38622]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38628]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:51888]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:51902]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:51906]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:51910]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:51918]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:51924]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:51938]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:51952]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:51964]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:51972]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:39754]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:39756]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:39762]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:39770]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:39780]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:39790]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:39800]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:39806]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:39822]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:39836]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54228]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54234]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54242]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54254]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54258]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54262]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54270]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54276]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54278]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54280]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53332]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:53340]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53344]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:53346]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53362]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:53368]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53384]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:53390]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53394]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:53396]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56450]
+HTTP GET /api/get_friends/ 200 [0.48, 172.18.0.5:56460]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:56470]
+HTTP GET /api/get_friends/ 200 [0.47, 172.18.0.5:56472]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56478]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56486]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56490]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56498]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56502]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56512]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:35498]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35508]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:35514]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:35528]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:35542]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35546]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:35548]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35560]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:35566]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35574]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49016]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49024]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:49026]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49030]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:49034]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:49042]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49046]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:49058]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:49064]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:49074]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47922]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47924]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47936]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47940]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47942]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47946]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:47952]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47966]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47970]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:47972]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56258]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56272]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56286]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56292]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56296]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56308]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56316]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56318]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56328]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56338]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34068]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34084]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:34088]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34094]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34100]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34110]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34124]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34136]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34142]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34148]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54082]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54088]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54104]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54118]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54128]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54136]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:54148]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:54160]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:54166]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:54176]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46182]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:46188]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:46204]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46220]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:46228]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:46236]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:46244]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:46246]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:46252]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:46262]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:37228]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:37236]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:37250]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:37254]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:37256]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:37260]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:37264]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:37274]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:37276]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:37286]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34206]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34220]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34224]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34232]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34244]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34256]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34264]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34268]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34278]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:34290]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:60412]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:60414]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:60424]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:60428]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:60440]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:60454]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:60468]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:60478]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:60490]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:60494]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49250]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49262]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49268]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:49282]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49288]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49298]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49304]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:49316]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49322]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49324]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57668]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:57676]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57692]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57700]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57704]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:57712]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57728]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:57730]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:57734]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:57742]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56484]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56496]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56500]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:56502]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:56518]
+HTTP GET /api/get_friend_requests/ 200 [0.47, 172.18.0.5:56530]
+HTTP GET /api/get_friends/ 200 [0.57, 172.18.0.5:56528]
+HTTP GET /api/get_friends/ 200 [0.33, 172.18.0.5:56536]
+HTTP GET /api/get_friend_requests/ 200 [0.19, 172.18.0.5:56546]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:56558]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:56562]
+HTTP GET /api/get_friends/ 200 [0.10, 172.18.0.5:56578]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:53746]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:53758]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:53772]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:53788]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:53804]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:53820]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:53830]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:34600]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:34602]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:34610]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:34614]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:34628]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:34636]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:37176]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:37188]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:37210]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:37194]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:37220]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:37232]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:36292]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:36288]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:36294]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:36300]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:36306]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:36320]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:36328]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:36334]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:51820]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:51822]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:51834]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:51836]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:51842]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:51850]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:45382]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:45394]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:45410]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:45412]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:45420]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:45422]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:48658]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:48674]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:48690]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:48692]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:48698]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:48704]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:48708]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:48720]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50224]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50234]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50250]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50254]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50268]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50282]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:41754]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:41758]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:41768]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:41784]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:41792]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:41798]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:41806]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:41818]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:60694]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:60702]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:60706]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:60718]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:60724]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:60730]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:60742]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:60754]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:41598]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:41606]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:41618]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:41630]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:41636]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:41648]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:41656]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:41662]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:58208]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:58216]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:58228]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:58242]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:58258]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:58260]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:58270]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:58284]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:40866]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:40880]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:40894]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:40898]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:40902]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.18.0.5:40916]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:40922]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:40932]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:59590]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:59606]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:59622]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:59638]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:59652]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:59660]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49324]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49332]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49346]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:49348]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:49362]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:49374]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52920]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52928]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:52934]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52946]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:52960]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:52976]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:52978]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:52980]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:56920]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56928]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:56936]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:56946]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:56954]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:56958]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52118]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:52124]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:52126]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:52130]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:52136]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:52138]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:35450]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:35462]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:35478]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:35494]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35498]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:35506]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:35520]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:35524]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:33124]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:33134]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:33138]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:33148]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:33156]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:33158]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47572]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47584]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47594]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:47602]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:47612]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:47628]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:50856]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50872]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50884]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:50900]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:50910]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50914]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:50918]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:50920]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:59272]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:59278]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:59284]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:59292]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:59296]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:59298]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:39780]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:39792]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:39808]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:39814]
+HTTP GET /api/get_friends/ 200 [0.11, 172.18.0.5:39822]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:39826]
+HTTP GET /api/get_friends/ 200 [0.60, 172.18.0.5:39834]
+HTTP GET /api/get_friend_requests/ 200 [0.26, 172.18.0.5:39850]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:39866]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:39868]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:39884]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:39890]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:38656]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38660]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38676]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38682]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38686]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38700]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38714]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38718]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38724]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38734]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:38742]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38746]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38758]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38766]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:38776]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38784]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38800]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38808]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:38812]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:38824]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:43486]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:43490]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:43500]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:43512]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:43516]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:43528]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:43542]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:43556]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:43568]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:43582]
+HTTP GET /api/get_friends/ 200 [0.03, 172.18.0.5:43592]
+HTTP GET /api/get_friend_requests/ 200 [0.41, 172.18.0.5:43594]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:43598]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:43604]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:43608]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:43616]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:43622]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:43632]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:43644]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:43646]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34308]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34324]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:34336]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:34342]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34352]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.18.0.5:34360]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:34366]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:34368]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:34378]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:34392]
+HTTP GET /api/get_friends/ 200 [0.10, 172.18.0.5:34396]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:34402]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:34412]
+/usr/src/app/hello_django/views.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/usr/src/app/hello_django/settings.py changed, reloading.
+Watching for file changes with StatReloader
+HTTP GET / 200 [0.96, 172.18.0.5:43642]
+HTTP GET /api/get_friends/ 200 [0.23, 172.18.0.5:43648]
+HTTP GET /api/get_friend_requests/ 200 [0.24, 172.18.0.5:43652]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:43658]
+HTTP GET /api/get_friend_requests/ 200 [0.16, 172.18.0.5:43674]
+HTTP GET /api/get_friend_requests/ 200 [0.21, 172.18.0.5:43688]
+HTTP GET /api/get_friends/ 200 [0.26, 172.18.0.5:43684]
+HTTP GET /api/get_friends/ 200 [0.11, 172.18.0.5:43690]
+HTTP GET /api/get_friend_requests/ 200 [0.51, 172.18.0.5:43704]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.18.0.5:48120]
+HTTP GET /api/get_friends/ 200 [0.14, 172.18.0.5:48108]
+HTTP GET /api/get_friend_requests/ 200 [0.11, 172.18.0.5:48130]
+HTTP GET /api/get_friends/ 200 [0.16, 172.18.0.5:48126]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:48134]
+HTTP GET /api/get_friend_requests/ 200 [0.16, 172.18.0.5:48144]
+HTTP GET /api/get_friends/ 200 [0.13, 172.18.0.5:48146]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.18.0.5:48148]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:48154]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.18.0.5:48166]
+HTTP GET /api/get_friends/ 200 [0.37, 172.18.0.5:48180]
+HTTP GET /api/get_friend_requests/ 200 [0.51, 172.18.0.5:48190]
+HTTP GET /api/get_friends/ 200 [0.25, 172.18.0.5:48212]
+HTTP GET /api/get_friend_requests/ 200 [0.36, 172.18.0.5:48204]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:48224]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.18.0.5:48238]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:48266]
+HTTP GET /api/get_friends/ 200 [0.09, 172.18.0.5:48254]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.18.0.5:48282]
+HTTP GET /api/get_friends/ 200 [0.18, 172.18.0.5:48278]
+HTTP GET /api/get_friends/ 200 [0.09, 172.18.0.5:42056]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.18.0.5:42066]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:42078]
+HTTP GET /api/get_friends/ 200 [0.09, 172.18.0.5:42072]
+HTTP GET /api/get_friends/ 200 [0.04, 172.18.0.5:42092]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:42094]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:42098]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:42110]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:42118]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:42120]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.09, 172.18.0.5:42130]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64df6173d0>>.
+HTTP GET /api/get_friend_requests/ 500 [0.40, 172.18.0.5:42132]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.11, 172.18.0.5:42142]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64df6420d0>>.
+HTTP GET /api/get_friend_requests/ 500 [0.49, 172.18.0.5:42150]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.06, 172.18.0.5:42160]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64df5d10d0>>.
+HTTP GET /api/get_friend_requests/ 500 [0.25, 172.18.0.5:42168]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.10, 172.18.0.5:42170]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64df5f6510>>.
+HTTP GET /api/get_friend_requests/ 500 [0.33, 172.18.0.5:42180]
+HTTP GET / 200 [0.04, 172.18.0.5:42182]
+HTTP GET /register/ 200 [0.05, 172.18.0.5:41532]
+HTTP POST /register/ 200 [3.62, 172.18.0.5:35540]
+HTTP GET / 200 [0.02, 172.18.0.5:50972]
+HTTP GET /login/ 200 [0.04, 172.18.0.5:50978]
+HTTP POST /login/ 302 [1.14, 172.18.0.5:50988]
+HTTP GET /two-factor-login/ 200 [0.05, 172.18.0.5:50996]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:51006]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:45924]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:45938]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:45948]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:45958]
+Forbidden (CSRF token from POST incorrect.): /login/
+HTTP POST /login/ 403 [0.02, 172.18.0.5:45960]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=ZZymuKSGmrRw9ohK2jhKKpDXbnwbS4XkB6LmCXw6DYsck0srzSz85m3ieM0VhgMj 302 [0.02, 172.18.0.5:45964]
+HTTP GET /redirection_apres_authentification?code=1638c572035e2cbbee7df8e8dfad785e28900f8c12dbe28c05b1a6990bfc3dd5 301 [0.04, 172.18.0.5:45970]
+HTTP GET /redirection_apres_authentification/?code=1638c572035e2cbbee7df8e8dfad785e28900f8c12dbe28c05b1a6990bfc3dd5 302 [0.03, 172.18.0.5:45976]
+HTTP GET /exchange_code_for_access_token/1638c572035e2cbbee7df8e8dfad785e28900f8c12dbe28c05b1a6990bfc3dd5/ 302 [0.22, 172.18.0.5:45992]
+HTTP GET / 200 [0.04, 172.18.0.5:45996]
+HTTP GET /api/get_friends/ 200 [0.11, 172.18.0.5:46004]
+HTTP GET /api/get_friend_requests/ 200 [0.15, 172.18.0.5:46020]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:46030]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:46034]
+HTTP GET /profile/?username=test 200 [0.11, 172.18.0.5:46038]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:46044]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:46046]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:46050]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:46052]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:58898]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:58910]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:58914]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:58916]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:58928]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:58940]
+HTTP GET /api/get_friend_requests/ 200 [0.17, 172.18.0.5:58958]
+HTTP GET /api/get_friends/ 200 [0.19, 172.18.0.5:58944]
+HTTP GET /api/get_friends/ 200 [0.12, 172.18.0.5:58982]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.18.0.5:58968]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.18.0.5:58986]
+HTTP GET /api/get_friends/ 200 [0.09, 172.18.0.5:58988]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.18.0.5:59014]
+HTTP GET /api/get_friends/ 200 [0.10, 172.18.0.5:59002]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:59016]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:59026]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:59042]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:59032]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:59044]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.18.0.5:59050]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.18.0.5:55306]
+HTTP GET /api/get_friends/ 200 [0.16, 172.18.0.5:55290]
+HTTP GET /api/get_friends/ 200 [0.07, 172.18.0.5:55316]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:55320]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.18.0.5:55338]
+HTTP GET /api/get_friends/ 200 [0.08, 172.18.0.5:55334]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.18.0.5:55352]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:55348]
+HTTP GET /api/get_friends/ 200 [0.05, 172.18.0.5:55362]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:55376]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.18.0.5:55406]
+HTTP GET /api/get_friends/ 200 [0.06, 172.18.0.5:55390]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.08, 172.18.0.5:55418]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64dd31aed0>>.
+HTTP GET /api/get_friend_requests/ 500 [0.23, 172.18.0.5:55420]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.11, 172.18.0.5:55436]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64df640a10>>.
+HTTP GET /api/get_friend_requests/ 500 [0.23, 172.18.0.5:55434]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.03, 172.18.0.5:55440]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64dd33bc10>>.
+HTTP GET /api/get_friend_requests/ 500 [0.08, 172.18.0.5:55452]
+Method Not Allowed: /api/get_friends/
+HTTP GET /api/get_friends/ 405 [0.04, 172.18.0.5:55460]
+Internal Server Error: /api/get_friend_requests/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 516, in thread_handler
+    raise exc_info[1]
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/asgiref/sync.py", line 520, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/hello_django/views.py", line 350, in get_friend_requests
+    friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1480, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1307, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/related_lookups.py", line 166, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f64dd4a7a90>>.
+HTTP GET /api/get_friend_requests/ 500 [0.10, 172.18.0.5:55462]
+HTTP GET /profile/?username=test 200 [0.05, 172.18.0.5:55472]
+HTTP GET / 200 [0.03, 172.18.0.5:59642]
+HTTP GET /login/ 200 [0.03, 172.18.0.5:59650]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=a9nSrhZ3OGVShbkJ3pmNBbzGhA1kwIU8jfJMhc0nneQmoWKMG4YIHtjE2gq6hI63 302 [0.01, 172.18.0.5:59654]
+HTTP GET /redirection_apres_authentification?code=842ef6535e1d277313af6967e99a4c03bd1fef239b282600604ceda5f878f095 301 [0.04, 172.18.0.5:59662]
+HTTP GET /redirection_apres_authentification/?code=842ef6535e1d277313af6967e99a4c03bd1fef239b282600604ceda5f878f095 302 [0.01, 172.18.0.5:59668]
+HTTP GET /exchange_code_for_access_token/842ef6535e1d277313af6967e99a4c03bd1fef239b282600604ceda5f878f095/ 302 [0.19, 172.18.0.5:59674]
+HTTP GET / 200 [0.02, 172.18.0.5:59682]
+HTTP GET /login/ 200 [0.03, 172.18.0.5:59690]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=IH379gbNuqaPVFoEfONYFtMCu8leWX12RNp1Zbc73Y5j2qOHStpTLLwAfOK0HXdX 302 [0.02, 172.18.0.5:59702]
+HTTP GET /redirection_apres_authentification?code=961800667bc119a916f8aea8afd70b4c5c785686f90034c3bc12d178aa8e3e5e 301 [0.04, 172.18.0.5:38382]
+HTTP GET /redirection_apres_authentification/?code=961800667bc119a916f8aea8afd70b4c5c785686f90034c3bc12d178aa8e3e5e 302 [0.02, 172.18.0.5:38390]
+HTTP GET /exchange_code_for_access_token/961800667bc119a916f8aea8afd70b4c5c785686f90034c3bc12d178aa8e3e5e/ 302 [0.20, 172.18.0.5:38404]
+HTTP GET / 200 [0.02, 172.18.0.5:38414]
+HTTP GET /login/ 200 [0.03, 172.18.0.5:38416]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=jBXgpXbzlRrHdrQUOVDMKjeAGzgMxtShsHjafScTUpmbkcgXrAfHQBYyrfFyit4c 302 [0.02, 172.18.0.5:38418]
+HTTP GET /redirection_apres_authentification?code=e5fdbbd9f38eaf8e459737df085af44081b43ecd12378e5ab340364af9f73d85 301 [0.03, 172.18.0.5:38428]
+HTTP GET /redirection_apres_authentification/?code=e5fdbbd9f38eaf8e459737df085af44081b43ecd12378e5ab340364af9f73d85 302 [0.01, 172.18.0.5:38442]
+HTTP GET /exchange_code_for_access_token/e5fdbbd9f38eaf8e459737df085af44081b43ecd12378e5ab340364af9f73d85/ 302 [0.15, 172.18.0.5:38444]
+HTTP GET / 200 [0.01, 172.18.0.5:38452]
+HTTP GET /login/ 200 [0.05, 172.18.0.5:54246]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=pFr6gu1Yejjdo4ZxTWfXDVixvTrKxIenyLN06p2iNReHvPpAwBRSJd2vgzQwiIqi 302 [0.02, 172.18.0.5:54250]
+HTTP GET /redirection_apres_authentification?code=7b98fad6788923642520b8c65f0c95bc2e7e4308ff02e883968321bfadd3b1a0 301 [0.05, 172.18.0.5:54266]
+HTTP GET /redirection_apres_authentification/?code=7b98fad6788923642520b8c65f0c95bc2e7e4308ff02e883968321bfadd3b1a0 302 [0.02, 172.18.0.5:54270]
+HTTP GET /exchange_code_for_access_token/7b98fad6788923642520b8c65f0c95bc2e7e4308ff02e883968321bfadd3b1a0/ 302 [0.16, 172.18.0.5:54278]
+HTTP GET / 200 [0.02, 172.18.0.5:54288]
+HTTP GET / 200 [0.02, 172.18.0.5:54294]
+HTTP GET /login/ 200 [0.03, 172.18.0.5:33766]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=xdTqmXoQZOWOyvBkLtzouXMBtGFJSmb5GjfkcSpaymRiFg1no8bjAfwzem4vDmn0 302 [0.01, 172.18.0.5:33774]
+HTTP GET /redirection_apres_authentification?code=dc666ada99994e7533c8c929ce7a7547f791d8df71d60fd7899041215dafe34e 301 [0.04, 172.18.0.5:33780]
+HTTP GET /redirection_apres_authentification/?code=dc666ada99994e7533c8c929ce7a7547f791d8df71d60fd7899041215dafe34e 302 [0.01, 172.18.0.5:33790]
+HTTP GET /exchange_code_for_access_token/dc666ada99994e7533c8c929ce7a7547f791d8df71d60fd7899041215dafe34e/ 302 [0.15, 172.18.0.5:33800]
+HTTP GET / 200 [0.02, 172.18.0.5:33812]
+HTTP GET /login/ 200 [0.03, 172.18.0.5:40032]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=hlBNaeuySVGue63zKfUTdXxClUK3Ny9QqrXH09vSrtBYlRtCnUwOjfhA6A9PyylL 302 [0.01, 172.18.0.5:40038]
+HTTP GET /redirection_apres_authentification?code=c9f5daf582976a40080de14151228b4c4e9b05d7a305c98bfec050d2e92687b5 301 [0.05, 172.18.0.5:40044]
+HTTP GET /redirection_apres_authentification/?code=c9f5daf582976a40080de14151228b4c4e9b05d7a305c98bfec050d2e92687b5 302 [0.01, 172.18.0.5:40060]
+HTTP GET /exchange_code_for_access_token/c9f5daf582976a40080de14151228b4c4e9b05d7a305c98bfec050d2e92687b5/ 302 [0.16, 172.18.0.5:40072]
+HTTP GET / 200 [0.02, 172.18.0.5:40086]
+Watching for file changes with StatReloader
+HTTP GET /login/ 200 [0.15, 172.19.0.5:33444]
+HTTP GET /login/ 200 [0.15, 172.19.0.5:33460]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=7RYhwPrm0mMFnzc7FKj2J06H9b6GTjGogXkbmKsGzUH9ukCaipVXPiQFURvsEjSj 302 [0.01, 172.19.0.5:33466]
+HTTP GET /redirection_apres_authentification?code=766e3d8ccbdb5157162212826800a0bbc555f28209851f358632e5c82bbd8aa8 301 [0.04, 172.19.0.5:33482]
+HTTP GET /redirection_apres_authentification/?code=766e3d8ccbdb5157162212826800a0bbc555f28209851f358632e5c82bbd8aa8 302 [0.01, 172.19.0.5:33494]
+HTTP GET /exchange_code_for_access_token/766e3d8ccbdb5157162212826800a0bbc555f28209851f358632e5c82bbd8aa8/ 302 [0.31, 172.19.0.5:33506]
+HTTP GET / 200 [0.05, 172.19.0.5:33508]
+HTTP GET /login/ 200 [0.03, 172.19.0.5:33522]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=bR8rvmQqbKFxhgYfgUYIuy9W5igJIvijkXullhRKKiA1o1oiTzADAQTUQYFvtvue 302 [0.01, 172.19.0.5:33528]
+HTTP GET /redirection_apres_authentification?code=794832afb2193093f8e1a01f165391b04b09092ec63c6406a2cd26f7e080b369 301 [0.02, 172.19.0.5:33532]
+HTTP GET /redirection_apres_authentification/?code=794832afb2193093f8e1a01f165391b04b09092ec63c6406a2cd26f7e080b369 302 [0.01, 172.19.0.5:33534]
+HTTP GET /exchange_code_for_access_token/794832afb2193093f8e1a01f165391b04b09092ec63c6406a2cd26f7e080b369/ 302 [0.14, 172.19.0.5:33542]
+HTTP GET / 200 [0.01, 172.19.0.5:33548]
+Watching for file changes with StatReloader
+HTTP GET / 200 [0.02, 172.21.0.5:58270]
+HTTP GET /login/ 200 [0.02, 172.21.0.5:58278]
+HTTP GET /connexion_42/?csrfmiddlewaretoken=9Wb0Du7r5DmiTa2wcxTLshkz7WQCQTGdi2xUtp8LEbhM0VszPcvGyz4xSCfoBTS8 302 [0.02, 172.21.0.5:58280]
+HTTP GET /redirection_apres_authentification?code=a75e0a3277cac10ba0ce6722d45a98c5a58538ce4cceb4b776131f2c1590b39c 301 [0.07, 172.21.0.5:58290]
+HTTP GET /redirection_apres_authentification/?code=a75e0a3277cac10ba0ce6722d45a98c5a58538ce4cceb4b776131f2c1590b39c 302 [0.03, 172.21.0.5:58298]
+HTTP GET /exchange_code_for_access_token/a75e0a3277cac10ba0ce6722d45a98c5a58538ce4cceb4b776131f2c1590b39c/ 302 [3.37, 172.21.0.5:58310]
+HTTP GET / 200 [0.04, 172.21.0.5:57764]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:57786]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:57774]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:57802]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:57818]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:57828]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:57844]
+HTTP GET /api/get_friend_requests/ 200 [0.11, 172.21.0.5:57862]
+HTTP GET /api/get_friends/ 200 [0.16, 172.21.0.5:57858]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:57872]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:57878]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:57886]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:57892]
+HTTP GET /api/get_friend_requests/ 200 [0.15, 172.21.0.5:57908]
+HTTP GET /api/get_friends/ 200 [0.20, 172.21.0.5:57914]
+HTTP GET /api/get_friend_requests/ 200 [0.18, 172.21.0.5:59332]
+HTTP GET /api/get_friends/ 200 [0.23, 172.21.0.5:59328]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:59342]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.21.0.5:59346]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:59356]
+HTTP GET /api/get_friends/ 200 [0.11, 172.21.0.5:59348]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:59380]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:59370]
+HTTP GET /api/get_friend_requests/ 200 [0.17, 172.21.0.5:59392]
+HTTP GET /api/get_friends/ 200 [0.18, 172.21.0.5:59388]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.21.0.5:59404]
+HTTP GET /api/get_friends/ 200 [0.12, 172.21.0.5:59394]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:59410]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:59422]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:59438]
+HTTP GET /api/get_friends/ 200 [0.09, 172.21.0.5:59436]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:59452]
+HTTP GET /api/get_friends/ 200 [0.10, 172.21.0.5:59446]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:59470]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:59460]
+HTTP GET /api/get_friends/ 200 [0.10, 172.21.0.5:56496]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.21.0.5:56512]
+HTTP GET /api/get_friends/ 200 [0.10, 172.21.0.5:56520]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.21.0.5:56522]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:56538]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56526]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56546]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:56548]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:56560]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:56572]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:56598]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56582]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56604]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.21.0.5:56618]
+HTTP GET /api/get_friends/ 200 [0.18, 172.21.0.5:56630]
+HTTP GET /api/get_friend_requests/ 200 [0.23, 172.21.0.5:56632]
+HTTP GET /profile/?username=lseiberr 200 [0.23, 172.21.0.5:56642]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:56660]
+HTTP GET /api/get_friends/ 200 [0.13, 172.21.0.5:56658]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56670]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:56672]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34300]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34290]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:34306]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:34322]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34330]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34344]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34354]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34352]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:34360]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:34356]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:34364]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34378]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34394]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34408]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34424]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34414]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:34440]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34452]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34472]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34466]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:46704]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:46706]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46710]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:46718]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46734]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:46750]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:46774]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:46758]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46776]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:46778]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:46796]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:46786]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46802]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:46818]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:46836]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46822]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46840]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:46846]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:46862]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:46864]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:55806]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:55810]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:55834]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:55818]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:55840]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:55844]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:55860]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:55866]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:55876]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:55890]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.21.0.5:55918]
+HTTP GET /api/get_friends/ 200 [0.15, 172.21.0.5:55904]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:55930]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:55920]
+HTTP GET /api/get_friend_requests/ 200 [0.39, 172.21.0.5:55940]
+HTTP GET /api/get_friends/ 200 [0.44, 172.21.0.5:55948]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:55958]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:55954]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:55968]
+HTTP GET /api/get_friends/ 200 [0.09, 172.21.0.5:55962]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.21.0.5:56516]
+HTTP GET /api/get_friends/ 200 [0.15, 172.21.0.5:56500]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:56536]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:56528]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:56550]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:56558]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:56574]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:56570]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:56600]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:56584]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:56614]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:56630]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:56636]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:56642]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:56662]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:56650]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:56664]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:56678]
+HTTP GET /api/get_friends/ 200 [0.13, 172.21.0.5:56682]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.21.0.5:56696]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:35238]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:35254]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:35268]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:35280]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:35290]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:35282]
+HTTP GET /api/get_friend_requests/ 200 [0.11, 172.21.0.5:35306]
+HTTP GET /api/get_friends/ 200 [0.13, 172.21.0.5:35300]
+HTTP GET /api/get_friend_requests/ 200 [0.18, 172.21.0.5:35332]
+HTTP GET /api/get_friends/ 200 [0.20, 172.21.0.5:35322]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:35350]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:35334]
+HTTP GET /api/get_friend_requests/ 200 [0.19, 172.21.0.5:35366]
+HTTP GET /api/get_friends/ 200 [0.20, 172.21.0.5:35354]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:35386]
+HTTP GET /api/get_friends/ 200 [0.10, 172.21.0.5:35374]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:35394]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:35400]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:35408]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:35418]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48524]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48510]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48542]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:48536]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48556]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48564]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48574]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48580]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.21.0.5:48596]
+HTTP GET /api/get_friends/ 200 [0.17, 172.21.0.5:48590]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48600]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48616]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48618]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48630]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48652]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:48640]
+HTTP GET /api/get_friend_requests/ 200 [0.10, 172.21.0.5:48670]
+HTTP GET /api/get_friends/ 200 [0.12, 172.21.0.5:48668]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:48674]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:48684]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:60276]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:60282]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:60284]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:60296]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:60308]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:60320]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:60328]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:60344]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:60360]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:60362]
+HTTP GET /api/get_friends/ 200 [0.11, 172.21.0.5:60374]
+HTTP GET /api/get_friend_requests/ 200 [0.12, 172.21.0.5:60388]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:60390]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60406]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:60420]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:60426]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60430]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:60428]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:60432]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60444]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:60178]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:60176]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60210]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:60194]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60234]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:60226]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:60248]
+HTTP GET /api/get_friend_requests/ 200 [0.12, 172.21.0.5:60236]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:60256]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:60262]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:60270]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:60268]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:60278]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:60274]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:60284]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:60288]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:60312]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:60304]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:60316]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:60332]
+HTTP GET /api/get_friends/ 200 [0.10, 172.21.0.5:34482]
+HTTP GET /api/get_friend_requests/ 200 [0.11, 172.21.0.5:34468]
+HTTP GET /api/get_friend_requests/ 200 [0.13, 172.21.0.5:34502]
+HTTP GET /api/get_friends/ 200 [0.15, 172.21.0.5:34496]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:34512]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34522]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34526]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34528]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34548]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:34540]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:34556]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34568]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34570]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:34582]
+HTTP GET /api/get_friend_requests/ 200 [0.11, 172.21.0.5:34610]
+HTTP GET /api/get_friends/ 200 [0.14, 172.21.0.5:34598]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:34628]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:34618]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:43286]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:43282]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43292]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.21.0.5:43294]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:43306]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:43296]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43322]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.21.0.5:43324]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43340]
+HTTP GET /api/get_friend_requests/ 200 [0.03, 172.21.0.5:43346]
+HTTP GET /api/get_friend_requests/ 200 [0.18, 172.21.0.5:55134]
+HTTP GET /api/get_friends/ 200 [0.20, 172.21.0.5:55128]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:52418]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:52422]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:52424]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:52426]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:52428]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:52442]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:52444]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:52446]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:52464]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:52458]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:52484]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:52474]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:52490]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:52506]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:52522]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:52514]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:52530]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:52538]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:52540]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:52544]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:57894]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57890]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:57918]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57906]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:57920]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:57924]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57938]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:57954]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57956]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:57958]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57974]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:57986]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:57994]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:57998]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:58008]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:58016]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:58032]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:58036]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:58042]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:58044]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:51196]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:51198]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:51214]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51230]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:51246]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51250]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:51260]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51266]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:51282]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51284]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:51292]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:51290]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:51294]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51302]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:51312]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:51322]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:51340]
+HTTP GET /api/get_friend_requests/ 200 [0.07, 172.21.0.5:51324]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:51354]
+HTTP GET /api/get_friend_requests/ 200 [0.06, 172.21.0.5:51346]
+HTTP GET /api/get_friends/ 200 [0.07, 172.21.0.5:43760]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:43754]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43774]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:43778]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43782]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:43796]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43808]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:43804]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43810]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:43818]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43832]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:43844]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43864]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:43848]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43878]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:43880]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:43896]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:43906]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48798]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48804]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48832]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48820]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48864]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48848]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48878]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48874]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48884]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48896]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48904]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48918]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48922]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48934]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:48952]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48942]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:48954]
+HTTP GET /api/get_friends/ 200 [0.06, 172.21.0.5:48970]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:48972]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:48974]
+HTTP GET /api/get_friend_requests/ 200 [0.08, 172.21.0.5:50386]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:50396]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:50400]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50404]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:50416]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50430]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50442]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50448]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50460]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50470]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:50480]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50476]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50486]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50488]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:50508]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:50500]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50510]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:50514]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:50538]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:50526]
+HTTP GET /api/get_friends/ 200 [0.04, 172.21.0.5:40908]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:40904]
+HTTP GET /api/get_friend_requests/ 200 [0.04, 172.21.0.5:40916]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:40928]
+HTTP GET /api/get_friends/ 200 [0.05, 172.21.0.5:40946]
+HTTP GET /api/get_friend_requests/ 200 [0.05, 172.21.0.5:40942]
+HTTP GET /api/get_friends/ 200 [0.08, 172.21.0.5:40966]
+HTTP GET /api/get_friend_requests/ 200 [0.09, 172.21.0.5:40956]
+HTTP GET /api/get_friends/ 200 [0.12, 172.21.0.5:40972]
+HTTP GET /api/get_friend_requests/ 200 [0.14, 172.21.0.5:40968]

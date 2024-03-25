@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -167,9 +168,10 @@ CSRF_COOKIE_NAME = 'csrftoken'
 
 # API 42
 
-SOCIAL_AUTH_42_KEY = 'u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3'
-SOCIAL_AUTH_42_SECRET = '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'
-LOGIN_REDIRECT_URL = 'http://localhost:80/'
+SOCIAL_AUTH_42_KEY = getenv('SOCIAL_AUTH_42_KEY')
+SOCIAL_AUTH_42_SECRET = getenv('SOCIAL_AUTH_42_SECRET')
+LOGIN_REDIRECT_URL = getenv('LOGIN_REDIRECT_URL')
+SECRET_KEY = getenv('SECRET_KEY')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),

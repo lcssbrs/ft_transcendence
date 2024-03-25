@@ -370,7 +370,7 @@ def generer_qr_code(user):
     payload = {
         'user_id': user.id,
     }
-    jwt_token = jwt.encode(payload, 'test', algorithm='HS256')
+    jwt_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
     user.jwt_token = jwt_token
     logger.critical(user.jwt_token)
     user.save()
