@@ -192,7 +192,7 @@ def exchange_code_for_access_token(request, code):
                     os.makedirs(photos_directory)
                 with open(filename, 'rb') as image_file:
                     image_data = image_file.read()
-                output_filename = os.path.join(photos_directory, user.username.removesuffix('test') + '.png')
+                output_filename = os.path.join(photos_directory, user.username + '.png')
                 with open(output_filename, 'wb') as output_file:
                     output_file.write(image_data)
                 user.profile_picture = 'photos/' + user.username + '.png'
