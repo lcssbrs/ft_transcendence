@@ -120,11 +120,11 @@ def login_view(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             token = form.cleaned_data['token']
-            user2 = user_list.objects.get(username=username)
-            if (user2.jwt_token != 'b\'' + token + '\''):
-                return JsonResponse({'success': False, 'error_message': 'Token de sécurité invalide'})
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                user2 = user_list.objects.get(username=username)
+                if (user2.jwt_token != 'b\'' + token + '\''):
+                    return JsonResponse({'success': False, 'error_message': 'Token de sécurité invalide'})
                 login(request, user)
                 return JsonResponse({'success': True})
             else:
