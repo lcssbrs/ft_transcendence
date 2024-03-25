@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1>QR Code de {{ user.username }}</h1>
-<img src="{{ user.qr_code.url }}" alt="QR Code">
+<div class="d-flex flex-column text-white justify-content-center mx-auto">
+	<h1 class="text-center">QR Code de {{ user.username }}</h1>
+	<p>Conservez cette clé, elle vous servira lors de votre prochaine connexion, car l'A2F est obligatoire sur notre Transcendence. Si vous perdez votre clé, veuillez contacter le support.</p>
+	<img class="mx-auto" src="{{ user.qr_code.url }}" style="width: 500px; height: 500px;">
+</div>
 {% endblock %}
