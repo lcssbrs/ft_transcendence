@@ -6,6 +6,7 @@ function setupRanked() {
 	let gameEnd = false
 	var playerName;
 	var adverseName;
+
 	function launchGame() {
 
 		var gameStarted = false;
@@ -272,13 +273,13 @@ function setupRanked() {
             if (data.match_exists) {
                 console.log("Match trouvé [", data.match_data.id, "]");
                 const match_id = data.match_data.id;
-                const playerId = 2;
-                initializeWebSocket(match_id, playerId);
+                const player = 2;
+                initializeWebSocket(match_id, player);
             } else {
-                console.log("Nouvelle partie créée [", data.match_data.id, "]");
+				console.log("Nouvelle partie créée [", data.match_data.id, "]");
                 const match_id = data.match_data.id;
-                const playerId = 1;
-                initializeWebSocket(match_id, playerId);
+                const player = 1;
+                initializeWebSocket(match_id, player);
             }
         })
         .catch(error => console.error('Erreur avec la connexion en base de données', error));
@@ -295,8 +296,10 @@ function setupRanked() {
 			const eventData = JSON.parse(event.data);
 			if (eventData.type === 'game_start')
 			{
+				searchingMatch.style.display = "none";
 				gameStarted = true;
 				displayGame();
+				console.log(eventData);
 			}
 			if (eventData.type === 'game_update')
 			{
