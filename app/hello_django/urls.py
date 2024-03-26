@@ -61,7 +61,7 @@ urlpatterns = [
 	path('api/tournaments/', views.api_tournois_list.as_view(), name='match-list'),
 	path('api/tournaments/<int:id>/', views.api_tournois_details.as_view(), name='match-details'),
     # ADMIN
-    path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
+    path('adminer/', lambda request: redirect('http://:8080/'), name='adminer_redirect'),
     # DEV
     path('users/', user_list_view, name='user_list'),
 	path('exemple', views.exemple_view, name='exemple'),

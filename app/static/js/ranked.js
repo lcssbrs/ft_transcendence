@@ -14,7 +14,7 @@ function setupRanked() {
 	setupStart();
 
 	// Établir la connexion WebSocket
-	const websocketURL = 'wss://localhost/ranked/'; // Remplacez YOUR_WEBSOCKET_URL par l'URL de votre serveur WebSocket
+	const websocketURL = 'wss://root.alan-andrieux.fr/ranked/'; // Remplacez YOUR_WEBSOCKET_URL par l'URL de votre serveur WebSocket
 	const websocket = new WebSocket(websocketURL);
 
 	// Gérer les événements WebSocket
