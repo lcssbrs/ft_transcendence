@@ -480,4 +480,4 @@ def edit_profile(request):
             return redirect('profile')
     else:
         form = UserProfileForm(instance=user)
-    return redirect('edit_profile')
+    return redirect('index')
