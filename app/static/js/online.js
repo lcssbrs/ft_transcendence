@@ -12,7 +12,7 @@ function online() {
             return;
         }
 
-        socket = new WebSocket(`wss://root.alan-andrieux.fr:8000/wss/match/${match_id}/`);
+        socket = new WebSocket(`wss://root.alan-andrieux.fr:443/wss/match/${match_id}/`);
 
         socket.onopen = function() {
             ID_ranked = match_id;
