@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import add_user_form, loginForm
+from .forms import add_user_form, loginForm, UserProfileForm
 from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
@@ -11,7 +11,6 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.contrib.auth.models import User
-from .forms import UserProfileForm
 from django.core.files.base import ContentFile
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -410,10 +409,10 @@ def edit_profile(request):
             # Mettre à jour les informations de l'utilisateur dans la base de données
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
-            if 'avatar' in request.FILES:
-                user.avatar = request.FILES['avatar']
+            if 'profile_picture' in request.FILES:
+                user.profile_picture = request.FILES['profile_picture']
             user.save()
-            return redirect('profile')
+            return JsonResponse({'succes': True})
     else:
         form = UserProfileForm(instance=user)
-    return render(request, 'edit_profile.html', {'form': form})
+    return JsonResponse({'succes': False, 'error_message': 'Impossible de changer les informations'})
