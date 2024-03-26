@@ -467,13 +467,13 @@ def decode_jwt_token(request):
 @login_required
 def edit_profile(request):
     user = request.user
-    user = user_list.objects.get(username=user.username)
+    userpr = user_list.objects.get(username=user.username)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             # Mettre à jour les informations de l'utilisateur dans la base de données
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
+            userpr.first_name = form.cleaned_data['first_name']
+            userpr.last_name = form.cleaned_data['last_name']
             if 'profile_picture' in request.FILES:
                 user.profile_picture = request.FILES['profile_picture']
             user.save()
