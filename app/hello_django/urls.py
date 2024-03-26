@@ -66,5 +66,9 @@ urlpatterns = [
     path('users/', user_list_view, name='user_list'),
 	path('exemple', views.exemple_view, name='exemple'),
 	path('edit_profile', views.edit_profile, name='edit_profile'),
-	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
+	## path('connected-users/', views.get_connected_users, name='get_connected_users'),
+    # WEBSOCKETS
+	path('check-match/', views.check_match, name='check_match'),
+	path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
+    path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
 ]

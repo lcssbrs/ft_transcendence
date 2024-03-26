@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from .models import models, user_list, Tournament, Match, Friendship, Match
 from .forms import add_user_form, loginForm, UserProfileForm
-from .models import models, user_list, Tournament, Match, Friendship
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -69,11 +69,41 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
-#check users status for ranked mode
-def get_connected_users(request):
-    connected_users = User.objects.filter(is_active=True)
-    user_names = [user.username for user in connected_users]
-    return JsonResponse({'user_names': user_names})
+#WEBSOCKETS
+
+def check_match(request):
+    try:
+        # Vérifier si un match existe dans la base de données
+        match_exists = Match.objects.exists()
+    except Exception as e:
+        # Gérer les exceptions comme vous le souhaitez
+        return JsonResponse({'error': str(e)}, status=500)
+
+    # Envoyer le résultat au client
+    return JsonResponse({'exists': match_exists})
+
+class JoinMatch(APIView):
+    def post(self, request):
+        match = Match.objects.filter(status='waiting', player2__isnull=True).exclude(player1=request.user).first()
+
+        if match:
+            match.player2 = request.user
+            match.status = 'in_game'
+            match.save()
+            serializer = MatchListSerializer(match)
+            return Response(serializer.data)
+        else:
+            new_match = Match(player1=request.user)
+            new_match.save()
+            serializer = MatchListSerializer(new_match)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CreateMatch(APIView):
+    def post(self, request):
+        new_match = Match(player1=request.user)
+        new_match.save()
+        serializer = MatchListSerializer(new_match)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # Login / register
 
@@ -205,7 +235,6 @@ def exchange_code_for_access_token(request, code):
                 return redirect('index')
             else:
                 return redirect('login')
-            return redirect('index')
     return redirect('index')
 
 # API
@@ -247,6 +276,19 @@ class api_match_details(APIView):
 
         serializer = MatchListSerializer(match)
         return Response(serializer.data)
+    def patch(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            if match.status != 'cancel':
+                match.update_scores()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class api_tournois_list(APIView):
     def get(self, request):
@@ -356,8 +398,30 @@ def get_friend_requests(request):
     else:
         return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
 
-
 # DEV
+
+class JoinMatch(APIView):
+    def post(self, request):
+        match = Match.objects.filter(status='waiting', player2__isnull=True).exclude(player1=request.user).first()
+
+        if match:
+            match.player2 = request.user
+            match.status = 'in_game'
+            match.save()
+            serializer = MatchListSerializer(match)
+            return Response({"match_exists": True, "match_data": serializer.data})
+        else:
+            new_match = Match(player1=request.user)
+            new_match.save()
+            serializer = MatchListSerializer(new_match)
+            return Response({"match_exists": False, "match_data": serializer.data}, status=status.HTTP_201_CREATED)
+
+class CreateMatch(APIView):
+    def post(self, request):
+        new_match = Match(player1=request.user)
+        new_match.save()
+        serializer = MatchListSerializer(new_match)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 def exemple_view(request):
     list = user_list.objects.all()
