@@ -1,6 +1,7 @@
-$(document).ready(function online() {
-	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+function online() {
+	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False') {
 		return ;
+	}
 
 	let socket = null;
 
@@ -50,4 +51,4 @@ $(document).ready(function online() {
 		}
 		socket.send(JSON.stringify(message));
 	});
-})
+}

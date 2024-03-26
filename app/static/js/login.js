@@ -19,6 +19,7 @@ function setupLogin() {
 					}
 				})
 				checkLogged();
+				online();
 				loadView('/');
 			}
 			else {
