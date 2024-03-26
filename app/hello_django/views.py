@@ -413,7 +413,7 @@ def edit_profile(request):
             if 'profile_picture' in request.FILES:
                 user.profile_picture = request.FILES['profile_picture']
             user.save()
-            return JsonResponse({'success': True})
+            return redirect('profile')
     else:
         form = UserProfileForm(instance=user)
-    return JsonResponse({'success': False, 'error_message': 'Impossible de changer les informations'})
+    return redirect('edit_profile')
