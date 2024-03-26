@@ -24,27 +24,6 @@ class PongConsumer(AsyncWebsocketConsumer):
 
         await self.check_group_full()
 
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
-            self.group_name,
-            self.channel_name
-        )
-
-        if self.group_name in self.connected_clients:
-            self.connected_clients[self.group_name].remove(self.channel_name)
-
-        await self.check_group_full()
-
-        if len(self.connected_clients[self.group_name]) == 1:
-            other_client_channel_name = self.connected_clients[self.group_name][0]
-            await self.channel_layer.send(
-                other_client_channel_name,
-                {
-                    'type': 'send_disconnect_message'
-                }
-            )
-
-
     async def receive(self, text_data):
         data = json.loads(text_data)
         message_type = data.get('type')
@@ -89,6 +68,10 @@ class PongConsumer(AsyncWebsocketConsumer):
                 }
             )
 
+    async def send_disconnect_message(self, event):
+        await self.send(text_data=json.dumps({
+            'type': 'disconnect_message'
+        }))
 
     async def game_move(self, event):
         data = event

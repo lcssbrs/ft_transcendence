@@ -279,6 +279,18 @@ class api_match_details(APIView):
 
         serializer = MatchListSerializer(match)
         return Response(serializer.data)
+    def patch(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            match.update_scores()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class api_tournois_list(APIView):
     def get(self, request):
