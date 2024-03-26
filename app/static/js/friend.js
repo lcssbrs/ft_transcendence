@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var friends = null;
+
     function loadFriends() {
         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
             return ;
@@ -8,7 +10,8 @@ $(document).ready(function() {
             success: function(response) {
                 var friendsList = response.friends;
                 var $friendContainer = $('.friend-user');
-                friendsList.forEach(function(friend) {
+                checkList = needReload(friendsList, $friendContainer);
+                checkList.forEach(function(friend) {
                     var statusColor;
                     var status;
                     if (friend.status === 'online') {
@@ -18,28 +21,26 @@ $(document).ready(function() {
                     } else if (friend.status === 'in_game') {
                         statusColor = 'rgb(13, 110, 253)';
                     }
-                    if (needReload(friend.username, statusColor) == true)
-                    {
-                        var $statusIcon = $('<div id="' + friend.username + '-status" class="status-icon mr-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ' + statusColor + ';"></div>');
+                    var $statusIcon = $('<div id="' + friend.username + '-status" class="status-icon mr-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ' + statusColor + ';"></div>');
 
-                        var $friendElement = $('<div id="' + friend.username + '" class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
-                        '<div class="d-flex align-items-center">' +
-                        '<a href="/profile/?id=' + friend.id + '" class="text-white redir">' +
-                        '<span>' + friend.username + '</span>' +
-                        '</a>' +
-                        '</div>' +
-                        '<button class="btn-sm rounded-2 remove-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC" data-friend-id="' + friend.id + '">' +
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
-                        '<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>' +
-                        '</svg>' +
-                        '</button>' +
-                        '</div>');
+                    var $friendElement = $('<div id="' + friend.username + '" class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
+                    '<div class="d-flex align-items-center">' +
+                    '<a href="/profile/?id=' + friend.id + '" class="text-white redir">' +
+                    '<span>' + friend.username + '</span>' +
+                    '</a>' +
+                    '</div>' +
+                    '<button class="btn-sm rounded-2 remove-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC" data-friend-id="' + friend.id + '">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
+                    '<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>' +
+                    '</svg>' +
+                    '</button>' +
+                    '</div>');
 
-                        $friendElement.find('.d-flex').prepend($statusIcon);
-                        $friendContainer.append($friendElement);
-                    }
+                    $friendElement.find('.d-flex').prepend($statusIcon);
+                    $friendContainer.append($friendElement);
                 });
                 attachEventListeners();
+                friends = friendsList;
 
                 $('.remove-button').on('click', function() {
                     var friendId = $(this).data('friend-id');
@@ -49,20 +50,39 @@ $(document).ready(function() {
         });
     }
 
-    function needReload(username, statusColor) {
-        var div = document.querySelector('#' + username);
-        if (div) {
-            var status = document.querySelector('#' + username + '-status');
-            if (status)
-            {
-                var color = window.getComputedStyle(status).backgroundColor;
-                if (statusColor != color) {
-                    return true;
+    function needReload(friendsList, $friendContainer) {
+        if (friends == null)
+            return (friendsList);
+        var newFriends = [];
+        var status = -2;
+        for (let i = 0; i < friendsList.length; i++) {
+            status = -1;
+            for (let j = 0; j < friends.length; j++) {
+                if (friends[j].username == friendsList[i].username) {
+                    if (friends[j].status == friendsList[i].status) {
+                        status = 0;
+                    }
+                    else {
+                        status = 1;
+                    }
                 }
             }
-            return false;
+            if (status == 1) {
+                newFriends.push(friendsList[i]);
+            }
+            else if (status == -1) {
+                var doesExist = document.querySelector('#' + friendsList[i].username);
+                if (doesExist) {
+                    doesExist.remove();
+                }
+                else {
+                    newFriends.push(friendsList[i]);
+                }
+            }
         }
-        return true;
+        if (status == -2)
+            $friendContainer.empty();
+        return (newFriends);
     }
 
     function removeFriend(friendId) {
@@ -87,10 +107,12 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 2500);
+    }, 1500);
 });
 
 $(document).ready(function() {
+    var requests = null;
+
     function loadFriendRequests() {
         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
             return ;
@@ -100,39 +122,59 @@ $(document).ready(function() {
             success: function(response) {
                 var requestsList = response.friend_requests;
                 var $requestsContainer = $('.friend-scroll');
-                requestsList.forEach(function(request) {
-                    if (needReload(request.from_user) == true)
-                    {
-                        var $acceptButton = $('<button class="btn-sm rounded-2 mr-2 accept-button" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">' +
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">' +
-                        '<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>' +
-                        '</svg>' +
-                        '</button>').data('request-id', request.id);
+                checkList = needReload(requestsList, $requestsContainer);
+                checkList.forEach(function(request) {
+                    var $acceptButton = $('<button class="btn-sm rounded-2 mr-2 accept-button" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">' +
+                    '<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>' +
+                    '</svg>' +
+                    '</button>').data('request-id', request.id);
 
-                        var $rejectButton = $('<button class="btn-sm rounded-2 reject-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">' +
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">' +
-                        '<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>' +
-                        '</svg>' +
-                        '</button>').data('request-id', request.id);
+                    var $rejectButton = $('<button class="btn-sm rounded-2 reject-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">' +
+                    '<path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>' +
+                    '</svg>' +
+                    '</button>').data('request-id', request.id);
 
-                        var $requestElement = $('<div id="' + request.from_user + '" class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
-                        '<a href="/profile/?id=' + request.id + '" class="text-white my-auto mr-auto redir">' +
-                        '<span>' + request.from_user + '</span>' +
-                        '</a>').append($acceptButton).append($rejectButton);
-                        $requestsContainer.append($requestElement);
-                    }
+                    var $requestElement = $('<div id="' + request.from_user + '-request" class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
+                    '<a href="/profile/?id=' + request.id + '" class="text-white my-auto mr-auto redir">' +
+                    '<span>' + request.from_user + '</span>' +
+                    '</a>').append($acceptButton).append($rejectButton);
+
+                    $requestsContainer.append($requestElement);
                 });
                 attachEventListeners();
+                requests = requestsList;
             },
         });
     }
 
-    function needReload(username) {
-        var div = document.querySelector('#' + username);
-        if (div) {
-            return false;
+    function needReload(requestsList, $requestsContainer) {
+        if (requests == null)
+            return (requestsList);
+        var newRequests = [];
+        var status = -2;
+        for (let i = 0; i < requestsList.length; i++) {
+            status = -1;
+            for (let j = 0; j < requests.length; j++) {
+                if (requests[j].username == requestsList[i].username) {
+                    status = 0;
+                    break ;
+                }
+            }
+            if (status == -1) {
+                var doesExist = document.querySelector('#' + requestsList[i].username + '-request');
+                if (doesExist) {
+                    doesExist.remove();
+                }
+                else {
+                    newRequests.push(requestsList[i]);
+                }
+            }
         }
-        return true;
+        if (status == -2)
+            $requestsContainer.empty();
+        return (newRequests);
     }
 
     $(document).on('click', '.accept-button', function() {
@@ -163,7 +205,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 2500);
+    }, 3000);
 });
 
 $(document).ready(function() {
@@ -221,4 +263,3 @@ function hideNotification() {
     var notification = $('#notification');
     notification.css({ 'display': 'none' });
 }
-
