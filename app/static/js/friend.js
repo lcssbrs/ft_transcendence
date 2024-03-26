@@ -54,36 +54,37 @@ $(document).ready(function() {
         if (friends == null)
             return (friendsList);
         var newFriends = [];
-        var status = -2;
+        var status;
         for (let i = 0; i < friendsList.length; i++) {
-            status = -1;
+            status = 1;
             for (let j = 0; j < friends.length; j++) {
                 if (friends[j].username == friendsList[i].username) {
                     if (friends[j].status == friendsList[i].status) {
                         status = 0;
-                    }
-                    else {
-                        status = 1;
                     }
                     break ;
                 }
             }
             if (status == 1) {
                 newFriends.push(friendsList[i]);
-                var doesExist = document.querySelector('#' + friendsList[i].username).remove();
-            }
-            else if (status == -1) {
-                var doesExist = document.querySelector('#' + friendsList[i].username);
-                if (doesExist) {
-                    doesExist.remove();
-                }
-                else {
-                    newFriends.push(friendsList[i]);
-                }
+                temp = document.querySelector('#' + friendsList[i].username);
+                if (temp)
+                    temp.remove();
             }
         }
-        if (status == -2)
-            $friendContainer.empty();
+        var checkDelete = $friendContainer[0].querySelectorAll("div");
+        for (let i = 0; i < checkDelete.length; i += 3) {
+            status = 1;
+            for (let j = 0; j < friendsList.length; j++) {
+                if (checkDelete[i].id == friendsList[j].username) {
+                    status = 0;
+                    break ;
+                }
+            }
+            if (status == 1) {
+                checkDelete[i].remove();
+            }
+        }
         return (newFriends);
     }
 
@@ -109,7 +110,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 1500);
+    }, 2000);
 });
 
 $(document).ready(function() {
@@ -155,27 +156,32 @@ $(document).ready(function() {
         if (requests == null)
             return (requestsList);
         var newRequests = [];
-        var status = -2;
+        var status;
         for (let i = 0; i < requestsList.length; i++) {
-            status = -1;
+            status = 1;
             for (let j = 0; j < requests.length; j++) {
-                if (requests[j].username == requestsList[i].username) {
+                if (requests[j].from_user === requestsList[i].from_user) {
                     status = 0;
                     break ;
                 }
             }
-            if (status == -1) {
-                var doesExist = document.querySelector('#' + requestsList[i].username + '-request');
-                if (doesExist) {
-                    doesExist.remove();
-                }
-                else {
-                    newRequests.push(requestsList[i]);
-                }
+            if (status == 1) {
+                newRequests.push(requestsList[i]);
             }
         }
-        if (status == -2)
-            $requestsContainer.empty();
+        var checkDelete = $requestsContainer[0].querySelectorAll("div");
+        for (let i = 0; i < checkDelete.length; i++) {
+            status = 1;
+            for (let j = 0; j < requestsList.length; j++) {
+                if (checkDelete[i].id == requestsList[j].from_user + '-request') {
+                    status = 0;
+                    break ;
+                }
+            }
+            if (status == 1) {
+                checkDelete[i].remove();
+            }
+        }
         return (newRequests);
     }
 
@@ -207,7 +213,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 3000);
+    }, 2000);
 });
 
 $(document).ready(function() {
