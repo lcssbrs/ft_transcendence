@@ -172,6 +172,9 @@ def exchange_code_for_access_token(request, code):
         if user_response.status_code == 200:
             user_info = user_response.json()
             username = user_info.get('login')
+            if (user_list.objects.filter(username=username).exists()):
+                if (user_list.objects.get(username=username).intra == False):
+                    return redirect('login')
             email = user_info.get('email')
             first_name = user_info.get('first_name')
             last_name = user_info.get('last_name')
@@ -180,9 +183,9 @@ def exchange_code_for_access_token(request, code):
             user.first_name = first_name
             user.last_name = last_name
             user.password = " "
-            user.intra = True
 
             if created:
+                user.intra = True
                 image = user_info.get('image', '')
                 image = image.get('versions', '')
                 image = image.get('medium')
