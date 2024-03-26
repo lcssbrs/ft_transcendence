@@ -305,13 +305,25 @@ function setupRanked() {
 			},
 			body: JSON.stringify(requestBody)
 		})
-		.then(response => {
-			if (response.ok) {
-				console.log('Scores mis à jour avec succès !');
-			} else {
-				console.log('Échec de la mise à jour des scores.');
-			}
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function quitGameApi(match_id, score_01, score_02) {
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			status: "cancel"
+		};
+
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
 		})
+		.then(response => {})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
 
@@ -474,6 +486,10 @@ function setupRanked() {
 				else
 					endGameApi(match_id, playerScore, 4, playerId);
 			}
+			if (playerId == 1 && disconnect_ennemy == false && gameStarted == false)
+			{
+				quitGameApi(match_id, 0, 0);
+			}
 			gameStarted = false;
 			console.log("WebSocket déconnecté");
 		};
@@ -490,8 +506,23 @@ function setupRanked() {
 			}
 		}
 
-		window.addEventListener("popstate", function() {
-			closeWebSocket();
+		document.addEventListener('click', function(event) {
+			if (event.target.tagName === 'A') {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('popstate', function(event) {
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('hashchange', function(event) {
+			console.log(window.location.pathname);
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
 		});
 	}
 }

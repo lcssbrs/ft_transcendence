@@ -283,7 +283,8 @@ class api_match_details(APIView):
         serializer = MatchListSerializer(match, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            match.update_scores()
+            if match.status is not 'cancel':
+                match.update_scores()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

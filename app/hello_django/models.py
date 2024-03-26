@@ -81,7 +81,7 @@ class Match(models.Model):
     score_player1 = models.IntegerField(default=0)
     score_player2 = models.IntegerField(default=0)
     player_winner = models.ForeignKey('user_list', related_name='winner_matches', on_delete=models.CASCADE, null=True)
-    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu')])
+    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
     locked = models.BooleanField(default=False)
 
     def update_scores(self):
