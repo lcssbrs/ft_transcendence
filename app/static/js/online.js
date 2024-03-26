@@ -1,4 +1,4 @@
-$(document).ready(function online() {
+function online() {
 	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
 		return ;
 
@@ -51,4 +51,4 @@ $(document).ready(function online() {
 			socket.send(JSON.stringify(message));
 		}
 	});
-})
+}
