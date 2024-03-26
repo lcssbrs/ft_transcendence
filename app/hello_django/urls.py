@@ -65,6 +65,6 @@ urlpatterns = [
     # DEV
     path('users/', user_list_view, name='user_list'),
 	path('exemple', views.exemple_view, name='exemple'),
-	path('edit', views.edit_profile, name='edit'),
+	path('edit_profile', views.edit_profile, name='edit'),
 	# path('connected-users/', views.get_connected_users, name='get_connected_users'),
 ]
