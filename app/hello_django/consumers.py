@@ -1,7 +1,31 @@
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
 from json.decoder import JSONDecodeError
+from .views import user_list
+from .models import user_list
+
+
+class ChatConsumer(WebsocketConsumer):
+    def connect(self):
+        username = self.scope['user'].username
+        user_list.objects.update_or_create(username=username, defaults={'status': 'online'})
+        self.accept()
+
+    def receive(self, text_data):
+        data = json.loads(text_data)
+        username = self.scope['user'].username
+        if 'status' in data:
+            new_status = data['status']
+            if new_status == 'in_game':
+                user_list.objects.update_or_create(username=username, defaults={'status': 'in_game'})
+            elif new_status == 'out':
+                previous_status = 'online' if user_list.objects.get(username=username).status != 'offline' else 'offline'
+                user_list.objects.update_or_create(username=username, defaults={'status': previous_status})
+
+    def disconnect(self, close_code):
+        username = self.scope['user'].username
+        user_list.objects.update_or_create(username=username, defaults={'status': 'offline'})
 
 class PongConsumer(AsyncWebsocketConsumer):
     connected_clients = {}
