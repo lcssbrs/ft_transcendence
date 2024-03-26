@@ -37,18 +37,19 @@ function online() {
 
 	window.addEventListener('popstate', function(event)
 	{
-		if (window.location.pathname !== "/ranked/" && window.location.pathname !== "/tournament/") {
+		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+			let message = {};
 			message.status = 'in_game';
+			socket.send(JSON.stringify(message));
 		}
-		socket.send(JSON.stringify(message));
 	});
 
 	window.addEventListener('hashchange', function(event)
 	{
-		console.log(window.location.pathname);
-		if (window.location.pathname !== "/ranked/" && window.location.pathname !== "/ranked/" && window.location.pathname !== "/tournament/") {
+		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+			let message = {};
 			message.status = 'in_game';
+			socket.send(JSON.stringify(message));
 		}
-		socket.send(JSON.stringify(message));
 	});
 }
