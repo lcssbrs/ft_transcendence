@@ -392,8 +392,9 @@ def remove_friend(request):
 def get_friend_requests(request):
     if request.method == 'GET':
         user = request.user
+        user2 = user_list.objects.get(username=user.username)
         friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
-        friend_requests_data = [{'id': request.id, 'from_user': request.from_user.username} for request in friend_requests]
+        friend_requests_data = [{'id': user2.id, 'from_user': request.from_user.username} for request in friend_requests]
         return JsonResponse({'friend_requests': friend_requests_data})
     else:
         return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
