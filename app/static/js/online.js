@@ -6,9 +6,9 @@ function online() {
 	let socket = null;
 
 	var ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
-	var ws_path = ws_scheme + '://' + 'root.alan-andrieux.fr/ws/chat/';
+	var ws_path = ws_scheme + '://' + 'root.alan-andrieux.fr:8000/wss/chat/';
 
-	socket = new WebSocket('wss://root.alan-andrieux.fr/wss/chat/');
+	socket = new WebSocket('wss://root.alan-andrieux.fr:8000/wss/chat/');
 
 	socket.onopen = function() {
 		// console.log("WebSocket connecté");
