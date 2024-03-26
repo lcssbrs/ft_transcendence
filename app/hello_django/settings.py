@@ -172,7 +172,7 @@ SOCIAL_AUTH_42_KEY = getenv('SOCIAL_AUTH_42_KEY')
 SOCIAL_AUTH_42_SECRET = getenv('SOCIAL_AUTH_42_SECRET')
 LOGIN_REDIRECT_URL = getenv('LOGIN_REDIRECT_URL')
 SECRET_KEY = getenv('SECRET_KEY')
-
+CSRF_TRUSTED_ORIGINS = ["https://root.alan-andrieux.fr"]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),
 ]
