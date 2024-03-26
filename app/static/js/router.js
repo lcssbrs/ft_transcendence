@@ -5,12 +5,12 @@ function extractViewContent(html) {
 	return viewContent;
 }
 
-function loadView(url) {
-	console.log(url);
+function loadView(url, addHistory) {
 	fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			history.pushState(null, null, url);
+			if (addHistory == true)
+				history.pushState(null, null, url);
 			document.querySelector('#content').innerHTML = extractViewContent(html);
 			if (url == '/local/')
 				setupLocal();
@@ -38,7 +38,7 @@ function attachEventListeners() {
 		link.addEventListener('click', function(event) {
 			event.preventDefault();
 			const url = link.getAttribute('href');
-			loadView(url);
+			loadView(url, true);
 		});
 	}
 
@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	online();
 	attachEventListeners();
 	let url = location.pathname;
+	history.pushState(null, null, url);
 	if (url == 'local/')
 		setupLocal();
 		if (url == '/local/')
@@ -89,9 +90,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupProfile();
 	else if (url == '/register/')
 		setupRegister();
+
 	window.addEventListener('popstate', function(event) {
-		event.preventDefault();
 		let url = location.pathname;
-		loadView(url);
+		loadView(url, false);
 	});
 });

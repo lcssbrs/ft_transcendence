@@ -58,10 +58,11 @@ def ranking_view(request):
     top_players = user_list.objects.order_by('-games_rank')
 
     context = {
-        'top_players': top_players
+        'top_players': top_players,
+        'user': request.user
     }
 
-    return render(request, 'ranking.html', context, {'user': request.user})
+    return render(request, 'ranking.html', context)
 
 def solo_view(request):
     return render(request, 'solo.html', {'user': request.user})

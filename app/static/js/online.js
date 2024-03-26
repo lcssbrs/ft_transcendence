@@ -37,7 +37,7 @@ function online() {
 
 	window.addEventListener('popstate', function(event)
 	{
-		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+		if (window.location.pathname !== "/ranked/" && window.location.pathname !== "/tournament/") {
 			message.status = 'in_game';
 		}
 		socket.send(JSON.stringify(message));
@@ -46,7 +46,7 @@ function online() {
 	window.addEventListener('hashchange', function(event)
 	{
 		console.log(window.location.pathname);
-		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+		if (window.location.pathname !== "/ranked/" && window.location.pathname !== "/ranked/" && window.location.pathname !== "/tournament/") {
 			message.status = 'in_game';
 		}
 		socket.send(JSON.stringify(message));
