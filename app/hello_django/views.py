@@ -403,6 +403,7 @@ def decode_jwt_token(request):
 @login_required
 def edit_profile(request):
     user = request.user
+    user = user_list.objects.get(username=user.username)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
@@ -412,7 +413,7 @@ def edit_profile(request):
             if 'profile_picture' in request.FILES:
                 user.profile_picture = request.FILES['profile_picture']
             user.save()
-            return JsonResponse({'succes': True})
+            return JsonResponse({'success': True})
     else:
         form = UserProfileForm(instance=user)
-    return JsonResponse({'succes': False, 'error_message': 'Impossible de changer les informations'})
+    return JsonResponse({'success': False, 'error_message': 'Impossible de changer les informations'})
