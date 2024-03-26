@@ -1,101 +1,66 @@
+let disconnect_ennemy = false;
+
 function online() {
     if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False') {
-        return;
+        return ;
     }
 
     let socket = null;
-    let gameStarted = false;
 
-    function initializeWebSocket(match_id, playerId) {
-        if (socket !== null && socket.readyState === WebSocket.OPEN) {
-            console.log("Connexion WebSocket déjà ouverte.");
-            return;
+    var ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+    var ws_path = ws_scheme + '://' + 'root.alan-andrieux.fr/wss/chat/';
+
+    socket = new WebSocket(ws_path);
+
+    socket.onopen = function() {
+        console.log("WebSocket connecté");
+        // Vous pouvez envoyer des données ici une fois que la connexion est ouverte
+        let message = {};
+        if (window.location.pathname.includes("/ranked/") || window.location.pathname.includes("/tournament/")) {
+            message.status = 'in_game';
+        } else {
+            message.status = 'out';
         }
+        socket.send(JSON.stringify(message));
+    };
 
-        socket = new WebSocket(`wss://root.alan-andrieux.fr:443/wss/match/${match_id}/`);
+    socket.onmessage = function(event) {
+        // Gérer les messages reçus ici
+    };
 
-        socket.onopen = function() {
-            ID_ranked = match_id;
-            console.log("Websocket ouvert");
-        };
-
-        socket.onmessage = function(event) {
-            const eventData = JSON.parse(event.data);
-            if (eventData.type === 'game_start') {
-                searchingMatch.style.display = "none";
-                gameStarted = true;
-                displayGame();
-                GetPlayerId(match_id);
-            }
-            if (eventData.type === 'game_update') {
-                const playerData = eventData.data;
-                if (playerData.player !== playerId) {
-                    updateOpponentPad(playerData.direction);
-                }
-            }
-            if (eventData.type === 'disconnect_message') {
-                disconnect_ennemy = true;
-                closeWebSocket();
-            }
-        };
-
-        function sendGameMove(player, direction) {
-            if (gameStarted) {
-                const moveData = {
-                    type: 'game_move',
-                    player: player,
-                    direction: direction
-                };
-                socket.send(JSON.stringify(moveData));
-            }
-        }
-
-        // Autres fonctions et gestionnaires d'événements
-
-        socket.onclose = function() {
-            adversaireMatch.style.display = "block";
-            if (gameStarted && disconnect_ennemy) {
-                if (playerId === 1)
-                    endGameApi(match_id, 4, adverseScore, playerId);
-                else
-                    endGameApi(match_id, playerScore, 4, playerId);
-            }
-            if (playerId === 1 && !disconnect_ennemy && !gameStarted) {
-                quitGameApi(match_id, 0, 0);
-            }
-            gameStarted = false;
-            console.log("WebSocket déconnecté");
-        };
-
-        // Autres fonctions et gestionnaires d'événements
+    socket.onclose = function() {
+        console.log("WebSocket déconnecté");
     }
 
-    const startButton = document.getElementById("start-ranked");
-    const searchingMatch = document.getElementById("searching-match");
-    const adversaireMatch = document.getElementById("adversaire-match");
-
-    startButton.addEventListener("click", function() {
-        startButton.style.display = "none";
-        searchingMatch.style.display = "block";
-
-        fetch('/api/join-match/', {
-            method: 'POST'
-        })
-        .then(response => response.json())
-        .then(data => {
-            var match_id = 0;
-            if (data.match_exists) {
-                console.log("Match trouvé [", data.match_data.id, "]");
-                match_id = data.match_data.id;
-                const player = 2;
-                initializeWebSocket(match_id, player);
+    document.addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+            let message = {};
+            if (event.target.href.includes("/ranked/") || event.target.href.includes("/tournament/")) {
+                message.status = 'in_game';
             } else {
-                console.log("Nouvelle partie créée [", data.match_data.id, "]");
-                match_id = data.match_data.id;
-                const player = 1;
-                initializeWebSocket(match_id, player);
+                message.status = 'out';
             }
-        })
-        .catch(error => console.error('Erreur avec la connexion en base de données', error));
+
+            socket.send(JSON.stringify(message));
+        }
+    });
+
+    window.addEventListener('popstate', function(event) {
+        if (window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+            let message = {};
+            message.status = 'in_game';
+            socket.send(JSON.stringify(message));
+        }
+    });
+
+    window.addEventListener('hashchange', function(event) {
+        if (window.location.pathname !== "/ranked" && window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
+            let message = {};
+            message.status = 'in_game';
+            socket.send(JSON.stringify(message));
+        }
     });
 }
+
+// Appeler la fonction online au chargement de la page
+online();
