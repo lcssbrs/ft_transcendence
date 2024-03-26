@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.contrib.auth.models import User
+from .forms import UserProfileForm
 from django.core.files.base import ContentFile
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -399,3 +400,20 @@ def decode_jwt_token(request):
         return JsonResponse({'success': False, 'error': 'Token expiré'})
     except jwt.InvalidTokenError:
         return JsonResponse({'success': False, 'error': 'Token invalide'})
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Mettre à jour les informations de l'utilisateur dans la base de données
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            if 'avatar' in request.FILES:
+                user.avatar = request.FILES['avatar']
+            user.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})

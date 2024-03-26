@@ -28,3 +28,13 @@ class loginForm(forms.Form):
     username = forms.CharField(label='Nom d\'utilisateur', widget=forms.TextInput(attrs={'placeholder': 'Pseudonyme'}))
     password = forms.CharField(label='Mot de passe', widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'}))
     token = forms.CharField(label='Clé d\'authentification', widget=forms.TextInput(attrs={'placeholder': 'Clé d\'authentification'}))
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = user_list
+        fields = ['first_name', 'last_name', 'profile_picture']
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['profile_picture'].required = False
