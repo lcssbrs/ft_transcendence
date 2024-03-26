@@ -61,7 +61,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [(ALLOWED_HOSTS, 6379)],
+            'hosts': [('https://root.alan-andrieux.fr/', 6379)],
         },
     },
 }
