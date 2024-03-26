@@ -8,18 +8,26 @@ function online() {
 	var ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
 	var ws_path = ws_scheme + '://' + 'root.alan-andrieux.fr:8000/wss/chat/';
 
-	socket = new WebSocket('wss://root.alan-andrieux.fr:8000/wss/chat/');
+	socket = new WebSocket(ws_path);
 
 	socket.onopen = function() {
-		// console.log("WebSocket connecté");
+		console.log("WebSocket connecté");
+		// Vous pouvez envoyer des données ici une fois que la connexion est ouverte
+		let message = {};
+		if (window.location.pathname.includes("/ranked/") || window.location.pathname.includes("/tournament/")) {
+			message.status = 'in_game';
+		} else {
+			message.status = 'out';
+		}
+		socket.send(JSON.stringify(message));
 	};
 
 	socket.onmessage = function(event) {
-
+		// Gérer les messages reçus ici
 	};
 
 	socket.onclose = function() {
-		// console.log("WebSocket déconnecté");
+		console.log("WebSocket déconnecté");
 	}
 
 	document.addEventListener('click', function(event) {
@@ -35,8 +43,7 @@ function online() {
 		}
 	});
 
-	window.addEventListener('popstate', function(event)
-	{
+	window.addEventListener('popstate', function(event) {
 		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
 			let message = {};
 			message.status = 'in_game';
@@ -44,8 +51,7 @@ function online() {
 		}
 	});
 
-	window.addEventListener('hashchange', function(event)
-	{
+	window.addEventListener('hashchange', function(event) {
 		if (window.location.pathname !== "/ranked" && window.location.pathname !== "/ranked" && window.location.pathname !== "/tournament") {
 			let message = {};
 			message.status = 'in_game';
