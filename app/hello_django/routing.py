@@ -6,8 +6,8 @@ from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
 
 websocket_urlpatterns = [
-    path('ws/ranked', PongConsumer.as_asgi()),
-	path('ws/chat/', ChatConsumer.as_asgi()),
+    path('wss/ranked', PongConsumer.as_asgi()),
+	path('wss/chat/', ChatConsumer.as_asgi()),
 ]
 
 application = ProtocolTypeRouter({
