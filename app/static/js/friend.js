@@ -163,7 +163,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 3000);
+    }, 2500);
 });
 
 $(document).ready(function() {
