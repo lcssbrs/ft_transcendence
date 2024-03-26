@@ -141,7 +141,7 @@ def login_view(request):
 logger = logging.getLogger(__name__)
 
 def connexion_42(request):
-    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fredirection_apres_authentification&response_type=code')
+    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=https%3A%2F%2Froot.alan-andrieux.fr%2Fredirection_apres_authentification&response_type=code')
 
 def redirection_apres_authentification(request):
     code_autorisation = request.GET.get('code')
@@ -158,7 +158,7 @@ def exchange_code_for_access_token(request, code):
         'client_id': settings.SOCIAL_AUTH_42_KEY,
         'client_secret': settings.SOCIAL_AUTH_42_SECRET,
         'code': code,
-        'redirect_uri': 'http://localhost:80/redirection_apres_authentification',
+        'redirect_uri': 'https://root.alan-andrieux.fr/redirection_apres_authentification',
     }
     response = requests.post(token_url, data=data)
 
