@@ -20,6 +20,7 @@ function setupRegister() {
 					}
 				})
 				checkLogged();
+				online();
 				loadView('/qrcode/');
 			}
 			else {

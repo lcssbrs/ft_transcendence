@@ -72,6 +72,7 @@ function checkLogged()
 
 document.addEventListener("DOMContentLoaded", function() {
 	checkLogged();
+	online();
 	attachEventListeners();
 	let url = location.pathname;
 	if (url == 'local/')
