@@ -65,10 +65,12 @@ $(document).ready(function() {
                     else {
                         status = 1;
                     }
+                    break ;
                 }
             }
             if (status == 1) {
                 newFriends.push(friendsList[i]);
+                var doesExist = document.querySelector('#' + friendsList[i].username).remove();
             }
             else if (status == -1) {
                 var doesExist = document.querySelector('#' + friendsList[i].username);
