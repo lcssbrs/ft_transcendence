@@ -1,6 +1,6 @@
 app/hello_django/logs.log
 app/media/qr_codes/*
 app/hello_django/migrations/*
-!app/media/photos/__init__.py
 app/media/photos/*
+!app/media/photos/__init__.py
 !app/media/photos/default-profile.png
