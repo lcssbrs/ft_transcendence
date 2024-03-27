@@ -6,6 +6,7 @@ function setupRanked() {
 	let gameEnd = false
 	let gameOwnerId;
 	var ID_ranked;
+	let playerId;
 	var playerName;
 	var adverseName;
 	var playerScore = 0;
