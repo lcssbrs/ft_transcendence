@@ -1,41 +1,27 @@
-function loadView(url) {
-	if (url == 'nothing')
-	{
-		document.getElementById('content').classList.add('d-none');
-		document.getElementById('logcontent').classList.add('d-none');
-		return ;
-	}
+function extractViewContent(html) {
+	const tempElement = document.createElement('div');
+	tempElement.innerHTML = html;
+	const viewContent = tempElement.querySelector('#content').innerHTML;
+	return viewContent;
+}
+
+function loadView(url, addHistory) {
 	fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			if (url == '/register/' || url == '/login/') {
-				var content = document.getElementById('logcontent');
-				if (url == '/register/') {
-					content.style.width = "35%";
-					content.style.height = "75%";
-				}
-				else {
-					content.style.width = "30%";
-					content.style.height = "60%";
-				}
-				content.classList.remove('d-none');
-				document.getElementById('content').classList.add('d-none');
-				content.innerHTML = html;
-			}
-			else {
-				var content = document.getElementById('content');
-				content.classList.remove('d-none');
-				document.getElementById('logcontent').classList.add('d-none');
-				content.innerHTML = html;
-			}
-			if (url == '/solo/')
-				setupSolo();
-			else if (url == '/local/')
+			if (addHistory == true)
+				history.pushState(null, null, url);
+			document.querySelector('#content').innerHTML = extractViewContent(html);
+			if (url == '/local/')
 				setupLocal();
+			else if (url == '/solo/')
+				setupSolo();
 			else if (url == '/ranked/')
 				setupRanked();
 			else if (url == '/login/')
 				setupLogin();
+			else if (url == '/register/')
+				setupRegister();
 			attachEventListeners();
 		})
 		.catch(error => {
@@ -45,28 +31,64 @@ function loadView(url) {
 
 function attachEventListeners() {
 	const navLinks = document.querySelectorAll('.redir');
+
+	function attachClickEvent(link) {
+		link.addEventListener('click', function(event) {
+			event.preventDefault();
+			const url = link.getAttribute('href');
+			loadView(url, true);
+		});
+	}
+
 	navLinks.forEach(link => {
-		if (!link.hasAttribute('data-event-added')) {
-			link.addEventListener('click', function(event) {
-				event.preventDefault();
-				const url = link.getAttribute('href');
-				loadView(url);
-				history.pushState(null, null, url);
-			});
-			link.setAttribute('data-event-added', 'true');
+		if (!link.hasAttribute('data-click-event-attached')) {
+			attachClickEvent(link);
+			link.setAttribute('data-click-event-attached', true);
 		}
 	});
 }
 
+function checkLogged()
+{
+	var isAuthenticated = document.getElementById('auth-data').getAttribute('data-authenticated') === 'True';
+	if (isAuthenticated) {
+		document.querySelector('#logbutton').classList.add('d-none');
+		document.querySelector('#profilebar').classList.remove('d-none');
+		document.querySelector('#friend-list').classList.remove('d-none');
+		document.querySelector('#friend-request').classList.remove('d-none');
+		document.querySelector('#add-friend').classList.remove('d-none');
+		document.querySelector('#logrequire').classList.add('d-none');
+	} else {
+		document.querySelector('#logbutton').classList.remove('d-none');
+		document.querySelector('#profilebar').classList.add('d-none');
+		document.querySelector('#friend-list').classList.add('d-none');
+		document.querySelector('#friend-request').classList.add('d-none');
+		document.querySelector('#add-friend').classList.add('d-none');
+		document.querySelector('#logrequire').classList.remove('d-none');
+	}
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+	checkLogged();
+	online();
 	attachEventListeners();
+	let url = location.pathname;
+	history.pushState(null, null, url);
+	if (url == 'local/')
+		setupLocal();
+		if (url == '/local/')
+		setupLocal();
+	else if (url == '/solo/')
+		setupSolo();
+	else if (url == '/ranked/')
+		setupRanked();
+	else if (url == '/login/')
+		setupLogin();
+	else if (url == '/register/')
+		setupRegister();
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;
-		console.log(url);
-		if (url === '/') {
-			url = 'nothing';
-		}
-		loadView(url);
+		loadView(url, false);
 	});
 });

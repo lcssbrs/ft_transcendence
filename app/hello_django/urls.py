@@ -38,6 +38,7 @@ urlpatterns = [
     path('ranked/', ranked_view, name='ranked'),
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
+    path('qrcode/', views.afficher_qr_code, name='qrcode'),
 	# Friend
 	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
 	path('add_friend_username/<str:username>/', views.add_friend_username, name='add_friend_username'),
@@ -62,9 +63,7 @@ urlpatterns = [
     # ADMIN
     path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
     # DEV
-    path('two-factor-login/', views.two_factor_login, name='two_factor_login'),
     path('users/', user_list_view, name='user_list'),
-    path('two-factor-login/', views.two_factor_login, name='two_factor_login'),
 	path('exemple', views.exemple_view, name='exemple'),
 	## path('connected-users/', views.get_connected_users, name='get_connected_users'),
     # WEBSOCKETS

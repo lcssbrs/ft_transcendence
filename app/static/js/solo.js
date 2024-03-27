@@ -251,7 +251,7 @@ function endGame() {
 	displayWinner = true;
 	setTimeout(function() {
 		displayWinner = false;
-		location.reload();
+		loadView('/solo/');
 	}, 3000);
 
 	removeKeyListeners();

@@ -4,9 +4,12 @@ function setupRanked() {
 	var canvas;
 	var winner
 	let gameEnd = false
+	var ID_ranked;
 	var playerName;
 	var adverseName;
-
+	var playerScore = 0;
+	var adverseScore = 0;
+	let disconnect_ennemy = false
 	function launchGame() {
 
 		var gameStarted = false;
@@ -108,7 +111,9 @@ function setupRanked() {
 				context.font = canvas.width / 15 + 'px Anta';
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
-				winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+				playerScore = game.player.score;
+				adverseScore = game.challenger.score;
+				winner = game.player.score === 3 ? playerName : adverseName;
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
 		}
@@ -160,9 +165,11 @@ function setupRanked() {
 				game.ball.speed.x = 2;
 				if (player === game.player) {
 					game.challenger.score++;
+					adverseScore = game.challenger.score;
 					flashBorder(1000);
 				} else {
 					game.player.score++;
+					playerScore = game.player.score;
 					flashBorder(1000);
 				}
 				updateScoreDisplay();
@@ -201,11 +208,16 @@ function setupRanked() {
 		function endGame() {
 			gameStarted = false;
 			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+			if (playerScore > adverseScore)
+				endGameApi(ID_ranked, playerScore, adverseScore, 1);
+			else
+				endGameApi(ID_ranked, playerScore, adverseScore, 2);
 			displayWinner = true;
+			endGame = true;
 
 			setTimeout(function() {
 				displayWinner = false;
-				location.reload();
+				loadView('/ranked/')
 			}, 3000);
 
 			removeKeyListeners();
@@ -255,40 +267,114 @@ function setupRanked() {
 		//----------------WEBSOCKET----------------\/
 		//-----------------------------------------\/
 
-		const startButton = document.getElementById("start-ranked");
-		const searchingMatch = document.getElementById("searching-match");
-		let socket = null;
-		let gameStarted = false;
+	const startButton = document.getElementById("start-ranked");
+	const searchingMatch = document.getElementById("searching-match");
+	const adversaireMatch = document.getElementById("adversaire-match");
+	let socket = null;
+	let gameStarted = false;
 
-		startButton.addEventListener("click", function() {
-			startButton.style.display = "none";
-			searchingMatch.style.display = "block";
 
-			fetch('/api/join-match/', {
-            method: 'POST'
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.match_data);
-            if (data.match_exists) {
-                console.log("Match trouvé [", data.match_data.id, "]");
-                const match_id = data.match_data.id;
-                const player = 2;
-                initializeWebSocket(match_id, player);
-            } else {
-				console.log("Nouvelle partie créée [", data.match_data.id, "]");
-                const match_id = data.match_data.id;
-                const player = 1;
-                initializeWebSocket(match_id, player);
-            }
-        })
-        .catch(error => console.error('Erreur avec la connexion en base de données', error));
-    });
+	function GetPlayerId(match_id) {
+		fetch(`/api/match/${match_id}/`, {
+			method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data) {
+				playerId1 = data.player1;
+				playerId2 = data.player2;
+				getPlayerNames(playerId1, playerId2);
+			} else {
+				console.log('Match non trouvé');
+			}
+		})
+		.catch(error => console.error('Erreur avec la connexion en base de données', error));
+	};
+
+	function endGameApi(match_id, score_01, score_02, winner) {
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			player_winner: winner,
+			status: "end_game"
+		};
+
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		})
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function quitGameApi(match_id, score_01, score_02) {
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			status: "cancel"
+		};
+
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		})
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function getPlayerNames(player1, player2) {
+		const request1 = fetch(`/api/users/${player1}`);
+		const request2 = fetch(`/api/users/${player2}`);
+
+		Promise.all([request1, request2])
+			.then(responses => {
+				const promises = responses.map(response => response.json());
+				Promise.all(promises)
+					.then(data => {
+						playerName = data[0].username;
+						adverseName = data[1].username;
+					})
+					.catch(error => console.error("Erreur lors de la récupération des données :", error));
+			})
+			.catch(error => console.error("Erreur lors de la requête API :", error));
+	}
+
+	startButton.addEventListener("click", function() {
+		startButton.style.display = "none";
+		searchingMatch.style.display = "block";
+
+		fetch('/api/join-match/', {
+		method: 'POST'
+	})
+	.then(response => response.json())
+	.then(data => {
+		var match_id = 0;
+		if (data.match_exists) {
+			console.log("Match trouvé [", data.match_data.id, "]");
+			match_id = data.match_data.id;
+			const player = 2;
+			initializeWebSocket(match_id, player);
+		} else {
+			console.log("Nouvelle partie créée [", data.match_data.id, "]");
+			match_id = data.match_data.id;
+			const player = 1;
+			initializeWebSocket(match_id, player);
+		}
+	})
+		.catch(error => console.error('Erreur avec la connexion en base de données', error));
+	});
 
     function initializeWebSocket(match_id, playerId) {
-		const socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
+		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
 
 		socket.onopen = function() {
+			ID_ranked = match_id;
 			console.log("Websocket ouvert");
 		};
 
@@ -299,7 +385,7 @@ function setupRanked() {
 				searchingMatch.style.display = "none";
 				gameStarted = true;
 				displayGame();
-				console.log(eventData);
+				GetPlayerId(match_id);
 			}
 			if (eventData.type === 'game_update')
 			{
@@ -308,8 +394,10 @@ function setupRanked() {
 					updateOpponentPad(playerData.direction);
 				}
 			}
-			if (gameEnd === true) {
-				console.log("fin de jeu");
+			if (eventData.type === 'disconnect_message')
+			{
+				disconnect_ennemy = true;
+				closeWebSocket();
 			}
 		};
 
@@ -391,18 +479,51 @@ function setupRanked() {
 		});
 
 		socket.onclose = function() {
-
+			adversaireMatch.style.display = "block";
+			if (gameStarted == true && disconnect_ennemy == true)
+			{
+				if (playerId === 1)
+					endGameApi(match_id, 4, adverseScore, playerId);
+				else
+					endGameApi(match_id, playerScore, 4, playerId);
+			}
+			if (playerId == 1 && disconnect_ennemy == false && gameStarted == false)
+			{
+				quitGameApi(match_id, 0, 0);
+			}
+			gameStarted = false;
 			console.log("WebSocket déconnecté");
 		};
 
 		function displayGame() {
 			launchGame();
 		}
+
+		function closeWebSocket() {
+			if (socket) {
+				socket.close();
+				console.log("Connexion WebSocket fermée");
+				socket = null;
+			}
+		}
+
+		document.addEventListener('click', function(event) {
+			if (event.target.tagName === 'A') {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('popstate', function(event) {
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('hashchange', function(event) {
+			console.log(window.location.pathname);
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
 	}
 }
-
-// TODO traiter la fin de jeu, nom d'affichage sur l'écran
-// TODO base de données gérer les parties finies, points lors d'un but, ajout des stats, ect..
-// TODO gérer les déconnexion en match
-// TODO gérer si l'utilisateur crée un match et se déconnecte alors que personne à rejoint \
-// TODO (next) TODO empêcher un joueur de pouvoir s'y connecter

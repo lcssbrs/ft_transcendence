@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import add_user_form
 from .models import models, user_list, Tournament, Match, Friendship, Match
+from .forms import add_user_form, loginForm
 from django.contrib.auth import authenticate, login, get_user_model
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
@@ -37,29 +36,47 @@ from qrcode import make
 from django.contrib.auth.decorators import login_required
 from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
-from django.contrib.auth import logout
 
-@login_required
-def two_factor_login(request):
-    user = request.user
-    if request.method == 'POST':
-        token = request.POST.get('token')
-        if 'b\'' + token + '\'' == user.jwt_token:
-            return redirect('index')
-        else:
-            logout(request)
-            return redirect('login')
-    else:
-        return render(request, 'two_factor_login.html')
-
+def afficher_qr_code(request):
+    if (request.user.is_authenticated == False):
+        return redirect ('login')
+    return render(request, 'qr_code.html', {'user': request.user})
 
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view(request):
-    username = request.GET.get('username')
-    profile_user = User.objects.get(username=username)
-    return render(request, 'profile.html', {'profile_user': profile_user})
+    id_value = request.GET.get('id', None)
+    profile_user = user_list.objects.get(id=id_value)
+    top_players = user_list.objects.order_by('-games_rank')
+    user_rank = None
+    for index, user in enumerate(top_players):
+        if user.id == profile_user.id:
+            user_rank = index + 1
+            break
+    if profile_user.games_rank <= 30:
+        ranksrc = '/static/images/bronze.png'
+        rank = 'Bronze'
+    elif profile_user.games_rank <= 60:
+        ranksrc = '/static/images/emerald.png'
+        rank = 'Emeraude'
+    elif profile_user.games_rank <= 90:
+        ranksrc = '/static/images/master.png'
+        rank = 'Master'
+    elif profile_user.games_rank <= 120:
+        ranksrc = '/static/images/challenger.png'
+        rank = 'Challenger'
+    user = request.user
+
+    context = {
+        'profile_user': profile_user,
+        'user_rank': user_rank,
+        'user': user,
+        'rank': rank,
+        'ranksrc': ranksrc
+    }
+
+    return render(request, 'profile.html', context)
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -68,14 +85,14 @@ def tournament_view (request):
     return render(request, 'tournament.html', {'user': request.user})
 
 def ranking_view(request):
-    top_players = user_list.objects.order_by('-games_rank')[:10]
+    top_players = user_list.objects.order_by('-games_rank')
 
     context = {
-        'top_players': top_players
+        'top_players': top_players,
+        'user': request.user
     }
 
-    return render(request, 'ranking.html', context, {'user': request.user})
-
+    return render(request, 'ranking.html', context)
 
 def solo_view(request):
     return render(request, 'solo.html', {'user': request.user})
@@ -123,6 +140,7 @@ class CreateMatch(APIView):
 
 def register_view(request):
     error_message = None
+    response_data = {}
 
     if request.method == 'POST':
         form = add_user_form(request.POST, request.FILES)
@@ -136,10 +154,21 @@ def register_view(request):
 
             if not error_message:
                 form.save()
-                user = user_list.objects.get(username=username)
+                response_data['success'] = True
+                response_data['message'] = "Utilisateur enregistré avec succès."
+                password = form.cleaned_data.get('password')
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
                 generer_qr_code(user)
-                return afficher_qr_code(request, user)
-                #return redirect('login')
+                return JsonResponse(response_data)
+            else:
+                response_data['success'] = False
+                response_data['error_message'] = error_message
+                return JsonResponse(response_data, status=400)
+        else:
+            response_data['success'] = False
+            response_data['error_message'] = "Données invalides."
+            return JsonResponse(response_data, status=400)
     else:
         form = add_user_form()
 
@@ -147,29 +176,26 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = loginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            token = form.cleaned_data['token']
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                user2 = user_list.objects.get(username=username)
+                if (user2.jwt_token != 'b\'' + token + '\''):
+                    return JsonResponse({'success': False, 'error_message': 'Token de sécurité invalide'})
                 login(request, user)
-                user.is_log = True
-                if user.double_auth:
-                    return redirect('two_factor_login')
-                return redirect('index')
+                return JsonResponse({'success': True})
             else:
-                error_message = "Nom d'utilisateur ou mot de passe incorrect."
-                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-                return redirect('login')  # Rediriger vers la vue de connexion
+                return JsonResponse({'success': False, 'error_message': 'Nom d\'utilisateur ou mot de passe incorrect ou clé d\'authentification incorrecte.'})
         else:
-            error_message = "Échec de la validation du formulaire."
-            messages.error(request, "Échec de la validation du formulaire.")
-            return redirect('login')  # Rediriger vers la vue de connexion
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        form = loginForm()
 
+    return render(request, 'login.html', {'form': form})
 
 # API LOGIN 42
 
@@ -279,6 +305,19 @@ class api_match_details(APIView):
 
         serializer = MatchListSerializer(match)
         return Response(serializer.data)
+    def patch(self, request, id):
+        try:
+            match = Match.objects.get(pk=id)
+        except Match.DoesNotExist:
+            return Response({"message": "Le match n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MatchListSerializer(match, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            if match.status != 'cancel':
+                match.update_scores()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class api_tournois_list(APIView):
     def get(self, request):
@@ -307,7 +346,7 @@ def add_friend(request, friend_id):
             return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
         else:
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
+                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
 
@@ -322,7 +361,7 @@ def add_friend_username(request, username):
             if existing_friendship.exists():
                 return JsonResponse({'error': 'Vous avez déjà envoyé une demande d\'ami à cet utilisateur.'}, status=400)
             if from_user.friends.filter(pk=to_user.pk).exists() or to_user.friends.filter(pk=from_user.pk).exists():
-                return JsonResponse({'error': 'Cet utilisateur est déjà dans votre liste d\'amis.'}, status=400)
+                return JsonResponse({'error': 'Ces utilisateurs sont déjà amis.'}, status=400)
             Friendship.objects.create(from_user=from_user, to_user=to_user)
             return JsonResponse({'success': 'Demande d\'ami envoyée avec succès.'})
         except user_list.DoesNotExist:
@@ -421,7 +460,6 @@ def user_list_view(request):
     users = user_list.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
-
 def generer_qr_code(user):
     buffer = BytesIO()
     payload = {
@@ -437,10 +475,6 @@ def generer_qr_code(user):
     image_bytes = buffer.getvalue()
     user.qr_code.save(f'{user.username}_qr_code.png', ContentFile(image_bytes))
     return HttpResponse(json.dumps({'jwt_token': jwt_token.decode('utf-8')}), content_type='application/json')
-
-def afficher_qr_code(request, user):
-    return render(request, 'qr_code.html', {'utilisateur': user})
-
 
 def decode_jwt_token(request):
     # Récupérer le token depuis la requête (par exemple depuis les paramètres GET ou POST)

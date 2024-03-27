@@ -1,7 +1,31 @@
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
 from json.decoder import JSONDecodeError
+from .views import user_list
+from .models import user_list
+
+
+class ChatConsumer(WebsocketConsumer):
+    def connect(self):
+        username = self.scope['user'].username
+        user_list.objects.update_or_create(username=username, defaults={'status': 'online'})
+        self.accept()
+
+    def receive(self, text_data):
+        data = json.loads(text_data)
+        username = self.scope['user'].username
+        if 'status' in data:
+            new_status = data['status']
+            if new_status == 'in_game':
+                user_list.objects.update_or_create(username=username, defaults={'status': 'in_game'})
+            elif new_status == 'out':
+                previous_status = 'online' if user_list.objects.get(username=username).status != 'offline' else 'offline'
+                user_list.objects.update_or_create(username=username, defaults={'status': previous_status})
+
+    def disconnect(self, close_code):
+        username = self.scope['user'].username
+        user_list.objects.update_or_create(username=username, defaults={'status': 'offline'})
 
 class PongConsumer(AsyncWebsocketConsumer):
     connected_clients = {}
@@ -23,27 +47,6 @@ class PongConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
         await self.check_group_full()
-
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
-            self.group_name,
-            self.channel_name
-        )
-
-        if self.group_name in self.connected_clients:
-            self.connected_clients[self.group_name].remove(self.channel_name)
-
-        await self.check_group_full()
-
-        if len(self.connected_clients[self.group_name]) == 1:
-            other_client_channel_name = self.connected_clients[self.group_name][0]
-            await self.channel_layer.send(
-                other_client_channel_name,
-                {
-                    'type': 'send_disconnect_message'
-                }
-            )
-
 
     async def receive(self, text_data):
         data = json.loads(text_data)
@@ -89,6 +92,10 @@ class PongConsumer(AsyncWebsocketConsumer):
                 }
             )
 
+    async def send_disconnect_message(self, event):
+        await self.send(text_data=json.dumps({
+            'type': 'disconnect_message'
+        }))
 
     async def game_move(self, event):
         data = event

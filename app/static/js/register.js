@@ -1,8 +1,9 @@
-function setupLogin() {
-	document.getElementById("loginForm").addEventListener("submit", function(event) {
+function setupRegister() {
+	document.getElementById("registerForm").addEventListener("submit", function(event) {
 		event.preventDefault();
-		const formData = new FormData(document.getElementById("loginForm"));
-		fetch('/login/', {
+		const formData = new FormData(document.getElementById("registerForm"));
+		console.log(formData);
+		fetch('/register/', {
 			method: 'POST',
 			body: formData
 		})
@@ -20,10 +21,10 @@ function setupLogin() {
 				})
 				checkLogged();
 				online();
-				loadView('/', true);
+				loadView('/qrcode/', true);
 			}
 			else {
-				loadView('/login/', true);
+				loadView('/register/', true);
 			}
 		})
 		.catch(error => {

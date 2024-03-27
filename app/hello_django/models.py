@@ -10,6 +10,7 @@ import os
 from django.core.files import File
 import urllib.request
 from PIL import Image
+from django.db import transaction
 
 # TODO LIST :
     # historique tournoi: position, date, résultat dernier match, adversaire dernier match
@@ -79,23 +80,31 @@ class Match(models.Model):
     player2 = models.ForeignKey('user_list', related_name='player2_matches', on_delete=models.CASCADE, null=True)
     score_player1 = models.IntegerField(default=0)
     score_player2 = models.IntegerField(default=0)
-    player_winner = models.ForeignKey(user_list, related_name='winner_matches', on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu')])
+    player_winner = models.ForeignKey('user_list', related_name='winner_matches', on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
+    locked = models.BooleanField(default=False)
 
     def update_scores(self):
-        if self.status == 'end_game':
-            self.player1.games_played += 1
-            self.player2.games_played += 1
-            if self.score_player1 > self.score_player2:
-                self.player1.games_win += 1
-                self.player2.games_loose += 1
-            elif self.score_player1 < self.score_player2:
-                self.player2.games_win += 1
-                self.player1.games_loose += 1
-            self.player1.save()
-            self.player2.save()
-
-#   match.update_scores()
+        if not self.locked:
+            with transaction.atomic():
+                self.locked = True
+                self.player1.games_played += 1
+                self.player2.games_played += 1
+                if self.score_player1 > self.score_player2:
+                    self.player1.games_win += 1
+                    self.player2.games_loose += 1
+                    self.player1.games_rank += 25
+                    if self.player2.games_rank >= 25:
+                        self.player2.games_rank -= 25
+                elif self.score_player1 < self.score_player2:
+                    self.player2.games_win += 1
+                    self.player1.games_loose += 1
+                    self.player2.games_rank += 25
+                    if self.player1.games_rank >= 25:
+                        self.player1.games_rank -= 25
+                self.player1.save()
+                self.player2.save()
+                self.save()
 
 class Tournament(models.Model):
     date_tournament = models.DateTimeField(null=True, blank=True)
