@@ -557,4 +557,3 @@ function initializeWebSocket(match_id, playerId) {
 			}
 		});
 	}
-}
