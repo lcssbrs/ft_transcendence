@@ -22,9 +22,9 @@ application = ProtocolTypeRouter({
     "https": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter([
-            path("wss/ranked", consumers.PongConsumer.as_asgi()),
-			re_path(r'wss/match/(?P<match_id>\d+)/$', consumers.PongConsumer.as_asgi()),
-			path('wss/chat/', consumers.ChatConsumer.as_asgi()),
+            path("ws/ranked", consumers.PongConsumer.as_asgi()),
+			re_path(r'ws/match/(?P<match_id>\d+)/$', consumers.PongConsumer.as_asgi()),
+			path('ws/chat/', consumers.ChatConsumer.as_asgi()),
         ])
     ),
 })
