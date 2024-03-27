@@ -212,24 +212,25 @@ function setupRanked() {
 
 		// Fonction pour terminer la partie
 		function endGame() {
-			gameStarted = false;
-			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-			if (playerScore > adverseScore)
-				endGameApi(ID_ranked, playerScore, adverseScore, 1);
-			else
-				endGameApi(ID_ranked, playerScore, adverseScore, 2);
-			displayWinner = true;
+		    gameStarted = false;
+		    winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+		    if (playerScore > adverseScore)
+		        endGameApi(ID_ranked, playerScore, adverseScore, 1);
+		    else
+		        endGameApi(ID_ranked, playerScore, adverseScore, 2);
+		    displayWinner = true;
+		    endGame = true;
 
-			setTimeout(function() {
-				displayWinner = false;
-				loadView('/ranked/'); // Relancer la page "ranked"
-			}, 3000);
+		    setTimeout(function() {
+		        displayWinner = false;
+		    }, 3000);
 
-			removeKeyListeners();
+		    removeKeyListeners();
 
-			game.ball.speed.x = 0;
-			game.ball.speed.y = 0;
+		    game.ball.speed.x = 0;
+		    game.ball.speed.y = 0;
 		}
+
 
 
 
@@ -299,23 +300,24 @@ function setupRanked() {
 	};
 
 	function endGameApi(match_id, score_01, score_02, winner) {
-		const requestBody = {
-			score_player1: score_01,
-			score_player2: score_02,
-			player_winner: winner,
-			status: "end_game"
-		};
+    	const requestBody = {
+    	    score_player1: score_01,
+    	    score_player2: score_02,
+    	    player_winner: winner,
+    	    status: "end_game"
+    	};
 
-		fetch(`/api/match/${match_id}/`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(requestBody)
-		})
-		.then(response => {})
-		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+    	fetch(`/api/match/${match_id}/`, {
+    	    method: 'PATCH',
+    	    headers: {
+    	        'Content-Type': 'application/json'
+    	    },
+    	    body: JSON.stringify(requestBody)
+    	})
+    	.then(response => {})
+    	.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
+
 
 	function quitGameApi(match_id, score_01, score_02) {
 		const requestBody = {
