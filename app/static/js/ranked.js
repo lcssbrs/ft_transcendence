@@ -119,6 +119,9 @@ function setupRanked() {
 				context.font = canvas.width / 15 + 'px Anta';
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
+				playerScore = game.player.score;
+				adverseScore = game.challenger.score;
+				winner = game.player.score === 3 ? playerName : adverseName;
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
 		}
