@@ -138,13 +138,13 @@ function setupRanked() {
 				game.ball.speed.y *= -1; // Inversion de la direction verticale
 			}
 
-			// Rebond sur le joueur 2 (à droite)
-			if (game.ball.x > canvasWidth - playerWidth - game.ball.r && game.ball.y + game.ball.r >= game.challenger.y && game.ball.y - game.ball.r <= game.challenger.y + PLAYER_HEIGHT) {
-				collide(game.challenger);
-			}
 			// Rebond sur le joueur 1 (à gauche)
-			else if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
+			if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
 				collide(game.player);
+			}
+			// Rebond sur le joueur 2 (à droite)
+			else if (game.ball.x > canvasWidth - playerWidth - game.ball.r && game.ball.y + game.ball.r >= game.challenger.y && game.ball.y - game.ball.r <= game.challenger.y + PLAYER_HEIGHT) {
+				collide(game.challenger);
 			}
 
 			// Mouvement de la balle
@@ -153,16 +153,17 @@ function setupRanked() {
 
 			// Vérifier si un but a été marqué
 			if (game.ball.x > canvasWidth) {
-				game.player.score++; // But pour le joueur 1
+				game.challenger.score++; // But pour le joueur 2
 				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
 			} else if (game.ball.x < 0) {
-				game.challenger.score++; // But pour le joueur 2
+				game.player.score++; // But pour le joueur 1
 				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
 			}
 
 			// Redessiner le canvas après le déplacement de la balle
 			draw();
 		}
+
 
 
 		function playerMove(event) {
