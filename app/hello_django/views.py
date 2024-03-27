@@ -537,7 +537,6 @@ def decode_jwt_token(request):
     except jwt.InvalidTokenError:
         return JsonResponse({'success': False, 'error': 'Token invalide'})
 
-@login_required
 def edit_profile(request):
     user = request.user
     userpr = user_list.objects.get(username=user.username)
@@ -553,4 +552,4 @@ def edit_profile(request):
             return redirect('profile')
     else:
         form = UserProfileForm(instance=user)
-    return redirect('index')
+    return render(request, 'edit_profile.html', {'form': form})
