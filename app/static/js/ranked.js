@@ -5,7 +5,6 @@ function setupRanked() {
 	var winner
 	let gameEnd = false
 	let gameOwnerId;
-	let gameOwnerId;
 	var ID_ranked;
 	var playerName;
 	var adverseName;
