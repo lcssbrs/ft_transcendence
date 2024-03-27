@@ -222,8 +222,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
-				startButton.style.display = "block"; // Réafficher le bouton de recherche de partie
-				searchingMatch.style.display = "none"; // Cacher l'indicateur de recherche de partie
+				window.location.reload(); // Relancer la page "ranked"
 			}, 3000);
 
 			removeKeyListeners();
@@ -231,6 +230,7 @@ function setupRanked() {
 			game.ball.speed.x = 0;
 			game.ball.speed.y = 0;
 		}
+
 
 
 		function removeKeyListeners() {
