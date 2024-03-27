@@ -9,7 +9,13 @@ function setupEdit() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
-				document.querySelector('#userAvatar').src = response.profile_picture;
+				$.ajax({
+					url: '/api/get_user/',
+					type: 'GET',
+					success: function(response) {
+						document.querySelector('#userAvatar').src = response.profile_picture;
+					}
+				})
 				loadView('/profile/?id=' + data.id, true, false);
 			}
 			else {

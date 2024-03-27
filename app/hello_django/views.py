@@ -135,7 +135,6 @@ def edit_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            # Mettre à jour les informations de l'utilisateur dans la base de données
             userpr.first_name = form.cleaned_data['first_name']
             userpr.last_name = form.cleaned_data['last_name']
             if 'profile_picture' in request.FILES:
