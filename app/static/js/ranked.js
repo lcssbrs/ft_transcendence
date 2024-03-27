@@ -119,7 +119,6 @@ function setupRanked() {
 			}
 		}
 
-
 		//mouvements de la balle :
 		function play() {
 			draw();
