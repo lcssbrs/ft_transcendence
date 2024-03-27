@@ -154,14 +154,17 @@ function setupRanked() {
 			if (game.ball.x > canvasWidth) {
 				game.player.score++;
 				resetPositions();
+				draw(); // Redessiner le canvas après avoir marqué un but
 			} else if (game.ball.x < 0) {
 				game.challenger.score++;
 				resetPositions();
+				draw(); // Redessiner le canvas après avoir marqué un but
+			} else {
+				// Redessiner le canvas après le déplacement de la balle
+				draw();
 			}
-
-			// Redessiner le canvas après le déplacement de la balle
-			draw();
 		}
+
 
 
 
