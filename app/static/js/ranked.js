@@ -328,12 +328,14 @@ function setupRanked() {
 
 	function displayWinner(winner) {
 		const context = canvas.getContext('2d');
+		context.clearRect(0, 0, canvas.width, canvas.height);
 		context.fillStyle = '#F4ACBC';
 		context.font = canvas.width / 15 + 'px Anta';
 		context.textAlign = 'center';
 		context.textBaseline = 'middle';
 		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 	}
+
 
 
 
