@@ -22,7 +22,9 @@
 <body class="bg-dark" style="font-family: 'Anta', sans serif;">
 
 	<header class="text-white d-flex justify-content-between header-size border-bottom border-primary" style="border-width: 4px !important;">
-		<h1 class="h4 my-auto ml-4">🏳️‍⚧️endence</h1>
+		<a class="redir text-white my-auto ml-4" href="/">
+			<h1 class="h4">🏳️‍⚧️endence</h1>
+		</a>
 		<div id="auth-data" class="d-none" data-authenticated="{{ user.is_authenticated }}"></div>
 		<div id="profilebar" class="my-auto mr-4">
 			<a id="linkProfile" href="{% url 'profile' %}?id={{ user.id }}" class="redir">
@@ -79,7 +81,6 @@
 	<script src="{% static 'js/solo.js' %}"></script>
 	<script src="{% static 'js/ranked.js' %}"></script>
 	<script src="{% static 'js/login.js' %}"></script>
-	<script src="{% static 'js/profile.js' %}"></script>
 	<script src="{% static 'js/register.js' %}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="{% static 'js/friend.js' %}"></script>

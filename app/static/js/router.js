@@ -20,8 +20,6 @@ function loadView(url, addHistory) {
 				setupRanked();
 			else if (url == '/login/')
 				setupLogin();
-			else if (url.startsWith('/profile/'))
-				setupProfile();
 			else if (url == '/register/')
 				setupRegister();
 			attachEventListeners();
@@ -86,8 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupRanked();
 	else if (url == '/login/')
 		setupLogin();
-	else if (url == '/profile/')
-		setupProfile();
 	else if (url == '/register/')
 		setupRegister();
 

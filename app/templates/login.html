@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div id="logcontent" class="text-white mx-auto text-center rounded-3 border border-light my-auto p-2 d-flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 30%; height: 60%; border-width: 3px !important;">
+<div id="logcontent" class="text-white mx-auto text-center rounded-3 border border-light my-auto p-2 d-flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 35%; height: 65%; border-width: 3px !important;">
 	<h2>Se connecter</h2>
 	<form id="loginForm" method="post">
 		{% csrf_token %}
@@ -13,7 +13,6 @@
 			<div class="log-input d-flex flex-column align-items-center my-2">
 				{{ form.password }}
 				<div id="passwordMissing" class="text-danger d-none">Veuillez saisir votre mot de passe</div>
-				<a class="text-white mt-2" href="#">Mot de passe oublié ?</a>
 			</div>
 		</div>
 		<div class="log-input d-flex flex-column align-items-center my-2">
