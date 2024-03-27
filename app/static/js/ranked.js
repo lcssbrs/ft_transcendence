@@ -224,19 +224,19 @@ function setupRanked() {
 				endGameApi(ID_ranked, playerScore, adverseScore, 1);
 			else
 				endGameApi(ID_ranked, playerScore, adverseScore, 2);
-			displayWinner = true; // Utilisez displayWinner pour afficher le gagnant
-			endGameFlag = true; // Renommez la variable pour éviter la confusion
+			displayWinner = true;
 
 			setTimeout(function() {
 				displayWinner = false;
+				loadView('/ranked/'); // Relancer la page "ranked"
 			}, 3000);
-			loadView('/ranked/')
 
 			removeKeyListeners();
 
 			game.ball.speed.x = 0;
 			game.ball.speed.y = 0;
 		}
+
 
 
 		//----------------EVENTS LISTENERS--------
