@@ -156,7 +156,6 @@ function SetupTournament() {
 		});
 	}
 
-
 	function printNames() {
 		if (PlayerNames)
 		{
@@ -189,6 +188,10 @@ function SetupTournament() {
 
 	function initialGame(playerID, playerMatchId)
 	{
+		document.querySelector('#bracket').classList.add("d-none");
+		document.querySelector('#canvas4').classList.remove("d-none");
+		document.querySelector('#start-tournament').classList.add("d-none");
+		document.querySelector('#start-match').classList.remove("d-none");
 		setupRanked(my_match_id, my_id);
 	}
 
@@ -437,7 +440,7 @@ function SetupTournament() {
 
 			// Dessins et animations
 			function setupStart() {
-				canvas = document.getElementById('canvas3');
+				canvas = document.getElementById('canvas4');
 				game = {
 					player: {
 						y: canvas.height / 2 - PLAYER_HEIGHT / 2,
@@ -469,8 +472,8 @@ function SetupTournament() {
 			//----------------WEBSOCKET----------------\/
 			//-----------------------------------------\/
 
-		const startMatch = document.getElementById("start-ranked");
-		const waitingMatch = document.getElementById("waiting-match");
+		const startMatch = document.getElementById("start-match");
+		// const waitingMatch = document.getElementById("waiting-match");
 		const adversaireMatch = document.getElementById("adversaire-match");
 		let socket = null;
 		let gameStarted = false;
@@ -549,7 +552,7 @@ function SetupTournament() {
 
 		startMatch.addEventListener("click", function() {
 			startMatch.style.display = "none";
-			waitingMatch.style.display = "block";
+			// waitingMatch.style.display = "block";
 
 			if (playerMatchId == 1)
 				initializeWebSocket(1);
@@ -570,7 +573,7 @@ function SetupTournament() {
 				const eventData = JSON.parse(event.data);
 				if (eventData.type === 'game_start')
 				{
-					waitingMatch.style.display = "none";
+					// waitingMatch.style.display = "none";
 					gameStarted = true;
 					displayGame();
 					GetPlayerId(my_match_id);
