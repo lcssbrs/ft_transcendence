@@ -4,6 +4,7 @@ function setupRanked() {
 	var canvas;
 	var winner
 	let gameEnd = false
+	let gameOwnerId;
 	var ID_ranked;
 	var playerName;
 	var adverseName;
@@ -178,9 +179,12 @@ function setupRanked() {
 					endGame();
 				}
 			} else {
-				game.ball.speed.x *= -BALL_SPEED;
-				if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
-					game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
+				if (gameOwnerId == 1)
+				{
+					game.ball.speed.x *= -BALL_SPEED;
+					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
+						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
+					}
 				}
 			}
 		}
@@ -370,6 +374,7 @@ function setupRanked() {
 	});
 
     function initializeWebSocket(match_id, playerId) {
+		gameOwnerId = playerId;
 		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
 
 		socket.onopen = function() {
@@ -400,14 +405,16 @@ function setupRanked() {
 			}
 			if (eventData.type === 'ball_move')
 			{
-				updateBall(playerId, eventData.data.x, eventData.data.y);
+				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02);
 			}
 		};
 
-		function updateBall(player, x, y) {
+		function updateBall(player, x, y, score01, score02) {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
 				game.ball.y = y;
+				game.player.score = score01,
+				game.challenger.score = score02
 			}
 		}
 
@@ -428,6 +435,8 @@ function setupRanked() {
 					type: 'ball_move',
 					x: game.ball.x,
 					y: game.ball.y,
+					score01: game.player.score,
+					score02: game.challenger.score,
 				};
 				socket.send(JSON.stringify(moveData));
 			}
@@ -435,7 +444,7 @@ function setupRanked() {
 
 		setInterval(function() {
 			sendGameBall(playerId);
-		}, 100);
+		}, 25);
 
 		function updatePad(direction) {
 			if (playerId === 2)
