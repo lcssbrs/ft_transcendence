@@ -5,31 +5,40 @@ function extractViewContent(html) {
 	return viewContent;
 }
 
-function loadView(url, addHistory) {
-	console.log(url);
-	fetch(url)
+function loadView(url, addHistory, force) {
+	let actual = location.pathname;
+	if (actual == url && force == false)
+		return ;
+	var isAuthenticated = document.getElementById('auth-data').getAttribute('data-authenticated') === 'True';
+	if ((!isAuthenticated && (url == '/login/' || url == '/register/' || url == '/')) || isAuthenticated) {
+		fetch(url)
 		.then(response => response.text())
 		.then(html => {
 			if (addHistory == true)
-				history.pushState(null, null, url);
-			document.querySelector('#content').innerHTML = extractViewContent(html);
-			if (url == '/local/')
-				setupLocal();
-			else if (url == '/solo/')
-				setupSolo();
-			else if (url == '/ranked/')
-				setupRanked();
-			else if (url == '/login/')
-				setupLogin();
-			else if (url == '/register/')
-				setupRegister();
-			else if (url == '/tournament/')
-				SetupTournament();
-			attachEventListeners();
+			history.pushState(null, null, url);
+		document.querySelector('#content').innerHTML = extractViewContent(html);
+		if (url == '/local/')
+			setupLocal();
+		else if (url == '/solo/')
+			setupSolo();
+		else if (url == '/ranked/')
+			setupRanked();
+		else if (url == '/login/')
+			setupLogin();
+		else if (url == '/register/')
+			setupRegister();
+		else if (url == '/edit/')
+			setupEdit();
+		attachEventListeners();
 		})
 		.catch(error => {
 			console.error('Erreur lors du chargement de la vue:', error);
 		});
+	}
+	else {
+		if (actual != '/login/')
+			loadView('/login/', true);
+	}
 }
 
 function attachEventListeners() {
@@ -68,6 +77,9 @@ function checkLogged()
 		document.querySelector('#friend-request').classList.add('d-none');
 		document.querySelector('#add-friend').classList.add('d-none');
 		document.querySelector('#logrequire').classList.remove('d-none');
+		let url = location.pathname;
+		if (url != '/login/' && url != '/register/' && url != '/')
+			loadView('/', true);
 	}
 }
 
@@ -89,11 +101,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupLogin();
 	else if (url == '/register/')
 		setupRegister();
-	else if (url == '/tournament/')
-		SetupTournament();
+	else if (url == '/edit/')
+		setupEdit();
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;
-		loadView(url, false);
+		loadView(url, false, true);
 	});
 });

@@ -1,10 +1,26 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1>Edit Profile</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
+<div class="text-white mx-auto text-center rounded-3 border border-light my-auto p-2 d-flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 35%; height: 60%; border-width: 3px !important;">
+	<h2>Editer le profil</h2>
+	<form id="editForm" method="post">
+		{% csrf_token %}
+		<div class="log-input d-flex flex-column align-items-center">
+			{{ form.first_name }}
+			<div id="firstMissing" class="text-danger d-none">Veuillez saisir un prénom</div>
+		</div>
+		<div>
+			<div class="log-input d-flex flex-column align-items-center my-2">
+				{{ form.last_name }}
+				<div id="lastMissing" class="text-danger d-none">Veuillez saisir un nom</div>
+			</div>
+		</div>
+		<div class="log-input d-flex flex-column align-items-center my-2">
+			<input type="file" id="id_profile_picture" name="profile_picture" accept=".jpg,.jpeg,.png">
+		</div>
+		<div>
+			<button class="btn btn-light" type="submit">Sauvegarder</button>
+		</div>
+	</form>
+</div>
 {% endblock %}
