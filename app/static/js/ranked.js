@@ -399,7 +399,18 @@ function setupRanked() {
 				disconnect_ennemy = true;
 				closeWebSocket();
 			}
+			if (eventData.type === 'update_ball')
+			{
+				updateBall(playerId, eventData.data.x, eventData.data.y);
+			}
 		};
+
+		function updateBall(player, x, y) {
+			if (gameStarted && player == 2) {
+				game.ball.x = x;
+				game.ball.y = y;
+			}
+		}
 
 		function sendGameMove(player, direction) {
 			if (gameStarted) {
@@ -411,6 +422,21 @@ function setupRanked() {
 				socket.send(JSON.stringify(moveData));
 			}
 		}
+
+		function sendGameBall(player) {
+			if (gameStarted && player == 1) {
+				const moveData = {
+					type: 'ball_move',
+					x: game.ball.x,
+					y: game.ball.y,
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
+		setInterval(function() {
+			sendGameBall(playerId);
+		}, 100);
 
 		function updatePad(direction) {
 			if (playerId === 2)

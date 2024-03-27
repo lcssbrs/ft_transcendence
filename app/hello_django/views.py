@@ -337,6 +337,18 @@ class api_tournois_details(APIView):
         serializer = TournoiListSerializer(tournoi)
         return Response(serializer.data)
 
+    def patch(self, request, id):
+        try:
+            tournoi = Tournament.objects.get(pk=id)
+        except Tournament.DoesNotExist:
+            return Response({"message": "Le tournoi n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TournoiListSerializer(tournoi, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 # Friend
 
 def add_friend(request, friend_id):
@@ -446,6 +458,36 @@ class JoinMatch(APIView):
             new_match.save()
             serializer = MatchListSerializer(new_match)
             return Response({"match_exists": False, "match_data": serializer.data}, status=status.HTTP_201_CREATED)
+
+            from rest_framework.views import APIView
+
+class JoinTournament(APIView):
+    def post(self, request):
+        tournament = Tournament.objects.filter(status='waiting').annotate(num_players=models.Count('player')).filter(num_players__lt=4).first()
+
+        if tournament:
+            if tournament.player01 is None:
+                tournament.player01 = request.user
+            elif tournament.player02 is None:
+                tournament.player02 = request.user
+            elif tournament.player03 is None:
+                tournament.player03 = request.user
+            else:
+                tournament.player04 = request.user
+
+            if tournament.player04 is not None:
+                tournament.status = 'in_game'
+
+            tournament.save()
+
+            serializer = serializer.TournamentSerializer(tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
+
+            serializer = serializer.TournamentSerializer(new_tournament)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class CreateMatch(APIView):
     def post(self, request):
