@@ -219,10 +219,11 @@ function setupRanked() {
 			else
 				endGameApi(ID_ranked, playerScore, adverseScore, 2);
 			displayWinner = true;
-			endGame = true;
 
 			setTimeout(function() {
 				displayWinner = false;
+				startButton.style.display = "block"; // Réafficher le bouton de recherche de partie
+				searchingMatch.style.display = "none"; // Cacher l'indicateur de recherche de partie
 			}, 3000);
 
 			removeKeyListeners();
@@ -230,6 +231,7 @@ function setupRanked() {
 			game.ball.speed.x = 0;
 			game.ball.speed.y = 0;
 		}
+
 
 		function removeKeyListeners() {
 			document.removeEventListener('keydown', playerMove);
@@ -500,7 +502,7 @@ function setupRanked() {
 		        }
 		    }
 		}
-		
+
 
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
