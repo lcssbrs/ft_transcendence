@@ -222,7 +222,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
-				window.location.reload(); // Relancer la page "ranked"
+				loadView('/ranked/'); // Relancer la page "ranked"
 			}, 3000);
 
 			removeKeyListeners();
