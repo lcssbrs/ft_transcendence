@@ -165,10 +165,6 @@ function setupRanked() {
 			}
 		}
 
-
-
-
-
 		function playerMove(event) {
 			if (game.player.y < 0) {
 				game.player.y = 0;
