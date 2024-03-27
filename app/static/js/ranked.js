@@ -217,6 +217,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
+				loadView('/ranked/')
 			}, 3000);
 
 			removeKeyListeners();

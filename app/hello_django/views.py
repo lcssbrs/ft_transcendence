@@ -54,12 +54,26 @@ def profile_view(request):
         if user.id == profile_user.id:
             user_rank = index + 1
             break
+    if profile_user.games_rank <= 30:
+        ranksrc = '/static/images/bronze.png'
+        rank = 'Bronze'
+    elif profile_user.games_rank <= 60:
+        ranksrc = '/static/images/emerald.png'
+        rank = 'Emeraude'
+    elif profile_user.games_rank <= 90:
+        ranksrc = '/static/images/master.png'
+        rank = 'Master'
+    elif profile_user.games_rank <= 120:
+        ranksrc = '/static/images/challenger.png'
+        rank = 'Challenger'
     user = request.user
 
     context = {
         'profile_user': profile_user,
         'user_rank': user_rank,
-        'user': user
+        'user': user,
+        'rank': rank,
+        'ranksrc': ranksrc
     }
 
     return render(request, 'profile.html', context)
