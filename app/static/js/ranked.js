@@ -181,8 +181,7 @@ function setupRanked() {
 					endGame();
 				}
 			} else {
-				if (gameOwnerId == 1)
-				{
+				if (gameOwnerId == 1) {
 					game.ball.speed.x *= -BALL_SPEED;
 					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
 						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
