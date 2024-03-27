@@ -224,12 +224,13 @@ function setupRanked() {
 				endGameApi(ID_ranked, playerScore, adverseScore, 1);
 			else
 				endGameApi(ID_ranked, playerScore, adverseScore, 2);
-			displayWinner = true;
-			endGame = true;
+			displayWinner = true; // Utilisez displayWinner pour afficher le gagnant
+			endGameFlag = true; // Renommez la variable pour éviter la confusion
 
 			setTimeout(function() {
 				displayWinner = false;
 			}, 3000);
+			loadView('/ranked/')
 
 			removeKeyListeners();
 
@@ -237,10 +238,6 @@ function setupRanked() {
 			game.ball.speed.y = 0;
 		}
 
-		function removeKeyListeners() {
-			document.removeEventListener('keydown', playerMove);
-			document.removeEventListener('keydown', challengerMove);
-		}
 
 		//----------------EVENTS LISTENERS--------
 
