@@ -27,11 +27,11 @@ function setupProfile() {
 				document.querySelector('#rank').innerHTML = 'Challenger' + ' - ' + response.games_rank + ' LP';
 				document.querySelector('#rank-picture').src = '/static/images/challenger.png';
 			}
-			document.querySelector('#name').innerHTML = response.first_name + ' ' + response.last_name;
-			document.querySelector('#username').innerHTML = response.username;
-			document.querySelector('#played').innerHTML = response.games_played;
-			document.querySelector('#victory').innerHTML = response.games_win;
-			document.querySelector('#defeat').innerHTML = response.games_loose;
+			// document.querySelector('#name').innerHTML = response.first_name + ' ' + response.last_name;
+			// document.querySelector('#username').innerHTML = response.username;
+			// document.querySelector('#played').innerHTML = response.games_played;
+			// document.querySelector('#victory').innerHTML = response.games_win;
+			// document.querySelector('#defeat').innerHTML = response.games_loose;
 		}
 	})
 }

@@ -46,7 +46,37 @@ def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view(request):
-    return render(request, 'profile.html')
+    id_value = request.GET.get('id', None)
+    profile_user = user_list.objects.get(id=id_value)
+    top_players = user_list.objects.order_by('-games_rank')
+    user_rank = None
+    for index, user in enumerate(top_players):
+        if user.id == profile_user.id:
+            user_rank = index + 1
+            break
+    if profile_user.games_rank <= 30:
+        ranksrc = '/static/images/bronze.png'
+        rank = 'Bronze'
+    elif profile_user.games_rank <= 60:
+        ranksrc = '/static/images/emerald.png'
+        rank = 'Emeraude'
+    elif profile_user.games_rank <= 90:
+        ranksrc = '/static/images/master.png'
+        rank = 'Master'
+    elif profile_user.games_rank <= 120:
+        ranksrc = '/static/images/challenger.png'
+        rank = 'Challenger'
+    user = request.user
+
+    context = {
+        'profile_user': profile_user,
+        'user_rank': user_rank,
+        'user': user,
+        'rank': rank,
+        'ranksrc': ranksrc
+    }
+
+    return render(request, 'profile.html', context)
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -58,10 +88,11 @@ def ranking_view(request):
     top_players = user_list.objects.order_by('-games_rank')
 
     context = {
-        'top_players': top_players
+        'top_players': top_players,
+        'user': request.user
     }
 
-    return render(request, 'ranking.html', context, {'user': request.user})
+    return render(request, 'ranking.html', context)
 
 def solo_view(request):
     return render(request, 'solo.html', {'user': request.user})
