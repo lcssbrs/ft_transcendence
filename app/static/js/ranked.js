@@ -176,6 +176,9 @@ function setupRanked() {
 				}
 				updateScoreDisplay();
 
+				// Mettre à jour l'affichage après la réinitialisation
+				draw();
+
 				if (game.player.score === 3 || game.challenger.score === 3) {
 					gameEnd = true;
 					endGame();
@@ -189,7 +192,6 @@ function setupRanked() {
 				}
 			}
 		}
-
 
 		// scorboard update
 		function updateScoreDisplay() {
