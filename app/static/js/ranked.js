@@ -132,37 +132,37 @@ function setupRanked() {
 			const canvasWidth = canvas.width;
 			const canvasHeight = canvas.height;
 			const playerWidth = PLAYER_WIDTH;
+			const playerHeight = PLAYER_HEIGHT;
 
 			// Rebonds sur le haut et bas
-			if (game.ball.y > canvasHeight - game.ball.r || game.ball.y < game.ball.r) {
-				game.ball.speed.y *= -1; // Inversion de la direction verticale
+			if (game.ball.y + game.ball.r >= canvasHeight || game.ball.y - game.ball.r <= 0) {
+				game.ball.speed.y *= -1;
 			}
 
-			// Rebond sur le joueur 1 (à gauche)
-			if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
-				collide(game.player);
-			}
-			// Rebond sur le joueur 2 (à droite)
-			else if (game.ball.x > canvasWidth - playerWidth - game.ball.r && game.ball.y + game.ball.r >= game.challenger.y && game.ball.y - game.ball.r <= game.challenger.y + PLAYER_HEIGHT) {
+			// Rebonds sur les joueurs
+			if (game.ball.x + game.ball.r >= canvasWidth - playerWidth && game.ball.y >= game.challenger.y && game.ball.y <= game.challenger.y + playerHeight) {
 				collide(game.challenger);
+			} else if (game.ball.x - game.ball.r <= playerWidth && game.ball.y >= game.player.y && game.ball.y <= game.player.y + playerHeight) {
+				collide(game.player);
 			}
 
 			// Mouvement de la balle
 			game.ball.x += game.ball.speed.x;
 			game.ball.y += game.ball.speed.y;
 
-			// Vérifier si un but a été marqué
+			// Vérification des buts
 			if (game.ball.x > canvasWidth) {
-				game.challenger.score++; // But pour le joueur 2
-				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
+				game.player.score++;
+				resetPositions();
 			} else if (game.ball.x < 0) {
-				game.player.score++; // But pour le joueur 1
-				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
+				game.challenger.score++;
+				resetPositions();
 			}
 
 			// Redessiner le canvas après le déplacement de la balle
 			draw();
 		}
+
 
 
 
