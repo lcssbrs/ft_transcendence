@@ -23,6 +23,8 @@ function loadView(url, addHistory) {
 				setupLogin();
 			else if (url == '/register/')
 				setupRegister();
+			else if (url == '/tournament/')
+				SetupTournament();
 			attachEventListeners();
 		})
 		.catch(error => {
@@ -87,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupLogin();
 	else if (url == '/register/')
 		setupRegister();
+	else if (url == '/tournament/')
+		SetupTournament();
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;

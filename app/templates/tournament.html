@@ -9,12 +9,12 @@
 	<div id="bracket" class="flex my-5 text-white">
 		<div class="d-flex flex-column">
 			<div class="d-flex flex-column border border-primary rounded-3 justify-content-center mb-3" style="width: 20vh; border-width: 2px !important;">
-				<span class="mx-2 my-1" id="s1">En attente...</span>
-				<span class="mx-2 my-1" id="s2">En attente...</span>
+				<span class="mx-2 my-1" id="d1">En attente...</span>
+				<span class="mx-2 my-1" id="d2">En attente...</span>
 			</div>
 			<div class="d-flex flex-column border border-primary rounded-3 justify-content-center" style="width: 20vh; border-width: 2px !important;">
-				<span class="mx-2 my-1" id="s3">En attente...</span>
-				<span class="mx-2 my-1" id="s4">En attente...</span>
+				<span class="mx-2 my-1" id="d3">En attente...</span>
+				<span class="mx-2 my-1" id="d4">En attente...</span>
 			</div>
 		</div>
 		<div class="ml-5 my-auto d-flex flex-column border border-primary rounded-3 justify-content-center" style="width: 20vh; border-width: 2px !important;">
@@ -24,7 +24,21 @@
 	</div>
 	<div class="d-flex justify-content-center">
 		<button id="start-tournament" class="btn btn-primary">Trouver un tournoi</button>
-		<p id="searching-match" style="display: none; color:white;">Recherche de tournoi en cours...</p>
+		<p id="searching-match" style="display: none; color:white;">En attente de joueurs...</p>
 	</div>
 </div>
+
+
+<div class="d-flex flex-column justify-content-center mx-auto">
+	<h2 class="text-white text-center mx-auto my-0">RANKED</h2>
+	<div class="d-flex justify-content-center">
+		<p id="adversaire-match" style="display: none; color:white;">Adversaire déconnecté</p>
+	</div>
+	<canvas id="canvas3" class="my-2" width="640" height="480"></canvas>
+	<div class="d-flex justify-content-center">
+		<button id="start-ranked" class="btn btn-primary">Trouver un adversaire</button>
+		<p id="waiting-match" style="display: none; color:white;">Recherche de match en cours...</p>
+	</div>
+</div>
+
 {% endblock %}

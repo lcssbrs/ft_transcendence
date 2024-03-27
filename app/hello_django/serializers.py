@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import user_list, Match, Tournament
 
-
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = user_list
@@ -20,7 +19,7 @@ class MatchListSerializer(serializers.ModelSerializer):
 class TournoiListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament
-        fields = ['id', 'date_tournament', 'player01', 'player02', 'player03', 'player04', 'status', 'player_winner']
+        fields = ['id', 'date_tournament', 'player01', 'player02', 'player03', 'player04', 'status', 'player_winner', 'match1_id', 'match2_id']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
