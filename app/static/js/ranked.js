@@ -129,38 +129,17 @@ function setupRanked() {
 		// Fonction pour déplacer la balle
 
 		function ballMove() {
-			const canvasWidth = canvas.width;
-			const canvasHeight = canvas.height;
-			const playerWidth = PLAYER_WIDTH;
-			const playerHeight = PLAYER_HEIGHT;
-
 			// Rebonds sur le haut et bas
-			if (game.ball.y + game.ball.r >= canvasHeight || game.ball.y - game.ball.r <= 0) {
+			if (game.ball.y > canvas.height || game.ball.y < 0) {
 				game.ball.speed.y *= -1;
 			}
-
-			// Rebonds sur les joueurs
-			if (game.ball.x + game.ball.r >= canvasWidth - playerWidth && game.ball.y >= game.challenger.y && game.ball.y <= game.challenger.y + playerHeight) {
+			if (game.ball.x > canvas.width - PLAYER_WIDTH) {
 				collide(game.challenger);
-			} else if (game.ball.x - game.ball.r <= playerWidth && game.ball.y >= game.player.y && game.ball.y <= game.player.y + playerHeight) {
+			} else if (game.ball.x < PLAYER_WIDTH) {
 				collide(game.player);
 			}
-
-			// Mouvement de la balle
 			game.ball.x += game.ball.speed.x;
 			game.ball.y += game.ball.speed.y;
-
-			// Vérification des buts
-			if (game.ball.x > canvasWidth) {
-				game.player.score++;
-				resetPositions();
-			} else if (game.ball.x < 0) {
-				game.challenger.score++;
-				resetPositions();
-			}
-
-			// Redessiner le canvas après le déplacement de la balle
-			draw();
 		}
 
 		function playerMove(event) {
