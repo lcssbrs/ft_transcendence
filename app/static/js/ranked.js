@@ -398,7 +398,7 @@ function setupRanked() {
 				disconnect_ennemy = true;
 				closeWebSocket();
 			}
-			if (eventData.type === 'update_ball')
+			if (eventData.type === 'ball_move')
 			{
 				updateBall(playerId, eventData.data.x, eventData.data.y);
 			}
