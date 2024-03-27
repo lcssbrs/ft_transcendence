@@ -1,327 +1,565 @@
 function setupRanked() {
-    var game;
-    var canvas;
-    var winner;
-    let gameEnd = false;
-    let gameOwnerId;
-    var ID_ranked;
-    var playerName;
-    var adverseName;
-    var playerScore = 0;
-    var adverseScore = 0;
-    let disconnect_ennemy = false;
 
-    function launchGame() {
-        var gameStarted = false;
-        const PLAYER_HEIGHT = 100;
-        const PLAYER_WIDTH = 5;
-        const PLAYER_SPEED = 10;
-        const BALL_SPEED = 1.2;
-        const MAX_SPEED = 14;
-        let displayWinner = false;
-        let borderFlashTime = 0;
-        let borderFlashInterval = null;
+	var game;
+	var canvas;
+	var winner
+	let gameEnd = false
+	let gameOwnerId;
+	var ID_ranked;
+	var playerName;
+	var adverseName;
+	var playerScore = 0;
+	var adverseScore = 0;
+	let disconnect_ennemy = false
+	function launchGame() {
 
-        setupStart();
-        startGameWithCountdown();
+		var gameStarted = false;
+		const PLAYER_HEIGHT = 100;
+		const PLAYER_WIDTH = 5;
+		const PLAYER_SPEED = 10;
+		const BALL_SPEED = 1.2;
+		const MAX_SPEED = 14;
+		let displayWinner = false;
+		let borderFlashTime = 0;
+		let borderFlashInterval = null;
 
-        // clignotement lors d'un but
-        function flashBorder(duration) {
-            let startTime = Date.now();
-            borderFlashInterval = setInterval(function() {
-                borderFlashTime = Date.now() - startTime;
-                if (borderFlashTime < duration) {
-                    canvas.style.border = (canvas.style.border === '2px solid white') ? '2px solid red' : '2px solid white';
-                } else {
-                    clearInterval(borderFlashInterval);
-                    canvas.style.border = '2px solid white';
-                }
-            }, 50);
-        }
+		setupStart();
+		startGameWithCountdown();
 
-        // Fonction pour lancer la partie après un compte à rebours
-        function startGameWithCountdown() {
-            gameStarted = true;
+		// clignotement lors d'un but
+		function flashBorder(duration) {
+			let startTime = Date.now();
+			borderFlashInterval = setInterval(function() {
+				borderFlashTime = Date.now() - startTime;
+				if (borderFlashTime < duration) {
+					canvas.style.border = (canvas.style.border === '2px solid white') ? '2px solid red' : '2px solid white';
+				} else {
+					clearInterval(borderFlashInterval);
+					canvas.style.border = '2px solid white';
+				}
+			}, 50);
+		}
 
-            game.player.score = 0;
-            game.challenger.score = 0;
-            game.ball.x = canvas.width / 2;
-            game.ball.y = canvas.height / 2;
-            game.ball.speed.x = 1;
-            game.ball.speed.y = 1;
+		// Fonction pour lancer la partie après un compte à rebours
+		function startGameWithCountdown() {
+			gameStarted = true;
 
-            displayWinner = false;
+			game.player.score = 0;
+			game.challenger.score = 0;
+			game.ball.x = canvas.width / 2;
+			game.ball.y = canvas.height / 2;
+			game.ball.speed.x = 1;
 
-            document.addEventListener('keydown', playerMove);
-            document.addEventListener('keydown', challengerMove);
+			game.ball.speed.y = 1;
 
-            var countdown = 3;
-            var countdownInterval = setInterval(function() {
-                var context = canvas.getContext('2d');
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                draw();
-                context.fillStyle = '#F4ACBC';
-                context.font = canvas.width / 2 + 'px Anta';
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
-                context.fillText(countdown, canvas.width / 2, canvas.height / 2);
-                countdown--;
-                if (countdown < 0) {
-                    clearInterval(countdownInterval);
-                    startGame();
-                }
-            }, 1000);
-        }
+			displayWinner = false;
 
-        function drawScore() {
-            var context = canvas.getContext('2d');
-            context.fillStyle = 'white';
-            context.font = canvas.width / 20 + 'px Anta';
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
-            context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
-            context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
-        }
+			document.addEventListener('keydown', playerMove);
+			document.addEventListener('keydown', challengerMove);
 
-        //Mise en place du terrain :
-        function draw() {
-            var context = canvas.getContext('2d');
-            context.fillStyle = '#0D6EFD';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-            context.strokeStyle = 'white';
-            context.beginPath();
-            context.moveTo(canvas.width / 2, 0);
-            context.lineTo(canvas.width / 2, canvas.height);
-            context.stroke();
-            context.strokeStyle = 'white';
-            context.lineWidth = 2;
-            context.strokeRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = '#F4ACBC';
-            context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
-            context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
-            context.beginPath();
-            context.fillStyle = 'white';
-            context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
-            context.fill();
-            drawScore();
+			var countdown = 3;
+			var countdownInterval = setInterval(function() {
+				var context = canvas.getContext('2d');
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				draw();
+				context.fillStyle = '#F4ACBC';
+				context.font = canvas.width / 2 + 'px Anta';
+				context.textAlign = 'center';
+				context.textBaseline = 'middle';
+				context.fillText(countdown, canvas.width / 2, canvas.height / 2);
+				countdown--;
+				if (countdown < 0) {
+					clearInterval(countdownInterval);
+					startGame();
+				}
+			}, 1000);
+		}
 
-            if (displayWinner) {
-                context.fillStyle = '#F4ACBC';
-                context.font = canvas.width / 15 + 'px Anta';
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
-                playerScore = game.player.score;
-                adverseScore = game.challenger.score;
-                winner = game.player.score === 3 ? playerName : adverseName;
-                context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
-            }
-        }
+		function drawScore() {
+			var context = canvas.getContext('2d');
+			context.fillStyle = 'white';
+			context.font = canvas.width / 20 + 'px Anta';
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+			context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
+		}
 
-        //mouvements de la balle :
-        function play() {
-            draw();
-            ballMove();
-            requestAnimationFrame(play);
-        }
+		//Mise en place du terrain :
+		function draw() {
+			var context = canvas.getContext('2d');
+			context.fillStyle = '#0D6EFD';
+			context.fillRect(0, 0, canvas.width, canvas.height);
+			context.strokeStyle = 'white';
+			context.beginPath();
+			context.moveTo(canvas.width / 2, 0);
+			context.lineTo(canvas.width / 2, canvas.height);
+			context.stroke();
+			context.strokeStyle = 'white';
+			context.lineWidth = 2;
+			context.strokeRect(0, 0, canvas.width, canvas.height);
+			context.fillStyle = '#F4ACBC';
+			context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+			context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+			context.beginPath();
+			context.fillStyle = 'white';
+			context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
+			context.fill();
+			drawScore();
 
-        function ballMove() {
-            // Rebonds sur le haut et bas
-            if (game.ball.y > canvas.height || game.ball.y < 0) {
-                game.ball.speed.y *= -1;
-            }
-            if (game.ball.x > canvas.width - PLAYER_WIDTH) {
-                collide(game.challenger);
-            } else if (game.ball.x < PLAYER_WIDTH) {
-                collide(game.player);
-            }
-            game.ball.x += game.ball.speed.x;
-            game.ball.y += game.ball.speed.y;
-        }
+			if (displayWinner) {
+				context.fillStyle = '#F4ACBC';
+				context.font = canvas.width / 15 + 'px Anta';
+				context.textAlign = 'center';
+				context.textBaseline = 'middle';
+				playerScore = game.player.score;
+				adverseScore = game.challenger.score;
+				winner = game.player.score === 3 ? playerName : adverseName;
+				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
+			}
+		}
 
-        function playerMove(event) {
-            if (game.player.y < 0) {
-                game.player.y = 0;
-            } else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
-                game.player.y = canvas.height - PLAYER_HEIGHT;
-            }
-        }
+		//mouvements de la balle :
+		function play() {
+			draw();
+			ballMove();
+			requestAnimationFrame(play);
+		}
 
-        function challengerMove(event) {
-            if (game.challenger.y < 0) {
-                game.challenger.y = 0;
-            } else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
-                game.challenger.y = canvas.height - PLAYER_HEIGHT;
-            }
-        }
+		function ballMove() {
+			// Rebonds sur le haut et bas
+			if (game.ball.y > canvas.height || game.ball.y < 0) {
+				game.ball.speed.y *= -1;
+			}
+			if (game.ball.x > canvas.width - PLAYER_WIDTH) {
+				collide(game.challenger);
+			} else if (game.ball.x < PLAYER_WIDTH) {
+				collide(game.player);
+			}
+			game.ball.x += game.ball.speed.x;
+			game.ball.y += game.ball.speed.y;
+		}
 
-        //collisions
-        function collide(player) {
-            if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
-                game.ball.x = canvas.width / 2;
-                game.ball.y = canvas.height / 2;
-                game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-                game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-                game.ball.speed.x = 2;
-                if (player === game.player) {
-                    game.challenger.score++;
-                    adverseScore = game.challenger.score;
-                    if (adverseScore < 3 && playerScore < 3) {
-                        flashBorder(500);
-                    }
-                } else {
-                    game.player.score++;
-                    playerScore = game.player.score;
-                    if (adverseScore < 3 && playerScore < 3) {
-                        flashBorder(500);
-                    }
-                }
+		function playerMove(event) {
+			if (game.player.y < 0) {
+				game.player.y = 0;
+			} else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
+				game.player.y = canvas.height - PLAYER_HEIGHT;
+			}
+		}
 
-                if (game.player.score >= 3 || game.challenger.score >= 3) {
-                    displayWinner = true;
-                    draw();
-                    gameEnd = true;
-                    gameStarted = false;
-                    clearInterval(borderFlashInterval);
-                    document.removeEventListener('keydown', playerMove);
-                    document.removeEventListener('keydown', challengerMove);
-                    setTimeout(endGame, 3000);
-                }
-            } else {
-                game.ball.speed.x *= -1;
-                // Augmenter la vitesse de la balle à chaque rebond avec une limite de MAX_SPEED
-                if (Math.abs(game.ball.speed.x) < MAX_SPEED) {
-                    game.ball.speed.x *= BALL_SPEED;
-                }
-            }
-        }
+		function challengerMove(event) {
+			if (game.challenger.y < 0) {
+				game.challenger.y = 0;
+			} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
+				game.challenger.y = canvas.height - PLAYER_HEIGHT;
+			}
+		}
 
-        function endGame() {
-            // Informer l'utilisateur que la partie est terminée et afficher le bouton pour rejouer
-            alert('La partie est terminée! Le gagnant est ' + winner);
-            var replay = confirm('Voulez-vous rejouer?');
-            if (replay) {
-                resetGame();
-            } else {
-                // Gérer la déconnexion ou d'autres actions nécessaires à la fin du jeu
-                if (gameOwnerId === ID_ranked) {
-                    // Si c'est le propriétaire du jeu qui a décidé de ne pas rejouer, fermer la salle
-                    // ou effectuer d'autres actions selon les besoins
-                    // Par exemple, ici, j'utilise une variable `disconnect_ennemy` pour informer le backend
-                    // que l'adversaire a été déconnecté, afin que des actions appropriées puissent être prises.
-                    disconnect_ennemy = true;
-                }
-                // Fermer la connexion WebSocket
-                game.close();
-                // Rediriger ou effectuer d'autres actions nécessaires après la fin du jeu
-                // Par exemple :
-                // window.location.href = '/'; // Rediriger vers la page d'accueil
-            }
-        }
+		//collisions
+		function collide(player) {
+			if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
+				game.ball.x = canvas.width / 2;
+				game.ball.y = canvas.height / 2;
+				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+				game.ball.speed.x = 2;
+				if (player === game.player) {
+					game.challenger.score++;
+					adverseScore = game.challenger.score;
+					flashBorder(1000);
+				} else {
+					game.player.score++;
+					playerScore = game.player.score;
+					flashBorder(1000);
+				}
+				updateScoreDisplay();
+				if (game.player.score === 3 || game.challenger.score === 3) {
+					gameEnd = true;
+					endGame();
+				}
+			} else {
+				if (gameOwnerId == 1)
+				{
+					game.ball.speed.x *= -BALL_SPEED;
+					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
+						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
+					}
+				}
+			}
+		}
 
-        function resetGame() {
-            // Réinitialiser les scores et relancer le jeu
-            game.player.score = 0;
-            game.challenger.score = 0;
-            startGameWithCountdown();
-        }
+		// scorboard update
+		function updateScoreDisplay() {
+			var context = canvas.getContext('2d');
+			context.fillStyle = 'white';
+			context.font = canvas.width / 20 + 'px Anta';
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
+			context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
+		}
 
-        function setupStart() {
-            canvas = document.getElementById('pong');
-            canvas.width = window.innerWidth / 2;
-            canvas.height = window.innerHeight / 1.5;
-            game = {
-                player: {
-                    y: canvas.height / 2 - PLAYER_HEIGHT / 2,
-                    score: 0,
-                },
-                challenger: {
-                    y: canvas.height / 2 - PLAYER_HEIGHT / 2,
-                    score: 0,
-                },
-                ball: {
-                    x: canvas.width / 2,
-                    y: canvas.height / 2,
-                    r: 10,
-                    speed: {
-                        x: 1,
-                        y: 1
-                    },
-                }
-            };
-        }
+		// lancer une game
+		function startGame() {
+			game.player.score = 0;
+			game.challenger.score = 0;
+			updateScoreDisplay();
+			play();
+		}
 
-        // Fonction pour lancer le jeu
-        function startGame() {
-            play();
-        }
+		// Fonction pour terminer la partie
+		function endGame() {
+			gameStarted = false;
+			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+			if (playerScore > adverseScore)
+				endGameApi(ID_ranked, playerScore, adverseScore, 1);
+			else
+				endGameApi(ID_ranked, playerScore, adverseScore, 2);
+			displayWinner = true;
 
-        // Envoi de mouvements au serveur WebSocket
-        function sendMove(direction) {
-            game.send(JSON.stringify({
-                'type': 'game_move',
-                'direction': direction
-            }));
-        }
+			setTimeout(function() {
+				displayWinner = false;
+				loadView('/ranked/'); // Rechargement de la page après un délai
+			}, 3000);
 
-        // Événements de mouvement des joueurs
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowUp') {
-                sendMove('up');
-            } else if (event.key === 'ArrowDown') {
-                sendMove('down');
-            }
-        });
-    }
+			removeKeyListeners();
 
-    function connectToGame() {
-        // Connexion au serveur WebSocket
-        var wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-        var endpoint = wsProtocol + window.location.host + '/ws/ranked/pong/' + ID_ranked + '/';
-        game = new WebSocket(endpoint);
+			game.ball.speed.x = 0;
+			game.ball.speed.y = 0;
+		}
 
-        // Gestion des événements WebSocket
-        game.onopen = function() {
-            console.log('WebSocket connected.');
-        };
+		function removeKeyListeners() {
+			document.removeEventListener('keydown', playerMove);
+			document.removeEventListener('keydown', challengerMove);
+		}
 
-        game.onmessage = function(e) {
-            var data = JSON.parse(e.data);
-            var messageType = data.type;
+		//----------------EVENTS LISTENERS--------
 
-            if (messageType === 'ball_move') {
-                // Mise à jour de la position de la balle
-                var ballData = data.data;
-                game.ball.x = ballData.x;
-                game.ball.y = ballData.y;
-            } else if (messageType === 'game_update') {
-                // Mise à jour de la position du joueur adverse
-                var playerData = data.data;
-                game.challenger.y = playerData.direction === 'up' ? game.challenger.y - 20 : game.challenger.y + 20;
-            } else if (messageType === 'game_start') {
-                // Démarrage du jeu
-                launchGame();
-            } else if (messageType === 'disconnect_message') {
-                // Message de déconnexion de l'adversaire
-                // Gérer la déconnexion de l'adversaire
-                disconnect_ennemy = true;
-            }
-        };
+		// Dessins et animations
+		function setupStart() {
+			canvas = document.getElementById('canvas3');
+			game = {
+				player: {
+					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
+					score: 0
+				},
+				challenger: {
+					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
+					score: 0
+				},
+				ball: {
+					x: canvas.width / 2,
+					y: canvas.height / 2,
+					r: 5,
+					speed: {
+						x: 1,
+						y: 1
+					}
+				}
+			}
+			draw();
+		}
 
-        game.onclose = function() {
-            console.log('WebSocket closed.');
-            // Gérer la fermeture de la connexion WebSocket
-            // Par exemple, rediriger l'utilisateur ou effectuer d'autres actions nécessaires
-            // Si l'adversaire n'est pas déjà déconnecté, alors il a fermé la connexion
-            if (!disconnect_ennemy) {
-                // Rediriger l'utilisateur ou afficher un message indiquant la fin de la partie
-            }
-        };
-    }
+		// Event sur le clavier
+		document.addEventListener('keydown', playerMove);
+		document.addEventListener('keydown', challengerMove);
+	}
 
-    // Début du script
-    ID_ranked = parseInt(document.getElementById('id_ranked').textContent);
-    playerName = document.getElementById('player_name').textContent;
-    adverseName = document.getElementById('adverse_name').textContent;
+		//-----------------------------------------\/
+		//----------------WEBSOCKET----------------\/
+		//-----------------------------------------\/
 
-    connectToGame();
+	const startButton = document.getElementById("start-ranked");
+	const searchingMatch = document.getElementById("searching-match");
+	const adversaireMatch = document.getElementById("adversaire-match");
+	let socket = null;
+	let gameStarted = false;
+
+
+	function GetPlayerId(match_id) {
+		fetch(`/api/match/${match_id}/`, {
+			method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data) {
+				playerId1 = data.player1;
+				playerId2 = data.player2;
+				getPlayerNames(playerId1, playerId2);
+			} else {
+				console.log('Match non trouvé');
+			}
+		})
+		.catch(error => console.error('Erreur avec la connexion en base de données', error));
+	};
+
+	function endGameApi(match_id, score_01, score_02, winner) {
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			player_winner: winner,
+			status: "end_game"
+		};
+
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		})
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function quitGameApi(match_id, score_01, score_02) {
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			status: "cancel"
+		};
+
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		})
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function getPlayerNames(player1, player2) {
+		const request1 = fetch(`/api/users/${player1}`);
+		const request2 = fetch(`/api/users/${player2}`);
+
+		Promise.all([request1, request2])
+			.then(responses => {
+				const promises = responses.map(response => response.json());
+				Promise.all(promises)
+					.then(data => {
+						playerName = data[0].username;
+						adverseName = data[1].username;
+					})
+					.catch(error => console.error("Erreur lors de la récupération des données :", error));
+			})
+			.catch(error => console.error("Erreur lors de la requête API :", error));
+	}
+
+	startButton.addEventListener("click", function() {
+		startButton.style.display = "none";
+		searchingMatch.style.display = "block";
+
+		fetch('/api/join-match/', {
+		method: 'POST'
+	})
+	.then(response => response.json())
+	.then(data => {
+		var match_id = 0;
+		if (data.match_exists) {
+			console.log("Match trouvé [", data.match_data.id, "]");
+			match_id = data.match_data.id;
+			const player = 2;
+			initializeWebSocket(match_id, player);
+		} else {
+			console.log("Nouvelle partie créée [", data.match_data.id, "]");
+			match_id = data.match_data.id;
+			const player = 1;
+			initializeWebSocket(match_id, player);
+		}
+	})
+		.catch(error => console.error('Erreur avec la connexion en base de données', error));
+	});
+
+    function initializeWebSocket(match_id, playerId) {
+		gameOwnerId = playerId;
+		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${match_id}/`);
+
+		socket.onopen = function() {
+			ID_ranked = match_id;
+			console.log("Websocket ouvert");
+		};
+
+		socket.onmessage = function(event) {
+			const eventData = JSON.parse(event.data);
+			if (eventData.type === 'game_start')
+			{
+				searchingMatch.style.display = "none";
+				gameStarted = true;
+				displayGame();
+				GetPlayerId(match_id);
+			}
+			if (eventData.type === 'game_update')
+			{
+				const playerData = eventData.data;
+				if (playerData.player !== playerId) {
+					updateOpponentPad(playerData.direction);
+				}
+			}
+			if (eventData.type === 'disconnect_message')
+			{
+				disconnect_ennemy = true;
+				closeWebSocket();
+			}
+			if (eventData.type === 'ball_move')
+			{
+				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status);
+			}
+		};
+
+		function updateBall(player, x, y, score01, score02, status) {
+			if (gameStarted && player == 2) {
+				game.ball.x = x;
+				game.ball.y = y;
+				game.player.score = score01,
+				game.challenger.score = score02
+				gameStarted = status
+			}
+		}
+
+		function sendGameMove(player, direction) {
+			if (gameStarted) {
+				const moveData = {
+					type: 'game_move',
+					player: player,
+					direction: direction
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
+		function sendGameBall(player) {
+			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
+				const moveData = {
+					type: 'ball_move',
+					x: game.ball.x,
+					y: game.ball.y,
+					score01: game.player.score,
+					score02: game.challenger.score,
+					status: gameStarted,
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
+		setInterval(function() {
+			sendGameBall(playerId);
+		}, 25);
+
+		function updatePad(direction) {
+			if (playerId === 2)
+			{
+				if (direction === 'up')
+					game.challenger.y -= 10;
+				if (direction === 'down')
+					game.challenger.y += 10;
+				if (game.challenger.y < 0) {
+					game.challenger.y = 0;
+				} else if (game.challenger.y > canvas.height - 100) {
+					game.challenger.y = canvas.height - 100;
+				}
+			}
+			else
+			{
+				if (direction === 'up')
+					game.player.y -= 10;
+				if (direction === 'down')
+					game.player.y += 10;
+				if (game.player.y < 0) {
+					game.player.y = 0;
+				} else if (game.player.y > canvas.height - 100) {
+					game.player.y = canvas.height - 100;
+				}
+			}
+		}
+
+		function updateOpponentPad(direction) {
+			if (playerId === 1)
+			{
+				if (direction === 'up')
+					game.challenger.y -= 10;
+				if (direction === 'down')
+					game.challenger.y += 10;
+				if (game.challenger.y < 0) {
+					game.challenger.y = 0;
+				} else if (game.challenger.y > canvas.height - 100) {
+					game.challenger.y = canvas.height - 100;
+				}
+			}
+			else
+			{
+				if (direction === 'up')
+					game.player.y -= 10;
+				if (direction === 'down')
+					game.player.y += 10;
+				if (game.player.y < 0) {
+					game.player.y = 0;
+				} else if (game.player.y > canvas.height - 100) {
+					game.player.y = canvas.height - 100;
+				}
+			}
+		}
+
+		document.addEventListener('keydown', function(event) {
+			if (gameStarted) {
+				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
+					updatePad('up')
+					sendGameMove(playerId, 'up');
+				} else if (event.key === 's' || event.key === 'S') {
+					updatePad('down')
+					sendGameMove(playerId, 'down');
+				}
+			}
+		});
+
+		socket.onclose = function() {
+			adversaireMatch.style.display = "block";
+			if (gameStarted == true && disconnect_ennemy == true)
+			{
+				if (playerId === 1)
+					endGameApi(match_id, 4, adverseScore, playerId);
+				else
+					endGameApi(match_id, playerScore, 4, playerId);
+			}
+			if (playerId == 1 && disconnect_ennemy == false && gameStarted == false)
+			{
+				quitGameApi(match_id, 0, 0);
+			}
+			gameStarted = false;
+			console.log("WebSocket déconnecté");
+		};
+
+		function displayGame() {
+			launchGame();
+		}
+
+		function closeWebSocket() {
+			if (socket) {
+				socket.close();
+				console.log("Connexion WebSocket fermée");
+				socket = null;
+			}
+		}
+
+		document.addEventListener('click', function(event) {
+			if (event.target.tagName === 'A') {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('popstate', function(event) {
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('hashchange', function(event) {
+			console.log(window.location.pathname);
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+	}
 }
