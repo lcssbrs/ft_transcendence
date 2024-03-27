@@ -126,35 +126,32 @@ function setupRanked() {
 			requestAnimationFrame(play);
 		}
 
+		// Fonction pour déplacer la balle
 		function ballMove() {
-			// Rebonds sur le haut et bas
-			if (game.ball.y > canvas.height || game.ball.y < 0) {
-				game.ball.speed.y *= -1;
-			}
-			if (game.ball.x > canvas.width - PLAYER_WIDTH) {
-				collide(game.challenger);
-			} else if (game.ball.x < PLAYER_WIDTH) {
-				collide(game.player);
-			}
-			game.ball.x += game.ball.speed.x;
-			game.ball.y += game.ball.speed.y;
+		    const canvasWidth = canvas.width;
+		    const canvasHeight = canvas.height;
+		    const playerWidth = PLAYER_WIDTH;
+		    const playerHeight = PLAYER_HEIGHT;
+		
+		    // Rebonds sur le haut et bas
+		    if (game.ball.y > canvasHeight || game.ball.y < 0) {
+		        game.ball.speed.y *= -1; // Inversion de la direction verticale
+		    }
+		
+		    // Rebond sur le joueur 2 (à droite)
+		    if (game.ball.x > canvasWidth - playerWidth) {
+		        collide(game.challenger);
+		    }
+		    // Rebond sur le joueur 1 (à gauche)
+		    else if (game.ball.x < playerWidth) {
+		        collide(game.player);
+		    }
+		
+		    // Mouvement de la balle
+		    game.ball.x += game.ball.speed.x;
+		    game.ball.y += game.ball.speed.y;
 		}
 
-		function playerMove(event) {
-			if (game.player.y < 0) {
-				game.player.y = 0;
-			} else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
-				game.player.y = canvas.height - PLAYER_HEIGHT;
-			}
-		}
-
-		function challengerMove(event) {
-			if (game.challenger.y < 0) {
-				game.challenger.y = 0;
-			} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
-				game.challenger.y = canvas.height - PLAYER_HEIGHT;
-			}
-		}
 
 		//collisions
 		function collide(player) {
