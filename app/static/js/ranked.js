@@ -160,31 +160,50 @@ function setupRanked() {
 
 		//collisions
 		function collide(player) {
-			if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
-				game.ball.x = canvas.width / 2;
-				game.ball.y = canvas.height / 2;
-				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-				game.ball.speed.x = 2;
-				if (player === game.player) {
-					game.challenger.score++;
-					adverseScore = game.challenger.score;
-					flashBorder(1000);
-				} else {
-					game.player.score++;
-					playerScore = game.player.score;
-					flashBorder(1000);
-				}
-				updateScoreDisplay();
-				if (game.player.score === 3 || game.challenger.score === 3) {
-					gameEnd = true;
-					endGame();
+			if (game.ball.x + game.ball.r >= player.x && game.ball.x - game.ball.r <= player.x + PLAYER_WIDTH && game.ball.y >= player.y && game.ball.y <= player.y + PLAYER_HEIGHT) {
+				// Collision détectée
+				game.ball.speed.x *= -1; // Inverser la direction de la balle
+				if (player === game.challenger) {
+					// Ajuster la vitesse de la balle pour une meilleure fluidité
+					game.ball.speed.x *= BALL_SPEED;
+					game.ball.speed.y *= BALL_SPEED;
 				}
 			} else {
-				if (gameOwnerId == 1) {
-					game.ball.speed.x *= -BALL_SPEED;
-					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
-						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
+				// Pas de collision
+				if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
+					game.ball.x = canvas.width / 2;
+					game.ball.y = canvas.height / 2;
+					game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+					game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+
+					// Ajuster la vitesse de la balle pour une meilleure fluidité
+					if (player === game.challenger) {
+						game.ball.speed.x *= BALL_SPEED;
+						game.ball.speed.y *= BALL_SPEED;
+					} else {
+						game.ball.speed.x = 2;
+					}
+
+					if (player === game.player) {
+						game.challenger.score++;
+						adverseScore = game.challenger.score;
+						flashBorder(1000);
+					} else {
+						game.player.score++;
+						playerScore = game.player.score;
+						flashBorder(1000);
+					}
+					updateScoreDisplay();
+					if (game.player.score === 3 || game.challenger.score === 3) {
+						gameEnd = true;
+						endGame();
+					}
+				} else {
+					if (gameOwnerId == 1) {
+						game.ball.speed.x *= -BALL_SPEED;
+						if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
+							game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
+						}
 					}
 				}
 			}
