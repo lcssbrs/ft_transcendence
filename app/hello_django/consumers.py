@@ -135,7 +135,9 @@ class PongConsumer(AsyncWebsocketConsumer):
             )
 
     async def ball_move(self, event):
-        await self.send(text_data=json.dumps({
-            'type': 'ball_move',
-            'data': event['data']
-        }))
+        ball_data = event.get('data')
+        if ball_data:
+            await self.send(text_data=json.dumps({
+                'type': 'ball_move',
+                'data': ball_data,
+            }))
