@@ -370,7 +370,7 @@ function setupRanked() {
 	});
 
     function initializeWebSocket(match_id, playerId) {
-		socket = new WebSocket(`wss://root.alan-andrieux.fr:443/wss/match/${match_id}/`);
+		socket = new WebSocket(`wss://root.alan-andrieux.fr/wss/match/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;
