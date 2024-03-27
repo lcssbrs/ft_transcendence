@@ -133,10 +133,6 @@ function setupRanked() {
 			const canvasHeight = canvas.height;
 			const playerWidth = PLAYER_WIDTH;
 
-			// Mouvement de la balle
-			game.ball.x += game.ball.speed.x;
-			game.ball.y += game.ball.speed.y;
-
 			// Rebonds sur le haut et bas
 			if (game.ball.y > canvasHeight - game.ball.r || game.ball.y < game.ball.r) {
 				game.ball.speed.y *= -1; // Inversion de la direction verticale
@@ -150,6 +146,14 @@ function setupRanked() {
 			else if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
 				collide(game.player);
 			}
+
+			// Mouvement de la balle
+			game.ball.x += game.ball.speed.x;
+			game.ball.y += game.ball.speed.y;
+
+			// Redessiner le canvas après le déplacement de la balle
+			draw();
+		}
 
 		function playerMove(event) {
 			if (game.player.y < 0) {
