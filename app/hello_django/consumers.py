@@ -27,6 +27,7 @@ class ChatConsumer(WebsocketConsumer):
         username = self.scope['user'].username
         user_list.objects.update_or_create(username=username, defaults={'status': 'offline'})
 
+
 class PongConsumer(AsyncWebsocketConsumer):
     connected_clients = {}
 
@@ -54,6 +55,8 @@ class PongConsumer(AsyncWebsocketConsumer):
 
         if message_type == 'game_move':
             await self.game_move(data)
+        elif message_type == 'ball_move':
+            await self.send_ball_move(data)
 
     async def check_group_full(self):
         if self.group_name in self.connected_clients and len(self.connected_clients[self.group_name]) >= 2:
@@ -107,7 +110,6 @@ class PongConsumer(AsyncWebsocketConsumer):
                 if len(self.connected_clients[self.group_name]) > player_id:
                     self.connected_clients[self.group_name][player_id] = direction
 
-
                 await self.channel_layer.group_send(
                     self.group_name,
                     {
@@ -119,11 +121,24 @@ class PongConsumer(AsyncWebsocketConsumer):
                     }
                 )
 
-
     async def send_game_update(self, event):
         await self.send(text_data=json.dumps({
             'type': 'game_update',
             'data': event['data']
         }))
 
+    async def send_ball_move(self, data):
+        if self.group_name in self.connected_clients:
+            await self.channel_layer.group_send(
+                self.group_name,
+                {
+                    'type': 'ball_move',
+                    'data': data,
+                }
+            )
 
+    async def ball_move(self, event):
+        await self.send(text_data=json.dumps({
+            'type': 'ball_move',
+            'data': event['data']
+        }))

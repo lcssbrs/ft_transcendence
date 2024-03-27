@@ -70,4 +70,5 @@ urlpatterns = [
 	path('check-match/', views.check_match, name='check_match'),
 	path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
     path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
+    path('api/create-tournament/', views.JoinTournament.as_view(), name='create_match'),
 ]

@@ -108,15 +108,16 @@ class Match(models.Model):
 
 class Tournament(models.Model):
     date_tournament = models.DateTimeField(null=True, blank=True)
-    player01 = models.ForeignKey('user_list', related_name='player01_tournaments', on_delete=models.CASCADE)
-    player02 = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE)
-    player03 = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE)
-    player04 = models.ForeignKey('user_list', related_name='player04_tournaments', on_delete=models.CASCADE)
+    player01    = models.ForeignKey('user_list', related_name='player01_tournaments', on_delete=models.CASCADE)
+    player02    = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE)
+    player03    = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE)
+    player04    = models.ForeignKey('user_list', related_name='player04_tournaments', on_delete=models.CASCADE)
+    player_winner = models.ForeignKey('user_list', related_name='winner_matches_tournaments', on_delete=models.CASCADE, null=True)
+    status      = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de tournoi'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
 
     def create_matches(self):
         Match.objects.create(player1=self.player01, player2=self.player02)
         Match.objects.create(player1=self.player03, player2=self.player04)
-        # TODO les 2 winners doivent s'affronter
 
     class Meta:
         db_table = 'django_tournament'
