@@ -1,28 +1,27 @@
 function setupRanked() {
+    var game;
+    var canvas;
+    var winner;
+    let gameEnd = false;
+    let gameOwnerId;
+    var ID_ranked;
+    let playerId; // Assurez-vous d'initialiser cette variable correctement
+    var playerName;
+    var adverseName;
+    var playerScore = 0;
+    var adverseScore = 0;
+    let disconnect_ennemy = false;
 
-	var game;
-	var canvas;
-	var winner
-	let gameEnd = false
-	let gameOwnerId;
-	var ID_ranked;
-	let playerId;
-	var playerName;
-	var adverseName;
-	var playerScore = 0;
-	var adverseScore = 0;
-	let disconnect_ennemy = false
-	function launchGame() {
-
-		var gameStarted = false;
-		const PLAYER_HEIGHT = 100;
-		const PLAYER_WIDTH = 5;
-		const PLAYER_SPEED = 10;
-		const BALL_SPEED = 1.2;
-		const MAX_SPEED = 14;
-		let displayWinner = false;
-		let borderFlashTime = 0;
-		let borderFlashInterval = null;
+    function launchGame() {
+        var gameStarted = false;
+        const PLAYER_HEIGHT = 100;
+        const PLAYER_WIDTH = 5;
+        const PLAYER_SPEED = 10;
+        const BALL_SPEED = 1.2;
+        const MAX_SPEED = 14;
+        let displayWinner = false;
+        let borderFlashTime = 0;
+        let borderFlashInterval = null;
 
 		setupStart();
 		startGameWithCountdown();
@@ -350,39 +349,40 @@ function setupRanked() {
 	}
 
 	startButton.addEventListener("click", function() {
-		startButton.style.display = "none";
-		searchingMatch.style.display = "block";
+        startButton.style.display = "none";
+        searchingMatch.style.display = "block";
 
-		fetch('/api/join-match/', {
-		method: 'POST'
-	})
-	.then(response => response.json())
-	.then(data => {
-		var match_id = 0;
-		if (data.match_exists) {
-			console.log("Match trouvé [", data.match_data.id, "]");
-			match_id = data.match_data.id;
-			const player = 2;
-			initializeWebSocket(match_id, player);
-		} else {
-			console.log("Nouvelle partie créée [", data.match_data.id, "]");
-			match_id = data.match_data.id;
-			const player = 1;
-			initializeWebSocket(match_id, player);
-		}
-	})
-		.catch(error => console.error('Erreur avec la connexion en base de données', error));
-	});
+        fetch('/api/join-match/', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            var match_id = 0;
+            if (data.match_exists) {
+                console.log("Match trouvé [", data.match_data.id, "]");
+                match_id = data.match_data.id;
+                const player = 2;
+                initializeWebSocket(match_id, player);
+            } else {
+                console.log("Nouvelle partie créée [", data.match_data.id, "]");
+                match_id = data.match_data.id;
+                const player = 1;
+                initializeWebSocket(match_id, player);
+            }
+        })
+        .catch(error => console.error('Erreur avec la connexion en base de données', error));
+    });
 
 	function updateBall(player, x, y, score01, score02, status) {
-        if (gameStarted && player == 2) {
+        if (gameStarted && player === playerId) {
             game.ball.x = x;
             game.ball.y = y;
-            game.player.score = score01,
-            game.challenger.score = score02
-            gameStarted = status
+            game.player.score = score01;
+            game.challenger.score = score02;
+            gameStarted = status;
         }
     }
+
 	function sendGameMove(player, direction) {
         if (gameStarted) {
             const moveData = {
@@ -418,15 +418,15 @@ function setupRanked() {
         }
     }
 
-	function sendGameBall(player) {
-        if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
+function sendGameBall(player) {
+        if (gameStarted && player === playerId && !disconnect_ennemy && socket) {
             const moveData = {
                 type: 'ball_move',
                 x: game.ball.x,
                 y: game.ball.y,
                 score01: game.player.score,
                 score02: game.challenger.score,
-                status: gameStarted,
+                status: gameStarted
             };
             socket.send(JSON.stringify(moveData));
         }
@@ -436,9 +436,9 @@ function setupRanked() {
         sendGameBall(playerId);
     }, 25);
 
-    function initializeWebSocket(match_id, playerId) {
-		gameOwnerId = playerId;
-		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${match_id}/`);
+	function initializeWebSocket(match_id, playerId) {
+        gameOwnerId = playerId;
+        socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;
