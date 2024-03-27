@@ -375,7 +375,7 @@ function setupRanked() {
 
     function initializeWebSocket(match_id, playerId) {
 		gameOwnerId = playerId;
-		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
+		socket = new WebSocket(`wss://root.alan-andrieux.fr:8000/ws/match/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;

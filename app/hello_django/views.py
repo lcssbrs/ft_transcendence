@@ -611,9 +611,12 @@ def edit_profile(request):
             if 'profile_picture' in request.FILES:
                 user.profile_picture = request.FILES['profile_picture']
             user.save()
-            return redirect('profile')
+            return JsonResponse({'success': True, 'id': user.id})
+        else:
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
         form = UserProfileForm(instance=user)
+
     return render(request, 'edit_profile.html', {'form': form})
 
 class CurrentUser(APIView):
