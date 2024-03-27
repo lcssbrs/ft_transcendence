@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import models, user_list, Tournament, Match, Friendship, Match
-from .forms import add_user_form, loginForm
+from .forms import add_user_form, loginForm, UserProfileForm
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -99,6 +99,23 @@ def solo_view(request):
 
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
+
+def edit_profile(request):
+    user = request.user
+    userpr = user_list.objects.get(username=user.username)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Mettre à jour les informations de l'utilisateur dans la base de données
+            userpr.first_name = form.cleaned_data['first_name']
+            userpr.last_name = form.cleaned_data['last_name']
+            if 'profile_picture' in request.FILES:
+                user.profile_picture = request.FILES['profile_picture']
+            user.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})
 
 #WEBSOCKETS
 
