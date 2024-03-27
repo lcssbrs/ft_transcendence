@@ -98,26 +98,31 @@ function setupRanked() {
 			context.strokeStyle = 'white';
 			context.lineWidth = 2;
 			context.strokeRect(0, 0, canvas.width, canvas.height);
+
+			// Dessin des joueurs
 			context.fillStyle = '#F4ACBC';
 			context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 			context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+
+			// Dessin de la balle
 			context.beginPath();
 			context.fillStyle = 'white';
 			context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
 			context.fill();
+
+			// Affichage des scores
 			drawScore();
 
+			// Affichage du gagnant si le jeu est terminé
 			if (displayWinner) {
 				context.fillStyle = '#F4ACBC';
 				context.font = canvas.width / 15 + 'px Anta';
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
-				playerScore = game.player.score;
-				adverseScore = game.challenger.score;
-				winner = game.player.score === 3 ? playerName : adverseName;
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
 		}
+
 
 		//mouvements de la balle :
 		function play() {
@@ -125,8 +130,6 @@ function setupRanked() {
 			ballMove();
 			requestAnimationFrame(play);
 		}
-
-		// Fonction pour déplacer la balle
 
 		function ballMove() {
 			// Rebonds sur le haut et bas
@@ -181,7 +184,8 @@ function setupRanked() {
 					endGame();
 				}
 			} else {
-				if (gameOwnerId == 1) {
+				if (gameOwnerId == 1)
+				{
 					game.ball.speed.x *= -BALL_SPEED;
 					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
 						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
@@ -189,7 +193,6 @@ function setupRanked() {
 				}
 			}
 		}
-
 
 		// scorboard update
 		function updateScoreDisplay() {
@@ -212,27 +215,24 @@ function setupRanked() {
 
 		// Fonction pour terminer la partie
 		function endGame() {
-		    gameStarted = false;
-		    winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-		    if (playerScore > adverseScore)
-		        endGameApi(ID_ranked, playerScore, adverseScore, 1);
-		    else
-		        endGameApi(ID_ranked, playerScore, adverseScore, 2);
-		    displayWinner = true;
-		    endGame = true;
+			gameStarted = false;
+			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+			if (playerScore > adverseScore)
+				endGameApi(ID_ranked, playerScore, adverseScore, 1);
+			else
+				endGameApi(ID_ranked, playerScore, adverseScore, 2);
+			displayWinner = true;
+			endGame = true;
 
-		    setTimeout(function() {
-		        displayWinner = false;
-		    }, 3000);
+			setTimeout(function() {
+				displayWinner = false;
+			}, 3000);
 
-		    removeKeyListeners();
+			removeKeyListeners();
 
-		    game.ball.speed.x = 0;
-		    game.ball.speed.y = 0;
+			game.ball.speed.x = 0;
+			game.ball.speed.y = 0;
 		}
-
-
-
 
 		function removeKeyListeners() {
 			document.removeEventListener('keydown', playerMove);
@@ -314,31 +314,9 @@ function setupRanked() {
 			},
 			body: JSON.stringify(requestBody)
 		})
-		.then(() => {
-			// Affiche le gagnant pendant 3 secondes
-			displayWinner(winner);
-			// Masque le gagnant après 3 secondes et recharge la page
-			setTimeout(() => {
-				displayWinner = false;
-				window.location.reload();
-			}, 3000);
-		})
+		.then(response => {})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
-
-	function displayWinner(winner) {
-		const context = canvas.getContext('2d');
-		context.clearRect(0, 0, canvas.width, canvas.height);
-		context.fillStyle = '#F4ACBC';
-		context.font = canvas.width / 15 + 'px Anta';
-		context.textAlign = 'center';
-		context.textBaseline = 'middle';
-		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
-	}
-
-
-
-
 
 	function quitGameApi(match_id, score_01, score_02) {
 		const requestBody = {
@@ -436,7 +414,6 @@ function setupRanked() {
 			}
 		};
 
-		// Fonction pour mettre à jour la position de la balle et les scores en fonction des données reçues via les websockets
 		function updateBall(player, x, y, score01, score02, status) {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
@@ -504,29 +481,31 @@ function setupRanked() {
 		}
 
 		function updateOpponentPad(direction) {
-		    if (playerId === 1) {
-		        if (direction === 'up')
-		            game.challenger.y -= 10;
-		        if (direction === 'down')
-		            game.challenger.y += 10;
-		        if (game.challenger.y < 0) {
-		            game.challenger.y = 0;
-		        } else if (game.challenger.y > canvas.height - 100) {
-		            game.challenger.y = canvas.height - 100;
-		        }
-		    } else {
-		        if (direction === 'up')
-		            game.player.y -= 10;
-		        if (direction === 'down')
-		            game.player.y += 10;
-		        if (game.player.y < 0) {
-		            game.player.y = 0;
-		        } else if (game.player.y > canvas.height - 100) {
-		            game.player.y = canvas.height - 100;
-		        }
-		    }
+			if (playerId === 1)
+			{
+				if (direction === 'up')
+					game.challenger.y -= 10;
+				if (direction === 'down')
+					game.challenger.y += 10;
+				if (game.challenger.y < 0) {
+					game.challenger.y = 0;
+				} else if (game.challenger.y > canvas.height - 100) {
+					game.challenger.y = canvas.height - 100;
+				}
+			}
+			else
+			{
+				if (direction === 'up')
+					game.player.y -= 10;
+				if (direction === 'down')
+					game.player.y += 10;
+				if (game.player.y < 0) {
+					game.player.y = 0;
+				} else if (game.player.y > canvas.height - 100) {
+					game.player.y = canvas.height - 100;
+				}
+			}
 		}
-
 
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
