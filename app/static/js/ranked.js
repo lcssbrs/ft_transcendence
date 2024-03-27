@@ -98,22 +98,15 @@ function setupRanked() {
 			context.strokeStyle = 'white';
 			context.lineWidth = 2;
 			context.strokeRect(0, 0, canvas.width, canvas.height);
-
-			// Dessin des joueurs
 			context.fillStyle = '#F4ACBC';
 			context.fillRect(0, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 			context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
-
-			// Dessin de la balle
 			context.beginPath();
 			context.fillStyle = 'white';
 			context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
 			context.fill();
-
-			// Affichage des scores
 			drawScore();
 
-			// Affichage du gagnant si le jeu est terminé
 			if (displayWinner) {
 				context.fillStyle = '#F4ACBC';
 				context.font = canvas.width / 15 + 'px Anta';
@@ -125,7 +118,6 @@ function setupRanked() {
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
 		}
-
 
 		//mouvements de la balle :
 		function play() {
@@ -228,7 +220,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
-				loadView('/ranked/'); // Relancer la page "ranked"
+				loadView('/ranked/'); // Rechargement de la page après un délai
 			}, 3000);
 
 			removeKeyListeners();
@@ -237,7 +229,10 @@ function setupRanked() {
 			game.ball.speed.y = 0;
 		}
 
-
+		function removeKeyListeners() {
+			document.removeEventListener('keydown', playerMove);
+			document.removeEventListener('keydown', challengerMove);
+		}
 
 		//----------------EVENTS LISTENERS--------
 
