@@ -151,9 +151,19 @@ function setupRanked() {
 			game.ball.x += game.ball.speed.x;
 			game.ball.y += game.ball.speed.y;
 
+			// Vérifier si un but a été marqué
+			if (game.ball.x > canvasWidth) {
+				game.player.score++; // But pour le joueur 1
+				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
+			} else if (game.ball.x < 0) {
+				game.challenger.score++; // But pour le joueur 2
+				resetPositions(); // Réinitialiser les positions des joueurs et de la balle
+			}
+
 			// Redessiner le canvas après le déplacement de la balle
 			draw();
 		}
+
 
 		function playerMove(event) {
 			if (game.player.y < 0) {
