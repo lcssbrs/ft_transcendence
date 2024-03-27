@@ -221,6 +221,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
+				loadView('/ranked/');
 			}, 3000);
 
 			removeKeyListeners();
@@ -405,16 +406,17 @@ function setupRanked() {
 			}
 			if (eventData.type === 'ball_move')
 			{
-				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02);
+				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status);
 			}
 		};
 
-		function updateBall(player, x, y, score01, score02) {
+		function updateBall(player, x, y, score01, score02, status) {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
 				game.ball.y = y;
 				game.player.score = score01,
 				game.challenger.score = score02
+				gameStarted = status
 			}
 		}
 
@@ -430,13 +432,14 @@ function setupRanked() {
 		}
 
 		function sendGameBall(player) {
-			if (gameStarted && player == 1 && disconnect_ennemy == false) {
+			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
 				const moveData = {
 					type: 'ball_move',
 					x: game.ball.x,
 					y: game.ball.y,
 					score01: game.player.score,
 					score02: game.challenger.score,
+					status: gameStarted,
 				};
 				socket.send(JSON.stringify(moveData));
 			}

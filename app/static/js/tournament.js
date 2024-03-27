@@ -82,7 +82,6 @@ function tournament() {
 
 	var ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
 
-
 	// Faire api/endpoint pour rejoindre/créer un tournoi existant
 	// Récupérer match_id
 
