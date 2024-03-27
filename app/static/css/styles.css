@@ -189,6 +189,30 @@
     background-image: linear-gradient(to right, #529bdb, #3250bf);
 }
 
+/* CSS */
+.line {
+    position: relative;
+    width: 20vh;
+    height: 10vh;
+}
+
+
+/* CSS */
+.parent {
+    display: flex;
+    flex-wrap: wrap; /* Permettre aux éléments enfants de passer à la ligne */
+    justify-content: space-between; /* Répartir les éléments enfants horizontalement */
+    align-content: space-between; /* Répartir les éléments enfants verticalement */
+    width: 100%; /* Ajustez la largeur de la div parente selon vos besoins */
+    height: 100%; /* Ajustez la hauteur de la div parente selon vos besoins */
+}
+
+.child {
+    flex-basis: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
+    height: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
+}
+
+
 
 @keyframes fade {
     5% {

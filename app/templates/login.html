@@ -3,6 +3,7 @@
 {% block content %}
 <div id="logcontent" class="text-white mx-auto text-center rounded-3 border border-light my-auto p-2 d-flex flex-column justify-content-center" style="background: linear-gradient(to right, #0D6EFD, #F4ACBC); width: 35%; height: 65%; border-width: 3px !important;">
 	<h2>Se connecter</h2>
+	<div id="errorInfo" class="text-danger d-none">Pseudonyme, mot de passe, ou cle d'authentification incorrect.</div>
 	<form id="loginForm" method="post">
 		{% csrf_token %}
 		<div class="log-input d-flex flex-column align-items-center">

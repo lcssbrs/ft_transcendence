@@ -25,6 +25,6 @@ class add_user_form(forms.ModelForm):
         return cleaned_data
 
 class loginForm(forms.Form):
-    username = forms.CharField(label='Nom d\'utilisateur', widget=forms.TextInput(attrs={'placeholder': 'Pseudonyme'}))
-    password = forms.CharField(label='Mot de passe', widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'}))
-    token = forms.CharField(label='Clé d\'authentification', widget=forms.TextInput(attrs={'placeholder': 'Clé d\'authentification'}))
+    username = forms.CharField(label='Nom d\'utilisateur', required=False, widget=forms.TextInput(attrs={'placeholder': 'Pseudonyme', 'id': 'usernameInput'}))
+    password = forms.CharField(label='Mot de passe', required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe', 'id': 'passwordInput'}))
+    token = forms.CharField(label='Clé d\'authentification', required=False, widget=forms.TextInput(attrs={'placeholder': 'Clé d\'authentification', 'id': 'tokenInput'}))
