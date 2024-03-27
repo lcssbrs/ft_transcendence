@@ -477,30 +477,31 @@ function setupRanked() {
 		}
 
 		function updateOpponentPad(direction) {
-			if (playerId === 1)
-			{
-				if (direction === 'up')
-					game.challenger.y -= 10;
-				if (direction === 'down')
-					game.challenger.y += 10;
-				if (game.challenger.y < 0) {
-					game.challenger.y = 0;
-				} else if (game.challenger.y > canvas.height - 100) {
-					game.challenger.y = canvas.height - 100;
+			const moveSpeed = 10; // Vitesse de déplacement du joueur
+			const now = Date.now(); // Temps actuel
+			const timeElapsed = now - lastMoveTime; // Temps écoulé depuis le dernier mouvement
+
+			if (playerId === 1) {
+				if (direction === 'up') {
+					game.challenger.y -= moveSpeed * (timeElapsed / 1000); // Mouvement vers le haut
 				}
-			}
-			else
-			{
-				if (direction === 'up')
-					game.player.y -= 10;
-				if (direction === 'down')
-					game.player.y += 10;
-				if (game.player.y < 0) {
-					game.player.y = 0;
-				} else if (game.player.y > canvas.height - 100) {
-					game.player.y = canvas.height - 100;
+				if (direction === 'down') {
+					game.challenger.y += moveSpeed * (timeElapsed / 1000); // Mouvement vers le bas
 				}
+				// Limiter la position du joueur dans les limites du canvas
+				game.challenger.y = Math.max(0, Math.min(canvas.height - 100, game.challenger.y));
+			} else {
+				if (direction === 'up') {
+					game.player.y -= moveSpeed * (timeElapsed / 1000); // Mouvement vers le haut
+				}
+				if (direction === 'down') {
+					game.player.y += moveSpeed * (timeElapsed / 1000); // Mouvement vers le bas
+				}
+				// Limiter la position du joueur dans les limites du canvas
+				game.player.y = Math.max(0, Math.min(canvas.height - 100, game.player.y));
 			}
+
+			lastMoveTime = now; // Mettre à jour le dernier temps de mouvement
 		}
 
 		document.addEventListener('keydown', function(event) {
