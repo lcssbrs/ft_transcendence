@@ -374,14 +374,14 @@ function setupRanked() {
     });
 
 	function updateBall(player, x, y, score01, score02, status) {
-        if (gameStarted && player === playerId) {
-            game.ball.x = x;
-            game.ball.y = y;
-            game.player.score = score01;
-            game.challenger.score = score02;
-            gameStarted = status;
-        }
-    }
+		if (gameStarted && player === playerId) {
+			game.ball.x = x;
+			game.ball.y = y;
+			game.player.score = score01; // Mise à jour du score du joueur actuel
+			game.challenger.score = score02; // Mise à jour du score du joueur adverse
+			gameStarted = status;
+		}
+	}
 
 	function sendGameMove(player, direction) {
         if (gameStarted) {
@@ -395,42 +395,42 @@ function setupRanked() {
     }
 
 	function updateOpponentPad(direction) {
-        if (gameOwnerId === 1) {
-            if (direction === 'up')
-                game.challenger.y -= 10;
-            if (direction === 'down')
-                game.challenger.y += 10;
-            if (game.challenger.y < 0) {
-                game.challenger.y = 0;
-            } else if (game.challenger.y > canvas.height - 100) {
-                game.challenger.y = canvas.height - 100;
-            }
-        } else {
-            if (direction === 'up')
-                game.player.y -= 10;
-            if (direction === 'down')
-                game.player.y += 10;
-            if (game.player.y < 0) {
-                game.player.y = 0;
-            } else if (game.player.y > canvas.height - 100) {
-                game.player.y = canvas.height - 100;
-            }
-        }
-    }
+		if (gameOwnerId === 1) {
+			if (direction === 'up')
+				game.challenger.y -= 10;
+			if (direction === 'down')
+				game.challenger.y += 10;
+			if (game.challenger.y < 0) {
+				game.challenger.y = 0;
+			} else if (game.challenger.y > canvas.height - 100) {
+				game.challenger.y = canvas.height - 100;
+			}
+		} else {
+			if (direction === 'up')
+				game.player.y -= 10;
+			if (direction === 'down')
+				game.player.y += 10;
+			if (game.player.y < 0) {
+				game.player.y = 0;
+			} else if (game.player.y > canvas.height - 100) {
+				game.player.y = canvas.height - 100;
+			}
+		}
+	}
 
-function sendGameBall(player) {
-        if (gameStarted && player === playerId && !disconnect_ennemy && socket) {
-            const moveData = {
-                type: 'ball_move',
-                x: game.ball.x,
-                y: game.ball.y,
-                score01: game.player.score,
-                score02: game.challenger.score,
-                status: gameStarted
-            };
-            socket.send(JSON.stringify(moveData));
-        }
-    }
+	function sendGameBall(player) {
+		if (gameStarted && player === playerId && !disconnect_ennemy && socket) {
+			const moveData = {
+				type: 'ball_move',
+				x: game.ball.x,
+				y: game.ball.y,
+				score01: game.player.score, // Envoi du score du joueur actuel
+				score02: game.challenger.score, // Envoi du score du joueur adverse
+				status: gameStarted
+			};
+			socket.send(JSON.stringify(moveData));
+		}
+	}
 
 	setInterval(function() {
         sendGameBall(playerId);
