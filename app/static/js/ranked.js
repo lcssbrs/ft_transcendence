@@ -162,9 +162,8 @@ function setupRanked() {
 				game.ball.x = canvas.width / 2;
 				game.ball.y = canvas.height / 2;
 				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2; // Réinitialisation de la position du challenger
+				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
 				game.ball.speed.x = 2;
-
 				if (player === game.player) {
 					game.challenger.score++;
 					adverseScore = game.challenger.score;
@@ -175,16 +174,13 @@ function setupRanked() {
 					flashBorder(1000);
 				}
 				updateScoreDisplay();
-
-				// Mettre à jour l'affichage après la réinitialisation
-				draw();
-
 				if (game.player.score === 3 || game.challenger.score === 3) {
 					gameEnd = true;
 					endGame();
 				}
 			} else {
-				if (gameOwnerId == 1) {
+				if (gameOwnerId == 1)
+				{
 					game.ball.speed.x *= -BALL_SPEED;
 					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
 						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
@@ -417,9 +413,9 @@ function setupRanked() {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
 				game.ball.y = y;
-				game.player.score = score01;
-				game.challenger.score = score02;
-				gameStarted = status;
+				game.player.score = score01,
+				game.challenger.score = score02
+				gameStarted = status
 			}
 		}
 
