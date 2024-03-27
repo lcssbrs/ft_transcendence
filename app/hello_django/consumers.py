@@ -141,3 +141,4 @@ class PongConsumer(AsyncWebsocketConsumer):
                 'type': 'ball_move',
                 'data': ball_data,
             }))
+

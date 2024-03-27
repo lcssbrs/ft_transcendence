@@ -414,20 +414,15 @@ function setupRanked() {
 		};
 
 		// Fonction pour mettre à jour la position de la balle et les scores en fonction des données reçues via les websockets
-		function updateBall(ballData) {
-		    // Extraire les données de position de la balle et les scores
-		    const newPosition = ballData.position;
-		    const newScores = ballData.scores;
-		
-		    // Mettre à jour la position de la balle sur le canvas
-		    game.ball.x = newPosition.x;
-		    game.ball.y = newPosition.y;
-		
-		    // Mettre à jour les scores
-		    game.player.score = newScores.playerScore;
-		    game.challenger.score = newScores.challengerScore;
+		function updateBall(player, x, y, score01, score02, status) {
+			if (gameStarted && player == 2) {
+				game.ball.x = x;
+				game.ball.y = y;
+				game.player.score = score01,
+				game.challenger.score = score02
+				gameStarted = status
+			}
 		}
-
 
 		function sendGameMove(player, direction) {
 			if (gameStarted) {
