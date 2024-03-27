@@ -1,10 +1,7 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
-from json.decoder import JSONDecodeError
-from .views import user_list
-from .models import user_list
-
+from .models import user_list  # Correction de l'import du modèle
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
@@ -107,7 +104,6 @@ class PongConsumer(AsyncWebsocketConsumer):
                 if len(self.connected_clients[self.group_name]) > player_id:
                     self.connected_clients[self.group_name][player_id] = direction
 
-
                 await self.channel_layer.group_send(
                     self.group_name,
                     {
@@ -119,11 +115,8 @@ class PongConsumer(AsyncWebsocketConsumer):
                     }
                 )
 
-
     async def send_game_update(self, event):
         await self.send(text_data=json.dumps({
             'type': 'game_update',
             'data': event['data']
         }))
-
-

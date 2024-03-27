@@ -54,7 +54,8 @@ INSTALLED_APPS = [
 
 
 # Définir ASGI_APPLICATION
-ASGI_APPLICATION = 'hello_django.asgi.application'
+ASGI_APPLICATION = 'hello_django.routing.application'
+
 
 
 CHANNEL_LAYERS = {
