@@ -1,6 +1,7 @@
 function online() {
-	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False') {
 		return ;
+	}
 
 	let socket = null;
 

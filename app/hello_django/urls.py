@@ -39,6 +39,7 @@ urlpatterns = [
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
     path('qrcode/', views.afficher_qr_code, name='qrcode'),
+	path('edit/', views.edit_profile, name='edit'),
 	# Friend
 	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
 	path('add_friend_username/<str:username>/', views.add_friend_username, name='add_friend_username'),

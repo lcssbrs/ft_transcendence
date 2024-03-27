@@ -5,12 +5,13 @@ function extractViewContent(html) {
 	return viewContent;
 }
 
-function loadView(url) {
+function loadView(url, addHistory) {
 	console.log(url);
 	fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			history.pushState(null, null, url);
+			if (addHistory == true)
+				history.pushState(null, null, url);
 			document.querySelector('#content').innerHTML = extractViewContent(html);
 			if (url == '/local/')
 				setupLocal();
@@ -20,8 +21,6 @@ function loadView(url) {
 				setupRanked();
 			else if (url == '/login/')
 				setupLogin();
-			else if (url.startsWith('/profile/'))
-				setupProfile();
 			else if (url == '/register/')
 				setupRegister();
 			attachEventListeners();
@@ -38,7 +37,7 @@ function attachEventListeners() {
 		link.addEventListener('click', function(event) {
 			event.preventDefault();
 			const url = link.getAttribute('href');
-			loadView(url);
+			loadView(url, true);
 		});
 	}
 
@@ -72,8 +71,10 @@ function checkLogged()
 
 document.addEventListener("DOMContentLoaded", function() {
 	checkLogged();
+	online();
 	attachEventListeners();
 	let url = location.pathname;
+	history.pushState(null, null, url);
 	if (url == 'local/')
 		setupLocal();
 		if (url == '/local/')
@@ -84,13 +85,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupRanked();
 	else if (url == '/login/')
 		setupLogin();
-	else if (url == '/profile/')
-		setupProfile();
 	else if (url == '/register/')
 		setupRegister();
+
 	window.addEventListener('popstate', function(event) {
-		event.preventDefault();
 		let url = location.pathname;
-		loadView(url);
+		loadView(url, false);
 	});
 });

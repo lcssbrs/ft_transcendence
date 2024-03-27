@@ -206,7 +206,7 @@ function endGame() {
 	displayWinner = true;
 	setTimeout(function() {
 		displayWinner = false;
-		location.reload();
+		loadView('/local/');
 	}, 3000);
 
 	removeKeyListeners();

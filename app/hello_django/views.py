@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import models, user_list, Tournament, Match, Friendship, Match
-from .forms import add_user_form, loginForm
+from .forms import add_user_form, loginForm, UserProfileForm
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -46,7 +46,37 @@ def index(request):
     return render (request, 'index.html', {'user': request.user})
 
 def profile_view(request):
-    return render(request, 'profile.html')
+    id_value = request.GET.get('id', None)
+    profile_user = user_list.objects.get(id=id_value)
+    top_players = user_list.objects.order_by('-games_rank')
+    user_rank = None
+    for index, user in enumerate(top_players):
+        if user.id == profile_user.id:
+            user_rank = index + 1
+            break
+    if profile_user.games_rank <= 30:
+        ranksrc = '/static/images/bronze.png'
+        rank = 'Bronze'
+    elif profile_user.games_rank <= 60:
+        ranksrc = '/static/images/emerald.png'
+        rank = 'Emeraude'
+    elif profile_user.games_rank <= 90:
+        ranksrc = '/static/images/master.png'
+        rank = 'Master'
+    elif profile_user.games_rank <= 120:
+        ranksrc = '/static/images/challenger.png'
+        rank = 'Challenger'
+    user = request.user
+
+    context = {
+        'profile_user': profile_user,
+        'user_rank': user_rank,
+        'user': user,
+        'rank': rank,
+        'ranksrc': ranksrc
+    }
+
+    return render(request, 'profile.html', context)
 
 def ranked_view (request):
     return render(request, 'ranked.html', {'user': request.user})
@@ -58,16 +88,34 @@ def ranking_view(request):
     top_players = user_list.objects.order_by('-games_rank')
 
     context = {
-        'top_players': top_players
+        'top_players': top_players,
+        'user': request.user
     }
 
-    return render(request, 'ranking.html', context, {'user': request.user})
+    return render(request, 'ranking.html', context)
 
 def solo_view(request):
     return render(request, 'solo.html', {'user': request.user})
 
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
+
+def edit_profile(request):
+    user = request.user
+    userpr = user_list.objects.get(username=user.username)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Mettre à jour les informations de l'utilisateur dans la base de données
+            userpr.first_name = form.cleaned_data['first_name']
+            userpr.last_name = form.cleaned_data['last_name']
+            if 'profile_picture' in request.FILES:
+                user.profile_picture = request.FILES['profile_picture']
+            user.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})
 
 #WEBSOCKETS
 
