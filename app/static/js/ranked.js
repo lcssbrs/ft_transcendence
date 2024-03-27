@@ -410,13 +410,11 @@ function setupRanked() {
 		};
 
 		function updateBall(player, x, y, score01, score02, status) {
-			if (gameStarted && player == 2) {
-				game.ball.x = x;
-				game.ball.y = y;
-				game.player.score = score01,
-				game.challenger.score = score02
-				gameStarted = status
-			}
+			game.ball.x = x;
+			game.ball.y = y;
+			game.player.score = score01;
+			game.challenger.score = score02;
+			gameStarted = status;
 		}
 
 		function sendGameMove(player, direction) {
