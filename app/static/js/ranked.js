@@ -300,28 +300,42 @@ function setupRanked() {
 	};
 
 	function endGameApi(match_id, score_01, score_02, winner) {
-    	const requestBody = {
-    	    score_player1: score_01,
-    	    score_player2: score_02,
-    	    player_winner: winner,
-    	    status: "end_game"
-    	};
+		const requestBody = {
+			score_player1: score_01,
+			score_player2: score_02,
+			player_winner: winner,
+			status: "end_game"
+		};
 
-    	fetch(`/api/match/${match_id}/`, {
-    	    method: 'PATCH',
-    	    headers: {
-    	        'Content-Type': 'application/json'
-    	    },
-    	    body: JSON.stringify(requestBody)
-    	})
-    	.then(response => {
-			setTimeout(() => {
-				displayWinner = true;
-			}, 7000);
-			loadView('/ranked/');
+		fetch(`/api/match/${match_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
 		})
-    	.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+		.then(() => {
+			// Affiche le gagnant pendant 3 secondes
+			displayWinner(winner);
+			// Masque le gagnant après 3 secondes et recharge la page
+			setTimeout(() => {
+				displayWinner = false;
+				window.location.reload();
+			}, 3000);
+		})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
+
+	function displayWinner(winner) {
+		const context = canvas.getContext('2d');
+		context.fillStyle = '#F4ACBC';
+		context.font = canvas.width / 15 + 'px Anta';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
+		context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
+	}
+
+
 
 
 	function quitGameApi(match_id, score_01, score_02) {
