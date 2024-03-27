@@ -129,27 +129,42 @@ function setupRanked() {
 		// Fonction pour déplacer la balle
 
 		function ballMove() {
-		    const canvasWidth = canvas.width;
-		    const canvasHeight = canvas.height;
-		    const playerWidth = PLAYER_WIDTH;
+			const canvasWidth = canvas.width;
+			const canvasHeight = canvas.height;
+			const playerWidth = PLAYER_WIDTH;
 
-		    // Mouvement de la balle
-		    game.ball.x += game.ball.speed.x;
-		    game.ball.y += game.ball.speed.y;
+			// Mouvement de la balle
+			game.ball.x += game.ball.speed.x;
+			game.ball.y += game.ball.speed.y;
 
-		    // Rebonds sur le haut et bas
-		    if (game.ball.y > canvasHeight - game.ball.r || game.ball.y < game.ball.r) {
-		        game.ball.speed.y *= -1; // Inversion de la direction verticale
-		    }
+			// Rebonds sur le haut et bas
+			if (game.ball.y > canvasHeight - game.ball.r || game.ball.y < game.ball.r) {
+				game.ball.speed.y *= -1; // Inversion de la direction verticale
+			}
 
-		    // Rebond sur le joueur 2 (à droite)
-		    if (game.ball.x > canvasWidth - playerWidth - game.ball.r && game.ball.y + game.ball.r >= game.challenger.y && game.ball.y - game.ball.r <= game.challenger.y + PLAYER_HEIGHT) {
-		        collide(game.challenger);
-		    }
-		    // Rebond sur le joueur 1 (à gauche)
-		    else if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
-		        collide(game.player);
-		    }
+			// Rebond sur le joueur 2 (à droite)
+			if (game.ball.x > canvasWidth - playerWidth - game.ball.r && game.ball.y + game.ball.r >= game.challenger.y && game.ball.y - game.ball.r <= game.challenger.y + PLAYER_HEIGHT) {
+				collide(game.challenger);
+			}
+			// Rebond sur le joueur 1 (à gauche)
+			else if (game.ball.x < playerWidth + game.ball.r && game.ball.y + game.ball.r >= game.player.y && game.ball.y - game.ball.r <= game.player.y + PLAYER_HEIGHT) {
+				collide(game.player);
+			}
+
+		function playerMove(event) {
+			if (game.player.y < 0) {
+				game.player.y = 0;
+			} else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
+				game.player.y = canvas.height - PLAYER_HEIGHT;
+			}
+		}
+
+		function challengerMove(event) {
+			if (game.challenger.y < 0) {
+				game.challenger.y = 0;
+			} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
+				game.challenger.y = canvas.height - PLAYER_HEIGHT;
+			}
 		}
 
 		//collisions
