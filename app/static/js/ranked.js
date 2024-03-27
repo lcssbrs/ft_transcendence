@@ -423,7 +423,7 @@ function setupRanked() {
 		}
 
 		function sendGameBall(player) {
-			if (gameStarted && player == 1) {
+			if (gameStarted && player == 1 && disconnect_ennemy == false) {
 				const moveData = {
 					type: 'ball_move',
 					x: game.ball.x,
