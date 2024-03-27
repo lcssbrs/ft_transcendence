@@ -262,9 +262,9 @@ function setupRanked() {
 		document.addEventListener('keydown', challengerMove);
 	}
 
-	//-----------------------------------------\/
-	//----------------WEBSOCKET----------------\/
-	//-----------------------------------------\/
+		//-----------------------------------------\/
+		//----------------WEBSOCKET----------------\/
+		//-----------------------------------------\/
 
 	const startButton = document.getElementById("start-ranked");
 	const searchingMatch = document.getElementById("searching-match");
@@ -405,45 +405,150 @@ function setupRanked() {
 		};
 
 		function updateBall(player, x, y) {
-			if (gameStarted
-				) {
-					if (player !== playerId) {
-						game.ball.x = x;
-						game.ball.y = y;
-					}
-				}
+			if (gameStarted && player == 2) {
+				game.ball.x = x;
+				game.ball.y = y;
 			}
-
-			function updateOpponentPad(direction) {
-				if (direction === 'up') {
-					game.challenger.y -= PLAYER_SPEED;
-				} else if (direction === 'down') {
-					game.challenger.y += PLAYER_SPEED;
-				}
-			}
-
-			function displayGame() {
-				const gameContainer = document.getElementById('game-container');
-				gameContainer.style.display = 'block';
-				launchGame();
-			}
-
-			function closeWebSocket() {
-				if (!gameEnd && !disconnect_ennemy)
-					quitGameApi(ID_ranked, playerScore, adverseScore);
-				if (socket) {
-					socket.close();
-					socket = null;
-				}
-			}
-
-			window.addEventListener('beforeunload', function(event) {
-				if (socket) {
-					socket.close();
-					socket = null;
-				}
-			});
 		}
-	}
 
-	setupRanked();
+		function sendGameMove(player, direction) {
+			if (gameStarted) {
+				const moveData = {
+					type: 'game_move',
+					player: player,
+					direction: direction
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
+		function sendGameBall(player) {
+			if (gameStarted && player == 1 && disconnect_ennemy == false) {
+				const moveData = {
+					type: 'ball_move',
+					x: game.ball.x,
+					y: game.ball.y,
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
+		setInterval(function() {
+			sendGameBall(playerId);
+		}, 100);
+
+		function updatePad(direction) {
+			if (playerId === 2)
+			{
+				if (direction === 'up')
+					game.challenger.y -= 10;
+				if (direction === 'down')
+					game.challenger.y += 10;
+				if (game.challenger.y < 0) {
+					game.challenger.y = 0;
+				} else if (game.challenger.y > canvas.height - 100) {
+					game.challenger.y = canvas.height - 100;
+				}
+			}
+			else
+			{
+				if (direction === 'up')
+					game.player.y -= 10;
+				if (direction === 'down')
+					game.player.y += 10;
+				if (game.player.y < 0) {
+					game.player.y = 0;
+				} else if (game.player.y > canvas.height - 100) {
+					game.player.y = canvas.height - 100;
+				}
+			}
+		}
+
+		function updateOpponentPad(direction) {
+			if (playerId === 1)
+			{
+				if (direction === 'up')
+					game.challenger.y -= 10;
+				if (direction === 'down')
+					game.challenger.y += 10;
+				if (game.challenger.y < 0) {
+					game.challenger.y = 0;
+				} else if (game.challenger.y > canvas.height - 100) {
+					game.challenger.y = canvas.height - 100;
+				}
+			}
+			else
+			{
+				if (direction === 'up')
+					game.player.y -= 10;
+				if (direction === 'down')
+					game.player.y += 10;
+				if (game.player.y < 0) {
+					game.player.y = 0;
+				} else if (game.player.y > canvas.height - 100) {
+					game.player.y = canvas.height - 100;
+				}
+			}
+		}
+
+		document.addEventListener('keydown', function(event) {
+			if (gameStarted) {
+				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
+					updatePad('up')
+					sendGameMove(playerId, 'up');
+				} else if (event.key === 's' || event.key === 'S') {
+					updatePad('down')
+					sendGameMove(playerId, 'down');
+				}
+			}
+		});
+
+		socket.onclose = function() {
+			adversaireMatch.style.display = "block";
+			if (gameStarted == true && disconnect_ennemy == true)
+			{
+				if (playerId === 1)
+					endGameApi(match_id, 4, adverseScore, playerId);
+				else
+					endGameApi(match_id, playerScore, 4, playerId);
+			}
+			if (playerId == 1 && disconnect_ennemy == false && gameStarted == false)
+			{
+				quitGameApi(match_id, 0, 0);
+			}
+			gameStarted = false;
+			console.log("WebSocket déconnecté");
+		};
+
+		function displayGame() {
+			launchGame();
+		}
+
+		function closeWebSocket() {
+			if (socket) {
+				socket.close();
+				console.log("Connexion WebSocket fermée");
+				socket = null;
+			}
+		}
+
+		document.addEventListener('click', function(event) {
+			if (event.target.tagName === 'A') {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('popstate', function(event) {
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+
+		window.addEventListener('hashchange', function(event) {
+			console.log(window.location.pathname);
+			if (window.location.pathname !== "/ranked") {
+				closeWebSocket();
+			}
+		});
+	}
+}
