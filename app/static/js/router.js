@@ -5,28 +5,46 @@ function extractViewContent(html) {
 	return viewContent;
 }
 
-function loadView(url, addHistory) {
-	fetch(url)
+function loadView(url, addHistory, force) {
+	let actual = location.pathname;
+	if (actual == url && force == false)
+		return ;
+	var isAuthenticated = document.getElementById('auth-data').getAttribute('data-authenticated') === 'True';
+	if ((!isAuthenticated && (url == '/login/' || url == '/register/' || url == '/')) || isAuthenticated) {
+		fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			if (addHistory == true)
-				history.pushState(null, null, url);
-			document.querySelector('#content').innerHTML = extractViewContent(html);
-			if (url == '/local/')
-				setupLocal();
-			else if (url == '/solo/')
-				setupSolo();
-			else if (url == '/ranked/')
-				setupRanked();
-			else if (url == '/login/')
-				setupLogin();
-			else if (url == '/register/')
-				setupRegister();
-			attachEventListeners();
+			if (addHistory == true) {
+				if (url.startsWith('/profile/')) {
+					let queryParams = url.substring(url.indexOf('?'));
+					history.pushState({id: queryParams}, null, url);
+				}
+				else
+					history.pushState(null, null, url);
+			}
+		document.querySelector('#content').innerHTML = extractViewContent(html);
+		if (url == '/local/')
+			setupLocal();
+		else if (url == '/solo/')
+			setupSolo();
+		else if (url == '/ranked/')
+			setupRanked();
+		else if (url == '/login/')
+			setupLogin();
+		else if (url == '/register/')
+			setupRegister();
+		else if (url == '/edit/')
+			setupEdit();
+		attachEventListeners();
 		})
 		.catch(error => {
 			console.error('Erreur lors du chargement de la vue:', error);
 		});
+	}
+	else {
+		if (actual != '/login/')
+			loadView('/login/', true, false);
+	}
 }
 
 function attachEventListeners() {
@@ -36,7 +54,7 @@ function attachEventListeners() {
 		link.addEventListener('click', function(event) {
 			event.preventDefault();
 			const url = link.getAttribute('href');
-			loadView(url, true);
+			loadView(url, true, false);
 		});
 	}
 
@@ -65,6 +83,9 @@ function checkLogged()
 		document.querySelector('#friend-request').classList.add('d-none');
 		document.querySelector('#add-friend').classList.add('d-none');
 		document.querySelector('#logrequire').classList.remove('d-none');
+		let url = location.pathname;
+		if (url != '/login/' && url != '/register/' && url != '/')
+			loadView('/', true, false);
 	}
 }
 
@@ -73,10 +94,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	online();
 	attachEventListeners();
 	let url = location.pathname;
-	history.pushState(null, null, url);
-	if (url == 'local/')
-		setupLocal();
-		if (url == '/local/')
+	if (url == '/profile/') {
+		if (history.state && history.state.id) {
+			url += history.state.id;
+		}
+	}
+	if (url.startsWith('/profile/')) {
+		let queryParams = url.substring(url.indexOf('?'));
+		history.pushState({id: queryParams}, null, url);
+	}
+	else
+		history.pushState(null, null, url);
+	if (url == '/local/')
 		setupLocal();
 	else if (url == '/solo/')
 		setupSolo();
@@ -86,9 +115,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupLogin();
 	else if (url == '/register/')
 		setupRegister();
+	else if (url == '/edit/')
+		setupEdit();
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;
-		loadView(url, false);
+		if (url == '/profile/') {
+			if (history.state && history.state.id) {
+				url += history.state.id;
+			}
+		}
+		loadView(url, false, true);
 	});
 });

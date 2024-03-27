@@ -17,8 +17,10 @@
             <tbody>
                 {% for player in top_players %}
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ player.username }}</td>
+                    <th scope="row">{{ player.position }}</th>
+                    <td>
+                        <a class="redir text-white" href="/profile/?id={{ player.id }}">{{ player.username }}</a>
+                    </td>
                     <td>{{ player.games_rank }}</td>
                     <td>{{ player.games_win }}</td>
                     <td>{{ player.games_loose }}</td>

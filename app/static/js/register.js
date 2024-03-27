@@ -91,7 +91,7 @@ function setupRegister() {
                     });
                     checkLogged();
                     online();
-                    loadView('/qrcode/', true);
+                    loadView('/qrcode/', true, false);
                 } else {
                     document.getElementById("id_username").value = "";
                     document.getElementById("id_email").value = "";

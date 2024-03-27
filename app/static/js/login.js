@@ -53,7 +53,7 @@ function setupLogin() {
                     })
                     checkLogged();
                     online();
-                    loadView('/', true);
+                    loadView('/', true, false);
                 } else {
                     document.getElementById("usernameInput").value = "";
     				document.getElementById("passwordInput").value = "";
