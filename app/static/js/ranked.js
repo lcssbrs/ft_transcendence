@@ -316,7 +316,7 @@ function setupRanked() {
     	})
     	.then(response => {
 			setTimeout(() => {
-				displayWinner = false;
+				displayWinner = true;
 			}, 7000);
 			loadView('/ranked/');
 		})
