@@ -314,7 +314,9 @@ function setupRanked() {
     	    },
     	    body: JSON.stringify(requestBody)
     	})
-    	.then(response => {})
+    	.then(response => {
+			loadView('/ranked/')
+		})
     	.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
 
