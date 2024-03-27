@@ -435,7 +435,7 @@ function setupRanked() {
 
 		setInterval(function() {
 			sendGameBall(playerId);
-		}, 100);
+		}, 15);
 
 		function updatePad(direction) {
 			if (playerId === 2)
