@@ -100,6 +100,23 @@ def solo_view(request):
 def local_view(request):
     return render(request, 'local.html', {'user': request.user})
 
+def edit_profile(request):
+    user = request.user
+    userpr = user_list.objects.get(username=user.username)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Mettre à jour les informations de l'utilisateur dans la base de données
+            userpr.first_name = form.cleaned_data['first_name']
+            userpr.last_name = form.cleaned_data['last_name']
+            if 'profile_picture' in request.FILES:
+                user.profile_picture = request.FILES['profile_picture']
+            user.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})
+
 #WEBSOCKETS
 
 def check_match(request):
@@ -463,31 +480,44 @@ class JoinMatch(APIView):
 
 class JoinTournament(APIView):
     def post(self, request):
-        tournament = Tournament.objects.filter(status='waiting').annotate(num_players=models.Count('player')).filter(num_players__lt=4).first()
+        user_tournament = Tournament.objects.filter(
+            status__in=['waiting', 'in_game'],
+            player01=request.user
+        ).first()
+
+        if user_tournament:
+            serializer = TournoiListSerializer(user_tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        tournament = Tournament.objects.filter(status='waiting').first()
 
         if tournament:
+            if tournament.player02 == request.user or tournament.player03 == request.user or tournament.player04 == request.user:
+                serializer = TournoiListSerializer(tournament)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
             if tournament.player01 is None:
                 tournament.player01 = request.user
             elif tournament.player02 is None:
                 tournament.player02 = request.user
             elif tournament.player03 is None:
                 tournament.player03 = request.user
-            else:
+            elif tournament.player04 is None:
                 tournament.player04 = request.user
 
-            if tournament.player04 is not None:
+            if all([tournament.player01, tournament.player02, tournament.player03, tournament.player04]):
                 tournament.status = 'in_game'
+                tournament.create_matches()
 
             tournament.save()
 
-            serializer = serializer.TournamentSerializer(tournament)
+            serializer = TournoiListSerializer(tournament)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
 
-            serializer = serializer.TournamentSerializer(new_tournament)
+            serializer = TournoiListSerializer(new_tournament)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 class CreateMatch(APIView):
     def post(self, request):
@@ -553,3 +583,16 @@ def edit_profile(request):
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'edit_profile.html', {'form': form})
+
+class CurrentUser(APIView):
+    def get(self, request):
+        current_user = request.user
+        if current_user.is_authenticated:
+            try:
+                user_info = user_list.objects.get(username=current_user.username)
+                serializer = UserDetailSerializer(user_info)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except user_list.DoesNotExist:
+                return Response({"message": "Utilisateur non trouvé"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"message": "Aucun utilisateur connecté"}, status=status.HTTP_401_UNAUTHORIZED)

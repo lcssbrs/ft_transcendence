@@ -39,6 +39,7 @@ urlpatterns = [
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
     path('qrcode/', views.afficher_qr_code, name='qrcode'),
+	path('edit/', views.edit_profile, name='edit'),
 	# Friend
 	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
 	path('add_friend_username/<str:username>/', views.add_friend_username, name='add_friend_username'),
@@ -71,5 +72,6 @@ urlpatterns = [
 	path('check-match/', views.check_match, name='check_match'),
 	path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
     path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
-    path('api/create-tournament/', views.JoinTournament.as_view(), name='create_match'),
+    path('api/create-tournament/', views.JoinTournament.as_view(), name='create_tournament'),
+	path('api/get_user/', views.CurrentUser.as_view(), name='curent_user'),
 ]

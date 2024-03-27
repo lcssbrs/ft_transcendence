@@ -1,9 +1,9 @@
 let disconnect_ennemy = false;
 
 function online() {
-    if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False') {
-        return ;
-    }
+	if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False') {
+		return ;
+	}
 
     let socket = null;
 

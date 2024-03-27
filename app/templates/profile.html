@@ -4,7 +4,7 @@
 <div id="profile" class="d-flex justify-content-center mx-auto">
 	<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center mr-5">
 		<div class="image-container">
-			<img id="user-picture" src={{ profile_user.profile_picture.url }} class="bottom-image">
+			<img id="user-picture" src="{{ profile_user.profile_picture.url }}" class="bottom-image">
 			<img id="rank-picture" src="{{ ranksrc }}" class="top-image">
 		</div>
 		<h3 id="name" class="m-0">{{ profile_user.first_name}} {{ profile_user.last_name}}</h3>
