@@ -20,10 +20,10 @@ function setupLogin() {
 				})
 				checkLogged();
 				online();
-				loadView('/', true);
+				loadView('/', true, false);
 			}
 			else {
-				loadView('/login/', true);
+				loadView('/login/', true, false);
 			}
 		})
 		.catch(error => {

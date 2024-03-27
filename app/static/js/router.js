@@ -14,8 +14,14 @@ function loadView(url, addHistory, force) {
 		fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			if (addHistory == true)
-			history.pushState(null, null, url);
+			if (addHistory == true) {
+				if (url.startsWith('/profile/')) {
+					let queryParams = url.substring(url.indexOf('?'));
+					history.pushState({id: queryParams}, null, url);
+				}
+				else
+					history.pushState(null, null, url);
+			}
 		document.querySelector('#content').innerHTML = extractViewContent(html);
 		if (url == '/local/')
 			setupLocal();
@@ -37,7 +43,7 @@ function loadView(url, addHistory, force) {
 	}
 	else {
 		if (actual != '/login/')
-			loadView('/login/', true);
+			loadView('/login/', true, false);
 	}
 }
 
@@ -48,7 +54,7 @@ function attachEventListeners() {
 		link.addEventListener('click', function(event) {
 			event.preventDefault();
 			const url = link.getAttribute('href');
-			loadView(url, true);
+			loadView(url, true, false);
 		});
 	}
 
@@ -79,7 +85,7 @@ function checkLogged()
 		document.querySelector('#logrequire').classList.remove('d-none');
 		let url = location.pathname;
 		if (url != '/login/' && url != '/register/' && url != '/')
-			loadView('/', true);
+			loadView('/', true, false);
 	}
 }
 
@@ -88,10 +94,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	online();
 	attachEventListeners();
 	let url = location.pathname;
-	history.pushState(null, null, url);
-	if (url == 'local/')
-		setupLocal();
-		if (url == '/local/')
+	if (url == '/profile/') {
+		if (history.state && history.state.id) {
+			url += history.state.id;
+		}
+	}
+	if (url.startsWith('/profile/')) {
+		let queryParams = url.substring(url.indexOf('?'));
+		history.pushState({id: queryParams}, null, url);
+	}
+	else
+		history.pushState(null, null, url);
+	if (url == '/local/')
 		setupLocal();
 	else if (url == '/solo/')
 		setupSolo();
@@ -106,6 +120,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;
+		if (url == '/profile/') {
+			if (history.state && history.state.id) {
+				url += history.state.id;
+			}
+		}
 		loadView(url, false, true);
 	});
 });

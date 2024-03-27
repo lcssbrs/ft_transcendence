@@ -9,10 +9,11 @@ function setupEdit() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
-				loadView('/profile/?id=' + data.id);
+				document.querySelector('#userAvatar').src = response.profile_picture;
+				loadView('/profile/?id=' + data.id, true, false);
 			}
 			else {
-				loadView('/edit/', true);
+				loadView('/edit/', true, false);
 			}
 		})
 		.catch(error => {
