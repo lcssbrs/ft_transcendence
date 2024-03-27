@@ -2,7 +2,6 @@ function setupRegister() {
 	document.getElementById("registerForm").addEventListener("submit", function(event) {
 		event.preventDefault();
 		const formData = new FormData(document.getElementById("registerForm"));
-		console.log(formData);
 		fetch('/register/', {
 			method: 'POST',
 			body: formData

@@ -36,6 +36,7 @@ from qrcode import make
 from django.contrib.auth.decorators import login_required
 from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
+from django.db.models.query import QuerySet
 
 def afficher_qr_code(request):
     if (request.user.is_authenticated == False):
@@ -48,11 +49,11 @@ def index(request):
 def profile_view(request):
     id_value = request.GET.get('id', None)
     profile_user = user_list.objects.get(id=id_value)
-    top_players = user_list.objects.order_by('-games_rank')
+    top_players = sortranking()
     user_rank = None
     for index, user in enumerate(top_players):
         if user.id == profile_user.id:
-            user_rank = index + 1
+            user_rank = user.position
             break
     if profile_user.games_rank <= 30:
         ranksrc = '/static/images/bronze.png'
@@ -84,8 +85,36 @@ def ranked_view (request):
 def tournament_view (request):
     return render(request, 'tournament.html', {'user': request.user})
 
+
+class UserWithPosition:
+    def __init__(self, user, position):
+        self.username = user.username
+        self.games_rank = user.games_rank
+        self.games_win = user.games_win
+        self.games_loose = user.games_loose
+        self.id = user.id
+        self.position = position
+
+def sortranking():
+    users = user_list.objects.all()
+    users_sorted = sorted(users, key=lambda x: (x.games_rank, x.games_win - x.games_loose), reverse=True)
+
+    users_with_position = []
+    current_position = 1
+    prev_user = None
+    for user in users_sorted:
+        if prev_user and user.games_rank == prev_user.games_rank and user.games_win - user.games_loose == prev_user.games_win - prev_user.games_loose:
+            users_with_position.append(UserWithPosition(user, users_with_position[-1].position))
+        else:
+            users_with_position.append(UserWithPosition(user, current_position))
+            current_position += 1
+        prev_user = user
+
+    users_with_position_sorted = sorted(users_with_position, key=lambda x: x.position)
+    return users_with_position_sorted
+
 def ranking_view(request):
-    top_players = user_list.objects.order_by('-games_rank')
+    top_players = sortranking()
 
     context = {
         'top_players': top_players,
@@ -112,9 +141,12 @@ def edit_profile(request):
             if 'profile_picture' in request.FILES:
                 user.profile_picture = request.FILES['profile_picture']
             user.save()
-            return redirect('profile')
+            return JsonResponse({'success': True, 'id': user.id})
+        else:
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
     else:
         form = UserProfileForm(instance=user)
+
     return render(request, 'edit_profile.html', {'form': form})
 
 #WEBSOCKETS
