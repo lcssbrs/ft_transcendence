@@ -29,6 +29,8 @@ function loadView(url, addHistory, force) {
 			setupRegister();
 		else if (url == '/edit/')
 			setupEdit();
+		else if (url == '/tournament/')
+			SetupTournament();
 		attachEventListeners();
 		})
 		.catch(error => {
@@ -89,9 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	attachEventListeners();
 	let url = location.pathname;
 	history.pushState(null, null, url);
-	if (url == 'local/')
-		setupLocal();
-		if (url == '/local/')
+	if (url == '/local/')
 		setupLocal();
 	else if (url == '/solo/')
 		setupSolo();
@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		setupRegister();
 	else if (url == '/edit/')
 		setupEdit();
+	else if (url == '/tournament/')
+		SetupTournament();
 
 	window.addEventListener('popstate', function(event) {
 		let url = location.pathname;

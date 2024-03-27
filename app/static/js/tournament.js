@@ -35,6 +35,7 @@ function SetupTournament() {
 	const final2 = document.getElementById("f2");
 
 	startButton.addEventListener("click", function() {
+		console.log("QSEDQE");
 		startButton.style.display = "none";
 		searchingMatch.style.display = "block";
 
