@@ -373,6 +373,68 @@ function setupRanked() {
 		.catch(error => console.error('Erreur avec la connexion en base de données', error));
 	});
 
+	function updateBall(player, x, y, score01, score02, status) {
+        if (gameStarted && player == 2) {
+            game.ball.x = x;
+            game.ball.y = y;
+            game.player.score = score01,
+            game.challenger.score = score02
+            gameStarted = status
+        }
+    }
+	function sendGameMove(player, direction) {
+        if (gameStarted) {
+            const moveData = {
+                type: 'game_move',
+                player: player,
+                direction: direction
+            };
+            socket.send(JSON.stringify(moveData));
+        }
+    }
+
+	function updateOpponentPad(direction) {
+        if (gameOwnerId === 1) {
+            if (direction === 'up')
+                game.challenger.y -= 10;
+            if (direction === 'down')
+                game.challenger.y += 10;
+            if (game.challenger.y < 0) {
+                game.challenger.y = 0;
+            } else if (game.challenger.y > canvas.height - 100) {
+                game.challenger.y = canvas.height - 100;
+            }
+        } else {
+            if (direction === 'up')
+                game.player.y -= 10;
+            if (direction === 'down')
+                game.player.y += 10;
+            if (game.player.y < 0) {
+                game.player.y = 0;
+            } else if (game.player.y > canvas.height - 100) {
+                game.player.y = canvas.height - 100;
+            }
+        }
+    }
+
+	function sendGameBall(player) {
+        if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
+            const moveData = {
+                type: 'ball_move',
+                x: game.ball.x,
+                y: game.ball.y,
+                score01: game.player.score,
+                score02: game.challenger.score,
+                status: gameStarted,
+            };
+            socket.send(JSON.stringify(moveData));
+        }
+    }
+
+	setInterval(function() {
+        sendGameBall(playerId);
+    }, 25);
+
     function initializeWebSocket(match_id, playerId) {
 		gameOwnerId = playerId;
 		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${match_id}/`);
@@ -384,132 +446,33 @@ function setupRanked() {
 
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
-			if (eventData.type === 'game_start')
-			{
+			if (eventData.type === 'game_start') {
 				searchingMatch.style.display = "none";
 				gameStarted = true;
 				displayGame();
 				GetPlayerId(match_id);
 			}
-			if (eventData.type === 'game_update')
-			{
+			if (eventData.type === 'game_update') {
 				const playerData = eventData.data;
 				if (playerData.player !== playerId) {
 					updateOpponentPad(playerData.direction);
 				}
 			}
-			if (eventData.type === 'disconnect_message')
-			{
+			if (eventData.type === 'disconnect_message') {
 				disconnect_ennemy = true;
 				closeWebSocket();
 			}
-			if (eventData.type === 'ball_move')
-			{
+			if (eventData.type === 'ball_move') {
 				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status);
 			}
 		};
 
-		function updateBall(player, x, y, score01, score02, status) {
-			if (gameStarted && player == 2) {
-				game.ball.x = x;
-				game.ball.y = y;
-				game.player.score = score01,
-				game.challenger.score = score02
-				gameStarted = status
-			}
-		}
-
-		function sendGameMove(player, direction) {
-			if (gameStarted) {
-				const moveData = {
-					type: 'game_move',
-					player: player,
-					direction: direction
-				};
-				socket.send(JSON.stringify(moveData));
-			}
-		}
-
-		function sendGameBall(player) {
-			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
-				const moveData = {
-					type: 'ball_move',
-					x: game.ball.x,
-					y: game.ball.y,
-					score01: game.player.score,
-					score02: game.challenger.score,
-					status: gameStarted,
-				};
-				socket.send(JSON.stringify(moveData));
-			}
-		}
-
-		setInterval(function() {
-			sendGameBall(playerId);
-		}, 25);
-
-		function updatePad(direction) {
-			if (playerId === 2)
-			{
-				if (direction === 'up')
-					game.challenger.y -= 10;
-				if (direction === 'down')
-					game.challenger.y += 10;
-				if (game.challenger.y < 0) {
-					game.challenger.y = 0;
-				} else if (game.challenger.y > canvas.height - 100) {
-					game.challenger.y = canvas.height - 100;
-				}
-			}
-			else
-			{
-				if (direction === 'up')
-					game.player.y -= 10;
-				if (direction === 'down')
-					game.player.y += 10;
-				if (game.player.y < 0) {
-					game.player.y = 0;
-				} else if (game.player.y > canvas.height - 100) {
-					game.player.y = canvas.height - 100;
-				}
-			}
-		}
-
-		function updateOpponentPad(direction) {
-			if (playerId === 1)
-			{
-				if (direction === 'up')
-					game.challenger.y -= 10;
-				if (direction === 'down')
-					game.challenger.y += 10;
-				if (game.challenger.y < 0) {
-					game.challenger.y = 0;
-				} else if (game.challenger.y > canvas.height - 100) {
-					game.challenger.y = canvas.height - 100;
-				}
-			}
-			else
-			{
-				if (direction === 'up')
-					game.player.y -= 10;
-				if (direction === 'down')
-					game.player.y += 10;
-				if (game.player.y < 0) {
-					game.player.y = 0;
-				} else if (game.player.y > canvas.height - 100) {
-					game.player.y = canvas.height - 100;
-				}
-			}
-		}
-
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
 				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
-					updatePad('up')
-					sendGameMove(playerId, 'up');
+					sendGameMove(gameOwnerId, 'up');
 				} else if (event.key === 's' || event.key === 'S') {
-					updatePad('down')
-					sendGameMove(playerId, 'down');
+					sendGameMove(gameOwnerId, 'down');
 				}
 			}
 		});
