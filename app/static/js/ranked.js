@@ -317,7 +317,7 @@ function setupRanked() {
     	.then(response => {
 			setTimeout(() => {
 				displayWinner = false;
-			}, 3000);
+			}, 7000);
 			loadView('/ranked/');
 		})
     	.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
