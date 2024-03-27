@@ -13,7 +13,6 @@ $(document).ready(function() {
                 checkList = needReload(friendsList, $friendContainer);
                 checkList.forEach(function(friend) {
                     var statusColor;
-                    var status;
                     if (friend.status === 'online') {
                         statusColor = 'rgb(40, 167, 69)';
                     } else if (friend.status === 'offline') {
