@@ -160,54 +160,36 @@ function setupRanked() {
 
 		//collisions
 		function collide(player) {
-			if (game.ball.x + game.ball.r >= player.x && game.ball.x - game.ball.r <= player.x + PLAYER_WIDTH && game.ball.y >= player.y && game.ball.y <= player.y + PLAYER_HEIGHT) {
-				// Collision détectée
-				game.ball.speed.x *= -1; // Inverser la direction de la balle
-				if (player === game.challenger) {
-					// Ajuster la vitesse de la balle pour une meilleure fluidité
-					game.ball.speed.x *= BALL_SPEED;
-					game.ball.speed.y *= BALL_SPEED;
+			if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
+				game.ball.x = canvas.width / 2;
+				game.ball.y = canvas.height / 2;
+				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+				game.ball.speed.x = 2;
+				if (player === game.player) {
+					game.challenger.score++;
+					adverseScore = game.challenger.score;
+					flashBorder(1000);
+				} else {
+					game.player.score++;
+					playerScore = game.player.score;
+					flashBorder(1000);
+				}
+				updateScoreDisplay();
+				if (game.player.score === 3 || game.challenger.score === 3) {
+					gameEnd = true;
+					endGame();
 				}
 			} else {
-				// Pas de collision
-				if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
-					game.ball.x = canvas.width / 2;
-					game.ball.y = canvas.height / 2;
-					game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-					game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
-
-					// Ajuster la vitesse de la balle pour une meilleure fluidité
-					if (player === game.challenger) {
-						game.ball.speed.x *= BALL_SPEED;
-						game.ball.speed.y *= BALL_SPEED;
-					} else {
-						game.ball.speed.x = 2;
-					}
-
-					if (player === game.player) {
-						game.challenger.score++;
-						adverseScore = game.challenger.score;
-						flashBorder(1000);
-					} else {
-						game.player.score++;
-						playerScore = game.player.score;
-						flashBorder(1000);
-					}
-					updateScoreDisplay();
-					if (game.player.score === 3 || game.challenger.score === 3) {
-						gameEnd = true;
-						endGame();
-					}
-				} else {
-					if (gameOwnerId == 1) {
-						game.ball.speed.x *= -BALL_SPEED;
-						if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
-							game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
-						}
+				if (gameOwnerId == 1) {
+					game.ball.speed.x *= -BALL_SPEED;
+					if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
+						game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
 					}
 				}
 			}
 		}
+
 
 		// scorboard update
 		function updateScoreDisplay() {
@@ -496,32 +478,29 @@ function setupRanked() {
 		}
 
 		function updateOpponentPad(direction) {
-			const moveSpeed = 10; // Vitesse de déplacement du joueur
-			const now = Date.now(); // Temps actuel
-			const timeElapsed = now - lastMoveTime; // Temps écoulé depuis le dernier mouvement
-
-			if (playerId === 1) {
-				if (direction === 'up') {
-					game.challenger.y -= moveSpeed * (timeElapsed / 1000); // Mouvement vers le haut
-				}
-				if (direction === 'down') {
-					game.challenger.y += moveSpeed * (timeElapsed / 1000); // Mouvement vers le bas
-				}
-				// Limiter la position du joueur dans les limites du canvas
-				game.challenger.y = Math.max(0, Math.min(canvas.height - 100, game.challenger.y));
-			} else {
-				if (direction === 'up') {
-					game.player.y -= moveSpeed * (timeElapsed / 1000); // Mouvement vers le haut
-				}
-				if (direction === 'down') {
-					game.player.y += moveSpeed * (timeElapsed / 1000); // Mouvement vers le bas
-				}
-				// Limiter la position du joueur dans les limites du canvas
-				game.player.y = Math.max(0, Math.min(canvas.height - 100, game.player.y));
-			}
-
-			lastMoveTime = now; // Mettre à jour le dernier temps de mouvement
+		    if (playerId === 1) {
+		        if (direction === 'up')
+		            game.challenger.y -= 10;
+		        if (direction === 'down')
+		            game.challenger.y += 10;
+		        if (game.challenger.y < 0) {
+		            game.challenger.y = 0;
+		        } else if (game.challenger.y > canvas.height - 100) {
+		            game.challenger.y = canvas.height - 100;
+		        }
+		    } else {
+		        if (direction === 'up')
+		            game.player.y -= 10;
+		        if (direction === 'down')
+		            game.player.y += 10;
+		        if (game.player.y < 0) {
+		            game.player.y = 0;
+		        } else if (game.player.y > canvas.height - 100) {
+		            game.player.y = canvas.height - 100;
+		        }
+		    }
 		}
+		
 
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
