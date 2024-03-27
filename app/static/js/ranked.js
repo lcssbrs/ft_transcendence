@@ -492,8 +492,7 @@ function setupRanked() {
 		}
 
 		document.addEventListener('keydown', function(event) {
-			if (gameStarted && playerId == 1) {
-				game.ball.x = 50; // rm ici
+			if (gameStarted) {
 				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
 					updatePad('up')
 					sendGameMove(playerId, 'up');
