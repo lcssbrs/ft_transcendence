@@ -1,0 +1,241 @@
+.navbar-nav .nav-item {
+	padding: 0 15px;
+	transition: transform 0.3s;
+	position: relative;
+}
+
+.navbar-nav .nav-item::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background-color: #007bff;
+	transition: width 0.3s;
+	transform: translateX(-50%);
+}
+
+.navbar-nav .nav-item:hover::after {
+	width: 100%;
+}
+
+.navbar-nav .nav-item:hover {
+	transform: scale(1.2);
+	color: #007bff !important;
+}
+
+.main-height {
+	height: 83.5vh;
+}
+
+.header-size {
+	height: 9vh;
+}
+
+.bottom-size {
+	height: 7.5vh;
+}
+
+.mid-height {
+	height: 41.75vh;
+}
+
+.image-container {
+	position: relative;
+	width: 175px;
+	height: 190px;
+	margin: 0 auto;
+}
+
+.top-image {
+	position: absolute;
+	top: 75px;
+	left: 0;
+	width: 175px;
+	height: 100px;
+}
+
+.bottom-image {
+	position:absolute;
+	top: 0;
+	left: 25px;
+	width: 125px;
+	height: 125px;
+	object-fit: cover;
+	border-radius: 100%;
+}
+
+.friend-scroll::-webkit-scrollbar {
+	width: 5px;
+}
+
+.friend-scroll::-webkit-scrollbar-thumb {
+	background-color: #F4ACBC;
+	border-radius: 10px;
+}
+
+.friend-scroll::-webkit-scrollbar-track {
+	border-radius: 10px;
+}
+
+.friend-user::-webkit-scrollbar {
+	width: 5px;
+}
+
+.friend-user::-webkit-scrollbar-thumb {
+	background-color: #F4ACBC;
+	border-radius: 10px;
+}
+
+.friend-user::-webkit-scrollbar-track {
+	border-radius: 10px;
+}
+
+.profile-bar {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 100%;
+}
+
+.flex {
+	display: flex;
+}
+
+.input-wrapper input {
+	background-color: white;
+	border: none;
+	padding: 5%;
+	width: 100%;
+	height: 70%;
+	border-radius: 1rem;
+	color: #0D6EFD;
+	box-shadow: 0 0.4rem #F4ACBC;
+	cursor: pointer;
+}
+
+.input-wrapper input:focus {
+	outline-color: white;
+}
+
+.ranking-scrollbar::-webkit-scrollbar {
+	width: 5px;
+}
+
+.ranking-scrollbar::-webkit-scrollbar-thumb {
+	background-color: white;
+	border-radius: 10px;
+}
+
+.ranking-scrollbar::-webkit-scrollbar-track {
+	border-radius: 10px;
+}
+
+.log-input input {
+	width: 75%;
+	height: 50%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 40px;
+	font-size: 16px;
+	color: #fff;
+	padding: 20px 45px 20px 20px;
+}
+
+.log-input input::placeholder {
+	color: #fff;
+}
+
+.notification {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    max-width: 600px;
+    padding: 20px 15px;
+    border-radius: 4px;
+    background-color: #141619;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    animation: fade 4s linear forwards;
+}
+
+.progress {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 0;
+    height: 3px;
+    border-radius: 4px;
+    animation: progress 3s .25s linear forwards;
+}
+
+.notification.success .progress {
+    background-image: linear-gradient(to right, #15d8b1, #10ce39);
+}
+
+.notification.error .progress {
+    background-image: linear-gradient(to right, #d81515, #d00127);
+}
+
+.notification.other .progress {
+    background-image: linear-gradient(to right, #529bdb, #3250bf);
+}
+
+/* CSS */
+.line {
+    position: relative;
+    width: 20vh;
+    height: 10vh;
+}
+
+
+/* CSS */
+.parent {
+    display: flex;
+    flex-wrap: wrap; /* Permettre aux éléments enfants de passer à la ligne */
+    justify-content: space-between; /* Répartir les éléments enfants horizontalement */
+    align-content: space-between; /* Répartir les éléments enfants verticalement */
+    width: 100%; /* Ajustez la largeur de la div parente selon vos besoins */
+    height: 100%; /* Ajustez la hauteur de la div parente selon vos besoins */
+}
+
+.child {
+    flex-basis: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
+    height: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
+}
+
+
+
+@keyframes fade {
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    95% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes progress {
+    to {
+        width: calc(100% - 10px);
+    }
+}
+
