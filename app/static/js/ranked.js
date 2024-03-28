@@ -208,16 +208,29 @@ function setupRanked() {
 		function endGame() {
 			gameStarted = false;
 			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-			if (playerScore > adverseScore)
-				endGameApi(ID_ranked, playerScore, adverseScore, 1);
-			else
-				endGameApi(ID_ranked, playerScore, adverseScore, 2);
+			fetch(`/api/match/${ID_ranked}/`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data) {
+					if (playerScore > adverseScore)
+						endGameApi(ID_ranked, playerScore, adverseScore, data.player1);
+					else
+						endGameApi(ID_ranked, playerScore, adverseScore, data.player2);
+				} else {
+					console.log('Match non trouvé');
+				}
+			})
+			.catch(error => console.error('Erreur avec la connexion en base de données', error));
 			displayWinner = true;
 			endGame = true;
 
 			setTimeout(function() {
 				displayWinner = false;
-				loadView('/ranked/', true, false)
+				let url = location.pathname;
+				if (url == '/ranked/')
+					loadView('/ranked/', false, true);
 			}, 3000);
 
 			removeKeyListeners();

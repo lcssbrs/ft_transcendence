@@ -36,7 +36,7 @@ from qrcode import make
 from django.contrib.auth.decorators import login_required
 from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
-from django.db.models.query import QuerySet
+from django.db.models import Q
 
 def afficher_qr_code(request):
     if (request.user.is_authenticated == False):
@@ -46,12 +46,64 @@ def afficher_qr_code(request):
 def index(request):
     return render (request, 'index.html', {'user': request.user})
 
+class MatchHistory:
+    def __init__(self, ranked, profile_user):
+        if (profile_user.username == ranked.player_winner.username):
+            self.gain = '+25 LP'
+            self.status = 'Victoire'
+        else:
+            self.gain = '-25 LP'
+            self.status = 'Défaite'
+        if (ranked.player1.username == profile_user.username):
+            self.challenger = ranked.player2
+            self.userScore = ranked.score_player1
+            self.challScore = ranked.score_player2
+        else:
+            self.challenger = ranked.player1
+            self.userScore = ranked.score_player2
+            self.challScore = ranked.score_player1
+
+class TournamentHistory:
+    def __init__(self, tournament, profile_user):
+        if (tournament.final_id.player1.username == profile_user.username or tournament.final_id.player2.username == profile_user.username):
+            if (tournament.player_winner.username == profile_user.username):
+                self.rank = 1
+            else :
+                self.rank = 2
+            if (tournament.final_id.player1.username == profile_user.username):
+                self.lastChall = tournament.final_id.player2.username
+                self.lastUserScore = tournament.final_id.score_player1
+                self.lastChallScore = tournament.final_id.score_player2
+            else:
+                self.lastChall = tournament.final_id.player2.username
+                self.lastUserScore = tournament.final_id.score_player2
+                self.lastChallScore = tournament.final_id.score_player1
+        else:
+            if (tournament.match1_id.player1.username == profile_user.username):
+                self.lastChall = tournament.match1_id.player2.username
+                self.lastUserScore = tournament.match1_id.score_player1
+                self.lastChallScore = tournament.match1_id.score_player2
+            elif (tournament.match1_id.player2.username == profile_user.username):
+                self.lastChall = tournament.match1_id.player2.username
+                self.lastUserScore = tournament.match1_id.score_player2
+                self.lastChallScore = tournament.match1_id.score_player1
+            elif (tournament.match2_id.player1.username == profile_user.username):
+                self.lastChall = tournament.match2_id.player2.username
+                self.lastUserScore = tournament.match2_id.score_player1
+                self.lastChallScore = tournament.match2_id.score_player2
+            elif (tournament.match2_id.player2.username == profile_user.username):
+                self.lastChall = tournament.match2_id.player2.username
+                self.lastUserScore = tournament.match2_id.score_player2
+                self.lastChallScore = tournament.match2_id.score_player1
+            self.rank = 4
+        self.date = tournament.date
+
 def profile_view(request):
     id_value = request.GET.get('id', None)
     profile_user = user_list.objects.get(id=id_value)
     top_players = sortranking()
     user_rank = None
-    for index, user in enumerate(top_players):
+    for user in top_players:
         if user.id == profile_user.id:
             user_rank = user.position
             break
@@ -69,14 +121,28 @@ def profile_view(request):
         rank = 'Challenger'
     user = request.user
 
+    matches_ended = Match.objects.filter(status='end_game')
+    matches_participated = matches_ended.filter(Q(player1=profile_user.id) | Q(player2=profile_user.id))
+    matches_participated = matches_participated[::-1][:5]
+    rankedHistory = []
+    for i in matches_participated:
+        rankedHistory.append(MatchHistory(i, profile_user))
+
+    # tournaments_ended = Match.objects.filter(status='end_game')
+    # tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
+    # tournaments_participated = tournaments_participated[::-1][:5]
+    # tournamentHistory = []
+    # for i in tournaments_participated:
+    #     tournamentHistory.append(tournamentHistory(i, profile_user))
+
     context = {
         'profile_user': profile_user,
         'user_rank': user_rank,
         'user': user,
         'rank': rank,
-        'ranksrc': ranksrc
+        'ranksrc': ranksrc,
+        'rankedHistory': rankedHistory
     }
-
     return render(request, 'profile.html', context)
 
 def ranked_view (request):
@@ -135,6 +201,7 @@ def edit_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
+
             userpr.first_name = form.cleaned_data['first_name']
             userpr.last_name = form.cleaned_data['last_name']
             if 'profile_picture' in request.FILES:
