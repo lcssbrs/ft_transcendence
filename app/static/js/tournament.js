@@ -1,6 +1,7 @@
 function SetupTournament() {
 
 	// TODO MODIFIER LA BASE DE DONNEES POUR EVITER LES ERREURS DE TOURNOI
+	// TODO si le joueur 1 detecte que la partie est fini alors il envoie 'end_game_status'
 
 	let socket = null;
 
