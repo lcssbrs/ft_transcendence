@@ -116,6 +116,7 @@ class Tournament(models.Model):
     status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de tournoi'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
     match1_id = models.IntegerField(null=True)
     match2_id = models.IntegerField(null=True)
+    final_id = models.IntegerField(null=True)
 
     def create_matches(self):
         match1 = Match.objects.create(player1=self.player01, player2=self.player02)
@@ -123,6 +124,21 @@ class Tournament(models.Model):
         self.match1_id = match1.id
         self.match2_id = match2.id
         self.save()
+
+    def check_and_create_final(self):
+        match1 = Match.objects.filter(id=self.match1_id).first()
+        match2 = Match.objects.filter(id=self.match2_id).first()
+
+        if match1 and match2 and not self.final_id:
+            if match1.status in ['end_game', 'cancel'] and match2.status in ['end_game', 'cancel']:
+                winner1 = match1.player_winner
+                winner2 = match2.player_winner
+                if winner1 and winner2:
+                    final_match = Match.objects.create(player1=winner1, player2=winner2)
+                    final_match.save()
+
+                    self.final_id = final_match.id
+                    self.save()
 
     class Meta:
         db_table = 'django_tournament'
