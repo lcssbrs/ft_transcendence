@@ -140,38 +140,34 @@ function playerMove(event) {
 }
 
 // IA ordi:
-function computerMove(signal) {
-	let TBS;
-	if (BALL_SPEED <= 3)
-		TBS = 4;
-	else if (BALL_SPEED > 3 && BALL_SPEED <= 5)
-		TBS = 5
-	// else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
-	// 	TBS = 6;
-	else
-		TBS = 7;
-	if (gameStarted == true)
-		{
-			let steps = Math.abs(game.ball.y - game.computer.y) / PLAYER_SPEED;
-        let delay = 100; // Délai initial de 100 ms
-
-        for (let i = 0; i < steps; i++) {
+function computerMove() {
+    if (gameStarted) {
+        let targetY = game.ball.y;
+        let steps = Math.abs(game.ball.x - game.computer.y) / BALL_SPEED;
+        let futureY = game.ball.y + steps * game.ball.speed.y;
+        if (game.ball.speed.x < 0 && futureY > 0 && futureY < canvas.height) {
+            targetY = futureY;
+        }
+        let delay = 100;
+        let totalSteps = Math.ceil(steps);
+        let stepDelay = delay / totalSteps;
+        for (let i = 0; i < totalSteps; i++) {
             setTimeout(function() {
-                if (signal === 'up') {
-                    game.computer.y -= PLAYER_SPEED;
-                } else if (signal === 'down') {
+                if (game.computer.y < targetY) {
                     game.computer.y += PLAYER_SPEED;
+                } else if (game.computer.y > targetY) {
+                    game.computer.y -= PLAYER_SPEED;
                 }
-
                 if (game.computer.y < 0) {
                     game.computer.y = 0;
                 } else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
                     game.computer.y = canvas.height - PLAYER_HEIGHT;
                 }
-            }, delay * i);
-		}
-	}
+            }, stepDelay * i);
+        }
+    }
 }
+
 
 // analyse du jeu 1X/sec
 function readGame() {
