@@ -1,12 +1,14 @@
 function setupEdit() {
-    document.getElementById("editForm").addEventListener("submit", function(event) {
-        event.preventDefault();
+	document.getElementById("editForm").addEventListener("submit", function(event) {
+		event.preventDefault();
 
-        var isValid = true;
-        const formFirstName = document.getElementById("id_first_name").value;
-        const formLastName = document.getElementById("id_last_name").value;
-        const idFirstMissing = document.getElementById("firstMissing");
-        const idLastMissing = document.getElementById("lastMissing");
+		var isValid = true;
+		const formFirstName = document.getElementById("id_first_name").value;
+		const formLastName = document.getElementById("id_last_name").value;
+		const idFirstMissing = document.getElementById("firstMissing");
+		const idLastMissing = document.getElementById("lastMissing");
+		const sizeId = document.getElementById("sizeError");
+		const formatId = document.getElementById("formatError");
 
         if (formFirstName == "") {
             isValid = false;
@@ -30,14 +32,14 @@ function setupEdit() {
         if (profilePictureFile) {
             if (!allowedTypes.includes(profilePictureFile.type)) {
                 isValid = false;
-                // Afficher un message d'erreur pour le type de fichier non autorisé
-                alert("Veuillez sélectionner une image au format JPG, JPEG ou PNG.");
+				formatId.classList.remove("d-none");
+
             }
 
             if (profilePictureFile.size > maxSize) {
                 isValid = false;
-                // Afficher un message d'erreur pour la taille du fichier dépassant la limite
-                alert("La taille du fichier dépasse la limite autorisée de 1 Mo.");
+				sizeId.classList.remove("d-none");
+
             }
         }
 
@@ -50,8 +52,14 @@ function setupEdit() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    document.querySelector('#userAvatar').src = data.profile_picture;
-                    loadView('/profile/?id=' + data.id, true, false);
+                    $.ajax({
+						url: '/api/get_user/',
+						type: 'GET',
+						success: function(response) {
+							document.querySelector('#userAvatar').src = response.profile_picture;
+						}
+					})
+					loadView('/profile/?id=' + data.id, true, false);
                 } else {
                     loadView('/edit/', true, false);
                 }
