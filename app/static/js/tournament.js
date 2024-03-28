@@ -55,7 +55,6 @@ function SetupTournament() {
 	const scoreF2 = document.getElementById("sf2");
 
 	startButton.addEventListener("click", function() {
-		console.log("QSEDQE");
 		startButton.style.display = "none";
 		searchingMatch.style.display = "block";
 
@@ -646,7 +645,7 @@ function SetupTournament() {
 
 		function initializeWebSocket(playerId) {
 			gameOwnerId = playerId;
-			socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${my_match_id}/`);
+			socket = new WebSocket(`ws://localhost:8000/ws/match/${my_match_id}/`);
 
 			socket.onopen = function() {
 				ID_ranked = my_match_id;
