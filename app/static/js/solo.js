@@ -149,31 +149,27 @@ function computerMove(signal) {
 	// else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
 	// 	TBS = 6;
 	else
-	TBS = 7;
+		TBS = 7;
 	if (gameStarted == true)
 		{
-			if (signal === 'up')
-			{
-				for (let i = 0; i < TBS; i++) {
-					setTimeout(function() {
-						game.computer.y -= PLAYER_SPEED;
-					}, i * 100); //100 millisecondes
-				}
-			}
-			else if (signal === 'down')
-			{
-				for (let i = 0; i < TBS; i++) {
-					setTimeout(function() {
-						game.computer.y += PLAYER_SPEED;
-					}, i * 100); //100 millisecondes
-				}
-			}
+			let steps = Math.abs(game.ball.y - game.computer.y) / PLAYER_SPEED;
+        let delay = 100; // Délai initial de 100 ms
 
-			if (game.computer.y < 0) {
-				game.computer.y = 0;
-			} else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
-				game.computer.y = canvas.height - PLAYER_HEIGHT;
-			}
+        for (let i = 0; i < steps; i++) {
+            setTimeout(function() {
+                if (signal === 'up') {
+                    game.computer.y -= PLAYER_SPEED;
+                } else if (signal === 'down') {
+                    game.computer.y += PLAYER_SPEED;
+                }
+
+                if (game.computer.y < 0) {
+                    game.computer.y = 0;
+                } else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
+                    game.computer.y = canvas.height - PLAYER_HEIGHT;
+                }
+            }, delay * i);
+		}
 	}
 }
 
