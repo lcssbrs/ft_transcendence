@@ -442,11 +442,11 @@ def accept_friend_request(request, request_id):
                 to_user.friends.add(from_user)
                 friend_request.accepted = True
                 friend_request.delete()
-                return JsonResponse({'success': 'Demande d\'ami acceptée avec succès.'})
+                return JsonResponse({'success': True, 'message': 'Demande d\'ami acceptée avec succès.'})
             else:
-                return JsonResponse({'error': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
+                return JsonResponse({'success': False, 'message': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
         except Friendship.DoesNotExist:
-            return JsonResponse({'error': 'Cette demande d\'ami n\'existe pas.'})
+            return JsonResponse({'success': False, 'message': 'Cette demande d\'ami n\'existe pas.'})
 
 def reject_friend_request(request, request_id):
     if request.method == 'POST':
