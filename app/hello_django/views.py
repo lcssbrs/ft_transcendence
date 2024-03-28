@@ -494,11 +494,11 @@ def accept_friend_request(request, request_id):
                 to_user.friends.add(from_user)
                 friend_request.accepted = True
                 friend_request.delete()
-                return JsonResponse({'success': 'Demande d\'ami acceptée avec succès.'})
+                return JsonResponse({'success': True, 'message': 'Demande d\'ami acceptée avec succès.'})
             else:
-                return JsonResponse({'error': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
+                return JsonResponse({'success': False, 'message': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
         except Friendship.DoesNotExist:
-            return HttpResponseNotFound("Cette demande d'ami n'existe pas.")
+            return JsonResponse({'success': False, 'message': 'Cette demande d\'ami n\'existe pas.'})
 
 def reject_friend_request(request, request_id):
     if request.method == 'POST':
@@ -536,9 +536,9 @@ def remove_friend(request):
 def get_friend_requests(request):
     if request.method == 'GET':
         user = request.user
-        friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
-        friend_requests_data = [{'id': request.id, 'from_user': request.from_user.username} for request in friend_requests]
-        return JsonResponse({'friend_requests': friend_requests_data})
+        friends_requests = Friendship.objects.filter(to_user=user, accepted=False)
+        friends_requests_data = [{'id': friend_request.id, 'from_user': friend_request.from_user.username} for friend_request in friends_requests]
+        return JsonResponse({'friend_requests': friends_requests_data})
     else:
         return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
 
