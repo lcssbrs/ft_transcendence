@@ -12,19 +12,18 @@ def user_logged_in_handler(sender, request, user, **kwargs):
 def user_logged_out_handler(sender, request, user, **kwargs):
     user_list.objects.update_or_create(user=user, defaults={'status': 'offline'})
 
+
 @receiver(post_save, sender=Match)
-def create_match_between_winners(sender, instance, **kwargs):
-    if instance.status == 'end_game':
-        tournament = Tournament.objects.filter(
-            player01=instance.player1,
-            player02=instance.player2,
-            status='end_game'
-        ).first()
+def create_final_match(sender, instance, **kwargs):
+        tournament = instance.tournament
+        if tournament:
+            match1 = tournament.match_set.filter(order=1).first()
+            match2 = tournament.match_set.filter(order=2).first()
+            if match1 and match2:
+                if match1.status in ['end_game', 'cancel'] and match2.status in ['end_game', 'cancel']:
+                    winner1 = match1.player_winner
+                    winner2 = match2.player_winner
+                    if winner1 and winner2:
+                        final_match = Match.objects.create(tournament=tournament, order=3, player1=winner1, player2=winner2)
+                        final_match.save()
 
-        if tournament and tournament.match_set.filter(status='end_game').count() == 2:
-            winner1 = tournament.match_set.first().player_winner
-            winner2 = tournament.match_set.last().player_winner
-
-            new_match = Match.objects.create(player1=winner1, player2=winner2)
-            tournament.status = 'waiting'
-            tournament.save()

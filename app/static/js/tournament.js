@@ -3,6 +3,7 @@ function SetupTournament() {
 	// TODO MODIFIER LA BASE DE DONNEES POUR EVITER LES ERREURS DE TOURNOI
 
 	let socket = null;
+
 	var ID_Player1;
 	var ID_Player2;
 	var ID_Player3;
@@ -10,6 +11,15 @@ function SetupTournament() {
 	var ID_players;
 
 	var PlayerNames;
+
+	var PlayerScoreMatch1P1;
+	var PlayerScoreMatch1P2;
+
+	var PlayerScoreMatch2P1;
+	var PlayerScoreMatch2P2;
+
+	var PlayerScoreFinalP1;
+	var PlayerScoreFinalP2;
 
 	var	my_id;
 	var playerMatchId;
@@ -26,6 +36,7 @@ function SetupTournament() {
 	const startButton = document.getElementById("start-tournament");
 	const searchingMatch = document.getElementById("searching-match");
 
+	// Match
 	const match1P1 = document.getElementById("d1");
 	const match1P2 = document.getElementById("d2");
 	const match2P1 = document.getElementById("d3");
@@ -33,6 +44,15 @@ function SetupTournament() {
 
 	const final1 = document.getElementById("f1");
 	const final2 = document.getElementById("f2");
+
+	// Score
+	const scoreM1P1 = document.getElementById("s1");
+	const scoreM1P2 = document.getElementById("s2");
+	const scoreM2P1 = document.getElementById("s3");
+	const scoreM2P2 = document.getElementById("s4");
+
+	const scoreF1 = document.getElementById("sf1");
+	const scoreF2 = document.getElementById("sf2");
 
 	startButton.addEventListener("click", function() {
 		startButton.style.display = "none";
@@ -150,6 +170,7 @@ function SetupTournament() {
 			} else {
 				console.log("Erreur de connexion avec la base de données");
 			}
+			initialGame();
 		})
 		.catch(error => {
 			console.error("Erreur lors de la récupération des données du tournoi :", error);
@@ -171,28 +192,92 @@ function SetupTournament() {
 				searchingMatch.style.display = "none";
 				TournamentStart = true;
 				getMyMatchId();
-				initialGame();
 			}
 		}
 	}
 
 	setInterval(function() {
-		if (tournament_id && TournamentStart === false && !my_match_id) {
+		if (tournament_id && TournamentStart === false) {
 			getTournamentInfo();
 		}
-	}, 1300);
+	}, 600);
 
-	//-----------------------------------------\/
-	//----------------WEBSOCKET----------------\/
-	//-----------------------------------------\/
-
-	function initialGame(playerID, playerMatchId)
+	function initialGame()
 	{
 		document.querySelector('#bracket').classList.add("d-none");
 		document.querySelector('#canvas4').classList.remove("d-none");
 		document.querySelector('#start-tournament').classList.add("d-none");
 		document.querySelector('#start-match').classList.remove("d-none");
-		setupRanked(my_match_id, my_id);
+		console.log("Match ID [", my_match_id, "]");
+		setupRanked(my_match_id, playerMatchId);
+	}
+
+	function waitingSecondGame()
+	{
+		document.querySelector('#bracket').classList.remove("d-none");
+		document.querySelector('#canvas4').classList.add("d-none");
+		document.querySelector('#start-tournament').classList.remove("d-none");
+		document.querySelector('#start-match').classList.add("d-none");
+
+		if (socket)
+		{
+			socket.close();
+			socket = null;
+		}
+
+		setInterval(function() {
+			if (!PlayerScoreMatch1P1 && !PlayerScoreMatch2P2) {
+				getScore();
+			}
+		}, 1000);
+	}
+
+	function getMatchInfo(id, nb) {
+		fetch(`/api/match/${id}/`, {
+			method: 'GET'
+		})
+		.then(reponse => reponse.json())
+		.then(data => {
+			if (data) {
+				if (nb === 1)
+				{
+					PlayerScoreMatch1P1 = data.score_player1;
+					PlayerScoreMatch1P2 = data.score_player2;
+					scoreM1P1.textContent = PlayerScoreMatch1P1;
+					scoreM1P2.textContent = PlayerScoreMatch1P2;
+				}
+				else {
+					PlayerScoreMatch2P1 = data.score_player1;
+					PlayerScoreMatch2P2 = data.score_player2;
+					scoreM2P1.textContent = PlayerScoreMatch2P1;
+					scoreM2P2.textContent = PlayerScoreMatch2P2;
+				}
+			}
+			else {
+				console.log("Erreur de connexion avec la base de données");
+			}
+		})
+		.catch(error => {
+			console.error("Erreur lors de la récupération des données du tournoi :", error);
+		});
+	}
+
+	function getScore() {
+		fetch(`/api/tournaments/${tournament_id}/`, {
+			method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data) {
+				getMatchInfo(data.match1_id, 1);
+				getMatchInfo(data.match2_id, 2);
+			} else {
+				console.log("Erreur de connexion avec la base de données");
+			}
+		})
+		.catch(error => {
+			console.error("Erreur lors de la récupération des données du tournoi :", error);
+		});
 	}
 
 	//-----------------------------------------\/
@@ -422,7 +507,7 @@ function SetupTournament() {
 
 				setTimeout(function() {
 					displayWinner = false;
-					loadView('/ranked/')
+					waitingSecondGame();
 				}, 3000);
 
 				removeKeyListeners();
@@ -475,7 +560,6 @@ function SetupTournament() {
 		const startMatch = document.getElementById("start-match");
 		// const waitingMatch = document.getElementById("waiting-match");
 		const adversaireMatch = document.getElementById("adversaire-match");
-		let socket = null;
 		let gameStarted = false;
 
 
