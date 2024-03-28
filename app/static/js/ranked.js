@@ -1,5 +1,6 @@
 function setupRanked() {
 	var game;
+	var socket;
 	var winner;
 	var ID_ranked;
 	var playerName;
@@ -7,14 +8,12 @@ function setupRanked() {
 	var playerScore = 0;
 	var challengerScore = 0;
 	var gameStarted = false;
+	var match_id = 0;
 
 	let canvas;
 	let context;
-	let gameStarted = false;
-	let gameEnd = false;
 	let disconnect_ennemy = false;
 	let displayWinner = false;
-
 
 	const PLAYER_HEIGHT = 100;
 	const PLAYER_WIDTH = 5;
@@ -22,20 +21,10 @@ function setupRanked() {
 	const BALL_SPEED = 1.2;
 	const MAX_SPEED = 14;
 
-
-	function launchGame() {
-		if (playerId1 = data.player1)
-		{
-			setupPlayer();
-		}
-		else
-		{
-			setupChallenger();
-		}
-	}
-
 	//-------------PARTIE JOUEUR 1-----------------
 	function setupPlayer() {
+		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
+
 		document.addEventListener('keydown', playerMove);
 		setupStart();
 		function setupStart() {
@@ -86,7 +75,6 @@ function setupRanked() {
 				countdown--;
 				if (countdown < 0) {
 					document.addEventListener('keydown', playerMove);
-					document.addEventListener('keydown', challengerMove);
 					clearInterval(countdownInterval);
 					startGame();
 				}
@@ -150,6 +138,7 @@ function setupRanked() {
 			}
 			game.ball.x += game.ball.speed.x;
 			game.ball.y += game.ball.speed.y;
+			ball_move(game.ball.x, game.ball.y, game.player.score, game.challenger.score);
 		}
 
 		function collide(player) {
@@ -168,7 +157,7 @@ function setupRanked() {
 				}
 				drawScore();
 				if (game.player.score === 3 || game.challenger.score === 3) {
-					var gameEnd = true;
+					ball_move();
 					endGame();
 				}
 			} else {
@@ -176,6 +165,19 @@ function setupRanked() {
 				if (Math.abs(game.ball.speed.x) > MAX_SPEED) {
 					game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
 				}
+			}
+		}
+
+		function ball_move() {
+			if (gameStarted && socket != null) {
+				const moveData = {
+					type: 'ball_move',
+					x: game.ball.x,
+					y: game.ball.y,
+					s1: game.player.score,
+					s2: game.challenger.score
+				};
+				socket.send(JSON.stringify(moveData));
 			}
 		}
 
@@ -196,7 +198,6 @@ function setupRanked() {
 
 			document.removeEventListener('keydown', playerMove);
 
-
 			game.ball.speed.x = 0;
 			game.ball.speed.y = 0;
 		}
@@ -212,6 +213,8 @@ function setupRanked() {
 
 	//-------------PARTIE JOUEUR 2-----------------
 	function setupChallenger() {
+		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
+
 		document.addEventListener('keydown', challengerMove);
 		setupStart()
 		function setupStart() {
@@ -223,8 +226,13 @@ function setupRanked() {
 				},
 				challenger: {
 					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
-					score: 0
-				}
+					score: 0,
+					ball: {
+						x: canvas.width / 2,
+						y: canvas.height / 2,
+						r: 5
+					}
+				},
 			}
 			draw();
 		}
@@ -235,7 +243,6 @@ function setupRanked() {
 			game.player.score = 0;
 			game.challenger.score = 0;
 			displayWinner = false;
-
 			var countdown = 3;
 			var countdownInterval = setInterval(function() {
 				var context = canvas.getContext('2d');
@@ -246,21 +253,25 @@ function setupRanked() {
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
 				context.fillText(countdown, canvas.width / 2, canvas.height / 2);
-				countdown--;
-				if (countdown <= 0) {
-					document.addEventListener('keydown', playerMove);
-					document.addEventListener('keydown', challengerMove);
-					clearInterval(countdownInterval);
-					startGame();
+				if (countdown > 0) {
+					countdown -= 1;
+					if (countdown == 0) {
+						countdown = '';
+					}
 				}
 			}, 1000);
+			document.addEventListener('keydown', challengerMove);
+			if (countdown <= 0) {
+				clearInterval(countdownInterval);
+				startGame();
+			}
 		}
 
 		function startGame() {
 			game.player.score = 0;
 			game.challenger.score = 0;
 			drawScore();
-			play();
+			draw();
 		}
 
 		function draw() {
@@ -280,7 +291,7 @@ function setupRanked() {
 			context.fillRect(canvas.width - PLAYER_WIDTH, game.challenger.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 			context.beginPath();
 			context.fillStyle = 'white';
-			context.arc(game.ball.x, game.ball.y, game.ball.r, 0, Math.PI * 2, false);
+			context.arc(game.challenger.ball.x, game.challenger.ball.y, game.challenger.ball.r, 0, Math.PI * 2, false);
 			context.fill();
 			drawScore();
 			if (displayWinner) {
@@ -295,8 +306,47 @@ function setupRanked() {
 			}
 		}
 
-		function play() {
+		function updateBall(x, y, s1, s2) {
+			game.challenger.ball.x = x;
+			game.challenger.ball.y = y;
+			if(game.player.score != s1 || game.challenger.score != s2)
+			{
+				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
+			}
+			game.player.score = s1;
+			game.challenger.score = s2;
 			draw();
+			if (s1 === 3 || s2 === 3)
+			{
+				endGame();
+			}
+		}
+
+		function endGame() {
+			gameStarted = false;
+			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
+			if (playerScore > challengerScore)
+				endGameApi(ID_ranked, playerScore, challengerScore, 1);
+			else
+				endGameApi(ID_ranked, playerScore, challengerScore, 2);
+			displayWinner = true;
+			endGame = true;
+			setTimeout(function() {
+				displayWinner = false;
+				loadView('/ranked/', true, false)
+			}, 3000);
+			// document.removeEventListener('keydown', playerMove);
+			// game.ball.speed.x = 0;
+			// game.ball.speed.y = 0;
+		}
+
+		socket.onmessage = function(event) {
+			const eventData = JSON.parse(event.data);
+			if (eventData.type === 'ball_move')
+			{
+				updateBall(eventData.x, eventData.y, eventData.s1, eventData.s2);
+			}
 		}
 
 		function challengerMove(event) {
@@ -308,7 +358,6 @@ function setupRanked() {
 		}
 	}
 
-
 	function drawScore() {
 		context = canvas.getContext('2d');
 		context.fillStyle = 'white';
@@ -318,7 +367,6 @@ function setupRanked() {
 		context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
 		context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
 	}
-}
 
 	//-----------------------------------------\/
 	//----------------WEBSOCKET----------------\/
@@ -327,9 +375,7 @@ function setupRanked() {
 	const startButton = document.getElementById("start-ranked");
 	const searchingMatch = document.getElementById("searching-match");
 	const adversaireMatch = document.getElementById("adversaire-match");
-	let socket = null;
-	let gameStarted = false;
-
+	socket = null;
 
 	function GetPlayerId(match_id) {
 		fetch(`/api/match/${match_id}/`, {
@@ -355,7 +401,6 @@ function setupRanked() {
 			player_winner: winner,
 			status: "end_game"
 		};
-
 		fetch(`/api/match/${match_id}/`, {
 			method: 'PATCH',
 			headers: {
@@ -363,7 +408,9 @@ function setupRanked() {
 			},
 			body: JSON.stringify(requestBody)
 		})
-		.then(response => {})
+		.then(response => {
+			closeWebSocket();
+		})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
 
@@ -373,7 +420,6 @@ function setupRanked() {
 			score_player2: score_02,
 			status: "cancel"
 		};
-
 		fetch(`/api/match/${match_id}/`, {
 			method: 'PATCH',
 			headers: {
@@ -381,70 +427,67 @@ function setupRanked() {
 			},
 			body: JSON.stringify(requestBody)
 		})
-		.then(response => {})
+		.then(response => {
+			closeWebSocket();
+		})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
 
 	function getPlayerNames(player1, player2) {
 		const request1 = fetch(`/api/users/${player1}`);
 		const request2 = fetch(`/api/users/${player2}`);
-
 		Promise.all([request1, request2])
-			.then(responses => {
-				const promises = responses.map(response => response.json());
-				Promise.all(promises)
-					.then(data => {
-						playerName = data[0].username;
-						challengerName = data[1].username;
-					})
-					.catch(error => console.error("Erreur lors de la récupération des données :", error));
+		.then(responses => {
+			const promises = responses.map(response => response.json());
+			Promise.all(promises)
+			.then(data => {
+				playerName = data[0].username;
+				challengerName = data[1].username;
 			})
-			.catch(error => console.error("Erreur lors de la requête API :", error));
+			.catch(error => console.error("Erreur lors de la récupération des données :", error));
+		})
+		.catch(error => console.error("Erreur lors de la requête API :", error));
 	}
 
 	startButton.addEventListener("click", function() {
 		startButton.style.display = "none";
 		searchingMatch.style.display = "block";
-
 		fetch('/api/join-match/', {
-		method: 'POST'
-	})
-	.then(response => response.json())
-	.then(data => {
-		var match_id = 0;
-		if (data.match_exists) {
-			console.log("Match trouvé [", data.match_data.id, "]");
-			match_id = data.match_data.id;
-			const player = 2;
-			initializeWebSocket(match_id, player);
-		} else {
-			console.log("Nouvelle partie créée [", data.match_data.id, "]");
-			match_id = data.match_data.id;
-			const player = 1;
-			initializeWebSocket(match_id, player);
-		}
-	})
+			method: 'POST'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.match_exists) {
+				console.log("Match trouvé [", data.match_data.id, "]");
+				match_id = data.match_data.id;
+				const player = 2;
+				initializeWebSocket(match_id, player);
+			} else {
+				console.log("Nouvelle partie créée [", data.match_data.id, "]");
+				match_id = data.match_data.id;
+				const player = 1;
+				initializeWebSocket(match_id, player);
+			}
+		})
 		.catch(error => console.error('Erreur avec la connexion en base de données', error));
 	});
 
 	function initializeWebSocket(match_id, playerId) {
 		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
-
 		socket.onopen = function() {
 			ID_ranked = match_id;
 			console.log("Websocket ouvert");
 		};
-
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
-			if (eventData.type === 'game_start')
+			if (eventData.type === 'game_start' && gameStarted == false)
 			{
 				searchingMatch.style.display = "none";
 				gameStarted = true;
-				displayGame();
+				displayGame(playerId);
 				GetPlayerId(match_id);
 			}
-			if (eventData.type === 'game_update')
+			if (eventData.type === 'game_move')
 			{
 				const playerData = eventData.data;
 				if (playerData.player !== playerId) {
@@ -459,7 +502,7 @@ function setupRanked() {
 		};
 
 		function sendGameMove(player, direction) {
-			if (gameStarted) {
+			if (gameStarted && socket != null) {
 				const moveData = {
 					type: 'game_move',
 					player: player,
@@ -472,65 +515,59 @@ function setupRanked() {
 		function updatePad(direction) {
 			if (playerId === 2)
 			{
-				if (direction === 'up')
-					game.challenger.y -= PLAYER_SPEED;
-				if (direction === 'down')
-					game.challenger.y += PLAYER_SPEED;
+				game.challenger.y = direction;
 				if (game.challenger.y < 0) {
 					game.challenger.y = 0;
-				} else if (game.challenger.y > canvas.height - 100) {
-					game.challenger.y = canvas.height - 100;
+				} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
+					game.challenger.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
 			else
 			{
-				if (direction === 'up')
-					game.player.y -= PLAYER_SPEED;
-				if (direction === 'down')
-					game.player.y += PLAYER_SPEED;
+				game.player.y = direction;
 				if (game.player.y < 0) {
 					game.player.y = 0;
-				} else if (game.player.y > canvas.height - 100) {
-					game.player.y = canvas.height - 100;
+				} else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
+					game.player.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
 		}
 
-		function updateOpponentPad(direction) {
+		function updateOpponentPad (direction) {
 			if (playerId === 1)
 			{
-				if (direction === 'up')
-					game.challenger.y -= PLAYER_SPEED;
-				if (direction === 'down')
-					game.challenger.y += PLAYER_SPEED;
+				game.challenger.y = direction;
 				if (game.challenger.y < 0) {
 					game.challenger.y = 0;
-				} else if (game.challenger.y > canvas.height - 100) {
-					game.challenger.y = canvas.height - 100;
+				} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
+					game.challenger.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
 			else
 			{
-				if (direction === 'up')
-					game.player.y -= PLAYER_SPEED;
-				if (direction === 'down')
-					game.player.y += PLAYER_SPEED;
+				game.player.y = direction;
 				if (game.player.y < 0) {
 					game.player.y = 0;
-				} else if (game.player.y > canvas.height - 100) {
-					game.player.y = canvas.height - 100;
+				} else if (game.player.y > canvas.height - PLAYER_HEIGHT) {
+					game.player.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
 		}
 
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
+				if (playerId === 1)
+					var posY = game.player.y
+				else
+					var posY = game.challenger.y
 				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
-					updatePad('up')
-					sendGameMove(playerId, 'up');
+					posY += -10;
+					updatePad(posY)
+					sendGameMove(playerId, posY);
 				} else if (event.key === 's' || event.key === 'S') {
-					updatePad('down')
-					sendGameMove(playerId, 'down');
+					posY += 10;
+					updatePad(posY)
+					sendGameMove(playerId, posY);
 				}
 			}
 		});
@@ -552,8 +589,15 @@ function setupRanked() {
 			console.log("WebSocket déconnecté");
 		};
 
-		function displayGame() {
-			launchGame();
+		function displayGame(playerId) {
+			if (playerId == 1)
+			{
+				setupPlayer();
+			}
+			else
+			{
+				setupChallenger();
+			}
 		}
 
 		function closeWebSocket() {
@@ -566,12 +610,14 @@ function setupRanked() {
 
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
+				console.log("chibre");
 				closeWebSocket();
 			}
 		});
 
 		window.addEventListener('popstate', function(event) {
 			if (window.location.pathname !== "/ranked") {
+				console.log("ok");
 				closeWebSocket();
 			}
 		});
@@ -579,7 +625,11 @@ function setupRanked() {
 		window.addEventListener('hashchange', function(event) {
 			console.log(window.location.pathname);
 			if (window.location.pathname !== "/ranked") {
+				console.log("poivre");
 				closeWebSocket();
 			}
 		});
+
 	}
+
+}

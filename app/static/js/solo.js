@@ -142,12 +142,10 @@ function playerMove(event) {
 // IA ordi:
 function computerMove(signal) {
 	let TBS;
-	if (BALL_SPEED <= 3)
-		TBS = 4;
-	else if (BALL_SPEED > 3 && BALL_SPEED <= 5)
-		TBS = 5
-	// else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
-	// 	TBS = 6;
+	if (BALL_SPEED <= 5)
+		TBS = 5;
+	else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
+		TBS = 6;
 	else
 	TBS = 7;
 	if (gameStarted == true)
