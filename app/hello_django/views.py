@@ -479,7 +479,7 @@ class JoinMatch(APIView):
 class JoinTournament(APIView):
     def post(self, request):
         user_tournament = Tournament.objects.filter(
-            status__in=['waiting', 'in_game'],
+            status__in=['waiting'],
             player01=request.user
         ).first()
 
@@ -512,10 +512,22 @@ class JoinTournament(APIView):
             serializer = TournoiListSerializer(tournament)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
+            user_tournament_in_game = Tournament.objects.filter(
+                status='in_game',
+                player01=request.user
+            ).first()
+
+            if user_tournament_in_game:
+                serializer = TournoiListSerializer(user_tournament_in_game)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            # Crée un nouveau tournoi avec le joueur en tant que joueur01
             new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
 
             serializer = TournoiListSerializer(new_tournament)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 class CreateMatch(APIView):
     def post(self, request):

@@ -110,7 +110,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 2000);
+    }, 200000);
 });
 
 $(document).ready(function() {
@@ -213,7 +213,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 2000);
+    }, 200000);
 });
 
 $(document).ready(function() {

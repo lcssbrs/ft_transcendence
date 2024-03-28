@@ -289,7 +289,6 @@ function SetupTournament() {
 		var game;
 		var canvas;
 		var winner
-		let gameEnd = false
 		let gameOwnerId;
 		var ID_ranked;
 		var playerName;
@@ -461,7 +460,7 @@ function SetupTournament() {
 					}
 					updateScoreDisplay();
 					if (game.player.score === 3 || game.challenger.score === 3) {
-						gameEnd = true;
+						gameStarted = false;
 						endGame();
 					}
 				} else {
@@ -676,17 +675,19 @@ function SetupTournament() {
 				}
 				if (eventData.type === 'ball_move')
 				{
-					updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status);
+					updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status, eventData.data.vx, eventData.data.vy);
 				}
 			};
 
-			function updateBall(player, x, y, score01, score02, status) {
+			function updateBall(player, x, y, score01, score02, status, vx, vy) {
 				if (gameStarted && player == 2) {
 					game.ball.x = x;
 					game.ball.y = y;
 					game.player.score = score01,
 					game.challenger.score = score02
 					gameStarted = status
+					game.ball.speed.x = vx,
+					game.ball.speed.y = vy
 				}
 			}
 
@@ -710,6 +711,8 @@ function SetupTournament() {
 						score01: game.player.score,
 						score02: game.challenger.score,
 						status: gameStarted,
+						vx: game.ball.speed.x,
+						vy: game.ball.speed.y,
 					};
 					socket.send(JSON.stringify(moveData));
 				}
@@ -786,7 +789,6 @@ function SetupTournament() {
 			});
 
 			socket.onclose = function() {
-				adversaireMatch.style.display = "block";
 				if (gameStarted == true && disconnect_ennemy == true)
 				{
 					if (playerId === 1)
