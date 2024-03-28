@@ -485,8 +485,10 @@ def get_friend_requests(request):
     if request.method == 'GET':
         user = request.user
         friend_requests = Friendship.objects.filter(to_user=user, accepted=False)
-        friend_requests_data = [{'request': friendask} for friendask in friend_requests]
-        return JsonResponse({'friend_requests': friend_requests_data})
+        data = []
+        for friendask in friend_requests:
+            data.append(friendask)
+        return JsonResponse({'friend_requests': data})
     else:
         return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
 
