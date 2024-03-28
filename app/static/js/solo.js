@@ -142,31 +142,48 @@ function playerMove(event) {
 // IA ordi:
 function computerMove() {
     if (gameStarted) {
-        let targetY = game.ball.y;
-        let steps = Math.abs(game.ball.x - game.computer.y) / BALL_SPEED;
-        let futureY = game.ball.y + steps * game.ball.speed.y;
-        if (game.ball.speed.x < 0 && futureY > 0 && futureY < canvas.height) {
-            targetY = futureY;
+        let ball = game.ball;
+        let side;
+
+        // Déterminer de quel côté de la table se trouve l'IA
+        if (game.computer.x > canvas.width / 2) {
+            side = 1; // Côté droit
+        } else {
+            side = -1; // Côté gauche
         }
-        let delay = 100;
-        let totalSteps = Math.ceil(steps);
-        let stepDelay = delay / totalSteps;
-        for (let i = 0; i < totalSteps; i++) {
-            setTimeout(function() {
-                if (game.computer.y < targetY) {
-                    game.computer.y += PLAYER_SPEED;
-                } else if (game.computer.y > targetY) {
-                    game.computer.y -= PLAYER_SPEED;
+
+        // Vérifier si la balle se dirige vers l'IA
+        if ((side < 0 && ball.x < canvas.width - canvas.width / 4 && ball.speed.x < 0) ||
+            (side > 0 && ball.x > canvas.width / 4 && ball.speed.x > 0)) {
+
+            let nextX = ball.x;
+            let nextY = ball.y;
+            let nextSpeedY = ball.speed.y;
+            let nextSpeedX = ball.speed.x;
+
+            // Prédire la trajectoire de la balle jusqu'à ce qu'elle soit proche de l'IA
+            while ((nextX > game.computer.x + PLAYER_WIDTH && side < 0) ||
+                   (nextX < game.computer.x && side > 0)) {
+                if (nextY <= 0 + ball.r || nextY >= canvas.height - ball.r) {
+                    nextSpeedY = -nextSpeedY; // Inverser la direction en cas de collision avec le haut ou le bas
                 }
-                if (game.computer.y < 0) {
-                    game.computer.y = 0;
-                } else if (game.computer.y > canvas.height - PLAYER_HEIGHT) {
-                    game.computer.y = canvas.height - PLAYER_HEIGHT;
-                }
-            }, stepDelay * i);
+
+                let dy = Math.abs(nextSpeedY * BALL_SPEED);
+                let dx = Math.abs(nextSpeedX * BALL_SPEED);
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                let ratio = BALL_SPEED / dist;
+
+                nextY += nextSpeedY * BALL_SPEED * ratio;
+                nextX += nextSpeedX * BALL_SPEED * ratio;
+            }
+
+            game.computer.y = nextY; // Position de l'IA ajustée en fonction de la trajectoire estimée de la balle
+        } else {
+            game.computer.y = canvas.height / 2; // Si la balle ne se dirige pas vers l'IA, position par défaut au centre
         }
     }
 }
+
 
 
 // analyse du jeu 1X/sec
