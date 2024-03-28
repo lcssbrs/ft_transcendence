@@ -446,7 +446,7 @@ def accept_friend_request(request, request_id):
             else:
                 return JsonResponse({'error': 'Cette demande d\'ami a déjà été acceptée.'}, status=400)
         except Friendship.DoesNotExist:
-            return HttpResponseNotFound("Cette demande d'ami n'existe pas.")
+            return JsonResponse({'error': 'Cette demande d\'ami n\'existe pas.'})
 
 def reject_friend_request(request, request_id):
     if request.method == 'POST':
