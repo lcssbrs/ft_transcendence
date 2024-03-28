@@ -10,6 +10,10 @@ function setupRanked() {
     var playerScore = 0;
     var adverseScore = 0;
     let disconnect_ennemy = false;
+	function launchGame() {
+		launchPlayerGame();
+		launchChallengerGame();
+	}
 
     function launchPlayerGame() {
         function startGameWithCountdown() {
