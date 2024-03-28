@@ -212,15 +212,29 @@ function setupRanked() {
 		function endGame() {
 			gameStarted = false;
 			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-			if (playerScore > adverseScore)
-				endGameApi(ID_ranked, playerScore, adverseScore, 1);
-			else
-				endGameApi(ID_ranked, playerScore, adverseScore, 2);
+			fetch(`/api/match/${ID_ranked}/`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data) {
+					if (playerScore > adverseScore)
+						endGameApi(ID_ranked, playerScore, adverseScore, data.player1);
+					else
+						endGameApi(ID_ranked, playerScore, adverseScore, data.player2);
+				} else {
+					console.log('Match non trouvé');
+				}
+			})
+			.catch(error => console.error('Erreur avec la connexion en base de données', error));
 			displayWinner = true;
+			endGame = true;
 
 			setTimeout(function() {
 				displayWinner = false;
-				loadView('/ranked/'); // Rechargement de la page après un délai
+				let url = location.pathname;
+				if (url == '/ranked/')
+					loadView('/ranked/', false, true);
 			}, 3000);
 
 			removeKeyListeners();
@@ -405,17 +419,19 @@ function setupRanked() {
 			}
 			if (eventData.type === 'ball_move')
 			{
-				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status);
+				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status, eventData.data.vx, eventData.data.vy);
 			}
 		};
 
-		function updateBall(player, x, y, score01, score02, status) {
+		function updateBall(player, x, y, score01, score02, status, vx, vy) {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
 				game.ball.y = y;
 				game.player.score = score01,
 				game.challenger.score = score02
 				gameStarted = status
+				game.ball.speed.x = vx;
+				game.ball.speed.y = vy;
 			}
 		}
 
@@ -436,6 +452,8 @@ function setupRanked() {
 					type: 'ball_move',
 					x: game.ball.x,
 					y: game.ball.y,
+					vx: game.ball.speed.x,
+					vy: game.ball.speed.y,
 					score01: game.player.score,
 					score02: game.challenger.score,
 					status: gameStarted,
