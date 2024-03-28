@@ -619,7 +619,6 @@ class JoinTournament(APIView):
                 serializer = TournoiListSerializer(user_tournament_in_game)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
-            # Crée un nouveau tournoi avec le joueur en tant que joueur01
             new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
 
             serializer = TournoiListSerializer(new_tournament)

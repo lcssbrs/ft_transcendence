@@ -29,6 +29,7 @@ function SetupTournament() {
 	var tournament_id;
 
 	let TournamentStart = false;
+	let TournamentWaitingFinal = 0;
 
 	//-----------------------------------------\/
 	//-----------------ELEMENTS----------------\/
@@ -210,7 +211,14 @@ function SetupTournament() {
 		document.querySelector('#start-tournament').classList.add("d-none");
 		document.querySelector('#start-match').classList.remove("d-none");
 		console.log("Match ID [", my_match_id, "]");
-		setupRanked(my_match_id, playerMatchId);
+		if (my_id === ID_Player1)
+			setupRanked(my_match_id, playerMatchId, my_id, ID_Player2);
+		else if (my_id === ID_Player2)
+			setupRanked(my_match_id, playerMatchId, my_id, ID_Player1);
+		else if (my_id === ID_Player3)
+			setupRanked(my_match_id, playerMatchId, my_id, ID_Player4);
+		else if (my_id === ID_Player4)
+			setupRanked(my_match_id, playerMatchId, my_id, ID_Player3);
 	}
 
 	function waitingSecondGame()
@@ -220,6 +228,7 @@ function SetupTournament() {
 		document.querySelector('#start-tournament').classList.remove("d-none");
 		document.querySelector('#start-match').classList.add("d-none");
 
+		my_match_id = null;
 		if (socket)
 		{
 			socket.close();
@@ -227,10 +236,10 @@ function SetupTournament() {
 		}
 
 		setInterval(function() {
-			if (!PlayerScoreMatch1P1 && !PlayerScoreMatch2P2) {
+			if (TournamentWaitingFinal < 2) {
 				getScore();
 			}
-		}, 1000);
+		}, 1500);
 	}
 
 	function getMatchInfo(id, nb) {
@@ -240,18 +249,23 @@ function SetupTournament() {
 		.then(reponse => reponse.json())
 		.then(data => {
 			if (data) {
-				if (nb === 1)
+				if (nb === 1 && (data.score_player1 || data.score_player2))
 				{
 					PlayerScoreMatch1P1 = data.score_player1;
 					PlayerScoreMatch1P2 = data.score_player2;
 					scoreM1P1.textContent = PlayerScoreMatch1P1;
 					scoreM1P2.textContent = PlayerScoreMatch1P2;
+					TournamentWaitingFinal++;
 				}
 				else {
-					PlayerScoreMatch2P1 = data.score_player1;
-					PlayerScoreMatch2P2 = data.score_player2;
-					scoreM2P1.textContent = PlayerScoreMatch2P1;
-					scoreM2P2.textContent = PlayerScoreMatch2P2;
+					if (data.score_player1 || data.score_player2)
+					{
+						PlayerScoreMatch2P1 = data.score_player1;
+						PlayerScoreMatch2P2 = data.score_player2;
+						scoreM2P1.textContent = PlayerScoreMatch2P1;
+						scoreM2P2.textContent = PlayerScoreMatch2P2;
+						TournamentWaitingFinal++;
+					}
 				}
 			}
 			else {
@@ -285,7 +299,7 @@ function SetupTournament() {
 	//------------------PONG-------------------\/
 	//-----------------------------------------\/
 
-	function setupRanked(match_id, playerMatchId) {
+	function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId) {
 
 		var game;
 		var canvas;
@@ -498,10 +512,21 @@ function SetupTournament() {
 			function endGame() {
 				gameStarted = false;
 				winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-				if (playerScore > adverseScore)
-					endGameApi(ID_ranked, playerScore, adverseScore, 1);
+				if (playerMatchId === 1)
+				{
+					if (playerScore > adverseScore)
+						endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
+					else
+						endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
+					sendEndGame();
+				}
 				else
-					endGameApi(ID_ranked, playerScore, adverseScore, 2);
+				{
+					if (playerScore > adverseScore)
+						endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
+					else
+						endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
+				}
 				displayWinner = true;
 				endGame = true;
 
@@ -599,6 +624,15 @@ function SetupTournament() {
 			.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 		}
 
+		function sendEndGame() {
+			if (gameStarted) {
+				const moveData = {
+					type: 'end_game',
+				};
+				socket.send(JSON.stringify(moveData));
+			}
+		}
+
 		function quitGameApi(my_match_id, score_01, score_02) {
 			const requestBody = {
 				score_player1: score_01,
@@ -672,11 +706,19 @@ function SetupTournament() {
 				if (eventData.type === 'disconnect_message')
 				{
 					disconnect_ennemy = true;
+					my_match_id = null;
 					closeWebSocket();
 				}
 				if (eventData.type === 'ball_move')
 				{
 					updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status, eventData.data.vx, eventData.data.vy);
+				}
+				if (eventData.type === 'end_game')
+				{
+					disconnect_ennemy = false;
+					gameStarted = false;
+					my_match_id = null;
+					closeWebSocket();
 				}
 			};
 
@@ -684,6 +726,8 @@ function SetupTournament() {
 				if (gameStarted && player == 2) {
 					game.ball.x = x;
 					game.ball.y = y;
+					if (score01 != game.player.score || score02 != game.challenger.score)
+						game.challenger.y = canvas.height / 2 - 100 / 2,
 					game.player.score = score01,
 					game.challenger.score = score02
 					gameStarted = status
@@ -726,10 +770,7 @@ function SetupTournament() {
 			function updatePad(direction) {
 				if (playerId === 2)
 				{
-					if (direction === 'up')
-						game.challenger.y -= 10;
-					if (direction === 'down')
-						game.challenger.y += 10;
+					game.challenger.y = direction;
 					if (game.challenger.y < 0) {
 						game.challenger.y = 0;
 					} else if (game.challenger.y > canvas.height - 100) {
@@ -738,10 +779,7 @@ function SetupTournament() {
 				}
 				else
 				{
-					if (direction === 'up')
-						game.player.y -= 10;
-					if (direction === 'down')
-						game.player.y += 10;
+					game.player.y = direction;
 					if (game.player.y < 0) {
 						game.player.y = 0;
 					} else if (game.player.y > canvas.height - 100) {
@@ -753,10 +791,7 @@ function SetupTournament() {
 			function updateOpponentPad(direction) {
 				if (playerId === 1)
 				{
-					if (direction === 'up')
-						game.challenger.y -= 10;
-					if (direction === 'down')
-						game.challenger.y += 10;
+					game.challenger.y = direction;
 					if (game.challenger.y < 0) {
 						game.challenger.y = 0;
 					} else if (game.challenger.y > canvas.height - 100) {
@@ -765,10 +800,7 @@ function SetupTournament() {
 				}
 				else
 				{
-					if (direction === 'up')
-						game.player.y -= 10;
-					if (direction === 'down')
-						game.player.y += 10;
+					game.player.y = direction;
 					if (game.player.y < 0) {
 						game.player.y = 0;
 					} else if (game.player.y > canvas.height - 100) {
@@ -779,12 +811,18 @@ function SetupTournament() {
 
 			document.addEventListener('keydown', function(event) {
 				if (gameStarted) {
+					if (playerId === 1)
+						var posY = game.player.y
+					else
+						var posY = game.challenger.y
 					if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
-						updatePad('up')
-						sendGameMove(playerId, 'up');
+						posY += -10;
+						updatePad(posY)
+						sendGameMove(playerId, posY);
 					} else if (event.key === 's' || event.key === 'S') {
-						updatePad('down')
-						sendGameMove(playerId, 'down');
+						posY += 10;
+						updatePad(posY)
+						sendGameMove(playerId, posY);
 					}
 				}
 			});
@@ -793,9 +831,9 @@ function SetupTournament() {
 				if (gameStarted == true && disconnect_ennemy == true)
 				{
 					if (playerId === 1)
-						endGameApi(match_id, 4, adverseScore, playerId);
+						endGameApi(match_id, 4, adverseScore, userPlayerId);
 					else
-						endGameApi(match_id, playerScore, 4, playerId);
+						endGameApi(match_id, playerScore, 4, userPlayerId);
 				}
 				if (playerId == 1 && disconnect_ennemy == false && gameStarted == false)
 				{
