@@ -8,6 +8,7 @@ function setupRanked() {
 	var playerScore = 0;
 	var challengerScore = 0;
 	var gameStarted = false;
+	var gameEnded = false;
 	var match_id = 0;
 
 	let canvas;
@@ -28,7 +29,6 @@ function setupRanked() {
 		document.addEventListener('keydown', playerMove);
 		setupStart();
 		function setupStart() {
-			console.log('test');
 			canvas = document.getElementById('canvas3');
 			game = {
 				player: {
@@ -50,7 +50,7 @@ function setupRanked() {
 				}
 			}
 			draw();
-		}
+		};
 
 		startGameWithCountdown();
 		function startGameWithCountdown() {
@@ -80,14 +80,14 @@ function setupRanked() {
 					startGame();
 				}
 			}, 1000);
-		}
+		};
 
 		function startGame() {
 			game.player.score = 0;
 			game.challenger.score = 0;
 			drawScore();
 			play();
-		}
+		};
 
 		function draw() {
 			context = canvas.getContext('2d');
@@ -119,18 +119,15 @@ function setupRanked() {
 				winner = game.player.score === 3 ? playerName : challengerName;
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
-		}
+		};
 
 		function play() {
-			if (gameStarted == false)
-				return ;
 			draw();
 			ballMove();
 			requestAnimationFrame(play);
-		}
+		};
 
 		function ballMove() {
-			// Rebonds sur le haut et bas
 			if (game.ball.y > canvas.height || game.ball.y < 0) {
 				game.ball.speed.y *= -1;
 			}
@@ -142,7 +139,7 @@ function setupRanked() {
 			game.ball.x += game.ball.speed.x;
 			game.ball.y += game.ball.speed.y;
 			ball_move(game.ball.x, game.ball.y, game.player.score, game.challenger.score);
-		}
+		};
 
 		function collide(player) {
 			if (game.ball.y < player.y || game.ball.y > player.y + PLAYER_HEIGHT) {
@@ -169,7 +166,7 @@ function setupRanked() {
 					game.ball.speed.x = Math.sign(game.ball.speed.x) * MAX_SPEED;
 				}
 			}
-		}
+		};
 
 		function ball_move() {
 			if (gameStarted && socket != null) {
@@ -182,29 +179,26 @@ function setupRanked() {
 				};
 				socket.send(JSON.stringify(moveData));
 			}
-		}
+		};
 
 		function endGame() {
-			gameStarted = false;
 			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
 			if (playerScore > challengerScore)
 				endGameApi(ID_ranked, playerScore, challengerScore, 1);
 			else
 				endGameApi(ID_ranked, playerScore, challengerScore, 2);
 			displayWinner = true;
-			endGame = true;
-
+			gameEnded = true;
 			setTimeout(function() {
 				displayWinner = false;
-				console.log('je vais loadview');
-				loadView('/ranked/', true, false)
+				let url = location.pathname;
+				if (url == '/ranked/')
+					loadView('/ranked/', true);
 			}, 3000);
-
 			document.removeEventListener('keydown', playerMove);
-
 			game.ball.speed.x = 0;
 			game.ball.speed.y = 0;
-		}
+		};
 
 		function playerMove(event) {
 			if (game.player.y < 0) {
@@ -213,12 +207,11 @@ function setupRanked() {
 				game.player.y = canvas.height - PLAYER_HEIGHT;
 			}
 		}
-	}
+	};
 
 	//-------------PARTIE JOUEUR 2-----------------
 	function setupChallenger() {
 		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
-
 		document.addEventListener('keydown', challengerMove);
 		setupStart()
 		function setupStart() {
@@ -239,7 +232,7 @@ function setupRanked() {
 				},
 			}
 			draw();
-		}
+		};
 
 		startGameWithCountdown();
 		function startGameWithCountdown() {
@@ -269,14 +262,14 @@ function setupRanked() {
 				clearInterval(countdownInterval);
 				startGame();
 			}
-		}
+		};
 
 		function startGame() {
 			game.player.score = 0;
 			game.challenger.score = 0;
 			drawScore();
 			draw();
-		}
+		};
 
 		function draw() {
 			context = canvas.getContext('2d');
@@ -308,40 +301,34 @@ function setupRanked() {
 				winner = game.player.score === 3 ? playerName : challengerName;
 				context.fillText('Le gagnant est ' + winner + ' !', canvas.width / 2, canvas.height / 2);
 			}
-		}
+		};
 
 		function updateBall(x, y, s1, s2) {
 			game.challenger.ball.x = x;
 			game.challenger.ball.y = y;
-			if(game.player.score != s1 || game.challenger.score != s2)
-			{
+			if (game.player.score !== s1 || game.challenger.score !== s2) {
 				game.player.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
 				game.challenger.y = canvas.height / 2 - PLAYER_HEIGHT / 2;
 			}
 			game.player.score = s1;
 			game.challenger.score = s2;
 			draw();
-			if (s1 === 3 || s2 === 3)
-			{
+			if (s1 === 3 || s2 === 3) {
 				endGame();
 			}
-		}
+		};
 
 		function endGame() {
-			gameStarted = false;
 			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
-			if (playerScore > challengerScore)
-				endGameApi(ID_ranked, playerScore, challengerScore, 1);
-			else
-				endGameApi(ID_ranked, playerScore, challengerScore, 2);
 			displayWinner = true;
-			endGame = true;
+			gameEnded = true;
 			setTimeout(function() {
 				displayWinner = false;
-				console.log('je vais loadview');
-				loadView('/ranked/', true, false)
+				let url = location.pathname;
+				if (url == '/ranked/')
+					loadView('/ranked/', true);
 			}, 3000);
-		}
+		};
 
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
@@ -349,7 +336,7 @@ function setupRanked() {
 			{
 				updateBall(eventData.x, eventData.y, eventData.s1, eventData.s2);
 			}
-		}
+		};
 
 		function challengerMove(event) {
 			if (game.challenger.y < 0) {
@@ -357,8 +344,8 @@ function setupRanked() {
 			} else if (game.challenger.y > canvas.height - PLAYER_HEIGHT) {
 				game.challenger.y = canvas.height - PLAYER_HEIGHT;
 			}
-		}
-	}
+		};
+	};
 
 	function drawScore() {
 		context = canvas.getContext('2d');
@@ -368,7 +355,7 @@ function setupRanked() {
 		context.textBaseline = 'middle';
 		context.fillText(game.player.score, canvas.width / 4, canvas.height / 6);
 		context.fillText(game.challenger.score, canvas.width - canvas.width / 4, canvas.height / 6);
-	}
+	};
 
 	//-----------------------------------------\/
 	//----------------WEBSOCKET----------------\/
@@ -414,7 +401,7 @@ function setupRanked() {
 			closeWebSocket();
 		})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
-	}
+	};
 
 	function closeWebSocket() {
 		if (socket) {
@@ -422,7 +409,7 @@ function setupRanked() {
 			console.log("Connexion WebSocket fermée");
 			socket = null;
 		}
-	}
+	};
 
 	function quitGameApi(match_id, score_01, score_02) {
 		const requestBody = {
@@ -442,7 +429,7 @@ function setupRanked() {
 			closeWebSocket();
 		})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
-	}
+	};
 
 	function getPlayerNames(player1, player2) {
 		const request1 = fetch(`/api/users/${player1}`);
@@ -458,7 +445,7 @@ function setupRanked() {
 			.catch(error => console.error("Erreur lors de la récupération des données :", error));
 		})
 		.catch(error => console.error("Erreur lors de la requête API :", error));
-	}
+	};
 
 	startButton.addEventListener("click", function() {
 		startButton.style.display = "none";
@@ -490,13 +477,15 @@ function setupRanked() {
 			console.log("Websocket ouvert");
 		};
 		socket.onmessage = function(event) {
+			if (gameEnded == true)
+				return ;
 			const eventData = JSON.parse(event.data);
 			if (eventData.type != 'ball_move')
 				console.log(eventData);
 			if (eventData.type === 'game_start' && gameStarted == false)
 			{
-				searchingMatch.style.display = "none";
 				gameStarted = true;
+				searchingMatch.style.display = "none";
 				displayGame(playerId);
 				GetPlayerId(match_id);
 			}
@@ -523,7 +512,7 @@ function setupRanked() {
 				};
 				socket.send(JSON.stringify(moveData));
 			}
-		}
+		};
 
 		function updatePad(direction) {
 			if (playerId === 2)
@@ -544,7 +533,7 @@ function setupRanked() {
 					game.player.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
-		}
+		};
 
 		function updateOpponentPad (direction) {
 			if (playerId === 1)
@@ -565,7 +554,7 @@ function setupRanked() {
 					game.player.y = canvas.height - PLAYER_HEIGHT;
 				}
 			}
-		}
+		};
 
 		document.addEventListener('keydown', function(event) {
 			if (gameStarted) {
@@ -574,11 +563,11 @@ function setupRanked() {
 				else
 					var posY = game.challenger.y
 				if (event.key === 'w' || event.key === 'W' || event.key === 'z' || event.key === 'Z') {
-					posY += -10;
+					posY += -PLAYER_SPEED;
 					updatePad(posY)
 					sendGameMove(playerId, posY);
 				} else if (event.key === 's' || event.key === 'S') {
-					posY += 10;
+					posY += PLAYER_SPEED;
 					updatePad(posY)
 					sendGameMove(playerId, posY);
 				}
@@ -611,31 +600,38 @@ function setupRanked() {
 			{
 				setupChallenger();
 			}
-		}
-
-
+		};
 
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
-				console.log("chibre");
+				adversaireMatch.classList.remove("d-none");
+				// endGameApi(match_id, 0, 0, null);
 				closeWebSocket();
 			}
 		});
 
 		window.addEventListener('popstate', function(event) {
 			if (window.location.pathname !== "/ranked") {
-				console.log("ok");
+                adversaireMatch.classList.remove("d-none");
+				// endGameApi(match_id, 0, 0, null);
 				closeWebSocket();
 			}
 		});
 
 		window.addEventListener('hashchange', function(event) {
-			console.log(window.location.pathname);
 			if (window.location.pathname !== "/ranked") {
-				console.log("poivre");
+                adversaireMatch.classList.remove("d-none");
+				// endGameApi(match_id, 0, 0, null);
 				closeWebSocket();
 			}
 		});
 
-	}
+		window.addEventListener('unload', function(event) {
+			adversaireMatch.classList.remove("d-none");
+			endGameApi(match_id, 0, 0, null);
+			loadView('/ranked/', true);
+			closeWebSocket();
+		});
+
+	};
 }
