@@ -624,7 +624,14 @@ class JoinTournament(APIView):
             serializer = TournoiListSerializer(new_tournament)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
+class CreateFinalMatch(APIView):
+    def post(self, request, tournament_id):
+        try:
+            tournament = Tournament.objects.get(pk=tournament_id)
+            tournament.check_and_create_final()
+            return Response("Tournoi crée", status=status.HTTP_201_CREATED)
+        except Tournament.DoesNotExist:
+            return Response("Ce tournoi n\'exite pas", status=status.HTTP_404_NOT_FOUND)
 
 class CreateMatch(APIView):
     def post(self, request):

@@ -73,4 +73,5 @@ urlpatterns = [
     path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
     path('api/create-tournament/', views.JoinTournament.as_view(), name='create_tournament'),
 	path('api/get_user/', views.CurrentUser.as_view(), name='curent_user'),
+	path('api/create-final-match/<int:tournament_id>/', views.CreateFinalMatch.as_view(), name='create_final_match'),
 ]

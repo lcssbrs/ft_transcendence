@@ -142,6 +142,3 @@ class Tournament(models.Model):
 
     class Meta:
         db_table = 'django_tournament'
-
-# appelle de méthode :
-#   tournoi.create_matches()

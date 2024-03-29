@@ -19,7 +19,7 @@ class MatchListSerializer(serializers.ModelSerializer):
 class TournoiListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament
-        fields = ['id', 'date_tournament', 'player01', 'player02', 'player03', 'player04', 'status', 'player_winner', 'match1_id', 'match2_id']
+        fields = ['id', 'date_tournament', 'player01', 'player02', 'player03', 'player04', 'status', 'player_winner', 'match1_id', 'match2_id', 'final_id']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
