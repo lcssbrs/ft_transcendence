@@ -28,6 +28,7 @@ function setupRanked() {
 		document.addEventListener('keydown', playerMove);
 		setupStart();
 		function setupStart() {
+			console.log('test');
 			canvas = document.getElementById('canvas3');
 			game = {
 				player: {
@@ -121,6 +122,8 @@ function setupRanked() {
 		}
 
 		function play() {
+			if (gameStarted == false)
+				return ;
 			draw();
 			ballMove();
 			requestAnimationFrame(play);
@@ -193,6 +196,7 @@ function setupRanked() {
 
 			setTimeout(function() {
 				displayWinner = false;
+				console.log('je vais loadview');
 				loadView('/ranked/', true, false)
 			}, 3000);
 
@@ -334,11 +338,9 @@ function setupRanked() {
 			endGame = true;
 			setTimeout(function() {
 				displayWinner = false;
+				console.log('je vais loadview');
 				loadView('/ranked/', true, false)
 			}, 3000);
-			// document.removeEventListener('keydown', playerMove);
-			// game.ball.speed.x = 0;
-			// game.ball.speed.y = 0;
 		}
 
 		socket.onmessage = function(event) {
@@ -414,6 +416,14 @@ function setupRanked() {
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
 	}
 
+	function closeWebSocket() {
+		if (socket) {
+			socket.close();
+			console.log("Connexion WebSocket fermée");
+			socket = null;
+		}
+	}
+
 	function quitGameApi(match_id, score_01, score_02) {
 		const requestBody = {
 			score_player1: score_01,
@@ -424,6 +434,7 @@ function setupRanked() {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json'
+
 			},
 			body: JSON.stringify(requestBody)
 		})
@@ -480,6 +491,8 @@ function setupRanked() {
 		};
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
+			if (eventData.type != 'ball_move')
+				console.log(eventData);
 			if (eventData.type === 'game_start' && gameStarted == false)
 			{
 				searchingMatch.style.display = "none";
@@ -600,13 +613,7 @@ function setupRanked() {
 			}
 		}
 
-		function closeWebSocket() {
-			if (socket) {
-				socket.close();
-				console.log("Connexion WebSocket fermée");
-				socket = null;
-			}
-		}
+
 
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
@@ -631,5 +638,4 @@ function setupRanked() {
 		});
 
 	}
-
 }

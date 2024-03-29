@@ -78,12 +78,9 @@ class PongConsumer(WebsocketConsumer):
             self.group_name,
             self.channel_name
         )
-
         if self.group_name in self.connected_clients:
             self.connected_clients[self.group_name].remove(self.channel_name)
-
         self.check_group_full()
-
         if len(self.connected_clients[self.group_name]) == 1:
             other_client_channel_name = self.connected_clients[self.group_name][0]
             async_to_sync(self.channel_layer.send)(
