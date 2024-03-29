@@ -184,17 +184,25 @@
 //         return (newRequests);
 //     }
 
-//     $(document).on('click', '.accept-button', function() {
-//         var $requestElement = $(this).closest('.d-flex');
-//         var requestId = $requestElement.find('.accept-button').data('request-id');
-//         $.post('/accept_friend/' + requestId + '/', {})
-//             .done(function(response) {
-//                 loadFriendRequests();
-//             })
-//             .fail(function(xhr, status, error) {
-//                 console.error('Erreur lors de l\'acceptation de la demande d\'ami :', error);
-//             });
-//     });
+    $(document).on('click', '.accept-button', function() {
+        var $requestElement = $(this).closest('.d-flex');
+        var requestId = $requestElement.find('.accept-button').data('request-id');
+        fetch('/accept_friend/' + requestId + '/', {
+			method: 'POST',
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+                loadFriendRequests();
+			}
+			else {
+				console.log(data.message);
+			}
+		})
+		.catch(error => {
+			console.error('Erreur lors de l\'envoi de la requête', error);
+		});
+    });
 
 //     $(document).on('click', '.reject-button', function() {
 //         var $requestElement = $(this).closest('.d-flex');

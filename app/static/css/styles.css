@@ -189,30 +189,38 @@
     background-image: linear-gradient(to right, #529bdb, #3250bf);
 }
 
-/* CSS */
-.line {
-    position: relative;
-    width: 20vh;
-    height: 10vh;
-}
+.card {
+	padding-top: 10px;
+	background-image: linear-gradient(144deg,#0D6EFD, #F4ACBC 60%,#0D6EFD);
+	border: none;
+	border-radius: 10px;
+  }
 
+  .card .announce {
+	color: white;
+	text-align: center;
+	display: block;
+	padding-top: 10px;
+	font-size: 1.3em;
+  }
 
-/* CSS */
-.parent {
-    display: flex;
-    flex-wrap: wrap; /* Permettre aux éléments enfants de passer à la ligne */
-    justify-content: space-between; /* Répartir les éléments enfants horizontalement */
-    align-content: space-between; /* Répartir les éléments enfants verticalement */
-    width: 100%; /* Ajustez la largeur de la div parente selon vos besoins */
-    height: 100%; /* Ajustez la hauteur de la div parente selon vos besoins */
-}
+  .card .winner {
+	font-weight: 400;
+	color: white;
+	display: block;
+	text-align: center;
+	padding-top: 5px;
+	font-size: 1em;
+  }
 
-.child {
-    flex-basis: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
-    height: calc(50% - 10px); /* La taille des enfants est de 50% moins les marges */
-}
-
-
+  .card .card-img {
+	width: 70px;
+	height: 70px;
+	background: #e8e8e8;
+	border-radius: 100%;
+	margin: auto;
+	margin-bottom: 20px;
+  }
 
 @keyframes fade {
     5% {

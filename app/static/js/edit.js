@@ -59,9 +59,9 @@ function setupEdit() {
 							document.querySelector('#userAvatar').src = response.profile_picture;
 						}
 					})
-					loadView('/profile/?id=' + data.id, true, false);
+					loadView('/profile/?id=' + data.id, true);
                 } else {
-                    loadView('/edit/', true, false);
+                    loadView('/edit/', true);
                 }
             })
             .catch(error => {
