@@ -189,38 +189,33 @@
     background-image: linear-gradient(to right, #529bdb, #3250bf);
 }
 
-.card {
+.winnercard {
 	padding-top: 10px;
 	background-image: linear-gradient(144deg,#0D6EFD, #F4ACBC 60%,#0D6EFD);
 	border: none;
 	border-radius: 10px;
-  }
+}
 
-  .card .announce {
+.winnercard .winner {
 	color: white;
 	text-align: center;
-	display: block;
 	padding-top: 10px;
-	font-size: 1.3em;
-  }
+	font-size: 2em;
+}
 
-  .card .winner {
-	font-weight: 400;
+.winnercard .announce {
 	color: white;
-	display: block;
 	text-align: center;
 	padding-top: 5px;
-	font-size: 1em;
-  }
+	font-size: 1.5em;
+}
 
-  .card .card-img {
-	width: 70px;
-	height: 70px;
-	background: #e8e8e8;
+.winnercard .card-img {
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
 	border-radius: 100%;
-	margin: auto;
-	margin-bottom: 20px;
-  }
+}
 
 @keyframes fade {
     5% {
