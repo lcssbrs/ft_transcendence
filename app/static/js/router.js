@@ -5,16 +5,14 @@ function extractViewContent(html) {
 	return viewContent;
 }
 
-function loadView(url, addHistory, force) {
+function loadView(url, addHistory) {
 	let actual = location.pathname;
-	if (actual == url && force == false)
-		return ;
 	var isAuthenticated = document.getElementById('auth-data').getAttribute('data-authenticated') === 'True';
 	if ((!isAuthenticated && (url == '/login/' || url == '/register/' || url == '/')) || isAuthenticated) {
 		fetch(url)
 		.then(response => response.text())
 		.then(html => {
-			if (addHistory == true) {
+			if (addHistory == true && actual != url) {
 				if (url.startsWith('/profile/')) {
 					let queryParams = url.substring(url.indexOf('?'));
 					history.pushState({id: queryParams}, null, url);
@@ -43,7 +41,7 @@ function loadView(url, addHistory, force) {
 	}
 	else {
 		if (actual != '/login/')
-			loadView('/login/', true, false);
+			loadView('/login/', true);
 	}
 }
 
@@ -54,7 +52,7 @@ function attachEventListeners() {
 		link.addEventListener('click', function(event) {
 			event.preventDefault();
 			const url = link.getAttribute('href');
-			loadView(url, true, false);
+			loadView(url, true);
 		});
 	}
 
@@ -85,7 +83,7 @@ function checkLogged()
 		document.querySelector('#logrequire').classList.remove('d-none');
 		let url = location.pathname;
 		if (url != '/login/' && url != '/register/' && url != '/')
-			loadView('/', true, false);
+			loadView('/', true);
 	}
 }
 
@@ -125,6 +123,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				url += history.state.id;
 			}
 		}
-		loadView(url, false, true);
+		loadView(url, false);
 	});
 });

@@ -247,7 +247,7 @@ function endGame() {
 		displayWinner = false;
 		let url = location.pathname;
 		if (url == '/solo/')
-			loadView('/solo/', false, true);
+			loadView('/solo/', false);
 	}, 3000);
 
 	removeKeyListeners();

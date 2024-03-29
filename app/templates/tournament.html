@@ -6,7 +6,14 @@
 		<p id="adversaire-match" style="display: none; color:white;">Adversaire déconnecté</p>
 	</div>
 	<canvas id="canvas4" class="d-none my-2" width="640" height="480"></canvas>
-	<div id="bracket" class="flex my-5 text-white">
+	<div class="card text-white text-center">
+		<div class="card-border-top">
+		</div>
+		<span class="announce">Le gagnant est...</span>
+		<span class="winner">hugoat</span>
+		<img class="card-img" src="/media/photos/default-profile.jpg">
+	</div>
+	<div id="bracket" class="d-none flex my-5 text-white">
 		<div class="d-flex flex-column">
 			<div class="d-flex flex-column border border-primary rounded-3 justify-content-center mb-3" style="width: 20vh; border-width: 2px !important;">
 				<span class="mx-2 my-1" id="s1">En attente...</span>
@@ -23,7 +30,7 @@
 		</div>
 	</div>
 	<div class="d-flex justify-content-center">
-		<button id="start-tournament" class="btn btn-primary">Trouver un tournoi</button>
+		<button id="start-tournament" class="d-none btn btn-primary">Trouver un tournoi</button>
 		<p id="searching-match" style="display: none; color:white;">Recherche de tournoi en cours...</p>
 	</div>
 </div>
