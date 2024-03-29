@@ -450,6 +450,18 @@ class api_tournois_details(APIView):
         serializer = TournoiListSerializer(tournoi)
         return Response(serializer.data)
 
+    def patch(self, request, id):
+        try:
+            tournoi = Tournament.objects.get(pk=id)
+        except Tournament.DoesNotExist:
+            return Response({"message": "Le tournoi n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TournoiListSerializer(tournoi, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 # Friend
 
 def add_friend(request, friend_id):
@@ -560,6 +572,67 @@ class JoinMatch(APIView):
             serializer = MatchListSerializer(new_match)
             return Response({"match_exists": False, "match_data": serializer.data}, status=status.HTTP_201_CREATED)
 
+            from rest_framework.views import APIView
+
+class JoinTournament(APIView):
+    def post(self, request):
+        user_tournament = Tournament.objects.filter(
+            status__in=['waiting'],
+            player01=request.user
+        ).first()
+
+        if user_tournament:
+            serializer = TournoiListSerializer(user_tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        tournament = Tournament.objects.filter(status='waiting').first()
+
+        if tournament:
+            if tournament.player02 == request.user or tournament.player03 == request.user or tournament.player04 == request.user:
+                serializer = TournoiListSerializer(tournament)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            if tournament.player01 is None:
+                tournament.player01 = request.user
+            elif tournament.player02 is None:
+                tournament.player02 = request.user
+            elif tournament.player03 is None:
+                tournament.player03 = request.user
+            elif tournament.player04 is None:
+                tournament.player04 = request.user
+
+            if all([tournament.player01, tournament.player02, tournament.player03, tournament.player04]):
+                tournament.status = 'in_game'
+                tournament.create_matches()
+
+            tournament.save()
+
+            serializer = TournoiListSerializer(tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            user_tournament_in_game = Tournament.objects.filter(
+                status='in_game',
+                player01=request.user
+            ).first()
+
+            if user_tournament_in_game:
+                serializer = TournoiListSerializer(user_tournament_in_game)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
+
+            serializer = TournoiListSerializer(new_tournament)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CreateFinalMatch(APIView):
+    def post(self, request, tournament_id):
+        try:
+            tournament = Tournament.objects.get(pk=tournament_id)
+            tournament.check_and_create_final()
+            return Response("Tournoi crée", status=status.HTTP_201_CREATED)
+        except Tournament.DoesNotExist:
+            return Response("Ce tournoi n\'exite pas", status=status.HTTP_404_NOT_FOUND)
+
 class CreateMatch(APIView):
     def post(self, request):
         new_match = Match(player1=request.user)
@@ -607,3 +680,16 @@ def decode_jwt_token(request):
         return JsonResponse({'success': False, 'error': 'Token expiré'})
     except jwt.InvalidTokenError:
         return JsonResponse({'success': False, 'error': 'Token invalide'})
+
+class CurrentUser(APIView):
+    def get(self, request):
+        current_user = request.user
+        if current_user.is_authenticated:
+            try:
+                user_info = user_list.objects.get(username=current_user.username)
+                serializer = UserDetailSerializer(user_info)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except user_list.DoesNotExist:
+                return Response({"message": "Utilisateur non trouvé"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"message": "Aucun utilisateur connecté"}, status=status.HTTP_401_UNAUTHORIZED)

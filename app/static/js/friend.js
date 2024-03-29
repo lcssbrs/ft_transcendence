@@ -109,7 +109,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 2000);
+    }, 1500);
 });
 
 $(document).ready(function() {
@@ -220,7 +220,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 2000);
+    }, 1500);
 });
 
 $(document).ready(function() {

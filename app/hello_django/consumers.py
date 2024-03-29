@@ -140,4 +140,3 @@ class PongConsumer(WebsocketConsumer):
             'x': event['x'],
             'y': event['y']
         }))
-
