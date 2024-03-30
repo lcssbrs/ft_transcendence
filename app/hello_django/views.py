@@ -577,7 +577,7 @@ class JoinMatch(APIView):
 class JoinTournament(APIView):
     def post(self, request):
         user_tournament = Tournament.objects.filter(
-            status__in=['waiting'],
+            status='waiting',
             player01=request.user
         ).first()
 
@@ -611,7 +611,7 @@ class JoinTournament(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             user_tournament_in_game = Tournament.objects.filter(
-                status='in_game',
+                status='waiting',
                 player01=request.user
             ).first()
 

@@ -16,10 +16,8 @@ canvas = document.getElementById('canvas4');
 
 let gameStarted = false;
 
-function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
+function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
 
-	if (final === true)
-		console.log("--------FINAL-------");
 	var winner
 	let gameOwnerId;
 	var ID_ranked;
@@ -245,7 +243,6 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 					endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
 			}
 			displayWinner = true;
-			endGame = true;
 
 
 			setTimeout(function() {
@@ -279,7 +276,6 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 			// canvas = document.getElementById('canvas4');
 			if (final)
 				document.querySelector('#canvas4').classList.remove("d-none");
-			console.log(game);
 			game = {
 				player: {
 					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
@@ -311,7 +307,11 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 		//----------------WEBSOCKET----------------\/
 		//-----------------------------------------\/
 
-	const startMatch = document.getElementById("start-match");
+	if (final)
+		var startMatch = document.getElementById("start-finale");
+	else
+		var startMatch = document.getElementById("start-match");
+
 	// const waitingMatch = document.getElementById("waiting-match");
 	const adversaireMatch = document.getElementById("adversaire-match");
 
@@ -352,6 +352,10 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 	}
 
 	function sendEndGame() {
+		var segments = socket.url.split("/");
+		var lastSegment = segments[segments.length - 2];
+		if (lastSegment != match_id)
+			return ;
 		if (gameStarted) {
 			const moveData = {
 				type: 'end_game',
@@ -396,9 +400,7 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 	}
 
 	startMatch.addEventListener("click", function() {
-		// startMatch.style.display = "none";
 		startMatch.classList.add("d-none");
-		// waitingMatch.style.display = "block";
 
 		if (playerMatchId == 1)
 			initializeWebSocket(1);
@@ -408,6 +410,7 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 
 	function initializeWebSocket(playerId) {
 		gameOwnerId = playerId;
+		socket = null;
 		socket = new WebSocket(`ws://localhost:8000/ws/tournament/${match_id}/`);
 
 		socket.onopen = function() {
@@ -419,7 +422,6 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 			const eventData = JSON.parse(event.data);
 			if (eventData.type === 'game_start')
 			{
-				// waitingMatch.style.display = "none";
 				gameStarted = true;
 				displayGame();
 				GetPlayerId(match_id);
@@ -463,7 +465,12 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 		}
 
 		function sendGameMove(player, direction) {
-			if (gameStarted && socket) {
+			var segments = socket.url.split("/");
+			var lastSegment = segments[segments.length - 2];
+			if (lastSegment != match_id)
+				return ;
+			if (gameStarted && socket)
+			{
 				const moveData = {
 					type: 'game_move',
 					player: player,
@@ -474,7 +481,12 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 		}
 
 		function sendGameBall(player) {
-			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
+			var segments = socket.url.split("/");
+			var lastSegment = segments[segments.length - 2];
+			if (lastSegment != match_id)
+				return ;
+			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket)
+			{
 				const moveData = {
 					type: 'ball_move',
 					x: game.ball.x,
@@ -591,7 +603,6 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 		});
 
 		window.addEventListener('hashchange', function(event) {
-			console.log(window.location.pathname);
 			if (window.location.pathname !== "/tournament") {
 				closeWebSocket(socket);
 			}
@@ -818,7 +829,7 @@ function SetupTournament() {
 	}, 1200);
 
 	function setupRankedAndWaitingSecondGame(match_id, playerMatchId, my_id, id_adverse, socket, final) {
-		setupRanked(match_id, playerMatchId, my_id, id_adverse, socket, final, function() {
+		setupMatch(match_id, playerMatchId, my_id, id_adverse, socket, final, function() {
 			waitingSecondGame();
 		});
 	}
@@ -872,6 +883,8 @@ function SetupTournament() {
 	}
 
 	var interval;
+	var final_start = false;
+	var end_loop = false;
 
 	function waitingSecondGame() {
 		document.querySelector('#bracket').classList.remove("d-none");
@@ -880,15 +893,15 @@ function SetupTournament() {
 		document.querySelector('#start-match').classList.add("d-none");
 
 		setupStart();
-		my_match_id = null;
 		closeWebSocket();
 
-		var end_loop = false;
-		var final_start = false;
+
+
 
 		interval = setInterval(function() {
+			if (end_loop == true)
+				return ;
 			if (TournamentWaitingFinal <= 1 && (PlayerScoreMatch1P1 !== 0 || PlayerScoreMatch1P2 !== 0) && (PlayerScoreMatch2P1 !== 0 || PlayerScoreMatch2P2 !== 0)) {
-				console.log(TournamentWaitingFinal);
 				getScore();
 			}
 			else if (!end_loop)
@@ -904,8 +917,6 @@ function SetupTournament() {
 			}
 
 			if (end_loop) {
-				clearInterval(interval);
-				console.log("interval stop");
 				if (!final_start)
 					WaitingFinalMatch();
 				final_start = true;
@@ -921,21 +932,23 @@ function SetupTournament() {
 		if (my_id === player_final_id01 || player_final_id02 === my_id)
 		{
 			my_match_id = match_final_id;
-			console.log("waitingSecondGame")
 			lunchFinal();
 		}
-		console.log("[", my_id, "]", "[", my_match_id, "/",  match_final_id, "]", "P1", player_final_id01, "P2", player_final_id02);
 	}
 
 	function spectFinal()
 	{
-		// TODO Faire en sorte que les perdants puissent voir les scores après match
+		// TODO Faire en sorte que les perdants puissent voir les scores après la finale (hugo t'es un gros gay)
+		// Fait des requêtes API toutes les 2 secondes pour savoir si le match finale est fini
+		// match_final_id pour t'aider
+		//
 		console.log("spectFinal");
 	}
 
 	function endTournament()
 	{
-		// TODO faire en sorte que lorsque que la finale est finie on voit les résultat et les gagnants
+		// TODO faire en sorte que lorsque que la finale est finie on voit les résultat et le winner (pas toi Hugros)
+		console.log("endTournament")
 	}
 
 	function createFinalMatch(tournamentId) {
@@ -958,8 +971,7 @@ function SetupTournament() {
 
 	var	final_game_start = false;
 
-	function  lunchFinal() {
-
+	function lunchFinal() {
 		setupStart();
 
 		if (!final_game_start)
@@ -968,17 +980,17 @@ function SetupTournament() {
 			{
 				document.querySelector('#bracket').classList.add("d-none");
 				document.querySelector('#start-tournament').classList.add("d-none");
-				document.querySelector('#start-match').classList.remove("d-none");
+				document.querySelector('#start-finale').classList.remove("d-none");
 				// document.querySelector('#canvas4').classList.remove("d-none");
-				setupRanked(match_final_id, 1, my_id, player_final_id02, socket, true);
+				setupMatch(match_final_id, 1, my_id, player_final_id02, socket, true);
 			}
 			else if (player_final_id02 === my_id)
 			{
 				document.querySelector('#bracket').classList.add("d-none");
 				document.querySelector('#start-tournament').classList.add("d-none");
-				document.querySelector('#start-match').classList.remove("d-none");
+				document.querySelector('#start-finale').classList.remove("d-none");
 				// document.querySelector('#canvas4').classList.remove("d-none");
-				setupRanked(match_final_id, 2, my_id, player_final_id01, socket, true);
+				setupMatch(match_final_id, 2, my_id, player_final_id01, socket, true);
 			}
 			else
 				return ;
@@ -986,7 +998,6 @@ function SetupTournament() {
 		}
 		else
 			return ;
-		console.log("final start");
 	}
 
 	function getMatchFinal(id) {
@@ -996,7 +1007,6 @@ function SetupTournament() {
 		.then(reponse => reponse.json())
 		.then(data => {
 			if (data) {
-				console.log(data);
 				if (data.player1)
 					player_final_id01 = data.player1;
 				if (data.player2)
