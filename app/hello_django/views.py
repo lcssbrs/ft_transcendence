@@ -585,7 +585,6 @@ def generer_qr_code(user):
     }
     jwt_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
     user.jwt_token = jwt_token
-    logger.critical(user.jwt_token)
     user.save()
     qr_code = make(jwt_token)
     img = qr_code.convert('RGB')
