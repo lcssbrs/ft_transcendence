@@ -4,6 +4,7 @@ from django.urls import path
 from hello_django.consumers import PongConsumer, ChatConsumer, TournamentConsumer
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
+from . import consumers
 
 websocket_urlpatterns = [
     path('ws/ranked', PongConsumer.as_asgi()),
