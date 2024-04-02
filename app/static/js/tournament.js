@@ -18,6 +18,8 @@ let gameStarted = false;
 
 function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
 
+	if (match_id === null)
+		return ;
 	if (final === true)
 		console.log("--------FINAL-------");
 	var winner
@@ -315,8 +317,8 @@ function setupRanked(match_id, playerMatchId, userPlayerId, adversePlayerId, soc
 	// const waitingMatch = document.getElementById("waiting-match");
 	const adversaireMatch = document.getElementById("adversaire-match");
 
-	function GetPlayerId(my_match_id) {
-		fetch(`/api/match/${my_match_id}/`, {
+	function GetPlayerId(match_id) {
+		fetch(`/api/match/${match_id}/`, {
 			method: 'GET'
 		})
 		.then(response => response.json())
