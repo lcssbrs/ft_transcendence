@@ -122,6 +122,8 @@ function setupRanked() {
 
 		//mouvements de la balle :
 		function play() {
+			if (gameStarted == false)
+				return ;
 			console.log('test');
 			draw();
 			ballMove();
