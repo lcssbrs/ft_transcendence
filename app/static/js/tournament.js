@@ -6,6 +6,27 @@ function closeWebSocket(socket) {
 	}
 }
 
+function showFinalCard() {
+	fetch(`/api/tournaments/${tournament_id}/`, {
+		method: 'GET'
+	})
+	.then(response => response.json())
+	.then(data => {
+		fetch(`/api/users/${data.player_winner}`)
+		.then(response => response.json())
+		.then(data => {
+			document.querySelector('#canvas4').classList.add("d-none");
+			document.querySelector('#winnercard').classList.remove("d-none");
+			document.querySelector('#winner-profile-picture').src = data.profile_picture;
+			document.querySelector('#winner').innerHTML = data.username + ' ! 🏆';
+		})
+		.catch(error => {console.error("Erreur lors de la récupération du nom du joueur :", error);})
+	})
+	.catch(error => {
+		console.error("Erreur lors de la récupération des données du tournoi :", error);
+	});
+}
+
 var tournament_id;
 
 //-----------------------------------------\/
@@ -231,25 +252,35 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 		function endGame() {
 			gameStarted = false;
 
-			if (playerScore > adverseScore)
-				winnerID = userPlayerId;
-			else
-				winnerID = adversePlayerId;
 			if (playerMatchId === 1)
 			{
+				if (playerScore > adverseScore) {
 					if (final)
-						endTournamentApi(winnerID);
-					endGameApi(ID_ranked, playerScore, adverseScore, winnerID);
+						endTournamentApi(userPlayerId);
+					endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
+				}
+				else {
+					if (final)
+						endTournamentApi(adversePlayerId);
+					endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
+				}
 				sendEndGame();
 			}
 			else
 			{
-				if (final)
-					endTournamentApi(winnerID);
-				endGameApi(ID_ranked, playerScore, adverseScore, winnerID);
+				if (playerScore > adverseScore) {
+					if (final)
+						endTournamentApi(userPlayerId);
+					endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
+				}
+				else {
+					if (final)
+						endTournamentApi(adversePlayerId);
+					endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
+				}
 			}
 			displayWinner = true;
-
+			draw();
 
 			setTimeout(function() {
 				displayWinner = false;
@@ -375,20 +406,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 		})
 		.then(response => {})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
-	}
-
-
-
-	function showFinalCard() {
-		fetch(`/api/users/${winnerID}`)
-		.then(response => response.json())
-		.then(data => {
-			document.querySelector('#canvas4').classList.add("d-none");
-			document.querySelector('#winnercard').classList.remove("d-none");
-			document.querySelector('#winner-profile-picture').src = data.profile_picture;
-			document.querySelector('#winner').innerHTML = data.username + '! 🏆';
-		})
-		.catch(error => {console.error("Erreur lors de la récupération du nom du joueur :", error);})
 	}
 
 	function sendEndGame() {
@@ -987,10 +1004,18 @@ function SetupTournament() {
 	{
 		loop_spect = setInterval(function() {
 			if (endSpect)
+			{
 				return ;
-			else {
-				getScore(match_final_id, 0);
-				console.log("spectFinal");
+			}
+			else
+			{
+				getMatchInfo(match_final_id, 0);
+			}
+			if (PlayerScoreFinalP1 > 0 || PlayerScoreFinalP2 > 0)
+			{
+				document.querySelector('#bracket').classList.add("d-none");
+				showFinalCard();
+				spectFinal = true;
 			}
 		}, 1300);
 	}
@@ -1110,11 +1135,10 @@ function SetupTournament() {
 				{
 					if (data.score_player1 > 0 || data.score_player2 > 0)
 					{
-						PlayerScoreFinalP1 = data.score01;
-						PlayerScoreFinalP2 = data.score02;
+						PlayerScoreFinalP1 = data.score_player1;
+						PlayerScoreFinalP2 = data.score_player2;
 						scoreF1.textContent = PlayerScoreFinalP1;
 						scoreF2.textContent = PlayerScoreFinalP2;
-						endSpect = true;
 					}
 				}
 			}

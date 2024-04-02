@@ -264,9 +264,11 @@ function showNotification(message, type) {
     notification.empty().removeClass().addClass('notification').addClass(type);
     var messageParagraph = $('<p></p>').text(message);
     var progressSpan = $('<span class="progress"></span>');
-
     notification.append(messageParagraph);
     notification.append(progressSpan);
+
+    var notificationWidth = notification.width();
+    notification.css('left', 'calc(50% - ' + (notificationWidth / 2) + 'px)');
 
     notification.css({ 'display': 'block' });
     setTimeout(function() {
