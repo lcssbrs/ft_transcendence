@@ -9,7 +9,7 @@ from . import consumers
 websocket_urlpatterns = [
     path('ws/ranked', PongConsumer.as_asgi()),
 	path('ws/chat/', ChatConsumer.as_asgi()),
-    path('ws/tournament', TournamentConsumer.as_asgi()),
+    path('ws/tournament/', TournamentConsumer.as_asgi()),
 	path('ws/match/<match_id>/', PongConsumer.as_asgi()),
 ]
 
