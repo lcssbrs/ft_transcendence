@@ -13,7 +13,6 @@ websocket_urlpatterns = [
 ]
 
 application = ProtocolTypeRouter({
-	"https": get_asgi_application(),
     'websocket': AuthMiddlewareStack(
         URLRouter(
             websocket_urlpatterns
