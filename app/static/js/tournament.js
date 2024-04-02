@@ -295,11 +295,11 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 				document.querySelector('#canvas4').classList.remove("d-none");
 			game = {
 				player: {
-					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
+					y: canvas.height / 2 - 100 / 2,
 					score: 0
 				},
 				challenger: {
-					y: canvas.height / 2 - PLAYER_HEIGHT / 2,
+					y: canvas.height / 2 - 100 / 2,
 					score: 0
 				},
 				ball: {
@@ -611,7 +611,7 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			}
 		}
 
-		document.addEventListener('keydown', function(event) {
+		function PadMoove(event) {
 			if (gameStarted) {
 				if (playerId === 1)
 					var posY = game.player.y
@@ -627,7 +627,13 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 					sendGameMove(playerId, posY);
 				}
 			}
-		});
+		}
+
+		document.addEventListener('keydown', PadMoove);
+
+		function removeKeyListeners() {
+			document.removeEventListener('keydown', PadMoove);
+		}
 
 		socket.onclose = function() {
 			if (gameStarted == true && disconnect_ennemy == true)
@@ -643,6 +649,7 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			}
 			gameStarted = false;
 			match_id = null;
+			removeKeyListeners();
 			console.log("WebSocket déconnecté");
 			if (callback && typeof callback === 'function') {
 				callback();
@@ -678,8 +685,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 
 function SetupTournament() {
 
-	// TODO MODIFIER LA BASE DE DONNEES POUR EVITER LES ERREURS DE TOURNOI
-	// TODO si le joueur 1 detecte que la partie est fini alors il envoie 'end_game_status'
 	// TODO endTournament
 	// TODO spectFinale
 
@@ -957,9 +962,6 @@ function SetupTournament() {
 
 		setupStart();
 		closeWebSocket();
-
-
-
 
 		interval = setInterval(function() {
 			if (end_loop == true)
