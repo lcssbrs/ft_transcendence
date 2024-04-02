@@ -107,7 +107,7 @@ class Match(models.Model):
                 self.save()
 
 class Tournament(models.Model):
-    date_tournament = models.DateTimeField(null=True, blank=True)
+    date_tournament = models.DateTimeField(auto_now_add=True)
     player01 = models.ForeignKey('user_list', related_name='player01_tournaments', on_delete=models.CASCADE)
     player02 = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE, null=True)
     player03 = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE, null=True)
