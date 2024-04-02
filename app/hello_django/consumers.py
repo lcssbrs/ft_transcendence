@@ -1,13 +1,9 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
-<<<<<<< HEAD
-from .models import user_list  # Correction de l'import du modèle
-=======
 from json.decoder import JSONDecodeError
 from .views import user_list
 from .models import user_list
->>>>>>> tom
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
