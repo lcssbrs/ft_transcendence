@@ -373,7 +373,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			score_player1: score_01,
 			score_player2: score_02,
 			player_winner: winner,
-			status: "end_game"
+			status: "end_game",
+			locked: true
 		};
 
 		fetch(`/api/match/${my_match_id}/`, {
@@ -472,6 +473,17 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			ID_ranked = match_id;
 			console.log("Websocket ouvert");
 		};
+
+		function adverseOnline() {
+			if (!gameStarted) {
+				disconnect_ennemy = true;
+				gameStarted = true;
+				console.log("adverseOnline");
+				closeWebSocket(socket);
+			}
+		}
+
+		setTimeout(adverseOnline, 5000);
 
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
