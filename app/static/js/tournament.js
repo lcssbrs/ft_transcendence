@@ -468,7 +468,7 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	function initializeWebSocket(playerId) {
 		gameOwnerId = playerId;
 		socket = null;
-		socket = new WebSocket(`ws://localhost:8000/ws/tournament/${match_id}/`);
+		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/tournament/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;
