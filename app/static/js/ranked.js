@@ -390,7 +390,7 @@ function setupRanked() {
 
     function initializeWebSocket(match_id, playerId) {
 		gameOwnerId = playerId;
-		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/match/${match_id}/`);
+		socket = new WebSocket(`wss://root.alan-andrieux.fr/ws/tournament/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;
@@ -420,6 +420,7 @@ function setupRanked() {
 			}
 			if (eventData.type === 'ball_move')
 			{
+				console.log(eventData.data)
 				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status, eventData.data.vx, eventData.data.vy);
 			}
 		};
