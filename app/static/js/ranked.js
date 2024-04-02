@@ -446,10 +446,6 @@ function setupRanked() {
 		}
 
 		function sendGameMove(player, direction) {
-			var segments = socket.url.split("/");
-			var lastSegment = segments[segments.length - 2];
-			if (lastSegment != match_id)
-				return ;
 			if (gameStarted && socket)
 			{
 				const moveData = {
@@ -462,12 +458,6 @@ function setupRanked() {
 		}
 
 		function sendGameBall(player) {
-			if (socket.url == null)
-				return ;
-			var segments = socket.url.split("/");
-			var lastSegment = segments[segments.length - 2];
-			if (lastSegment != match_id)
-				return ;
 			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket)
 			{
 				const moveData = {
