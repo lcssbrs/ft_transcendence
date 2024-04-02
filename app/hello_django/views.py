@@ -116,29 +116,30 @@ def profile_view(request):
     elif profile_user.games_rank <= 90:
         ranksrc = '/static/images/master.png'
         rank = 'Master'
-    elif profile_user.games_rank <= 120:
+    else:
         ranksrc = '/static/images/challenger.png'
         rank = 'Challenger'
-    user = request.user
 
+    tournaments_ended = Tournament.objects.filter(status='end_game')
     matches_ended = Match.objects.filter(status='end_game')
+    logger.critical(tournaments_ended[0].match1_id)
+    logger.critical(matches_ended)
     matches_participated = matches_ended.filter(Q(player1=profile_user.id) | Q(player2=profile_user.id))
     matches_participated = matches_participated[::-1][:5]
     rankedHistory = []
     for i in matches_participated:
         rankedHistory.append(MatchHistory(i, profile_user))
 
-    # tournaments_ended = Match.objects.filter(status='end_game')
     # tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
     # tournaments_participated = tournaments_participated[::-1][:5]
     # tournamentHistory = []
     # for i in tournaments_participated:
-    #     tournamentHistory.append(tournamentHistory(i, profile_user))
+    #     tournamentHistory.append(TournamentHistory(i, profile_user))
 
     context = {
         'profile_user': profile_user,
         'user_rank': user_rank,
-        'user': user,
+        'user': request.user,
         'rank': rank,
         'ranksrc': ranksrc,
         'rankedHistory': rankedHistory
