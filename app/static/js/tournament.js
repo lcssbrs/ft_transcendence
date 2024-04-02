@@ -986,7 +986,7 @@ function SetupTournament() {
 					WaitingFinalMatch();
 				final_start = true;
 			}
-		}, 2500);
+		}, 800);
 	}
 
 
@@ -999,15 +999,22 @@ function SetupTournament() {
 			my_match_id = match_final_id;
 			lunchFinal();
 		}
+		else
+			spectFinal();
 	}
+
+	var	endSpect = false;
 
 	function spectFinal()
 	{
-		// TODO Faire en sorte que les perdants puissent voir les scores après la finale (hugo t'es un gros gay)
-		// Fait des requêtes API toutes les 2 secondes pour savoir si le match finale est fini
-		// match_final_id pour t'aider
-		//
-		console.log("spectFinal");
+		loop_spect = setInterval(function() {
+			if (endSpect)
+				return ;
+			else {
+				getScore(match_final_id, 0);
+				console.log("spectFinal");
+			}
+		}, 1300);
 	}
 
 	function endTournament()
@@ -1119,6 +1126,17 @@ function SetupTournament() {
 							final2.textContent = PlayerNames[2];
 						else
 							final2.textContent = PlayerNames[3];
+					}
+				}
+				if (id == match_final_id)
+				{
+					if (data.score_player1 > 0 || data.score_player2 > 0)
+					{
+						PlayerScoreFinalP1 = data.score01;
+						PlayerScoreFinalP2 = data.score02;
+						scoreF1.textContent = PlayerScoreFinalP1;
+						scoreF2.textContent = PlayerScoreFinalP2;
+						endSpect = true;
 					}
 				}
 			}
