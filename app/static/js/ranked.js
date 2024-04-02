@@ -414,6 +414,7 @@ function setupRanked() {
 			}
 			if (eventData.type === 'disconnect_message')
 			{
+				console.log("test");
 				disconnect_ennemy = true;
 				closeWebSocket(socket);
 			}
