@@ -65,38 +65,41 @@ class MatchHistory:
 
 class TournamentHistory:
     def __init__(self, tournament, profile_user):
-        if (tournament.final_id.player1.username == profile_user.username or tournament.final_id.player2.username == profile_user.username):
+        final = Match.objects.get(id=tournament.final_id)
+        if (final.player1.username == profile_user.username or final.player2.username == profile_user.username):
             if (tournament.player_winner.username == profile_user.username):
                 self.rank = 1
             else :
                 self.rank = 2
-            if (tournament.final_id.player1.username == profile_user.username):
-                self.lastChall = tournament.final_id.player2.username
-                self.lastUserScore = tournament.final_id.score_player1
-                self.lastChallScore = tournament.final_id.score_player2
+            if (final.player1.username == profile_user.username):
+                self.lastChall = final.player2.username
+                self.lastUserScore = final.score_player1
+                self.lastChallScore = final.score_player2
             else:
-                self.lastChall = tournament.final_id.player2.username
-                self.lastUserScore = tournament.final_id.score_player2
-                self.lastChallScore = tournament.final_id.score_player1
+                self.lastChall = final.player2.username
+                self.lastUserScore = final.score_player2
+                self.lastChallScore = final.score_player1
         else:
-            if (tournament.match1_id.player1.username == profile_user.username):
-                self.lastChall = tournament.match1_id.player2.username
-                self.lastUserScore = tournament.match1_id.score_player1
-                self.lastChallScore = tournament.match1_id.score_player2
-            elif (tournament.match1_id.player2.username == profile_user.username):
-                self.lastChall = tournament.match1_id.player2.username
-                self.lastUserScore = tournament.match1_id.score_player2
-                self.lastChallScore = tournament.match1_id.score_player1
-            elif (tournament.match2_id.player1.username == profile_user.username):
-                self.lastChall = tournament.match2_id.player2.username
-                self.lastUserScore = tournament.match2_id.score_player1
-                self.lastChallScore = tournament.match2_id.score_player2
-            elif (tournament.match2_id.player2.username == profile_user.username):
-                self.lastChall = tournament.match2_id.player2.username
-                self.lastUserScore = tournament.match2_id.score_player2
-                self.lastChallScore = tournament.match2_id.score_player1
+            match1 = Match.objects.get(id=tournament.match1_id)
+            match2 = Match.objects.get(id=tournament.match2_id)
+            if (match1.player1.username == profile_user.username):
+                self.lastChall = match1.player2.username
+                self.lastUserScore = match1.score_player1
+                self.lastChallScore = match1.score_player2
+            elif (match1.player2.username == profile_user.username):
+                self.lastChall = match1.player2.username
+                self.lastUserScore = match1.score_player2
+                self.lastChallScore = match1.score_player1
+            elif (match2.player1.username == profile_user.username):
+                self.lastChall = match2.player2.username
+                self.lastUserScore = match2.score_player1
+                self.lastChallScore = match2.score_player2
+            elif (match2.player2.username == profile_user.username):
+                self.lastChall = match2.player2.username
+                self.lastUserScore = match2.score_player2
+                self.lastChallScore = match2.score_player1
             self.rank = 4
-        self.date = tournament.date
+        self.date = tournament.date_tournament
 
 def profile_view(request):
     id_value = request.GET.get('id', None)
@@ -116,32 +119,37 @@ def profile_view(request):
     elif profile_user.games_rank <= 90:
         ranksrc = '/static/images/master.png'
         rank = 'Master'
-    elif profile_user.games_rank <= 120:
+    else:
         ranksrc = '/static/images/challenger.png'
         rank = 'Challenger'
-    user = request.user
 
+    tournaments_ended = Tournament.objects.filter(status='end_game')
     matches_ended = Match.objects.filter(status='end_game')
-    matches_participated = matches_ended.filter(Q(player1=profile_user.id) | Q(player2=profile_user.id))
+    unique_matches = []
+    for match in matches_ended:
+        match_id = match.id
+        if not any(match_id in (t.match1_id, t.match2_id, t.final_id) for t in tournaments_ended):
+            unique_matches.append(match)
+    matches_participated = [match for match in unique_matches if match.player1 == profile_user.id or match.player2 == profile_user.id]
     matches_participated = matches_participated[::-1][:5]
     rankedHistory = []
     for i in matches_participated:
         rankedHistory.append(MatchHistory(i, profile_user))
 
-    # tournaments_ended = Match.objects.filter(status='end_game')
-    # tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
-    # tournaments_participated = tournaments_participated[::-1][:5]
-    # tournamentHistory = []
-    # for i in tournaments_participated:
-    #     tournamentHistory.append(tournamentHistory(i, profile_user))
+    tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
+    tournaments_participated = tournaments_participated[::-1][:5]
+    tournamentHistory = []
+    for i in tournaments_participated:
+        tournamentHistory.append(TournamentHistory(i, profile_user))
 
     context = {
         'profile_user': profile_user,
         'user_rank': user_rank,
-        'user': user,
+        'user': request.user,
         'rank': rank,
         'ranksrc': ranksrc,
-        'rankedHistory': rankedHistory
+        'rankedHistory': rankedHistory,
+        'tournamentHistory': tournamentHistory
     }
     return render(request, 'profile.html', context)
 
