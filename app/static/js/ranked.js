@@ -390,7 +390,7 @@ function setupRanked() {
 
     function initializeWebSocket(match_id, playerId) {
 		gameOwnerId = playerId;
-		socket = new WebSocket(`ws://localhost:8000/ws/match/${match_id}/`);
+		socket = new WebSocket(`ws://localhost:8000/ws/tournament/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;
@@ -401,7 +401,6 @@ function setupRanked() {
 			const eventData = JSON.parse(event.data);
 			if (eventData.type === 'game_start')
 			{
-				searchingMatch.style.display = "none";
 				gameStarted = true;
 				displayGame();
 				GetPlayerId(match_id);
@@ -415,12 +414,19 @@ function setupRanked() {
 			}
 			if (eventData.type === 'disconnect_message')
 			{
+				console.log("test");
 				disconnect_ennemy = true;
-				closeWebSocket();
+				closeWebSocket(socket);
 			}
 			if (eventData.type === 'ball_move')
 			{
 				updateBall(playerId, eventData.data.x, eventData.data.y, eventData.data.score01, eventData.data.score02, eventData.data.status, eventData.data.vx, eventData.data.vy);
+			}
+			if (eventData.type === 'end_game')
+			{
+				disconnect_ennemy = false;
+				gameStarted = false;
+				closeWebSocket(socket);
 			}
 		};
 
@@ -433,15 +439,16 @@ function setupRanked() {
 				game.player.score = score01,
 				game.challenger.score = score02
 				gameStarted = status
-				game.ball.speed.x = vx;
-				game.ball.speed.y = vy;
+				game.ball.speed.x = vx,
+				game.ball.speed.y = vy
 				if (score01 == 3 || score02 == 3)
 					gameStarted = false;
 			}
 		}
 
 		function sendGameMove(player, direction) {
-			if (gameStarted) {
+			if (gameStarted && socket)
+			{
 				const moveData = {
 					type: 'game_move',
 					player: player,
@@ -452,16 +459,17 @@ function setupRanked() {
 		}
 
 		function sendGameBall(player) {
-			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket) {
+			if (gameStarted == true && player == 1 && disconnect_ennemy == false && socket)
+			{
 				const moveData = {
 					type: 'ball_move',
 					x: game.ball.x,
 					y: game.ball.y,
-					vx: game.ball.speed.x,
-					vy: game.ball.speed.y,
 					score01: game.player.score,
 					score02: game.challenger.score,
 					status: gameStarted,
+					vx: game.ball.speed.x,
+					vy: game.ball.speed.y,
 				};
 				socket.send(JSON.stringify(moveData));
 			}
