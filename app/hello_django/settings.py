@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = ['root.alan-andrieux.fr', '::1', '167.99.204.136', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['root.alan-andrieux.fr', '::1', '138.68.147.124', 'localhost', '127.0.0.1']
 
 
 # Application definition
