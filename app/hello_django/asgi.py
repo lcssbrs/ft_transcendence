@@ -19,7 +19,7 @@ from django.urls import re_path
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hello_django.settings')
 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "https": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter([
             path("ws/ranked", consumers.PongConsumer.as_asgi()),
