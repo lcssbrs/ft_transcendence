@@ -22,7 +22,7 @@ websocket_urlpatterns = [
     path('ws/ranked', PongConsumer.as_asgi()),
 	path('ws/chat/', ChatConsumer.as_asgi()),
     path('ws/tournament', TournamentConsumer.as_asgi()),
-	path('ws/tournament/<match_id>/', consumers.TournamentConsumer.as_asgi()),
+	re_path(r'ws/tournament/(?P<match_id>\d+)/$', consumers.TournamentConsumer.as_asgi()),
 	path('ws/match/<match_id>/', PongConsumer.as_asgi()),
 ]
 
