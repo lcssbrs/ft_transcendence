@@ -4,6 +4,9 @@ $(document).ready(function() {
     function loadFriends() {
         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
             return ;
+        url = window.location.pathname();
+        if (url == '/ranked/' || url == '/tournament/')
+            return ;
         $.ajax({
             url: '/api/get_friends/',
             type: 'GET',
@@ -117,6 +120,9 @@ $(document).ready(function() {
 
     function loadFriendRequests() {
         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+            return ;
+        url = window.location.pathname();
+        if (url == '/ranked/' || url == '/tournament/')
             return ;
         $.ajax({
             url: '/api/get_friend_requests/',
