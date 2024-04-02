@@ -428,11 +428,15 @@ function setupRanked() {
 			if (gameStarted && player == 2) {
 				game.ball.x = x;
 				game.ball.y = y;
+				if (score01 != game.player.score || score02 != game.challenger.score)
+					game.challenger.y = canvas.height / 2 - 100 / 2,
 				game.player.score = score01,
 				game.challenger.score = score02
 				gameStarted = status
 				game.ball.speed.x = vx;
 				game.ball.speed.y = vy;
+				if (score01 == 3 || score02 == 3)
+					gameStarted = false;
 			}
 		}
 
