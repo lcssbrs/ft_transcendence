@@ -20,10 +20,10 @@ function setupRegister() {
 				})
 				checkLogged();
 				online();
-				loadView('/qrcode/', true, false);
+				loadView('/qrcode/', true);
 			}
 			else {
-				loadView('/register/', true, false);
+				loadView('/register/', true);
 			}
 		})
 		.catch(error => {

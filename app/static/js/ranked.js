@@ -1,3 +1,4 @@
+
 function setupRanked() {
 
 	var game;

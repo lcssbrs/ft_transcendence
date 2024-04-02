@@ -6,6 +6,13 @@
 		<p id="adversaire-match" style="display: none; color:white;">Adversaire déconnecté</p>
 	</div>
 	<canvas id="canvas4" class="d-none my-2" width="640" height="480"></canvas>
+	<div class="winnercard d-none flex justify-content-center text-center" style="width: 500px; height: 200px;">
+		<div class="d-flex flex-column mr-5 my-auto">
+			<span class="announce">Le gagnant est...</span>
+			<span class="winner"></span>
+		</div>
+		<img id="winner-profile-picture" class="card-img my-auto" src="/media/photos/default-profile.jpg">
+	</div>
 	<div id="bracket" class="flex my-5 text-white">
 		<div class="container ml-4">
 			<div class="row">
@@ -70,11 +77,11 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div class="d-flex justify-content-center">
 		<button id="start-tournament" class="btn btn-primary">Trouver un tournoi</button>
-		<button id="start-match" class=" d-none btn btn-primary">Commencer la partie</button>
+		<button id="start-match" class=" d-none btn btn-primary">Prêt ?</button>
+		<button id="start-finale" class=" d-none btn btn-primary">Prêt pour le grand final ?</button>
 		<p id="searching-match" style="display: none; color:white;">Recherche de tournoi en cours...</p>
 	</div>
 </div>
