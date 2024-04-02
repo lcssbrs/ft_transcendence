@@ -523,6 +523,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 				gameStarted = status
 				game.ball.speed.x = vx,
 				game.ball.speed.y = vy
+				if (score01 == 3 || score02 == 3)
+					gameStarted = false;
 			}
 		}
 
