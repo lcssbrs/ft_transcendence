@@ -6,6 +6,8 @@ function closeWebSocket(socket) {
 	}
 }
 
+var tournament_id;
+
 //-----------------------------------------\/
 //------------------PONG-------------------\/
 //-----------------------------------------\/
@@ -17,7 +19,6 @@ canvas = document.getElementById('canvas4');
 let gameStarted = false;
 
 function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
-
 	var winner
 	let gameOwnerId;
 	var ID_ranked;
@@ -136,6 +137,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 
 		//mouvements de la balle :
 		function play() {
+			if (gameStarted == false)
+				return ;
 			draw();
 			ballMove();
 			requestAnimationFrame(play);
@@ -226,21 +229,32 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 		// Fonction pour terminer la partie
 		function endGame() {
 			gameStarted = false;
-			winner = game.player.score === 3 ? "Joueur 1" : "Joueur 2";
 			if (playerMatchId === 1)
 			{
-				if (playerScore > adverseScore)
+				if (playerScore > adverseScore) {
+					if (final)
+						endTournamentApi(userPlayerId);
 					endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
-				else
+				}
+				else {
+					if (final)
+						endTournamentApi(adversePlayerId);
 					endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
+				}
 				sendEndGame();
 			}
 			else
 			{
-				if (playerScore > adverseScore)
+				if (playerScore > adverseScore) {
+					if (final)
+						endTournamentApi(userPlayerId);
 					endGameApi(ID_ranked, playerScore, adverseScore, adversePlayerId);
-				else
+				}
+				else {
+					if (final)
+						endTournamentApi(adversePlayerId);
 					endGameApi(ID_ranked, playerScore, adverseScore, userPlayerId);
+				}
 			}
 			displayWinner = true;
 
@@ -248,7 +262,11 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			setTimeout(function() {
 				displayWinner = false;
 				closeWebSocket(socket);
-				if (callback && typeof callback === 'function') {
+				console.log('wsh');
+				if (final) {
+					showFinalCard();
+				}
+				else if (callback && typeof callback === 'function') {
 					callback();
 				}
 			}, 3000);
@@ -273,7 +291,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 		setupStart();
 
 		function setupStart() {
-			// canvas = document.getElementById('canvas4');
 			if (final)
 				document.querySelector('#canvas4').classList.remove("d-none");
 			game = {
@@ -298,7 +315,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			draw();
 		}
 
-		// Event sur le clavier
 		document.addEventListener('keydown', playerMove);
 		document.addEventListener('keydown', challengerMove);
 	}
@@ -349,6 +365,52 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 		})
 		.then(response => {})
 		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function endTournamentApi(winner) {
+		console.log(tournament_id);
+		console.log(winner);
+		const requestBody = {
+			player_winner: winner,
+			status: "end_game"
+		};
+
+		fetch(`/api/tournaments/${tournament_id}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody)
+		})
+		.then(response => {})
+		.catch(error => console.error('Erreur lors de la connexion à la base de données :', error));
+	}
+
+	function showFinalCard() {
+		console.log('show final card');
+		let winner = null;
+		fetch(`/api/tournaments/${tournament_id}/`, {
+			method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			console.log(data.player_winner);
+			winner = data.player_winner;
+			console.log(winner);
+		})
+		.catch(error => {
+			console.error("Erreur lors de la récupération des données du tournoi :", error);
+		});
+		if (winner == null)
+			setTimeout(showFinalCard, 3000);
+		else {
+			console.log('hi !!!');
+			document.querySelector('#canvas4').classList.add("d-none");
+			document.querySelector('#winner').innerHTML = winner.username + '! 🏆';
+			document.querySelector('#winner-profile-picture').src = winner.profile_picture.url;
+			document.querySelector('#winnercard').classList.remove("d-none");
+		}
 	}
 
 	function sendEndGame() {
@@ -642,7 +704,6 @@ function SetupTournament() {
 	var playerMatchId;
 
 	var my_match_id;
-	var tournament_id;
 
 	var match_final_id;
 	var player_final_id01;
@@ -947,7 +1008,7 @@ function SetupTournament() {
 
 	function endTournament()
 	{
-		// TODO faire en sorte que lorsque que la finale est finie on voit les résultat et le winner (pas toi Hugros)
+
 		console.log("endTournament")
 	}
 
@@ -981,16 +1042,14 @@ function SetupTournament() {
 				document.querySelector('#bracket').classList.add("d-none");
 				document.querySelector('#start-tournament').classList.add("d-none");
 				document.querySelector('#start-finale').classList.remove("d-none");
-				// document.querySelector('#canvas4').classList.remove("d-none");
-				setupMatch(match_final_id, 1, my_id, player_final_id02, socket, true);
+				setupMatch(match_final_id, 1, my_id, player_final_id02, socket, true, null);
 			}
 			else if (player_final_id02 === my_id)
 			{
 				document.querySelector('#bracket').classList.add("d-none");
 				document.querySelector('#start-tournament').classList.add("d-none");
 				document.querySelector('#start-finale').classList.remove("d-none");
-				// document.querySelector('#canvas4').classList.remove("d-none");
-				setupMatch(match_final_id, 2, my_id, player_final_id01, socket, true);
+				setupMatch(match_final_id, 2, my_id, player_final_id01, socket, true, null);
 			}
 			else
 				return ;
