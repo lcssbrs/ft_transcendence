@@ -122,6 +122,7 @@ function setupRanked() {
 
 		//mouvements de la balle :
 		function play() {
+			console.log('test');
 			draw();
 			ballMove();
 			requestAnimationFrame(play);
