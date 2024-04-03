@@ -112,7 +112,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriends();
-    }, 1500);
+    }, 3000);
 });
 
 $(document).ready(function() {
@@ -226,7 +226,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         loadFriendRequests();
-    }, 1500);
+    }, 3000);
 });
 
 $(document).ready(function() {
