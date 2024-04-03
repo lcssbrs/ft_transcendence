@@ -51,7 +51,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	let disconnect_ennemy = false
 	function launchGame() {
 
-		var gameStarted = false;
 		const PLAYER_HEIGHT = 100;
 		const PLAYER_WIDTH = 5;
 		const PLAYER_SPEED = 10;
