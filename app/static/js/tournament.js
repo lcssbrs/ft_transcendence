@@ -389,8 +389,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	}
 
 	function endTournamentApi(winner) {
-		console.log(tournament_id);
-		console.log(winner);
 		const requestBody = {
 			player_winner: winner,
 			status: "end_game"
@@ -474,8 +472,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			console.log("Websocket ouvert");
 		};
 
-		function adverseOnline() { // ICI
-		if (!gameStarted) {
+		function adverseOnline() {
+			if (!gameStarted) {
 				closeWebSocket(socket);
 			}
 		}
@@ -1025,12 +1023,6 @@ function SetupTournament() {
 				spectFinal = true;
 			}
 		}, 1300);
-	}
-
-	function endTournament()
-	{
-
-		console.log("endTournament")
 	}
 
 	function createFinalMatch(tournamentId) {

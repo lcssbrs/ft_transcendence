@@ -5,7 +5,6 @@ function setupProfile() {
 		url: '/api/users/' + id + '/',
 		type: 'GET',
 		success: function(response) {
-			console.log(response);
 			document.querySelector('#user-picture').src = response.profile_picture;
 			if (response.games_rank <= 30)
 			{

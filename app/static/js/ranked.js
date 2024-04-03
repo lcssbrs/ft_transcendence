@@ -414,7 +414,6 @@ function setupRanked() {
 			}
 			if (eventData.type === 'disconnect_message')
 			{
-				console.log("test");
 				disconnect_ennemy = true;
 				closeWebSocket(socket);
 			}
@@ -587,7 +586,6 @@ function setupRanked() {
 		});
 
 		window.addEventListener('hashchange', function(event) {
-			console.log(window.location.pathname);
 			if (window.location.pathname !== "/ranked") {
 				closeWebSocket();
 			}
