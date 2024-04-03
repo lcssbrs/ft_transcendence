@@ -130,8 +130,11 @@ def profile_view(request):
         match_id = match.id
         if not any(match_id in (t.match1_id, t.match2_id, t.final_id) for t in tournaments_ended):
             unique_matches.append(match)
-    matches_participated = [match for match in unique_matches if match.player1 == profile_user.id or match.player2 == profile_user.id]
+    logger.critical(unique_matches)
+    matches_participated = [match for match in unique_matches if match.player1.id == profile_user.id or match.player2.id == profile_user.id]
+    logger.critical(matches_participated)
     matches_participated = matches_participated[::-1][:5]
+    logger.critical(matches_participated)
     rankedHistory = []
     for i in matches_participated:
         rankedHistory.append(MatchHistory(i, profile_user))
