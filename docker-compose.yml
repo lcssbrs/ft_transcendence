@@ -7,7 +7,7 @@ services:
     volumes:
       - ./app/:/usr/src/app/
     ports:
-      - "8000:8000"
+      - "8123:8000"
     env_file:
       - .env.dev
     depends_on:
@@ -20,8 +20,8 @@ services:
       - ./app/static/:/usr/share/nginx/html/static/
       - ./app/media/:/usr/share/nginx/html/media/
     ports:
-      - "80:80"
-      - "443:443"
+      - "85:80"
+      - "445:443"
     depends_on:
       - django
 
@@ -39,11 +39,11 @@ services:
     ports:
       - "5432:5432"
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
 
 volumes:
   postgres_data:

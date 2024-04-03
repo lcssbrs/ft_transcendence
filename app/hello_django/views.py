@@ -342,7 +342,7 @@ def exchange_code_for_access_token(request, code):
         'client_id': settings.SOCIAL_AUTH_42_KEY,
         'client_secret': settings.SOCIAL_AUTH_42_SECRET,
         'code': code,
-        'redirect_uri': 'https://root.alan-andrieux.fr/redirection_apres_authentification',
+        'redirect_uri': 'https://trans.lmas.dev/redirection_apres_authentification',
     }
     response = requests.post(token_url, data=data)
 

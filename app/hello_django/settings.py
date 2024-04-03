@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = ['root.alan-andrieux.fr', '::1', '138.68.147.124', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['trans.lmas.dev', '::1', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -62,7 +62,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('root.alan-andrieux.fr', 6379)],
+            'hosts': [('trans.lmas.dev', 6379)],
         },
     },
 }
@@ -179,7 +179,7 @@ SOCIAL_AUTH_42_KEY = getenv('SOCIAL_AUTH_42_KEY')
 SOCIAL_AUTH_42_SECRET = getenv('SOCIAL_AUTH_42_SECRET')
 LOGIN_REDIRECT_URL = getenv('LOGIN_REDIRECT_URL')
 SECRET_KEY = getenv('SECRET_KEY')
-CSRF_TRUSTED_ORIGINS = ["https://root.alan-andrieux.fr"]
+CSRF_TRUSTED_ORIGINS = ["https://trans.lmas.dev"]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),
 ]
