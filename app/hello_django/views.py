@@ -37,6 +37,7 @@ from django.contrib.auth.decorators import login_required
 from qrcode.image.pil import PilImage
 from .backends import CustomAuthenticationBackend
 from django.db.models import Q
+from datetime import datetime
 
 def afficher_qr_code(request):
     if (request.user.is_authenticated == False):
@@ -63,6 +64,10 @@ class MatchHistory:
             self.userScore = ranked.score_player2
             self.challScore = ranked.score_player1
 
+def convert_date(date_obj):
+    formatted_date = date_obj.strftime("%d/%m/%Y")
+    return formatted_date
+
 class TournamentHistory:
     def __init__(self, tournament, profile_user):
         final = Match.objects.get(id=tournament.final_id)
@@ -76,7 +81,7 @@ class TournamentHistory:
                 self.lastUserScore = final.score_player1
                 self.lastChallScore = final.score_player2
             else:
-                self.lastChall = final.player2.username
+                self.lastChall = final.player1.username
                 self.lastUserScore = final.score_player2
                 self.lastChallScore = final.score_player1
         else:
@@ -87,7 +92,7 @@ class TournamentHistory:
                 self.lastUserScore = match1.score_player1
                 self.lastChallScore = match1.score_player2
             elif (match1.player2.username == profile_user.username):
-                self.lastChall = match1.player2.username
+                self.lastChall = match1.player1.username
                 self.lastUserScore = match1.score_player2
                 self.lastChallScore = match1.score_player1
             elif (match2.player1.username == profile_user.username):
@@ -95,11 +100,11 @@ class TournamentHistory:
                 self.lastUserScore = match2.score_player1
                 self.lastChallScore = match2.score_player2
             elif (match2.player2.username == profile_user.username):
-                self.lastChall = match2.player2.username
+                self.lastChall = match2.player1.username
                 self.lastUserScore = match2.score_player2
                 self.lastChallScore = match2.score_player1
             self.rank = 4
-        self.date = tournament.date_tournament
+        self.date = convert_date(tournament.date_tournament)
 
 def profile_view(request):
     id_value = request.GET.get('id', None)

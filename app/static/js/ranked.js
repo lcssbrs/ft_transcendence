@@ -122,6 +122,8 @@ function setupRanked() {
 
 		//mouvements de la balle :
 		function play() {
+			if (gameStarted == false)
+				return ;
 			draw();
 			ballMove();
 			requestAnimationFrame(play);
@@ -229,7 +231,7 @@ function setupRanked() {
 			})
 			.catch(error => console.error('Erreur avec la connexion en base de données', error));
 			displayWinner = true;
-			endGame = true;
+			draw();
 
 			setTimeout(function() {
 				displayWinner = false;
