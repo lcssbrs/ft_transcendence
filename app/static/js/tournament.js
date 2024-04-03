@@ -37,8 +37,6 @@ var game;
 var canvas;
 canvas = document.getElementById('canvas4');
 
-let gameStarted = false;
-
 function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
 	var winner;
 	let winnerID = null;
@@ -48,7 +46,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	var adverseName;
 	var playerScore = 0;
 	var adverseScore = 0;
-	let disconnect_ennemy = false
+	let disconnect_ennemy = false;
+	let gameStarted = false;
 	function launchGame() {
 
 		const PLAYER_HEIGHT = 100;
