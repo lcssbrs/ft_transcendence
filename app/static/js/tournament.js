@@ -467,7 +467,7 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	function initializeWebSocket(playerId) {
 		gameOwnerId = playerId;
 		socket = null;
-		socket = new WebSocket(`wss://trans.lmas.dev/ws/tournament/${match_id}/`);
+		socket = new WebSocket(`wss://localhost/ws/tournament/${match_id}/`);
 
 		socket.onopen = function() {
 			ID_ranked = match_id;

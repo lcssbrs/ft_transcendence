@@ -95,16 +95,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	attachEventListeners();
 	let url = location.pathname;
 	if (url == '/profile/') {
-		if (history.state && history.state.id) {
-			url += history.state.id;
-		}
-	}
-	if (url.startsWith('/profile/')) {
+		url += "?id=" + document.getElementById("id-user").getAttribute("data-id");
 		let queryParams = url.substring(url.indexOf('?'));
 		history.pushState({id: queryParams}, null, url);
 	}
-	else
+	else {
 		history.pushState(null, null, url);
+	}
 	if (url == '/local/')
 		setupLocal();
 	else if (url == '/solo/')
