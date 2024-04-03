@@ -172,7 +172,7 @@ CSRF_COOKIE_NAME = 'csrftoken'
 
 SOCIAL_AUTH_42_KEY = 'u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3'
 SOCIAL_AUTH_42_SECRET = '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'
-LOGIN_REDIRECT_URL = 'http://localhost:80/'
+LOGIN_REDIRECT_URL = 'https://localhost/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),
