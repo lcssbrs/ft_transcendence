@@ -6,7 +6,7 @@ const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 5;
 const PLAYER_SPEED = 10;
 const BALL_SPEED = 1.2;
-const MAX_SPEED = 14;
+const MAX_SPEED = 18;
 let displayWinner = false;
 let borderFlashTime = 0;
 let borderFlashInterval = null;
@@ -142,10 +142,14 @@ function playerMove(event) {
 // IA ordi:
 function computerMove(signal) {
 	let TBS;
-	if (BALL_SPEED <= 5)
-		TBS = 5;
+	if (BALL_SPEED <= 3)
+		TBS = 4;
+	else if (BALL_SPEED > 3 && BALL_SPEED <= 5)
+		TBS = 5
+	// else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
+	// 	TBS = 6;
 	else
-	TBS = 6;
+		TBS = 7;
 	if (gameStarted == true)
 		{
 			if (signal === 'up')
@@ -200,9 +204,11 @@ function collide(player) {
 		game.ball.speed.x = 2;
 		if (player === game.player) {
 			game.computer.score++;
+			game.ball.speed.x = BALL_SPEED;
 			flashBorder(1000);
 		} else {
 			game.player.score++;
+			game.ball.speed.x = BALL_SPEED;
 			flashBorder(1000);
 		}
 		updateScoreDisplay();
@@ -245,7 +251,9 @@ function endGame() {
 	displayWinner = true;
 	setTimeout(function() {
 		displayWinner = false;
-		location.reload();
+		let url = location.pathname;
+		if (url == '/solo/')
+			loadView('/solo/', false);
 	}, 3000);
 
 	removeKeyListeners();

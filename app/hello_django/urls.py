@@ -38,6 +38,8 @@ urlpatterns = [
     path('ranked/', ranked_view, name='ranked'),
     path('tournament/', tournament_view, name='tournament'),
     path('profile/', profile_view, name='profile'),
+    path('qrcode/', views.afficher_qr_code, name='qrcode'),
+	path('edit/', views.edit_profile, name='edit'),
 	# Friend
 	path('add_friend/<int:friend_id>/', views.add_friend, name='add_friend'),
 	path('add_friend_username/<str:username>/', views.add_friend_username, name='add_friend_username'),
@@ -52,6 +54,7 @@ urlpatterns = [
 	path('redirection_apres_authentification/', views.redirection_apres_authentification, name='redirection_apres_authentification'),
     path('exchange_code_for_access_token/<str:code>/', views.exchange_code_for_access_token, name='exchange_code_for_access_token'),
 	# API
+	path('api/get_user/', views.api_user_view.as_view(), name='get_user'),
     path('api/users/', views.api_user_list.as_view(), name='user-list'),
 	path('api/users/<int:id>/', views.api_user_details.as_view(), name='user-details'),
 	path('api/match/', views.api_match_list.as_view(), name='match-list'),
@@ -59,13 +62,17 @@ urlpatterns = [
 	path('api/tournaments/', views.api_tournois_list.as_view(), name='match-list'),
 	path('api/tournaments/<int:id>/', views.api_tournois_details.as_view(), name='match-details'),
     # ADMIN
-    path('adminer/', lambda request: redirect('http://localhost:8080/'), name='adminer_redirect'),
+    path('adminer/', lambda request: redirect('http://:8080/'), name='adminer_redirect'),
     # DEV
-    path('two-factor-login/', views.two_factor_login, name='two_factor_login'),
     path('users/', user_list_view, name='user_list'),
-    path('two-factor-login/', views.two_factor_login, name='two_factor_login'),
 	path('exemple', views.exemple_view, name='exemple'),
-    path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
-    path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
+	path('edit_profile', views.edit_profile, name='edit_profile'),
 	## path('connected-users/', views.get_connected_users, name='get_connected_users'),
+    # WEBSOCKETS
+	path('check-match/', views.check_match, name='check_match'),
+	path('api/join-match/', views.JoinMatch.as_view(), name='join_match'),
+    path('api/create-match/', views.CreateMatch.as_view(), name='create_match'),
+    path('api/create-tournament/', views.JoinTournament.as_view(), name='create_tournament'),
+	path('api/get_user/', views.CurrentUser.as_view(), name='curent_user'),
+	path('api/create-final-match/<int:tournament_id>/', views.CreateFinalMatch.as_view(), name='create_final_match'),
 ]

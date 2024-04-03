@@ -10,6 +10,7 @@ import os
 from django.core.files import File
 import urllib.request
 from PIL import Image
+from django.db import transaction
 
 # TODO LIST :
     # historique tournoi: position, date, résultat dernier match, adversaire dernier match
@@ -79,38 +80,65 @@ class Match(models.Model):
     player2 = models.ForeignKey('user_list', related_name='player2_matches', on_delete=models.CASCADE, null=True)
     score_player1 = models.IntegerField(default=0)
     score_player2 = models.IntegerField(default=0)
-    player_winner = models.ForeignKey(user_list, related_name='winner_matches', on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu')])
+    player_winner = models.ForeignKey('user_list', related_name='winner_matches', on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de partie'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
+    locked = models.BooleanField(default=False)
 
     def update_scores(self):
-        if self.status == 'end_game':
-            self.player1.games_played += 1
-            self.player2.games_played += 1
-            if self.score_player1 > self.score_player2:
-                self.player1.games_win += 1
-                self.player2.games_loose += 1
-            elif self.score_player1 < self.score_player2:
-                self.player2.games_win += 1
-                self.player1.games_loose += 1
-            self.player1.save()
-            self.player2.save()
-
-#   match.update_scores()
+        if not self.locked:
+            with transaction.atomic():
+                self.locked = True
+                self.player1.games_played += 1
+                self.player2.games_played += 1
+                if self.score_player1 > self.score_player2:
+                    self.player1.games_win += 1
+                    self.player2.games_loose += 1
+                    self.player1.games_rank += 25
+                    if self.player2.games_rank >= 25:
+                        self.player2.games_rank -= 25
+                elif self.score_player1 < self.score_player2:
+                    self.player2.games_win += 1
+                    self.player1.games_loose += 1
+                    self.player2.games_rank += 25
+                    if self.player1.games_rank >= 25:
+                        self.player1.games_rank -= 25
+                self.player1.save()
+                self.player2.save()
+                self.save()
 
 class Tournament(models.Model):
-    date_tournament = models.DateTimeField(null=True, blank=True)
+    date_tournament = models.DateTimeField(auto_now_add=True)
     player01 = models.ForeignKey('user_list', related_name='player01_tournaments', on_delete=models.CASCADE)
-    player02 = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE)
-    player03 = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE)
-    player04 = models.ForeignKey('user_list', related_name='player04_tournaments', on_delete=models.CASCADE)
+    player02 = models.ForeignKey('user_list', related_name='player02_tournaments', on_delete=models.CASCADE, null=True)
+    player03 = models.ForeignKey('user_list', related_name='player03_tournaments', on_delete=models.CASCADE, null=True)
+    player04 = models.ForeignKey('user_list', related_name='player04_tournaments', on_delete=models.CASCADE, null=True)
+    player_winner = models.ForeignKey('user_list', related_name='winner_matches_tournaments', on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20, default='waiting', choices=[('waiting', 'En attente de joueurs'), ('end_game', 'Fin de tournoi'), ('in_game', 'En jeu'), ('cancel', 'Annulé')])
+    match1_id = models.IntegerField(null=True)
+    match2_id = models.IntegerField(null=True)
+    final_id = models.IntegerField(null=True)
 
     def create_matches(self):
-        Match.objects.create(player1=self.player01, player2=self.player02)
-        Match.objects.create(player1=self.player03, player2=self.player04)
-        # TODO les 2 winners doivent s'affronter
+        match1 = Match.objects.create(player1=self.player01, player2=self.player02)
+        match2 = Match.objects.create(player1=self.player03, player2=self.player04)
+        self.match1_id = match1.id
+        self.match2_id = match2.id
+        self.save()
+
+    def check_and_create_final(self):
+        match1 = Match.objects.filter(id=self.match1_id).first()
+        match2 = Match.objects.filter(id=self.match2_id).first()
+
+        if match1 and match2 and not self.final_id:
+            if match1.status in ['end_game', 'cancel'] and match2.status in ['end_game', 'cancel']:
+                winner1 = match1.player_winner
+                winner2 = match2.player_winner
+                if winner1 and winner2:
+                    final_match = Match.objects.create(player1=winner1, player2=winner2)
+                    final_match.save()
+
+                    self.final_id = final_match.id
+                    self.save()
 
     class Meta:
         db_table = 'django_tournament'
-
-# appelle de méthode :
-#   tournoi.create_matches()

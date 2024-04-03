@@ -1,3 +1,6 @@
+{% extends 'index.html' %}
+
+{% block content %}
 <div id="ranking" class="d-flex flex-column justify-content-center text-white text-center mx-auto">
     <h2 class="mx-auto my-0 pb-3">CLASSEMENT</h2>
     <div class="overflow-auto rounded-3 mb-4 ranking-scrollbar" style="max-height: 65vh;">
@@ -14,8 +17,10 @@
             <tbody>
                 {% for player in top_players %}
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ player.username }}</td>
+                    <th scope="row">{{ player.position }}</th>
+                    <td>
+                        <a class="redir text-white" href="/profile/?id={{ player.id }}">{{ player.username }}</a>
+                    </td>
                     <td>{{ player.games_rank }}</td>
                     <td>{{ player.games_win }}</td>
                     <td>{{ player.games_loose }}</td>
@@ -25,3 +30,4 @@
         </table>
     </div>
 </div>
+{% endblock %}

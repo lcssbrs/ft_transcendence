@@ -9,14 +9,25 @@ function setupLogin() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
-				loadView('nothing');
+				document.getElementById('auth-data').setAttribute('data-authenticated', 'True');
+				$.ajax({
+					url: '/api/get_user/',
+					type: 'GET',
+					success: function(response) {
+						document.querySelector('#userAvatar').src = response.profile_picture;
+						document.querySelector('#linkProfile').href = '/profile/?id=' + response.id;
+					}
+				})
+				checkLogged();
+				online();
+				loadView('/', true);
 			}
 			else {
-				loadView('/login/');
+				loadView('/login/', true);
 			}
 		})
 		.catch(error => {
-			// console.error('Erreur lors de l\'envoi du formulaire:', error);
+			console.error('Erreur lors de l\'envoi du formulaire:', error);
 		});
 	});
 }
