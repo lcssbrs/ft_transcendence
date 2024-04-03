@@ -37,6 +37,8 @@ var game;
 var canvas;
 canvas = document.getElementById('canvas4');
 
+let gameStarted = false;
+
 function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, socket, final, callback) {
 	var winner;
 	let winnerID = null;
@@ -46,10 +48,10 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	var adverseName;
 	var playerScore = 0;
 	var adverseScore = 0;
-	let disconnect_ennemy = false;
-	let gameStarted = false;
+	let disconnect_ennemy = false
 	function launchGame() {
 
+		var gameStarted = false;
 		const PLAYER_HEIGHT = 100;
 		const PLAYER_WIDTH = 5;
 		const PLAYER_SPEED = 10;
@@ -389,6 +391,8 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 	}
 
 	function endTournamentApi(winner) {
+		console.log(tournament_id);
+		console.log(winner);
 		const requestBody = {
 			player_winner: winner,
 			status: "end_game"
@@ -471,14 +475,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			ID_ranked = match_id;
 			console.log("Websocket ouvert");
 		};
-
-		function adverseOnline() {
-			if (!gameStarted) {
-				closeWebSocket(socket);
-			}
-		}
-
-		setTimeout(adverseOnline, 10000);
 
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
@@ -660,6 +656,10 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			console.log("Match ID [", match_id, "]");
 			launchGame();
 		}
+
+		window.addEventListener('beforeunload', function(event) {
+			closeWebSocket();
+		});
 
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
@@ -1023,6 +1023,12 @@ function SetupTournament() {
 				spectFinal = true;
 			}
 		}, 1300);
+	}
+
+	function endTournament()
+	{
+
+		console.log("endTournament")
 	}
 
 	function createFinalMatch(tournamentId) {

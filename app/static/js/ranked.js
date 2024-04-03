@@ -574,6 +574,10 @@ function setupRanked() {
 			}
 		}
 
+		window.addEventListener('beforeunload', function(event) {
+			closeWebSocket();
+		});
+
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
 				closeWebSocket();
@@ -587,6 +591,7 @@ function setupRanked() {
 		});
 
 		window.addEventListener('hashchange', function(event) {
+			console.log(window.location.pathname);
 			if (window.location.pathname !== "/ranked") {
 				closeWebSocket();
 			}
