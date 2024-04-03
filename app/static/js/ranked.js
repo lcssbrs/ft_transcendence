@@ -70,12 +70,11 @@ function setupRanked() {
 				context.fillText(countdown, canvas.width / 2, canvas.height / 2);
 				countdown--;
 				if (countdown < 0) {
-					document.addEventListener('keydown', playerMove);
 					clearInterval(countdownInterval);
 					startGame();
 				}
 			}, 1000);
-		};
+		}
 
 		function drawScore() {
 			var context = canvas.getContext('2d');
@@ -397,9 +396,8 @@ function setupRanked() {
 			ID_ranked = match_id;
 			console.log("Websocket ouvert");
 		};
+
 		socket.onmessage = function(event) {
-			if (gameEnded == true)
-				return ;
 			const eventData = JSON.parse(event.data);
 			if (eventData.type === 'game_start')
 			{
