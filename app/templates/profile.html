@@ -2,6 +2,7 @@
 
 {% block content %}
 <div id="profile" class="d-flex justify-content-center mx-auto">
+	<div id="id-user" data-id="{{ profile_user.id }}"></div>
 	<div class="main-height text-white text-center flex flex-column justify-content-center align-items-center mr-5">
 		<div class="image-container">
 			<img id="user-picture" src="{{ profile_user.profile_picture.url }}" class="bottom-image">
