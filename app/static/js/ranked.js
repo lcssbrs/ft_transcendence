@@ -574,6 +574,10 @@ function setupRanked() {
 			}
 		}
 
+		window.addEventListener('beforeunload', function(event) {
+			closeWebSocket();
+		});
+
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
 				closeWebSocket();

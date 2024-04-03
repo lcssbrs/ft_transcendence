@@ -657,6 +657,10 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			launchGame();
 		}
 
+		window.addEventListener('beforeunload', function(event) {
+			closeWebSocket();
+		});
+
 		document.addEventListener('click', function(event) {
 			if (event.target.tagName === 'A') {
 				closeWebSocket(socket);
