@@ -147,7 +147,7 @@ function computerMove(signal) {
 	else if (BALL_SPEED > 5 && BALL_SPEED <= 10)
 		TBS = 6;
 	else
-	TBS = 7;
+		TBS = 7;
 	if (gameStarted == true)
 		{
 			if (signal === 'up')

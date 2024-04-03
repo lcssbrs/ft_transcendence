@@ -1,26 +1,29 @@
 // $(document).ready(function() {
 //     var friends = null;
 
-//     function loadFriends() {
-//         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
-//             return ;
-//         $.ajax({
-//             url: '/api/get_friends/',
-//             type: 'GET',
-//             success: function(response) {
-//                 var friendsList = response.friends;
-//                 var $friendContainer = $('.friend-user');
-//                 checkList = needReload(friendsList, $friendContainer);
-//                 checkList.forEach(function(friend) {
-//                     var statusColor;
-//                     if (friend.status === 'online') {
-//                         statusColor = 'rgb(40, 167, 69)';
-//                     } else if (friend.status === 'offline') {
-//                         statusColor = 'rgb(204, 204, 204)';
-//                     } else if (friend.status === 'in_game') {
-//                         statusColor = 'rgb(13, 110, 253)';
-//                     }
-//                     var $statusIcon = $('<div id="' + friend.username + '-status" class="status-icon mr-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ' + statusColor + ';"></div>');
+    function loadFriends() {
+        if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+            return ;
+        url = location.pathname;
+        if (url == '/ranked/' || url == '/tournament/')
+            return ;
+        $.ajax({
+            url: '/api/get_friends/',
+            type: 'GET',
+            success: function(response) {
+                var friendsList = response.friends;
+                var $friendContainer = $('.friend-user');
+                checkList = needReload(friendsList, $friendContainer);
+                checkList.forEach(function(friend) {
+                    var statusColor;
+                    if (friend.status === 'online') {
+                        statusColor = 'rgb(40, 167, 69)';
+                    } else if (friend.status === 'offline') {
+                        statusColor = 'rgb(204, 204, 204)';
+                    } else if (friend.status === 'in_game') {
+                        statusColor = 'rgb(13, 110, 253)';
+                    }
+                    var $statusIcon = $('<div id="' + friend.username + '-status" class="status-icon mr-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ' + statusColor + ';"></div>');
 
 //                     var $friendElement = $('<div id="' + friend.username + '" class="pt-1 mb-2 d-flex justify-content-between mr-3">' +
 //                     '<div class="d-flex align-items-center">' +
@@ -107,30 +110,33 @@
 
 //     loadFriends();
 
-//     setInterval(function() {
-//         loadFriends();
-//     }, 2000);
-// });
+    setInterval(function() {
+        loadFriends();
+    }, 3000);
+});
 
 // $(document).ready(function() {
 //     var requests = null;
 
-//     function loadFriendRequests() {
-//         if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
-//             return ;
-//         $.ajax({
-//             url: '/api/get_friend_requests/',
-//             type: 'GET',
-//             success: function(response) {
-//                 var requestsList = response.friend_requests;
-//                 var $requestsContainer = $('.friend-scroll');
-//                 checkList = needReload(requestsList, $requestsContainer);
-//                 checkList.forEach(function(request) {
-//                     var $acceptButton = $('<button class="btn-sm rounded-2 mr-2 accept-button" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">' +
-//                     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">' +
-//                     '<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>' +
-//                     '</svg>' +
-//                     '</button>').data('request-id', request.id);
+    function loadFriendRequests() {
+        if (document.getElementById('auth-data').getAttribute('data-authenticated') === 'False')
+            return ;
+        url = location.pathname;
+        if (url == '/ranked/' || url == '/tournament/')
+            return ;
+        $.ajax({
+            url: '/api/get_friend_requests/',
+            type: 'GET',
+            success: function(response) {
+                var requestsList = response.friend_requests;
+                var $requestsContainer = $('.friend-scroll');
+                checkList = needReload(requestsList, $requestsContainer);
+                checkList.forEach(function(request) {
+                    var $acceptButton = $('<button class="btn-sm rounded-2 mr-2 accept-button" style="background-color: #0D6EFD; color:white; border-color:#0D6EFD;">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">' +
+                    '<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>' +
+                    '</svg>' +
+                    '</button>').data('request-id', request.id);
 
 //                     var $rejectButton = $('<button class="btn-sm rounded-2 reject-button" style="background-color: #F4ACBC; color:white; border-color:#F4ACBC">' +
 //                     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">' +
@@ -218,10 +224,10 @@
 
 //     loadFriendRequests();
 
-//     setInterval(function() {
-//         loadFriendRequests();
-//     }, 2000);
-// });
+    setInterval(function() {
+        loadFriendRequests();
+    }, 3000);
+});
 
 // $(document).ready(function() {
 //     $('#add-friend-input').keypress(function(event) {
@@ -259,20 +265,22 @@
 // });
 
 
-// function showNotification(message, type) {
-//     var notification = $('#notification');
-//     notification.empty().removeClass().addClass('notification').addClass(type);
-//     var messageParagraph = $('<p></p>').text(message);
-//     var progressSpan = $('<span class="progress"></span>');
+function showNotification(message, type) {
+    var notification = $('#notification');
+    notification.empty().removeClass().addClass('notification').addClass(type);
+    var messageParagraph = $('<p></p>').text(message);
+    var progressSpan = $('<span class="progress"></span>');
+    notification.append(messageParagraph);
+    notification.append(progressSpan);
 
-//     notification.append(messageParagraph);
-//     notification.append(progressSpan);
+    var notificationWidth = notification.width();
+    notification.css('left', 'calc(50% - ' + (notificationWidth / 2) + 'px)');
 
-//     notification.css({ 'display': 'block' });
-//     setTimeout(function() {
-//         hideNotification();
-//     }, 2500);
-// }
+    notification.css({ 'display': 'block' });
+    setTimeout(function() {
+        hideNotification();
+    }, 2500);
+}
 
 // function hideNotification() {
 //     var notification = $('#notification');

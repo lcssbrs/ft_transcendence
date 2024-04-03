@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['trans.lmas.dev', '::1', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -53,12 +54,16 @@ INSTALLED_APPS = [
 
 
 # Définir ASGI_APPLICATION
-ASGI_APPLICATION = 'hello_django.asgi.application'
+ASGI_APPLICATION = 'hello_django.routing.application'
+
 
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('trans.lmas.dev', 6379)],
+        },
     },
 }
 
@@ -170,10 +175,11 @@ CSRF_COOKIE_NAME = 'csrftoken'
 
 # API 42
 
-SOCIAL_AUTH_42_KEY = 'u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3'
-SOCIAL_AUTH_42_SECRET = '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'
-LOGIN_REDIRECT_URL = 'http://localhost:80/'
-
+SOCIAL_AUTH_42_KEY = getenv('SOCIAL_AUTH_42_KEY')
+SOCIAL_AUTH_42_SECRET = getenv('SOCIAL_AUTH_42_SECRET')
+LOGIN_REDIRECT_URL = getenv('LOGIN_REDIRECT_URL')
+SECRET_KEY = getenv('SECRET_KEY')
+CSRF_TRUSTED_ORIGINS = ["https://trans.lmas.dev"]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/'),
 ]

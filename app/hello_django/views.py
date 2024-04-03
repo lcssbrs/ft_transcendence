@@ -65,38 +65,41 @@ class MatchHistory:
 
 class TournamentHistory:
     def __init__(self, tournament, profile_user):
-        if (tournament.final_id.player1.username == profile_user.username or tournament.final_id.player2.username == profile_user.username):
+        final = Match.objects.get(id=tournament.final_id)
+        if (final.player1.username == profile_user.username or final.player2.username == profile_user.username):
             if (tournament.player_winner.username == profile_user.username):
                 self.rank = 1
             else :
                 self.rank = 2
-            if (tournament.final_id.player1.username == profile_user.username):
-                self.lastChall = tournament.final_id.player2.username
-                self.lastUserScore = tournament.final_id.score_player1
-                self.lastChallScore = tournament.final_id.score_player2
+            if (final.player1.username == profile_user.username):
+                self.lastChall = final.player2.username
+                self.lastUserScore = final.score_player1
+                self.lastChallScore = final.score_player2
             else:
-                self.lastChall = tournament.final_id.player2.username
-                self.lastUserScore = tournament.final_id.score_player2
-                self.lastChallScore = tournament.final_id.score_player1
+                self.lastChall = final.player2.username
+                self.lastUserScore = final.score_player2
+                self.lastChallScore = final.score_player1
         else:
-            if (tournament.match1_id.player1.username == profile_user.username):
-                self.lastChall = tournament.match1_id.player2.username
-                self.lastUserScore = tournament.match1_id.score_player1
-                self.lastChallScore = tournament.match1_id.score_player2
-            elif (tournament.match1_id.player2.username == profile_user.username):
-                self.lastChall = tournament.match1_id.player2.username
-                self.lastUserScore = tournament.match1_id.score_player2
-                self.lastChallScore = tournament.match1_id.score_player1
-            elif (tournament.match2_id.player1.username == profile_user.username):
-                self.lastChall = tournament.match2_id.player2.username
-                self.lastUserScore = tournament.match2_id.score_player1
-                self.lastChallScore = tournament.match2_id.score_player2
-            elif (tournament.match2_id.player2.username == profile_user.username):
-                self.lastChall = tournament.match2_id.player2.username
-                self.lastUserScore = tournament.match2_id.score_player2
-                self.lastChallScore = tournament.match2_id.score_player1
+            match1 = Match.objects.get(id=tournament.match1_id)
+            match2 = Match.objects.get(id=tournament.match2_id)
+            if (match1.player1.username == profile_user.username):
+                self.lastChall = match1.player2.username
+                self.lastUserScore = match1.score_player1
+                self.lastChallScore = match1.score_player2
+            elif (match1.player2.username == profile_user.username):
+                self.lastChall = match1.player2.username
+                self.lastUserScore = match1.score_player2
+                self.lastChallScore = match1.score_player1
+            elif (match2.player1.username == profile_user.username):
+                self.lastChall = match2.player2.username
+                self.lastUserScore = match2.score_player1
+                self.lastChallScore = match2.score_player2
+            elif (match2.player2.username == profile_user.username):
+                self.lastChall = match2.player2.username
+                self.lastUserScore = match2.score_player2
+                self.lastChallScore = match2.score_player1
             self.rank = 4
-        self.date = tournament.date
+        self.date = tournament.date_tournament
 
 def profile_view(request):
     id_value = request.GET.get('id', None)
@@ -116,32 +119,37 @@ def profile_view(request):
     elif profile_user.games_rank <= 90:
         ranksrc = '/static/images/master.png'
         rank = 'Master'
-    elif profile_user.games_rank <= 120:
+    else:
         ranksrc = '/static/images/challenger.png'
         rank = 'Challenger'
-    user = request.user
 
+    tournaments_ended = Tournament.objects.filter(status='end_game')
     matches_ended = Match.objects.filter(status='end_game')
-    matches_participated = matches_ended.filter(Q(player1=profile_user.id) | Q(player2=profile_user.id))
+    unique_matches = []
+    for match in matches_ended:
+        match_id = match.id
+        if not any(match_id in (t.match1_id, t.match2_id, t.final_id) for t in tournaments_ended):
+            unique_matches.append(match)
+    matches_participated = [match for match in unique_matches if match.player1 == profile_user.id or match.player2 == profile_user.id]
     matches_participated = matches_participated[::-1][:5]
     rankedHistory = []
     for i in matches_participated:
         rankedHistory.append(MatchHistory(i, profile_user))
 
-    # tournaments_ended = Match.objects.filter(status='end_game')
-    # tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
-    # tournaments_participated = tournaments_participated[::-1][:5]
-    # tournamentHistory = []
-    # for i in tournaments_participated:
-    #     tournamentHistory.append(tournamentHistory(i, profile_user))
+    tournaments_participated = tournaments_ended.filter(Q(player01=profile_user.id) | Q(player02=profile_user.id) | Q(player03=profile_user.id) | Q(player04=profile_user.id))
+    tournaments_participated = tournaments_participated[::-1][:5]
+    tournamentHistory = []
+    for i in tournaments_participated:
+        tournamentHistory.append(TournamentHistory(i, profile_user))
 
     context = {
         'profile_user': profile_user,
         'user_rank': user_rank,
-        'user': user,
+        'user': request.user,
         'rank': rank,
         'ranksrc': ranksrc,
-        'rankedHistory': rankedHistory
+        'rankedHistory': rankedHistory,
+        'tournamentHistory': tournamentHistory
     }
     return render(request, 'profile.html', context)
 
@@ -317,7 +325,7 @@ def login_view(request):
 logger = logging.getLogger(__name__)
 
 def connexion_42(request):
-    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fredirection_apres_authentification&response_type=code')
+    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-fa6f764441ccb32fcd2d4bd0fbef3aa90a88bc80e5fa72f6cca3db6a645560e3&redirect_uri=https%3A%2F%2Froot.alan-andrieux.fr%2Fredirection_apres_authentification&response_type=code')
 
 def redirection_apres_authentification(request):
     code_autorisation = request.GET.get('code')
@@ -334,7 +342,7 @@ def exchange_code_for_access_token(request, code):
         'client_id': settings.SOCIAL_AUTH_42_KEY,
         'client_secret': settings.SOCIAL_AUTH_42_SECRET,
         'code': code,
-        'redirect_uri': 'http://localhost:80/redirection_apres_authentification',
+        'redirect_uri': 'https://trans.lmas.dev/redirection_apres_authentification',
     }
     response = requests.post(token_url, data=data)
 
@@ -348,6 +356,8 @@ def exchange_code_for_access_token(request, code):
         if user_response.status_code == 200:
             user_info = user_response.json()
             username = user_info.get('login')
+            if (user_list.objects.filter(username=username).exists() and user_list.objects.get(username=username).intra == False):
+                return redirect('login')
             email = user_info.get('email')
             first_name = user_info.get('first_name')
             last_name = user_info.get('last_name')
@@ -356,9 +366,9 @@ def exchange_code_for_access_token(request, code):
             user.first_name = first_name
             user.last_name = last_name
             user.password = " "
-            user.intra = True
 
             if created:
+                user.intra = True
                 image = user_info.get('image', '')
                 image = image.get('versions', '')
                 image = image.get('medium')
@@ -449,6 +459,18 @@ class api_tournois_details(APIView):
 
         serializer = TournoiListSerializer(tournoi)
         return Response(serializer.data)
+
+    def patch(self, request, id):
+        try:
+            tournoi = Tournament.objects.get(pk=id)
+        except Tournament.DoesNotExist:
+            return Response({"message": "Le tournoi n'existe pas."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TournoiListSerializer(tournoi, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Friend
 
@@ -560,6 +582,67 @@ class JoinMatch(APIView):
             serializer = MatchListSerializer(new_match)
             return Response({"match_exists": False, "match_data": serializer.data}, status=status.HTTP_201_CREATED)
 
+            from rest_framework.views import APIView
+
+class JoinTournament(APIView):
+    def post(self, request):
+        user_tournament = Tournament.objects.filter(
+            status='waiting',
+            player01=request.user
+        ).first()
+
+        if user_tournament:
+            serializer = TournoiListSerializer(user_tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        tournament = Tournament.objects.filter(status='waiting').first()
+
+        if tournament:
+            if tournament.player02 == request.user or tournament.player03 == request.user or tournament.player04 == request.user:
+                serializer = TournoiListSerializer(tournament)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            if tournament.player01 is None:
+                tournament.player01 = request.user
+            elif tournament.player02 is None:
+                tournament.player02 = request.user
+            elif tournament.player03 is None:
+                tournament.player03 = request.user
+            elif tournament.player04 is None:
+                tournament.player04 = request.user
+
+            if all([tournament.player01, tournament.player02, tournament.player03, tournament.player04]):
+                tournament.status = 'in_game'
+                tournament.create_matches()
+
+            tournament.save()
+
+            serializer = TournoiListSerializer(tournament)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            user_tournament_in_game = Tournament.objects.filter(
+                status='waiting',
+                player01=request.user
+            ).first()
+
+            if user_tournament_in_game:
+                serializer = TournoiListSerializer(user_tournament_in_game)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            new_tournament = Tournament.objects.create(player01=request.user, status='waiting')
+
+            serializer = TournoiListSerializer(new_tournament)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CreateFinalMatch(APIView):
+    def post(self, request, tournament_id):
+        try:
+            tournament = Tournament.objects.get(pk=tournament_id)
+            tournament.check_and_create_final()
+            return Response("Tournoi crée", status=status.HTTP_201_CREATED)
+        except Tournament.DoesNotExist:
+            return Response("Ce tournoi n\'exite pas", status=status.HTTP_404_NOT_FOUND)
+
 class CreateMatch(APIView):
     def post(self, request):
         new_match = Match(player1=request.user)
@@ -580,9 +663,8 @@ def generer_qr_code(user):
     payload = {
         'user_id': user.id,
     }
-    jwt_token = jwt.encode(payload, 'test', algorithm='HS256')
+    jwt_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
     user.jwt_token = jwt_token
-    logger.critical(user.jwt_token)
     user.save()
     qr_code = make(jwt_token)
     img = qr_code.convert('RGB')
@@ -607,3 +689,36 @@ def decode_jwt_token(request):
         return JsonResponse({'success': False, 'error': 'Token expiré'})
     except jwt.InvalidTokenError:
         return JsonResponse({'success': False, 'error': 'Token invalide'})
+
+def edit_profile(request):
+    user = request.user
+    userpr = user_list.objects.get(username=user.username)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Mettre à jour les informations de l'utilisateur dans la base de données
+            userpr.first_name = form.cleaned_data['first_name']
+            userpr.last_name = form.cleaned_data['last_name']
+            if 'profile_picture' in request.FILES:
+                user.profile_picture = request.FILES['profile_picture']
+            user.save()
+            return JsonResponse({'success': True, 'id': user.id})
+        else:
+            return JsonResponse({'success': False, 'error_message': 'Échec de la validation du formulaire.'})
+    else:
+        form = UserProfileForm(instance=user)
+
+    return render(request, 'edit_profile.html', {'form': form})
+
+class CurrentUser(APIView):
+    def get(self, request):
+        current_user = request.user
+        if current_user.is_authenticated:
+            try:
+                user_info = user_list.objects.get(username=current_user.username)
+                serializer = UserDetailSerializer(user_info)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except user_list.DoesNotExist:
+                return Response({"message": "Utilisateur non trouvé"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"message": "Aucun utilisateur connecté"}, status=status.HTTP_401_UNAUTHORIZED)
