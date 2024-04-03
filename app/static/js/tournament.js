@@ -476,14 +476,6 @@ function setupMatch(match_id, playerMatchId, userPlayerId, adversePlayerId, sock
 			console.log("Websocket ouvert");
 		};
 
-		function adverseOnline() { // ICI
-		if (!gameStarted) {
-				closeWebSocket(socket);
-			}
-		}
-
-		setTimeout(adverseOnline, 10000);
-
 		socket.onmessage = function(event) {
 			const eventData = JSON.parse(event.data);
 			if (eventData.type === 'game_start')
