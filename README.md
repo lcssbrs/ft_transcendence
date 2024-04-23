@@ -20,7 +20,7 @@ ft_transcendence est un projet inspiré du jeu classique "Pong", conçu dans le 
   - Authentification : JWT (JSON Web Tokens).
   - Déploiement : Docker.
 
-## Fonctionnalités Futures
+## Fonctionnalités
 
 - Intégration de notifications en temps réel.
 - Ajout de fonctionnalités sociales telles que l'ajout d'amis.
