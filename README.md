@@ -30,3 +30,5 @@ ft_transcendence est un projet inspiré du jeu classique "Pong", conçu dans le 
 👨‍💻 [hbaduel](https://github.com/hbaduel)<br/>
 👨‍💻 [AlanADX](https://github.com/AlanADX-dev)<br/>
 👨‍💻 [NineSuper](https://github.com/NineSuper)<br/>
+
+[![tde-los-'s 42](https://badge42.coday.fr/api/v2/clpo61f0c167701t692asdwoa/project/3624477)](https://github.com/Coday-meric/badge42)
