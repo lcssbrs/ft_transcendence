@@ -20,6 +20,7 @@ ft_transcendence est un projet inspiré du jeu classique "Pong", conçu dans le 
 - **Technologies Utilisées :** 
   - Frontend : HTML, CSS, Javascript.
   - Backend : django.
+  - Base de données : postgreSQL.
   - Authentification : JWT (JSON Web Tokens).
   - Déploiement : Docker.
 
