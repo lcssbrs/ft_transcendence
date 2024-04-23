@@ -13,18 +13,15 @@ ft_transcendence est un projet inspiré du jeu classique "Pong", conçu dans le 
   - Matchs en temps réel avec suivi des scores.
   - Classement des joueurs et des tournois.
   - Authentification des utilisateurs.
+  - Intégration de notifications en temps réel.
+  - Ajout de fonctionnalités sociales telles que l'ajout d'amis.
+  - Amélioration de l'interface utilisateur et de l'expérience utilisateur.
     
 - **Technologies Utilisées :** 
   - Frontend : HTML, CSS, Javascript.
   - Backend : django.
   - Authentification : JWT (JSON Web Tokens).
   - Déploiement : Docker.
-
-## Fonctionnalités
-
-- Intégration de notifications en temps réel.
-- Ajout de fonctionnalités sociales telles que l'ajout d'amis.
-- Amélioration de l'interface utilisateur et de l'expérience utilisateur.
 
 ## Auteurs
 
