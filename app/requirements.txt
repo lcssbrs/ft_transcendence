@@ -1,3 +1,4 @@
 Django==4.2.3
 psycopg2-binary==2.9.6
 channels==3.0.4
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
