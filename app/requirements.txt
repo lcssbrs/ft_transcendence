@@ -1,3 +1,7 @@
 Django==4.2.16
 psycopg2-binary==2.9.6
 channels==3.0.4
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
+sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
+twisted>=24.7.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
